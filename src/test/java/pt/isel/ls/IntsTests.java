@@ -78,4 +78,15 @@ public class IntsTests {
         // Assert
         assertTrue(isNonDecreasingOrder(values, 2, 5));
     }
+
+    @Test
+    public void checkFirstValue()
+    {
+        int[] values = {9, 8, 7, 6, 5, 4, 3, 2, 1};
+        // Act
+        Ints.insertionSort(values, 0, values.length-1);
+        // Assert
+        assertEquals(1, values[0]);
+    }
+
 }
