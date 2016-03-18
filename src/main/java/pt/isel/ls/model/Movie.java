@@ -21,7 +21,7 @@ public class Movie
         this.fiveStar = fiveStar;
     }
 
-    public double average()
+    public float average()
     {
         return (oneStar*1 + twoStar*2 + treeStar*3 + fourStar*4 + fiveStar*5)/(oneStar+twoStar+treeStar+fourStar+fiveStar);
     }
