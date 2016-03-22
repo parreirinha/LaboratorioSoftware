@@ -1,22 +1,46 @@
 package pt.isel.ls.model;
 
 /**
- * Created by Tede on 16/03/2016.
+ * Class whose instances are used to represent a model of a movie review.
  */
 public class Review
 {
-    public final int reviewID, movieID, reviewRating;
-    public final String reviewName, reviewSummary, completeReview;
+    private int movieID, reviewRating, reviewID;
+    private String reviewName, reviewSummary, completeReview;
 
-    public Review(int reviewID, int movieID, String reviewName, String reviewSummary, String completeReview, int reviewRating)
-    {
+
+
+    public Review(int reviewID, int movieID, String reviewName, String reviewSummary, String completeReview, int reviewRating){
+
         this.reviewID = reviewID;
         this.movieID = movieID;
-        this.reviewRating = reviewRating;
         this.reviewName = reviewName;
         this.reviewSummary = reviewSummary;
         this.completeReview = completeReview;
+        this.reviewRating = reviewRating;
     }
+
+
+    public int getMovieID() {
+        return movieID;
+    }
+
+    public int getReviewRating() {
+        return reviewRating;
+    }
+
+    public String getReviewName() {
+        return reviewName;
+    }
+
+    public String getReviewSummary() {
+        return reviewSummary;
+    }
+
+    public String getCompleteReview() {
+        return completeReview;
+    }
+
 
     public Review(int reviewID, int movieID, String reviewName, String reviewSummary, int reviewRating) {
         this.reviewID = reviewID;
