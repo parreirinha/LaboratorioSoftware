@@ -8,7 +8,7 @@ package pt.isel.ls.commands;
  */
 public class GetTopReviewHigherCount implements Commands {
     @Override
-    public Object execute(Object obj) {
+    public Object execute(Object... obj) {
         return null;
     }
 }

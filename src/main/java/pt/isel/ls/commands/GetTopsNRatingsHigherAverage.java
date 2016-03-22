@@ -7,7 +7,7 @@ package pt.isel.ls.commands;
  */
 public class GetTopsNRatingsHigherAverage implements Commands {
     @Override
-    public Object execute(Object obj) {
+    public Object execute(Object... obj) {
         return null;
     }
 }

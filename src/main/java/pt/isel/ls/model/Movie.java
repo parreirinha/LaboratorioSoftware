@@ -5,11 +5,11 @@ package pt.isel.ls.model;
  */
 public class Movie
 {
-    public final int movieID, movieRelease;
+    private int movieID, movieRelease;
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
     public final String movieName;
 
-    public Movie(int id, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar, String movieName)
+    public Movie(int id, String movieName, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar)
     {
         this.movieID = id;
         this.movieName = movieName;
@@ -19,6 +19,18 @@ public class Movie
         this.treeStar = treeStar;
         this.fourStar = fourStar;
         this.fiveStar = fiveStar;
+    }
+    public Movie(String name){movieName=name;}
+
+    public Movie(String name, int date){movieName=name; movieRelease=date;}
+
+    public Movie(int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
+        this.oneStar = oneStar;
+        this.twoStar = twoStar;
+        this.treeStar = treeStar;
+        this.fourStar = fourStar;
+        this.fiveStar = fiveStar;
+        movieName=null;
     }
 
     public float average()
@@ -79,4 +91,11 @@ public class Movie
         return fiveStar;
     }
 
+    public int getMovieRelease() {
+        return movieRelease;
+    }
+
+    public int getMovieID() {
+        return movieID;
+    }
 }

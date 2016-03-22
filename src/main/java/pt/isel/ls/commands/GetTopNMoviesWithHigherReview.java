@@ -14,7 +14,7 @@ public class GetTopNMoviesWithHigherReview implements Commands{
      * @return a collection
      */
     @Override
-    public Object execute(Object obj) {
+    public Object execute(Object... obj) {
         return null;
     }
 }

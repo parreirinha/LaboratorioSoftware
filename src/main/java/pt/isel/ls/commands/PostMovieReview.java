@@ -13,7 +13,7 @@ package pt.isel.ls.commands;
 public class PostMovieReview implements Commands{
 
     @Override
-    public Object execute(Object obj) {
+    public Object execute(Object... obj) {
         return null;
     }
 }

@@ -8,7 +8,7 @@ public class Review
     public final int reviewID, movieID, reviewRating;
     public final String reviewName, reviewSummary, completeReview;
 
-    public Review(int reviewID, int movieID, int reviewRating, String reviewName, String reviewSummary, String completeReview)
+    public Review(int reviewID, int movieID, String reviewName, String reviewSummary, String completeReview, int reviewRating)
     {
         this.reviewID = reviewID;
         this.movieID = movieID;
@@ -18,4 +18,12 @@ public class Review
         this.completeReview = completeReview;
     }
 
+    public Review(int reviewID, int movieID, String reviewName, String reviewSummary, int reviewRating) {
+        this.reviewID = reviewID;
+        this.movieID = movieID;
+        this.reviewName = reviewName;
+        this.reviewSummary = reviewSummary;
+        this.reviewRating = reviewRating;
+        completeReview = null;
+    }
 }

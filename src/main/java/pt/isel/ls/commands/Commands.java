@@ -1,7 +1,10 @@
 package pt.isel.ls.commands;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Collection;
 
 
@@ -10,8 +13,5 @@ import java.util.Collection;
  */
 public interface Commands {
 
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-
-    public Object execute(Object obj);
+    public Object execute(Object... obj) throws SQLException;
 }
