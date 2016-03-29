@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+
 /**
  * command nº3
  * GET /movies/{mid}
@@ -20,12 +20,11 @@ public class GetMovie implements Commands {
     private Movie movie = null;
 
     @Override
-    public Object execute(Object... obj) throws SQLException {
+    public Object execute(Connection connection, Object... obj) throws SQLException {
         int ID = (Integer) obj[0];
         String statementQuery =
                 "select * from Movie where (MovieID = " + ID+");";
-        connection = new ConnectionFactory().connectionFactory();
-        Statement stmt = connection.createStatement();
+        Statement stmt = this.connection.createStatement();
         ResultSet rs = stmt.executeQuery(statementQuery);
         Movie res = null;
         while (rs.next()) {
@@ -40,7 +39,6 @@ public class GetMovie implements Commands {
                     rs.getInt(8)
             );
         }
-        connection.close();
         return res;
     }
 }

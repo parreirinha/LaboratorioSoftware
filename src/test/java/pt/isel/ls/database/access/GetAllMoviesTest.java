@@ -1,10 +1,12 @@
-package pt.isel.ls.commands;
+package pt.isel.ls.database.access;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.model.Movie;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class GetAllMoviesTest {
 
-
+    private Connection connection;
     private DataCreationTests dataCreation = new DataCreationTests();
     private GetAllMovies test = new GetAllMovies();
 
@@ -26,6 +28,7 @@ public class GetAllMoviesTest {
     public void deleteCreatedData() throws SQLException {
         //dataCreation.deleteAllReviews();
         //dataCreation.deleteAllMovies();
+        connection.close();
     }
 
     @Before
@@ -37,10 +40,12 @@ public class GetAllMoviesTest {
     @Test
     public void checkResultsetFromMoviesQueary() throws SQLException {
 
-        ArrayList<Movie> container = (ArrayList<Movie>) test.execute(null);
+        connection = new ConnectionFactory().connectionFactory();
+
+        ArrayList<Movie> container = (ArrayList<Movie>) test.execute(connection, null);
         int i= 0;
         for (Movie m:container) {
-            assertEquals(m.movieName, dataCreation.movies[i++].movieName);
+            assertEquals(dataCreation.movies[i++].getMovieName(),m.getMovieName());
         }
 
     }

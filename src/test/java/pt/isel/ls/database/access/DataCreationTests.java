@@ -1,7 +1,8 @@
-package pt.isel.ls.commands;
+package pt.isel.ls.database.access;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import pt.isel.ls.dbconnection.ConnectionFactory;
+
+import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.model.Review;
 

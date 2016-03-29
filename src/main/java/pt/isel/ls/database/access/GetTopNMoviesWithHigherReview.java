@@ -1,5 +1,7 @@
 package pt.isel.ls.database.access;
 
+import java.sql.Connection;
+
 /**
  * command nº14
  *
@@ -10,11 +12,13 @@ public class GetTopNMoviesWithHigherReview implements Commands{
 
 
     /**
+     *
+     * @param connection
      * @param obj
      * @return a collection
      */
     @Override
-    public Object execute(Object... obj) {
+    public Object execute(Connection connection, Object... obj) {
         return null;
     }
 }

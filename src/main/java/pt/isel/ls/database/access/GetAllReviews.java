@@ -1,7 +1,7 @@
 package pt.isel.ls.database.access;
 
-import pt.isel.ls.dbconnection.ConnectionFactory;
-import pt.isel.ls.model.Movie;
+
+import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.model.Review;
 
 import java.sql.Connection;
@@ -24,10 +24,9 @@ public class GetAllReviews implements Commands {
     private Review review = null;
 
     @Override
-    public Object execute(Object... obj) throws SQLException {
+    public Object execute(Connection connection, Object... obj) throws SQLException {
         String statementQuery = "select * from Review order by ReviewID";
-        connection = new ConnectionFactory().connectionFactory();
-        Statement stmt = connection.createStatement();
+        Statement stmt = this.connection.createStatement();
         ResultSet rs = stmt.executeQuery(statementQuery);
         Collection<Review> container = new ArrayList<Review>();
         while (rs.next()) {
@@ -40,7 +39,6 @@ public class GetAllReviews implements Commands {
             );
             container.add(review);
         }
-        connection.close();
         return container;
     }
 }

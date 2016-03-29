@@ -1,9 +1,9 @@
 package pt.isel.ls.database.access;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import pt.isel.ls.dbconnection.ConnectionFactory;
+import pt.isel.ls.database.connection.ConnectionFactory;
+
 import java.sql.*;
-import java.util.ArrayList;
+
 /**
  * command nº1
  * POST /movies
@@ -14,27 +14,25 @@ import java.util.ArrayList;
  */
 public class PostMovie implements Commands {
 
-    private Connection connection = null;
-    private Movie movie = null;
+
     private PreparedStatement preparedStatement = null;
 
 
     @Override
-    public Object execute(Object... obj) throws SQLException {
+    public Object execute(Connection connection, Object... obj) throws SQLException {
 
-        Movie movie = (Movie) obj[0];
+
         String query = "insert into Movie (movieName, movieRelease) " + "values(?,?)  " +
                 "select @@IDENTITY;";
-        connection = new ConnectionFactory().connectionFactory();
         preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, movie.movieName);
-        preparedStatement.setInt(2, movie.getMovieRelease());
+        preparedStatement.setString(1, (String)obj[0]);
+        preparedStatement.setInt(2, (Integer)obj[1]);
 
         //TODO
         // não consigo retornar o ID correcto
         int id = preparedStatement.executeUpdate();
         connection.commit();
-        connection.close();
+
         return id;
     }
 }

@@ -21,10 +21,10 @@ public class GetAllMovies implements Commands {
     private Movie movie = null;
 
     @Override
-    public Object execute(Object... obj) throws SQLException {
+    public Object execute(Connection connection, Object... obj) throws SQLException {
+
         String statementQuery = "select * from Movie order by MovieID";
-        connection = new ConnectionFactory().connectionFactory();
-        Statement stmt = connection.createStatement();
+        Statement stmt = this.connection.createStatement();
         ResultSet rs = stmt.executeQuery(statementQuery);
         Collection<Movie> container = new ArrayList<Movie>();
         while (rs.next()) {
@@ -40,7 +40,6 @@ public class GetAllMovies implements Commands {
             );
             container.add(movie);
         }
-        connection.close();
         return container;
     }
 }

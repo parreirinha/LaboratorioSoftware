@@ -1,5 +1,7 @@
 package pt.isel.ls.database.access;
 
+import java.sql.Connection;
+
 /**
  * command nº9
  * GET /tops/ratings/higher/average
@@ -7,7 +9,7 @@ package pt.isel.ls.database.access;
  */
 public class GetTopRatingsHigherAverage implements Commands {
     @Override
-    public Object execute(Object... obj) {
+    public Object execute(Connection connection, Object... obj) {
         return null;
     }
 }

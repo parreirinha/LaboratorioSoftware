@@ -28,7 +28,7 @@ public class ModelFactory {
             case 4: obj = command.getPath().getIntegers().iterator().next(); break;
 
             case 5: ArrayList<String> array = (ArrayList<String>)command.getParams().getParamParts();
-
+                    //TODO - scope do construtor
                     obj = new Review(array.get(0), array.get(1),array.get(2),
                             command.getParams().getIntegers().iterator().next(),
                     command.getPath().getIntegers().iterator().next()
