@@ -5,7 +5,9 @@ package pt.isel.ls.model;
  */
 public class Review
 {
-    private int movieID, reviewRating, reviewID;
+    private int movieID;
+    private int reviewRating;
+    private int reviewID;
     private String reviewName, reviewSummary, completeReview;
 
 
@@ -20,6 +22,10 @@ public class Review
         this.reviewRating = reviewRating;
     }
 
+
+    public int getReviewID() {
+        return reviewID;
+    }
 
     public int getMovieID() {
         return movieID;

@@ -1,6 +1,7 @@
 package pt.isel.ls.command.model;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Class whose instances are used to represent the command parameters,
@@ -8,20 +9,28 @@ import java.util.Collection;
  * and other of Integer type.
  */
 public class Parameters {
-    private Collection<String> paramParts;
-    private Collection<Integer> integers;
+    private HashMap<String, String> paramStrings;
 
-    public Collection<String> getParamParts() {
-        return paramParts;
+    public Parameters(HashMap<String, String> strings) {
+        this.paramStrings = strings;
     }
 
-    public Collection<Integer> getIntegers() {
-        return integers;
+    //TODO: fix verifications... they screw some tests...
+    public String getParamString(String key){
+       /* if(key.equals("releaseYear") || key.equals("rating")){
+            System.out.println("Error: the key doesn't match a string.");
+            return null;
+        }*/
+
+        return paramStrings.get(key);
     }
 
-    public Parameters(Collection<String> pathParts, Collection<Integer> ids) {
+    public int getParamInt(String key){
+      /*  if(!key.equals("releaseYear") || !key.equals("rating")){
+            System.out.println("Error: the key doesn't match a number.");
+            return 0;
+        }*/
 
-        this.paramParts = pathParts;
-        this.integers = ids;
+        return Integer.parseInt(paramStrings.get(key));
     }
 }

@@ -30,18 +30,15 @@ public class PathGetterTests {
          assertEquals("movies", new PathGetter().getPath(onlyMoviesPath).getPathString());
     }
 
-    @Test
-    public void onlyMoviesIdsPathTest() {
-        assertEquals(0, new PathGetter().getPath(onlyMoviesPath).getIntegers().size());    }
 
     @Test
     public void moviesAndMidStringPathTest() {
-        assertEquals("movies", new PathGetter().getPath(onlyMoviesPath).getPathString());
+        assertEquals("moviesmid", new PathGetter().getPath(moviesAndMidPath).getPathString());
     }
 
     @Test
     public void moviesAndMidMidPathTest() {
-        assertEquals(123, (int)new PathGetter().getPath(moviesAndMidPath).getIntegers().iterator().next());
+        assertEquals(123, (int)new PathGetter().getPath(moviesAndMidPath).getPathInt("mid"));
     }
 
     @Test
@@ -51,7 +48,7 @@ public class PathGetterTests {
 
     @Test
     public void moviesAndMidAndRatingsMidPathTest(){
-        assertEquals(123, (int)new PathGetter().getPath(moviesAndMidAndRatingsPath).getIntegers().iterator().next());
+        assertEquals(123, (int)new PathGetter().getPath(moviesAndMidAndRatingsPath).getPathInt("mid"));
     }
 
     @Test
@@ -61,7 +58,7 @@ public class PathGetterTests {
 
     @Test
     public void moviesAndMidAndReviewsMidPathTest(){
-        assertEquals(123, (int)new PathGetter().getPath(moviesAndMidAndReviewsPath).getIntegers().iterator().next());
+        assertEquals(123, (int)new PathGetter().getPath(moviesAndMidAndReviewsPath).getPathInt("mid"));
     }
 
     @Test
@@ -70,12 +67,13 @@ public class PathGetterTests {
     }
 
     @Test
-    public void moviesAndMidAndReviewsAndRidIdsPathTest(){
-        ArrayList<Integer> array = new ArrayList<Integer>();
-        array.add(123);
-        array.add(100);
+    public void moviesAndMidAndReviewsAndRidMidsPathTest(){
+        assertEquals(123, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathInt("mid"));
+    }
 
-        assertEquals(array, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getIntegers());
+    @Test
+    public void moviesAndMidAndReviewsAndRidRidsPathTest(){
+        assertEquals(100, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathInt("rid"));
     }
 
     @Test
@@ -92,7 +90,7 @@ public class PathGetterTests {
 
     @Test
     public void topsNRatingsHigherAveragePathNTest(){
-        assertEquals(10, (int)new PathGetter().getPath(topsNRatingsHigherAveragePath).getIntegers().iterator().next());
+        assertEquals(10, (int)new PathGetter().getPath(topsNRatingsHigherAveragePath).getPathInt("n"));
 
     }
 
@@ -108,7 +106,7 @@ public class PathGetterTests {
 
     @Test
     public void topsNRatingsLowerAveragePathNTest(){
-        assertEquals(10, (int)new PathGetter().getPath(topsNRatingsLowerAveragePath).getIntegers().iterator().next());
+        assertEquals(10, (int)new PathGetter().getPath(topsNRatingsLowerAveragePath).getPathInt("n"));
     }
 
     @Test
@@ -123,7 +121,7 @@ public class PathGetterTests {
 
     @Test
     public void topsNReviewsHigherCountPathNTest(){
-        assertEquals(10, (int)new PathGetter().getPath(topsNReviewsHigherCountPath).getIntegers().iterator().next());
+        assertEquals(10, (int)new PathGetter().getPath(topsNReviewsHigherCountPath).getPathInt("n"));
     }
 
 }

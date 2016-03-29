@@ -1,6 +1,6 @@
 package pt.isel.ls.command.model;
 
-import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Class whose instances are used to represent a command path,
@@ -9,19 +9,23 @@ import java.util.Collection;
  */
 public class Path {
     private String pathString;
-    private Collection<Integer> integers;
+    private HashMap<String, Integer> pathIntegers;
 
-    public Path(String pathString, Collection<Integer> ids) {
+    public Path(String pathString, HashMap<String, Integer> ints) {
         this.pathString = pathString;
-        this.integers = ids;
+        this.pathIntegers = ints;
     }
 
     public String getPathString() {
         return pathString;
     }
 
-    public Collection<Integer> getIntegers() {
-        return integers;
+    public int getPathInt(String key) {
+       /* if(key != "mid" || key != "rid" || key != "n"){
+            System.out.println("Error: the key doesn't match a number.");
+            return 0;
+        }*/
+        return pathIntegers.get(key);
     }
 
 }
