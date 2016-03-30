@@ -1,5 +1,8 @@
 package pt.isel.ls.database.access;
 
+import pt.isel.ls.command.model.Parameters;
+import pt.isel.ls.command.model.Path;
+
 import java.sql.Connection;
 
 /**
@@ -14,11 +17,11 @@ public class GetTopNMoviesWithHigherReview implements Commands{
     /**
      *
      * @param connection
-     * @param obj
-     * @return a collection
+     * @param path
+     *@param parameters @return a collection
      */
     @Override
-    public Object execute(Connection connection, Object... obj) {
+    public Object execute(Connection connection, Path path, Parameters parameters) {
         return null;
     }
 }

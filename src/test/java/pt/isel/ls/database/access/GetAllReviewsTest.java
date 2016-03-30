@@ -28,7 +28,7 @@ public class GetAllReviewsTest {
     @Test
     public void testReviews() throws SQLException {
         connection = new ConnectionFactory().connectionFactory();
-        ArrayList<Review> container = (ArrayList<Review>) test.execute(connection, null);
+        ArrayList<Review> container = (ArrayList<Review>) test.execute(connection, , null, );
         int i = 0;
 
         for (Review review : container) {

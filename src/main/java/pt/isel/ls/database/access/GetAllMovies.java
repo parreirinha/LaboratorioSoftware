@@ -1,12 +1,10 @@
 package pt.isel.ls.database.access;
 
-import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.command.model.Parameters;
+import pt.isel.ls.command.model.Path;
 import pt.isel.ls.model.Movie;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,16 +15,16 @@ import java.util.Collection;
  */
 public class GetAllMovies implements Commands {
 
-    private Connection connection = null;
-    private Movie movie = null;
+
 
     @Override
-    public Object execute(Connection connection, Object... obj) throws SQLException {
+    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
-        String statementQuery = "select * from Movie order by MovieID";
-        Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery(statementQuery);
+        String query = "select * from Movie order by MovieID";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet rs = preparedStatement.executeQuery();
         Collection<Movie> container = new ArrayList<Movie>();
+        Movie movie;
         while (rs.next()) {
             movie = new Movie(
                     rs.getInt(1),
@@ -40,6 +38,8 @@ public class GetAllMovies implements Commands {
             );
             container.add(movie);
         }
+        rs.close();
+        preparedStatement.close();
         return container;
     }
 }

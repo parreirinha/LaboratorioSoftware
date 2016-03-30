@@ -21,7 +21,7 @@ public class PostMovieTest {
         //TODO
         connection = new ConnectionFactory().connectionFactory();
         movie = new Movie("PostMovieTest", 2016);
-        int newMovieId = (Integer) postMovie.execute(connection, movie);
+        int newMovieId = (Integer) postMovie.execute(connection, , movie, );
         assertEquals(dataCreationTests.movies[7].getMovieID(), newMovieId);
     }
 

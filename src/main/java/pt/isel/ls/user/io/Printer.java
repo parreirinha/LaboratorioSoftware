@@ -3,11 +3,11 @@ package pt.isel.ls.user.io;
 import java.sql.ResultSet;
 
 /**
- * Created by Dani on 19-03-2016.
+ * Class used to visualize the obtained ResultSet on console.
  */
 public class Printer {
 
     public void printResultSet(ResultSet resultSet){
-
+        //TODO
     }
 }

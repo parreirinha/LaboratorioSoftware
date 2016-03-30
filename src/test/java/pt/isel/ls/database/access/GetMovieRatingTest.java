@@ -21,7 +21,7 @@ public class GetMovieRatingTest {
     public void movieSevenTest() throws SQLException {
 
         connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) movieRating.execute(connection, 2);
+        movie = (Movie) movieRating.execute(connection, , 2, );
         assertEquals(dataCreation.movies[1].getOneStar(), movie.getOneStar());
         assertEquals(dataCreation.movies[1].getTwoStar(), movie.getTwoStar());
         assertEquals(dataCreation.movies[1].getTreeStar(), movie.getTreeStar());

@@ -27,9 +27,9 @@ public class PostMovieRatingTest {
     public void incrementMatrizMovieStarTree() throws SQLException {
         //int[] values = {3,2};
         connection = new ConnectionFactory().connectionFactory();
-        postMovieRating.execute(connection, 3, 2);
+        postMovieRating.execute(connection, , 3, , 2);
         connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) getMovieRating.execute(connection, 3);
+        movie = (Movie) getMovieRating.execute(connection, , 3, );
         assertEquals(34, movie.getTwoStar());
 
     }
@@ -38,9 +38,9 @@ public class PostMovieRatingTest {
     public void incrementSevenMovieStarFive() throws SQLException {
         //int[] values = {2,5};
         connection = new ConnectionFactory().connectionFactory();
-        postMovieRating.execute(connection, 2, 5);
+        postMovieRating.execute(connection, , 2, , 5);
         connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) getMovieRating.execute(connection, 2);
+        movie = (Movie) getMovieRating.execute(connection, , 2, );
         assertEquals(23, movie.getFiveStar());
     }
 

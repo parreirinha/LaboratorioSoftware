@@ -1,6 +1,7 @@
 package pt.isel.ls.database.access;
 
-import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.command.model.Parameters;
+import pt.isel.ls.command.model.Path;
 
 import java.sql.*;
 
@@ -12,41 +13,23 @@ import java.sql.*;
  */
 public class PostMovieRating implements Commands {
 
-    private Connection connection = null;
-    private PreparedStatement preparedStatement = null;
 
     @Override
-    public Object execute(Connection connection, Object... obj) throws SQLException {
+    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
-
-        int reviewID = (Integer) obj[0];
-        int rating = (Integer) obj[1];
-        String ratingColumnName = getColumnName(rating);
-
+        int reviewID = path.getPathInt("rid");
+        int rating = parameters.getParamInt("rating");
+        String ratingColumnName = AccessUtils.getColumnName(rating);
         String query = "update Review set ? = ? + 1 where MovieID = ?";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, ratingColumnName);
-        preparedStatement.setString(2, ratingColumnName);
-        preparedStatement.setInt(3,reviewID);
-        preparedStatement.executeUpdate();
+        PreparedStatement ps = connection.prepareStatement(query);
+        AccessUtils.setValuesOnPreparedStatement(ps, ratingColumnName, ratingColumnName, reviewID);
+        //preparedStatement.setString(1, ratingColumnName);
+        //preparedStatement.setString(2, ratingColumnName);
+        //preparedStatement.setInt(3,reviewID);
+        ps.executeUpdate();
         connection.commit();
+        ps.close();
         return null;
     }
 
-    public String getColumnName(int rating) {
-
-        switch (rating) {
-            case 1:
-                return "OneStar";
-            case 2:
-                return "TwoStar";
-            case 3:
-                return "TreeStar";
-            case 4:
-                return "FourStar";
-            case 5:
-                return "FiveStar";
-        }
-        return null;
-    }
 }

@@ -42,7 +42,7 @@ public class GetAllMoviesTest {
 
         connection = new ConnectionFactory().connectionFactory();
 
-        ArrayList<Movie> container = (ArrayList<Movie>) test.execute(connection, null);
+        ArrayList<Movie> container = (ArrayList<Movie>) test.execute(connection, , null, );
         int i= 0;
         for (Movie m:container) {
             assertEquals(dataCreation.movies[i++].getMovieName(),m.getMovieName());

@@ -3,18 +3,24 @@ package pt.isel.ls.command.process;
 import pt.isel.ls.command.model.Path;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Class used to process a path string and generate the
  * correspondent Path instance.
  */
 public class PathGetter {
+    private String[] pathParts;
+    private String cleanPath;
+    private HashMap<String, Integer> pathIntegers;
+
+    public PathGetter(){
+        cleanPath = "";
+        pathIntegers = new HashMap<String, Integer>();
+    }
 
     public Path getPath(String path){
-
-        String[] pathParts = path.split("/");
-        String cleanPath = "";
-        ArrayList<Integer> ids = new ArrayList<Integer>();
+        pathParts = path.split("/");
 
         int j=0;
         for(int i = 0; i < pathParts.length; ++i) {
@@ -22,19 +28,23 @@ public class PathGetter {
                 cleanPath += pathParts[i];
             else{
                 if(i>0) {
+                    String key="";
                     if (pathParts[i - 1].equals("movies"))
-                        cleanPath += "mid";
-                    if (pathParts[i - 1].equals("reviews"))
-                        cleanPath += "rid";
-                    if (pathParts[i - 1].equals("tops"))
-                        cleanPath += "n";
+                        key = "mid";
 
-                    ids.add(Integer.parseInt(pathParts[i]));
+                    if (pathParts[i - 1].equals("reviews"))
+                        key = "rid";
+
+                    if (pathParts[i - 1].equals("tops"))
+                        key = "n";
+
+                    cleanPath += key;
+                    pathIntegers.put(key, Integer.parseInt(pathParts[i]));
                 }
             }
         }
 
-        return new Path(cleanPath, ids);
+        return new Path(cleanPath, pathIntegers);
     }
 
     static boolean isAllDigits(String pathPart){

@@ -2,8 +2,8 @@ package pt.isel.ls.command.mapping;
 
 
 import org.junit.Test;
-import pt.isel.ls.command.mapping.CommandMapper;
 import pt.isel.ls.command.process.CommandGetter;
+import pt.isel.ls.database.access.*;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -25,79 +25,83 @@ public class CommandMapperTests {
     private final String[] getMovieReviewById = {"GET", "/movies/123/reviews/100"};
     private final String[] getTopAverageHigherRating = {"GET", "/tops/ratings/higher/average"};
     private final String[] getTopNAverageHigherRating = {"GET", "/tops/10/ratings/higher/average"};
-    private final String[] getTopAverageLoweerRating = {"GET", "/tops/ratings/lower/average"};
-    private final String[] getTopNAverageLoweerRating = {"GET", "/tops/10/ratings/lower/average"};
+    private final String[] getTopAverageLowerRating = {"GET", "/tops/ratings/lower/average"};
+    private final String[] getTopNAverageLowerRating = {"GET", "/tops/10/ratings/lower/average"};
     private final String[] getTopReviewHigherCount = {"GET", "/tops/reviews/higher/count"};
     private final String[] getTopNReviewHigherCount = {"GET","/tops/10/reviews/higher/count"};
 
+    CommandMapper map = new CommandMapper();
+
     @Test
-    public void PostMovieIndexTest() {
-        assertEquals(0, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(postMovie)));
+    public void PostMovieTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(postMovie)) instanceof PostMovie);
     }
 
     @Test
-    public void GetAllMovieIndexTest() {
-        assertEquals(1, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getAllMovies)));
+    public void GetAllMoviesTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getAllMovies)) instanceof GetAllMovies);
     }
 
     @Test
-    public void GetMovieIndexTest() {
-        assertEquals(2, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getMovie)));
+    public void GetMovieTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getMovie)) instanceof GetMovie);
     }
 
     @Test
-    public void PostRatingIndexTest() {
-        assertEquals(3, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(postMovieRating)));
+    public void PostRatingTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(postMovieRating)) instanceof PostMovieRating);
     }
 
     @Test
-    public void GetRatingIndexTest() {
-        assertEquals(4, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getMovieRating)));
+    public void GetRatingTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getMovieRating)) instanceof GetMovieRating);
     }
 
     @Test
-    public void PostReviewIndexTest() {
-        assertEquals(5, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(postMovieReview)));
+    public void PostReviewTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(postMovieReview)) instanceof PostMovieReview);
     }
 
     @Test
-    public void GetReviewIndexTest() {
-        assertEquals(6, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getMovieReview)));
+    public void GetReviewsTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getMovieReview)) instanceof GetAllReviews);
     }
 
     @Test
-    public void GetReviewByIdIndexTest() {
-        assertEquals(7, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getMovieReviewById)));
+    public void GetReviewByIdTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getMovieReviewById)) instanceof GetReviewById);
     }
 
     @Test
-    public void GetTopHigherAverageRatingIndexTest() {
-        assertEquals(8, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getTopAverageHigherRating)));
+    public void GetTopHigherAverageRatingTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopAverageHigherRating)) instanceof GetTopRatingsHigherAverage);
     }
 
     @Test
-    public void GetTopNHigherAverageRatingIndexTest() {
-        assertEquals(9, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getTopNAverageHigherRating)));
+    public void GetTopNHigherAverageRatingTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNAverageHigherRating)) instanceof GetTopsNRatingsHigherAverage);
     }
 
     @Test
-    public void GetTopLowerAverageRatingIndexTest() {
-        assertEquals(10, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getTopAverageLoweerRating)));
+    public void GetTopLowerAverageRatingTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopAverageLowerRating)) instanceof GetTopRatingsLowerAverage);
     }
 
     @Test
-    public void GetTopNLowerAverageRatingIndexTest() {
-        assertEquals(11, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getTopNAverageLoweerRating)));
+    public void GetTopNLowerAverageRatingTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNAverageLowerRating)) instanceof GetTopNRatingsLowerAverage);
+
     }
 
     @Test
-    public void GetTopCountReviewIndexTest() {
-        assertEquals(12, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getTopReviewHigherCount)));
+    public void GetTopCountReviewTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopReviewHigherCount)) instanceof GetTopReviewHigherCount);
     }
 
     @Test
-    public void GetTopNCounteReviewsIndexTest() {
-        assertEquals(13, new CommandMapper().getCommandIndex(new CommandGetter().getCommand(getTopNReviewHigherCount)));
+    public void GetTopNCounteReviewsTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNReviewHigherCount)) instanceof GetTopNMoviesWithHigherReview);
+
     }
 
 }

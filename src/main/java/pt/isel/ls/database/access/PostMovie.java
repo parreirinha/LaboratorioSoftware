@@ -1,6 +1,7 @@
 package pt.isel.ls.database.access;
 
-import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.command.model.Parameters;
+import pt.isel.ls.command.model.Path;
 
 import java.sql.*;
 
@@ -15,24 +16,24 @@ import java.sql.*;
 public class PostMovie implements Commands {
 
 
-    private PreparedStatement preparedStatement = null;
-
-
     @Override
-    public Object execute(Connection connection, Object... obj) throws SQLException {
+    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
+        String movieName = parameters.getParamString("title");
+        int movieRelease = parameters.getParamInt("releaseYear");
 
-        String query = "insert into Movie (movieName, movieRelease) " + "values(?,?)  " +
-                "select @@IDENTITY;";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, (String)obj[0]);
-        preparedStatement.setInt(2, (Integer)obj[1]);
+        String query = "insert into Movie (movieName, movieRelease) " + "values(?,?)";
+        PreparedStatement ps = connection.prepareStatement(query);
+        AccessUtils.setValuesOnPreparedStatement(ps, movieName, movieRelease);
+        ps.executeUpdate();
 
-        //TODO
-        // não consigo retornar o ID correcto
-        int id = preparedStatement.executeUpdate();
-        connection.commit();
-
+        String query2 =  "select @@IDENTITY;";
+        ps = connection.prepareStatement(query2);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int id = rs.getInt(1);
+        rs.close();
+        ps.close();
         return id;
     }
 }

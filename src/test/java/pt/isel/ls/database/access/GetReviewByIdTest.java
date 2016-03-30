@@ -35,7 +35,7 @@ public class GetReviewByIdTest {
         values[0] = 1;
         values[1] = 5;  //review with id = 5 not exists
         connection = new ConnectionFactory().connectionFactory();
-        review = (Review) getReviewById.execute(connection, values);
+        review = (Review) getReviewById.execute(connection, , values, );
         assertNull(review);
     }
 
@@ -45,7 +45,7 @@ public class GetReviewByIdTest {
         values[0] = 3;  //movie 3 -matrix
         values[1] = 5;  //review with id = 5 not exists
         connection = new ConnectionFactory().connectionFactory();
-        review = (Review) getReviewById.execute(connection, values);
+        review = (Review) getReviewById.execute(connection, , values, );
 
         assertEquals((int)values[0],review.getMovieID());
         assertEquals(dataCreationTests.reviews[4].getReviewID(), review.getReviewID());
@@ -60,7 +60,7 @@ public class GetReviewByIdTest {
         values[0] = 1;  //movie 3 -matrix
         values[1] = 2;  //review with id = 5 not exists
         connection = new ConnectionFactory().connectionFactory();
-        review = (Review) getReviewById.execute(connection, values);
+        review = (Review) getReviewById.execute(connection, , values, );
 
         assertEquals((int)values[0], review.getMovieID());
         assertEquals(dataCreationTests.reviews[1].getReviewID(), review.getReviewID());

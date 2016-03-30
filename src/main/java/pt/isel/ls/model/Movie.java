@@ -6,7 +6,7 @@ package pt.isel.ls.model;
 public class Movie {
 
     private int movieID, movieRelease;
-    private String movieName;
+    public String movieName;
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
 
     public Movie(int id, String movieName, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
@@ -40,32 +40,6 @@ public class Movie {
 
     public float average() {
         return (oneStar * 1 + twoStar * 2 + treeStar * 3 + fourStar * 4 + fiveStar * 5) / (oneStar + twoStar + treeStar + fourStar + fiveStar);
-    }
-
-    public void incrementStar(int star) {
-        if (star < 1 || star > 5)
-            return;
-        switch (star) {
-            case 1:
-                ++oneStar;
-                break;
-
-            case 2:
-                ++twoStar;
-                break;
-
-            case 3:
-                ++treeStar;
-                break;
-
-            case 4:
-                ++fourStar;
-                break;
-
-            case 5:
-                ++fiveStar;
-                break;
-        }
     }
 
     public int getOneStar() {

@@ -30,15 +30,15 @@ public class GetMovieTest {
     public void  existingMoviesTest() throws SQLException {
 
         connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) getMovie.execute(connection, 1);
+        movie = (Movie) getMovie.execute(connection, , 1, );
         assertEquals(movie.getMovieID(), dataCreation.movies[0].getMovieID());
         assertEquals(movie.getMovieName(), dataCreation.movies[0].getMovieName());
 
-        movie = (Movie) getMovie.execute(connection, 4);
+        movie = (Movie) getMovie.execute(connection, , 4, );
         assertEquals(movie.getMovieID(), dataCreation.movies[3].getMovieID());
         assertEquals(movie.getMovieName(), dataCreation.movies[3].getMovieName());
 
-        movie = (Movie) getMovie.execute(connection, 6);
+        movie = (Movie) getMovie.execute(connection, , 6, );
         assertEquals(movie.getMovieID(), dataCreation.movies[5].getMovieID());
         assertEquals(movie.getMovieName(), dataCreation.movies[5].getMovieName());
     }
@@ -47,7 +47,7 @@ public class GetMovieTest {
     public void nonExistingID() throws SQLException {
 
         connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) getMovie.execute(connection, 10);
+        movie = (Movie) getMovie.execute(connection, , 10, );
         assertNull(movie);
     }
 }

@@ -1,13 +1,11 @@
 package pt.isel.ls.database.access;
 
 
-import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.command.model.Parameters;
+import pt.isel.ls.command.model.Path;
 import pt.isel.ls.model.Review;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 /**
@@ -19,21 +17,18 @@ import java.sql.Statement;
  */
 public class GetReviewById implements Commands {
 
-    private Connection connection = null;
-    private Review review = null;
 
     @Override
-    public Object execute(Connection connection, Object... obj) throws SQLException {
+    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
-
-        Integer movieId = (Integer) obj[0];
-        Integer reviewId = (Integer) obj[1];
-
-        String statementQuery = "select * from Review where MovieId = " +movieId +
-                " and ReviewID = " + reviewId +";";
-        Statement stmt = this.connection.createStatement();
-        ResultSet rs = stmt.executeQuery(statementQuery);
-        if(!rs.next())      // query nao encontrou resultados
+        int movieId = path.getPathInt("mid");
+        int reviewId = parameters.getParamInt("rid");
+        String query = "select * from Review where MovieId = ? and ReviewID = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        AccessUtils.setValuesOnPreparedStatement(preparedStatement,movieId,reviewId);
+        ResultSet rs = preparedStatement.executeQuery();
+        Review review;
+        if(!rs.next())      // query nao encontrou resultados   //TODO verificar
             return null;
         review = new Review(
                 rs.getInt(1),
@@ -43,6 +38,8 @@ public class GetReviewById implements Commands {
                 rs.getString(5),
                 rs.getInt(6)
         );
+        rs.close();
+        preparedStatement.close();
         return review;
     }
 }

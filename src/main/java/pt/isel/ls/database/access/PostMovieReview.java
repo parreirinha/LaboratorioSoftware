@@ -1,6 +1,7 @@
 package pt.isel.ls.database.access;
 
-import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.command.model.Parameters;
+import pt.isel.ls.command.model.Path;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,29 +20,31 @@ import java.sql.SQLException;
 public class PostMovieReview implements Commands{
 
 
-
-    private PreparedStatement preparedStatement = null;
-
     @Override
-    public Object execute(Connection connection, Object... obj) throws SQLException {
+    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
         //TODO tenho que incrementar o rating global correspondente!?!?
 
-        String reviwerName = (String) obj[0];
-        String reviewSummary = (String) obj[1];
-        String review = (String) obj[2];
-        int rating = (Integer) obj[3];
+        int movieId = path.getPathInt("mid");
+        String reviwerName = parameters.getParamString("reviewerName");
+        String reviewSummary = parameters.getParamString("reviewSummary");
+        String review = parameters.getParamString("review");
+        int rating = parameters.getParamInt("rating");
         String query =
-                "insert into Review (MovieID, ReviewrName, ReviewSummary, ReviewComplete, ReviewRating)" +
-                "values(?,?,?,?,?)";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, reviwerName);
-        preparedStatement.setString(2, reviewSummary);
-        preparedStatement.setString(3,review);
-        preparedStatement.setInt(4,rating);
-        preparedStatement.executeUpdate();
+            "insert into Review (MovieID, ReviewrName, ReviewSummary, ReviewComplete, ReviewRating)" +
+            "values(?,?,?,?,?)";
+        PreparedStatement ps = connection.prepareStatement(query);
+        AccessUtils.setValuesOnPreparedStatement(ps, movieId, reviwerName, reviewSummary, review, rating);
+        ps.executeUpdate();
         connection.commit();
-
+        //increment of the star given in the review
+        String query2 = "update table Movie set ? = ? + 1 where MovieID = ?";
+        String star = AccessUtils.getColumnName(rating);
+        ps = connection.prepareStatement(query2);
+        AccessUtils.setValuesOnPreparedStatement(ps, star, star, movieId);
+        ps.executeUpdate();
+        connection.commit();
+        ps.close();
         return null;
     }
 }
