@@ -13,7 +13,7 @@ public class ParamGetter {
     private HashMap<String, String> paramStrings;
 
     public ParamGetter(){
-        paramStrings = new HashMap<>();
+        paramStrings = new HashMap<String, String>();
     }
 
     public Parameters getParams(String paramString) {

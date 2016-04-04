@@ -22,10 +22,10 @@ public class Run {
 
             if (command == null)
                 System.exit(-1);
-/*
-            new Printer().printResult(
-                    (ResultSet) new CommandMapper().getExecutionCommandInstance(command).execute(conn, command.getPath(),
-                            command.getParams()));
+
+           /* new Printer().printResultSet(
+                    (ResultSet) new CommandMapper().getExecutionCommandInstance(command).execute(conn, , command, ));
+
 */
             conn.close();
 
@@ -34,3 +34,5 @@ public class Run {
         }
     }
 }
+
+

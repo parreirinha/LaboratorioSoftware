@@ -17,7 +17,7 @@ public class CommandMapper {
     }
 
     private void initMap(){
-        commmandMap = new HashMap<>();
+        commmandMap = new HashMap<String, Commands>();
         commmandMap.put("POSTmovies", new PostMovie());
         commmandMap.put("GETmovies", new GetAllMovies());
         commmandMap.put("GETmoviesmid", new GetMovie());

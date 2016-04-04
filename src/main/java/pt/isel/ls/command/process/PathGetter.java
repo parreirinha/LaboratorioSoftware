@@ -16,7 +16,7 @@ public class PathGetter {
 
     public PathGetter(){
         cleanPath = "";
-        pathIntegers = new HashMap<>();
+        pathIntegers = new HashMap<String, Integer>();
     }
 
     public Path getPath(String path){
