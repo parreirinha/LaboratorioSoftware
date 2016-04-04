@@ -57,6 +57,7 @@ public class Movie {
     public int getMovieReleaseYear() {
         return movieRelease;
     }
+
     public int getFourStar()
     {
         return fourStar;
@@ -65,6 +66,7 @@ public class Movie {
     public String getMovieName() {
         return movieName;
     }
+
     public int getFiveStar()
     {
         return fiveStar;

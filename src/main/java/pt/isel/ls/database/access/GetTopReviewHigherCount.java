@@ -48,7 +48,7 @@ public class GetTopReviewHigherCount implements Commands
 
     private void getCollection(ResultSet rs, Collection<Movie> col) throws SQLException {
         while (rs.next()) {
-            Movie movie = new Movie(rs.getString(2), rs.getInt(3));
+            Movie movie = new Movie(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8));
             col.add(movie);
         }
     }
