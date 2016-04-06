@@ -15,6 +15,13 @@ import java.sql.SQLException;
 public class Run {
     private Connection conn;
 
+<<<<<<< HEAD
+
+
+
+    public void RunApp(String[] args) {
+
+=======
     public void RunApp(String[] args) {
         try {
             Command command = new CommandGetter().getCommand(args);
@@ -32,6 +39,7 @@ public class Run {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+>>>>>>> b69cb7695632094e91ab925677945f160e8aaf1a
     }
 }
 
