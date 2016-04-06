@@ -23,7 +23,7 @@ public class GetTopNRatingsLowerAverage implements Commands {
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
         int aux = path.getPathInt("n");
-        int aux1 = aux;
+
 
         String querry = "select * from Movie " +
                             "inner join " +
@@ -36,7 +36,7 @@ public class GetTopNRatingsLowerAverage implements Commands {
         ResultSet rs = ps.executeQuery();
         Collection<Movie> col = new ArrayList<Movie>();
         getCollection(rs, col, aux);
-        if(col.size() == aux1-1)
+        if(col.size() == aux-1)
         {
             rs.close();
             ps.close();
@@ -44,15 +44,14 @@ public class GetTopNRatingsLowerAverage implements Commands {
         }
 
         querry = "select * from Movie " +
-                            "inner join " +
-                                "(select top(?) y.MovieID from " +
-                                    "(select MovieID, ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar)) as c from Movie) y " +
-                                        "inner join  " +
-                                            "(select * from Movie " +
-                                                "where OneStar > 0 or TwoStar > 0 or FourStar > 0 or TreeStar > 0 or FiveStar > 0) b " +
-                                            "on y.MovieID = b.MovieID order by y.c asc) x " +
-                                "ON Movie.MovieID = x.MovieID " +
-                            "order by Movie.MovieID asc";
+                    "inner join " +
+                        "(select top(?) y.MovieID, y.c from " +
+                            "(select MovieID, ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar)) as c from Movie " +
+                                "where OneStar > 0 or TwoStar > 0 or FourStar > 0 or TreeStar > 0 or FiveStar > 0" +
+                            ") y " +
+                        ") x " +
+                        "ON Movie.MovieID = x.MovieID " +
+                    "order by x.c desc";
         ps = connection.prepareStatement(querry);
         ps.setInt(1, aux);
         rs = ps.executeQuery();
@@ -64,11 +63,10 @@ public class GetTopNRatingsLowerAverage implements Commands {
 
     private void getCollection(ResultSet rs, Collection<Movie> col, int aux) throws SQLException
     {
-        while(rs.next())
+        while(rs.next() && col.size() < aux)
         {
             Movie movie = new Movie(rs.getString(2), rs.getInt(3));
             col.add(movie);
-            --aux;
         }
     }
 

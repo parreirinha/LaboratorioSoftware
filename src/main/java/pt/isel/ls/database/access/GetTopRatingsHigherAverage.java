@@ -30,7 +30,7 @@ public class GetTopRatingsHigherAverage implements Commands {
                                         ") a " +
                                     ") b " +
                                 ") c " +
-                            "on c.maximum = ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar))";
+                                "on (OneStar > 0 or TwoStar>0 or FourStar > 0 or TreeStar>0 or FiveStar>0) and c.maximum = ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar))";
         PreparedStatement ps = connection.prepareStatement(querry);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> col = new ArrayList<Movie>();
