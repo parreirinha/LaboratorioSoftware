@@ -29,13 +29,20 @@ public class Movie {
         movieRelease = date;
     }
 
-    public Movie(int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
+    public Movie(int id,int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
+        movieID = id;
         this.oneStar = oneStar;
         this.twoStar = twoStar;
         this.treeStar = treeStar;
         this.fourStar = fourStar;
         this.fiveStar = fiveStar;
         movieName = null;
+    }
+
+    public Movie(int mid, String moviename, int movieyear) {
+        movieID = mid;
+        movieName = moviename;
+        movieRelease = movieyear;
     }
 
     public float average() {

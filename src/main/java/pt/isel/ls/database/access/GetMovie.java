@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetMovies;
 import pt.isel.ls.model.Movie;
 
 import java.sql.*;
@@ -38,6 +39,6 @@ public class GetMovie implements Commands {
         }
         rs.close();
         ps.close();
-        return res;
+        return new PrintGetMovies(res);
     }
 }

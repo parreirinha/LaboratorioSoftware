@@ -20,15 +20,6 @@ public class GetMovieRatingTest {
     @Test
     public void movieSevenTest() throws SQLException {
 
-        connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) movieRating.execute(connection, , 2, );
-        assertEquals(dataCreation.movies[1].getOneStar(), movie.getOneStar());
-        assertEquals(dataCreation.movies[1].getTwoStar(), movie.getTwoStar());
-        assertEquals(dataCreation.movies[1].getTreeStar(), movie.getTreeStar());
-        assertEquals(dataCreation.movies[1].getFourStar(), movie.getFourStar());
-        assertEquals(dataCreation.movies[1].getFiveStar(), movie.getFiveStar());
-        //assertEquals(movie.average(), dataCreation.movies[1].average());
-
     }
 
     @After

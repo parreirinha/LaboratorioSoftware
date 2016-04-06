@@ -27,18 +27,7 @@ public class GetAllReviewsTest {
 
     @Test
     public void testReviews() throws SQLException {
-        connection = new ConnectionFactory().connectionFactory();
-        ArrayList<Review> container = (ArrayList<Review>) test.execute(connection, , null, );
-        int i = 0;
 
-        for (Review review : container) {
-            assertEquals(dataCreation.reviews[i].getReviewID(), review.getReviewID());
-            assertEquals(dataCreation.reviews[i].getMovieID(), review.getMovieID());
-            assertEquals(dataCreation.reviews[i].getReviewName(), review.getReviewName());
-            assertEquals(dataCreation.reviews[i].getReviewRating(), review.getReviewRating());
-            assertEquals(dataCreation.reviews[i].getReviewSummary(), review.getReviewSummary());
-            assertEquals(dataCreation.reviews[i].getCompleteReview(), review.getCompleteReview());
-            i++;
-        }
+
     }
 }

@@ -3,6 +3,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetAllReviews;
 import pt.isel.ls.model.Review;
 
 import java.sql.*;
@@ -38,6 +39,6 @@ public class GetAllReviews implements Commands {
         }
         rs.close();
         preparedStatement.close();
-        return container;
+        return new PrintGetAllReviews(container);
     }
 }

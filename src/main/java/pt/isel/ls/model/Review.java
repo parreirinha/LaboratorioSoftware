@@ -22,14 +22,7 @@ public class Review
         this.reviewRating = reviewRating;
     }
 
-    public Review(String s, String s1, String reviewName, Integer next, Integer next1) {
-        //TODO tive que criar este construtor para nao dar erro. falta
-    }
 
-
-    public int getReviewID() {
-        return reviewID;
-    }
 
     public int getMovieID() {
         return movieID;

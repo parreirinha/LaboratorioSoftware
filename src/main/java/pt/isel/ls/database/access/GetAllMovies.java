@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetAllMovies;
 import pt.isel.ls.model.Movie;
 
 import java.sql.*;
@@ -29,17 +30,12 @@ public class GetAllMovies implements Commands {
             movie = new Movie(
                     rs.getInt(1),
                     rs.getString(2),
-                    rs.getInt(3),
-                    rs.getInt(4),
-                    rs.getInt(5),
-                    rs.getInt(6),
-                    rs.getInt(7),
-                    rs.getInt(8)
+                    rs.getInt(3)
             );
             container.add(movie);
         }
         rs.close();
         preparedStatement.close();
-        return container;
+        return new PrintGetAllMovies(container);
     }
 }

@@ -3,6 +3,8 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetAllReviews;
+import pt.isel.ls.database.printers.PrintGetMovieRating;
 import pt.isel.ls.model.Movie;
 
 import java.sql.*;
@@ -29,6 +31,7 @@ public class GetMovieRating implements Commands {
         Movie res = null;
         while (rs.next()) {
             res = new Movie(
+                    rs.getInt(1),
                     rs.getInt(4),
                     rs.getInt(5),
                     rs.getInt(6),
@@ -38,6 +41,6 @@ public class GetMovieRating implements Commands {
         }
         rs.close();
         ps.close();
-        return res;
+        return new PrintGetMovieRating(res);
     }
 }

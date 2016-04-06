@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class DataCreationTests {
 
-    Connection connection = null;
+    private Connection connection = null;
     private PreparedStatement preparedStatement = null;
 
     // Arrays to compare values in the assertEquals methods
@@ -29,6 +29,7 @@ public class DataCreationTests {
             new Movie(7,"The Silence of the Lambs",1991,2,30,11,40,22),
             new Movie(8, "PostMovieTest", 2016,0,0,0,0,0)
        };
+
     public final Review[] reviews= {
             new Review(1,1,"Manel","Magnificent","An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more...",5),
             new Review(2,1,"Bad taste Reviwer","Horrible","This is the worst movie i have seen in my life",1),
@@ -72,7 +73,6 @@ public class DataCreationTests {
             connection.close();
     }
 
-
     public void deleteAllReviews() throws SQLException {
         String query = "delete from Review where (ReviewID >= 0)";
         connection = new ConnectionFactory().connectionFactory();
@@ -81,6 +81,7 @@ public class DataCreationTests {
         if (connection != null)
             connection.close();
     }
+
     public void deleteAllMovies() throws SQLException {
         String query = "delete from Movie where (MovieID >= 0)";
         connection = new ConnectionFactory().connectionFactory();
@@ -89,4 +90,64 @@ public class DataCreationTests {
         if (connection != null)
             connection.close();
     }
+
+    public void dropTables() throws SQLException {
+
+        String query = "drop table Review";
+        connection = new ConnectionFactory().connectionFactory();
+        preparedStatement =connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+
+        query = "drop table Movie";
+        connection = new ConnectionFactory().connectionFactory();
+        preparedStatement =connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+        if (connection != null)
+            connection.close();
+    }
+
+    public void createTables() throws SQLException {
+
+
+
+        String creatMovie =
+                "create table Movie\n" +
+                "(\n" +
+                "\tMovieID integer identity(1, 1),\n" +
+                "\tMovieName varchar(50),\n" +
+                "\tMovieRelease integer,\n" +
+                "\tOneStar integer default 0,\n" +
+                "\tTwoStar integer default 0,\n" +
+                "\tTreeStar integer default 0,\n" +
+                "\tFourStar integer default 0,\n" +
+                "\tFiveStar integer default 0,\n" +
+                "\tunique(MovieName, MovieRelease),\n" +
+                "\tprimary key(MovieID)\n" +
+                ")";
+        connection = new ConnectionFactory().connectionFactory();
+        preparedStatement =connection.prepareStatement(creatMovie);
+        preparedStatement.executeUpdate();
+
+
+
+        String createReview =
+                "create table Review\n" +
+                "(\n" +
+                "\tReviewID integer identity(1, 1),\n" +
+                "\tMovieID integer,\n" +
+                "\tReviewerName varchar(50) not null,\n" +
+                "\tReviewSummary varchar(100) not null,\n" +
+                "\tReviewComplete varchar(500) not null,\n" +
+                "\tReviewRating integer not null check (ReviewRating >= 1 AND ReviewRating <= 5),\n" +
+                "\tforeign key(MovieID) references Movie(MovieID),\n" +
+                "\tprimary key(ReviewID, MovieID)\n" +
+                ")";
+        connection = new ConnectionFactory().connectionFactory();
+        preparedStatement =connection.prepareStatement(createReview);
+        preparedStatement.executeUpdate();
+
+        if (connection != null)
+            connection.close();
+    }
+
 }
