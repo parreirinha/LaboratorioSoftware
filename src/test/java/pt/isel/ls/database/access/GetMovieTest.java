@@ -1,6 +1,10 @@
 package pt.isel.ls.database.access;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.command.model.Command;
+import pt.isel.ls.command.model.Path;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.model.Movie;
 
@@ -16,38 +20,34 @@ import static org.junit.Assert.assertNull;
 public class GetMovieTest {
 
     private Connection connection;
-    private DataCreationTests dataCreation = new DataCreationTests();
     private GetMovie getMovie = new GetMovie();
     private Movie movie = null;
+    private Path path = null;
+    private Command command = null;
+
 
     @After
     private void closeConnection() throws SQLException {
         connection.close();
     }
+    @Before
+    private void doBefore() throws SQLServerException {
+        connection = new ConnectionFactory().connectionFactory();
+
+    }
 
 
     @Test
-    public void  existingMoviesTest() throws SQLException {
+    public void  existingMoviesTest() {
 
-        connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) getMovie.execute(connection, , 1, );
-        assertEquals(movie.getMovieID(), dataCreation.movies[0].getMovieID());
-        assertEquals(movie.getMovieName(), dataCreation.movies[0].getMovieName());
 
-        movie = (Movie) getMovie.execute(connection, , 4, );
-        assertEquals(movie.getMovieID(), dataCreation.movies[3].getMovieID());
-        assertEquals(movie.getMovieName(), dataCreation.movies[3].getMovieName());
 
-        movie = (Movie) getMovie.execute(connection, , 6, );
-        assertEquals(movie.getMovieID(), dataCreation.movies[5].getMovieID());
-        assertEquals(movie.getMovieName(), dataCreation.movies[5].getMovieName());
     }
 
     @Test
     public void nonExistingID() throws SQLException {
 
-        connection = new ConnectionFactory().connectionFactory();
-        movie = (Movie) getMovie.execute(connection, , 10, );
-        assertNull(movie);
+
+
     }
 }

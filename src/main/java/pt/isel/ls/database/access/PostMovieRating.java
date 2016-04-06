@@ -23,9 +23,6 @@ public class PostMovieRating implements Commands {
         String query = "update Review set ? = ? + 1 where MovieID = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, ratingColumnName, ratingColumnName, reviewID);
-        //preparedStatement.setString(1, ratingColumnName);
-        //preparedStatement.setString(2, ratingColumnName);
-        //preparedStatement.setInt(3,reviewID);
         ps.executeUpdate();
         connection.commit();
         ps.close();

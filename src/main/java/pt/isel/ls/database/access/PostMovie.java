@@ -27,7 +27,7 @@ public class PostMovie implements Commands {
         AccessUtils.setValuesOnPreparedStatement(ps, movieName, movieRelease);
         ps.executeUpdate();
 
-        String query2 =  "select @@IDENTITY;";
+        String query2 = "select @@IDENTITY;";
         ps = connection.prepareStatement(query2);
         ResultSet rs = ps.executeQuery();
         rs.next();
@@ -35,5 +35,8 @@ public class PostMovie implements Commands {
         rs.close();
         ps.close();
         return id;
+
+
+
     }
 }

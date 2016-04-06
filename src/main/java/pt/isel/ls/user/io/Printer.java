@@ -1,5 +1,7 @@
 package pt.isel.ls.user.io;
 
+import pt.isel.ls.database.printers.Printable;
+
 import java.sql.ResultSet;
 
 /**
@@ -7,7 +9,14 @@ import java.sql.ResultSet;
  */
 public class Printer {
 
-    public void printResultSet(ResultSet resultSet){
-        //TODO
+
+    private Printable printable = null;
+
+    public Printer(Printable p){
+        printable = p;
+    }
+
+    public void printResult(){
+        System.out.println(printable.toStringResult());
     }
 }

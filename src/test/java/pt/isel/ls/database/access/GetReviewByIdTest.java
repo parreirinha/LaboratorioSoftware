@@ -31,43 +31,9 @@ public class GetReviewByIdTest {
         connection.close();
     }
     @Test
-    public void reviewIdNotExists() throws SQLException {
-        values[0] = 1;
-        values[1] = 5;  //review with id = 5 not exists
-        connection = new ConnectionFactory().connectionFactory();
-        review = (Review) getReviewById.execute(connection, , values, );
-        assertNull(review);
-    }
+    public void reviewIdNotExists() throws SQLException {}
 
 
-    @Test
-    public void validReviewId() throws SQLException {
-        values[0] = 3;  //movie 3 -matrix
-        values[1] = 5;  //review with id = 5 not exists
-        connection = new ConnectionFactory().connectionFactory();
-        review = (Review) getReviewById.execute(connection, , values, );
 
-        assertEquals((int)values[0],review.getMovieID());
-        assertEquals(dataCreationTests.reviews[4].getReviewID(), review.getReviewID());
-        assertEquals(dataCreationTests.reviews[4].getReviewName(),review.getReviewName());
-        assertEquals(dataCreationTests.reviews[4].getCompleteReview(), review.getCompleteReview());
-        assertEquals(dataCreationTests.reviews[4].getReviewRating(), review.getReviewRating());
-        assertEquals(dataCreationTests.reviews[4].getReviewSummary(), review.getReviewSummary());
-    }
-
-    @Test
-    public void movieWithTwoReviews() throws SQLException {
-        values[0] = 1;  //movie 3 -matrix
-        values[1] = 2;  //review with id = 5 not exists
-        connection = new ConnectionFactory().connectionFactory();
-        review = (Review) getReviewById.execute(connection, , values, );
-
-        assertEquals((int)values[0], review.getMovieID());
-        assertEquals(dataCreationTests.reviews[1].getReviewID(), review.getReviewID());
-        assertEquals(dataCreationTests.reviews[1].getReviewName(),review.getReviewName());
-        assertEquals(dataCreationTests.reviews[1].getCompleteReview(), review.getCompleteReview());
-        assertEquals(dataCreationTests.reviews[1].getReviewRating(), review.getReviewRating());
-        assertEquals(dataCreationTests.reviews[1].getReviewSummary(), review.getReviewSummary());
-    }
 
 }

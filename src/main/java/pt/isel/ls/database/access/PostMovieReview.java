@@ -2,9 +2,11 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintPostMovieReview;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -23,7 +25,7 @@ public class PostMovieReview implements Commands{
     @Override
     public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
-        //TODO tenho que incrementar o rating global correspondente!?!?
+        //TODO tenho que incrementar o rating global correspondente!?!? verificar
 
         int movieId = path.getPathInt("mid");
         String reviwerName = parameters.getParamString("reviewerName");
@@ -31,12 +33,13 @@ public class PostMovieReview implements Commands{
         String review = parameters.getParamString("review");
         int rating = parameters.getParamInt("rating");
         String query =
-            "insert into Review (MovieID, ReviewrName, ReviewSummary, ReviewComplete, ReviewRating)" +
-            "values(?,?,?,?,?)";
+                "insert into Review (MovieID, ReviewrName, ReviewSummary, ReviewComplete, ReviewRating)" +
+                        "values(?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, movieId, reviwerName, reviewSummary, review, rating);
         ps.executeUpdate();
         connection.commit();
+
         //increment of the star given in the review
         String query2 = "update table Movie set ? = ? + 1 where MovieID = ?";
         String star = AccessUtils.getColumnName(rating);
@@ -44,7 +47,17 @@ public class PostMovieReview implements Commands{
         AccessUtils.setValuesOnPreparedStatement(ps, star, star, movieId);
         ps.executeUpdate();
         connection.commit();
+
+        //*** get rid
+        String queary3 = "select @@identity";
+        ps = connection.prepareStatement(queary3);
+        ResultSet rs = ps.executeQuery();
+        int rid = rs.getInt(1);
         ps.close();
-        return null;
+
+        return new PrintPostMovieReview(rid);
+
+
+
     }
 }
