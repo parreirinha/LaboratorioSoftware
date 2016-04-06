@@ -35,7 +35,7 @@ public class PostMovie implements Commands {
         int id = rs.getInt(1);
         rs.close();
         ps.close();
-        return id;
+        return null;
 
 
 
