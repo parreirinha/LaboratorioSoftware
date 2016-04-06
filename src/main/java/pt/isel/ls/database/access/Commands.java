@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.Printable;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,5 +15,5 @@ import java.sql.SQLException;
  */
 public interface Commands {
 
-    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException;
+    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException;
 }

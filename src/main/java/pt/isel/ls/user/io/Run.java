@@ -24,8 +24,8 @@ public class Run {
                 System.out.println("Error: ");
                 System.exit(-1);
             }
-           new Printer().printResult( new CommandMapper()
-                    .getExecutionCommandInstance(command).execute(conn,command.getPath(), command.getParams()));
+           new Printer(new CommandMapper()
+                   .getExecutionCommandInstance(command).execute(conn,command.getPath(), command.getParams())).printResult( );
 
 
             conn.close();

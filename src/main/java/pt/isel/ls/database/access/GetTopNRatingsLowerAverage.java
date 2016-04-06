@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
 import java.sql.Connection;
@@ -19,7 +20,7 @@ import java.util.Collection;
  */
 public class GetTopNRatingsLowerAverage implements Commands {
     @Override
-    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
         int aux = path.getPathInt("n");
         int aux1 = aux;
 

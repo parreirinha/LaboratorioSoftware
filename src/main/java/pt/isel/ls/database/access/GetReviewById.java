@@ -4,6 +4,7 @@ package pt.isel.ls.database.access;
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
 import pt.isel.ls.database.printers.PrintGetReviewById;
+import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Review;
 
 import java.sql.*;
@@ -20,7 +21,7 @@ public class GetReviewById implements Commands {
 
 
     @Override
-    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
         int movieId = path.getPathInt("mid");
         int reviewId = parameters.getParamInt("rid");

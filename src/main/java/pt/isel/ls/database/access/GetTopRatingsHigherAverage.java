@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
 import java.sql.Connection;
@@ -18,7 +19,7 @@ import java.util.Collection;
  */
 public class GetTopRatingsHigherAverage implements Commands {
     @Override
-    public Object execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
         String querry = "select * from Movie " +
                             "inner join " +
                                 "(select max(b.average) as maximum from " +
