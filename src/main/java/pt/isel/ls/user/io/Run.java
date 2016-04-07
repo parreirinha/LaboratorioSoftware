@@ -22,10 +22,11 @@ public class Run {
             if (command == null)
                 exit();
 
-            new Printer(new CommandMapper()
+            new Printer().printResult(new CommandMapper()
                     .getExecutionCommandInstance(command)
-                    .execute(conn, command.getPath(), command.getParams()))
-                    .printResult();
+                    .execute(conn, command.getPath(), command.getParams())
+            );
+
 
         } catch (SQLException e) {
             tryRollback(conn);
