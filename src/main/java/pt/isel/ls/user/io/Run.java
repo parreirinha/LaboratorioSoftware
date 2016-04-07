@@ -18,7 +18,7 @@ public class Run {
         try {
             Command command = new CommandGetter().getCommand(args);
             conn = new ConnectionFactory().getNewConnection();
-
+            conn.setAutoCommit(false);
             if (command == null)
                 exit();
 
