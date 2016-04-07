@@ -23,5 +23,4 @@ create table Review
 	primary key(ReviewID, MovieID)
 )
 
-select * from Movie;
-select * from Review;
+

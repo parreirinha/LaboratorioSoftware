@@ -17,33 +17,43 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * POST /movies
+ * "the id of the new movie is: ##"
+ */
 public class PostMovieTest {
 
-
-
-    private GetMovie getMovie = new GetMovie();
-    private DataCreationTests dataCreationTests;
     private Connection connection;
-    private Movie movie;
+    private PostMovie postMovie = new PostMovie();
     private Command command;
-
-
-    @Test
-    public void postOneMovie() throws SQLException {
-
-
-
-    }
+    private String[] input;
+    private String expected;
+    private String result;
+    private DataCreationTests dataTests = new DataCreationTests();
 
 
     @After
-    private void closeConnection() throws SQLException {
+    private void undoChangesAndCloseConnection() throws SQLException {
+        dataTests.deleteAllMovies();
+        dataTests.dropTables();
         connection.close();
     }
-
     @Before
-    private void initValues() throws SQLServerException {
-
-
+    private void initConnectionandDataBase() throws SQLException {
+        connection = new ConnectionFactory().connectionFactory();
+        dataTests.createTables();
+        dataTests.insertMoviesToTest();
     }
+
+    @Test
+    public void  postNewMovie() throws SQLException {
+
+        input = new String[]{"POST", "/movies", "title=Big Fish&releaseYear=2003"};
+        command = new CommandGetter().getCommand(input);
+        result = postMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
+        expected = "the id of the new movie is: 9";
+        assertEquals(expected, result);
+    }
+
+
 }

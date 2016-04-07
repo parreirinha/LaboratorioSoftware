@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintPostMovie;
 import pt.isel.ls.database.printers.Printable;
 
 import java.sql.*;
@@ -35,7 +36,7 @@ public class PostMovie implements Commands {
         int id = rs.getInt(1);
         rs.close();
         ps.close();
-        return id;
+        return new PrintPostMovie(id);
 
 
 

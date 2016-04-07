@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintPostMovieRating;
 import pt.isel.ls.database.printers.Printable;
 
 import java.sql.*;
@@ -27,7 +28,8 @@ public class PostMovieRating implements Commands {
         ps.executeUpdate();
         connection.commit();
         ps.close();
-        return null;
+        return new PrintPostMovieRating();
     }
 
 }
+

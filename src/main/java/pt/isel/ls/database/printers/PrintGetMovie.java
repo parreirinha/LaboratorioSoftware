@@ -5,13 +5,13 @@ import pt.isel.ls.model.Movie;
 /**
  * Created by fabio on 05-Apr-16.
  */
-public class PrintGetMovies implements Printable {
+public class PrintGetMovie implements Printable {
 
 
     private Movie movie = null;
 
 
-    public PrintGetMovies(Movie movie){
+    public PrintGetMovie(Movie movie){
         this.movie = movie;
     }
 
