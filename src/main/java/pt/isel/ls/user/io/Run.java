@@ -6,7 +6,6 @@ import pt.isel.ls.command.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -18,22 +17,48 @@ public class Run {
     public void RunApp(String[] args) {
         try {
             Command command = new CommandGetter().getCommand(args);
-            conn = new ConnectionFactory().connectionFactory();
+            conn = new ConnectionFactory().getNewConnection();
 
-            if (command == null) {
-                System.out.println("Error: ");
-                System.exit(-1);
-            }
-           new Printer(new CommandMapper()
-                   .getExecutionCommandInstance(command).execute(conn,command.getPath(), command.getParams())).printResult( );
+            if (command == null)
+                exit();
 
-
-            conn.close();
+            new Printer(new CommandMapper()
+                    .getExecutionCommandInstance(command)
+                    .execute(conn, command.getPath(), command.getParams()))
+                    .printResult();
 
         } catch (SQLException e) {
+            tryRollback(conn);
             e.printStackTrace();
+        } finally {
+          tryClose(conn);
         }
     }
+
+    private void tryClose(Connection conn){
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Database Access Error.");
+            e.printStackTrace();
+            exit();
+        }
+    }
+
+    private void tryRollback(Connection conn) {
+        try {
+            conn.rollback();
+        } catch (SQLException e) {
+            System.out.println("Error: Database Access Error.");
+            e.printStackTrace();
+            exit();
+        }
+    }
+
+    private void exit(){
+        System.exit(-1);
+    }
+
 }
 
 
