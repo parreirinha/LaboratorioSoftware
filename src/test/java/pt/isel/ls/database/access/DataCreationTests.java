@@ -1,7 +1,5 @@
 package pt.isel.ls.database.access;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.model.Review;
@@ -50,7 +48,7 @@ public class DataCreationTests {
             "select 'Pulp Fiction', 1994, 30, 8, 34, 13, 20 union all " +
             "select 'American History X', 1998, 1, 5, 20, 100, 50  union all " +
             "select 'The Silence of the Lambs', 1991, 2, 30, 11, 40,22;";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -66,7 +64,7 @@ public class DataCreationTests {
             "select 2, 'Jack', 'Morgan Freeman is the best', 'Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his modus operandi', 2 union all " +
             "select 3, 'IT guy', 'interesting concept', 'In a futuristic world some heroes battles the forces of evil in a cybernetic world',3 union all " +
             "select 4, 'Manel', 'Film of the year candidate', 'Interesting concept movie about dreams hunters',5;";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -75,7 +73,7 @@ public class DataCreationTests {
 
     public void deleteAllReviews() throws SQLException {
         String query = "delete from Review where (ReviewID >= 0)";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -84,7 +82,7 @@ public class DataCreationTests {
 
     public void deleteAllMovies() throws SQLException {
         String query = "delete from Movie where (MovieID >= 0)";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -94,12 +92,12 @@ public class DataCreationTests {
     public void dropTables() throws SQLException {
 
         String query = "drop table Review";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(query);
         preparedStatement.executeUpdate();
 
         query = "drop table Movie";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -124,7 +122,7 @@ public class DataCreationTests {
                 "\tunique(MovieName, MovieRelease),\n" +
                 "\tprimary key(MovieID)\n" +
                 ")";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(creatMovie);
         preparedStatement.executeUpdate();
 
@@ -142,7 +140,7 @@ public class DataCreationTests {
                 "\tforeign key(MovieID) references Movie(MovieID),\n" +
                 "\tprimary key(ReviewID, MovieID)\n" +
                 ")";
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(createReview);
         preparedStatement.executeUpdate();
 

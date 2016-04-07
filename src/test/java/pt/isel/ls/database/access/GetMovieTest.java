@@ -32,7 +32,7 @@ public class GetMovieTest {
     }
     @Before
     private void doBefore() throws SQLServerException {
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
 
     }
 

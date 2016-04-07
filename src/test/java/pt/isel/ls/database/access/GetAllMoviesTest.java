@@ -4,11 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.model.Movie;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,7 +38,7 @@ public class GetAllMoviesTest {
     @Test
     public void checkResultsetFromMoviesQueary() throws SQLException {
 
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
 
 
     }
