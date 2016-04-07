@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetTopsNRatingsHigherAverage;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -24,13 +25,14 @@ public class GetTopsNRatingsHigherAverage implements Commands {
         int aux1 = aux;
         String querry = "select * from Movie " +
                             "inner join " +
-                                "(select top(?) y.MovieID from " +
-                                    "(select MovieID, ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar)) as c from Movie) y " +
-                                        "inner join  " +
-                                            "(select * from Movie " +
-                                                "where OneStar > 0 or TwoStar>0 or FourStar > 0 or TreeStar>0 or FiveStar>0) b " +
-                                            "on y.MovieID = b.MovieID order by y.c desc) x " +
-                                "ON Movie.MovieID = x.MovieID " +
+                                "(select top(?) x.MovieID from " +
+                                    "(select MovieID, ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar)) as c from " +
+                                        "(select * from Movie " +
+                                            "where OneStar > 0 or TwoStar>0 or FourStar > 0 or TreeStar>0 or FiveStar>0 " +
+                                        ") b " +
+                                    ") x " +
+                                ") y " +
+                                "on y.MovieID = Movie.MovieID " +
                             "order by Movie.MovieID asc";
         PreparedStatement ps = connection.prepareStatement(querry);
         ps.setInt(1, aux);
@@ -41,7 +43,7 @@ public class GetTopsNRatingsHigherAverage implements Commands {
         {
             rs.close();
             ps.close();
-            return col;
+            return new PrintGetTopsNRatingsHigherAverage(col);
         }
         querry = "select * from Movie " +
                     "inner join " +
@@ -55,16 +57,15 @@ public class GetTopsNRatingsHigherAverage implements Commands {
         getCollection(rs, col, aux);
         rs.close();
         ps.close();
-        return col;
+        return new PrintGetTopsNRatingsHigherAverage(col);
     }
 
     private void getCollection(ResultSet rs, Collection<Movie> col, int aux) throws SQLException
     {
-        while(rs.next())
+        while(rs.next() && col.size() <= aux-1)
         {
             Movie movie = new Movie(rs.getString(2), rs.getInt(3));
             col.add(movie);
-            --aux;
         }
     }
 }

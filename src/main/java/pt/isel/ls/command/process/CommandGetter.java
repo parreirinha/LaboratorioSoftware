@@ -10,7 +10,7 @@ import pt.isel.ls.command.model.Method;
 public class CommandGetter {
 
     /*
-    * Returns a new Command instance from the String array
+    * Class used to returns a new Command instance from the String array
     * command passed as argument, or null if the command is
     * invalid.
     * */

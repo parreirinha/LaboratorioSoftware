@@ -46,7 +46,8 @@ public class Movie {
     }
 
     public float average() {
-        return (oneStar * 1 + twoStar * 2 + treeStar * 3 + fourStar * 4 + fiveStar * 5) / (oneStar + twoStar + treeStar + fourStar + fiveStar);
+       return (oneStar != 0 && twoStar != 0 && treeStar != 0 && fourStar != 0 && fiveStar != 0) ?
+            (oneStar * 1 + twoStar * 2 + treeStar * 3 + fourStar * 4 + fiveStar * 5) / (oneStar + twoStar + treeStar + fourStar + fiveStar) : 0;
     }
 
     public int getOneStar() {
@@ -59,10 +60,6 @@ public class Movie {
 
     public int getTreeStar() {
         return treeStar;
-    }
-
-    public int getMovieReleaseYear() {
-        return movieRelease;
     }
 
     public int getFourStar()

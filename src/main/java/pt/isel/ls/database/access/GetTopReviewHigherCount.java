@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetTopReviewHigherCount;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -44,7 +45,7 @@ public class GetTopReviewHigherCount implements Commands
         getCollection(rs, col);
         rs.close();
         ps.close();
-        return col;
+        return new PrintGetTopReviewHigherCount(col);
     }
 
     private void getCollection(ResultSet rs, Collection<Movie> col) throws SQLException {

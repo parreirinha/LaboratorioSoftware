@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetTopRatingsHigherAverage;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -29,7 +30,7 @@ public class GetTopRatingsHigherAverage implements Commands {
                                         ") a " +
                                     ") b " +
                                 ") c " +
-                            "on c.maximum = ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar))";
+                                "on (OneStar > 0 or TwoStar>0 or FourStar > 0 or TreeStar>0 or FiveStar>0) and c.maximum = ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar))";
         PreparedStatement ps = connection.prepareStatement(querry);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> col = new ArrayList<Movie>();
@@ -38,7 +39,7 @@ public class GetTopRatingsHigherAverage implements Commands {
         {
             rs.close();
             ps.close();
-            return col;
+            return new PrintGetTopRatingsHigherAverage(col);
         }
 
         querry = "select * from Movie " +
@@ -49,7 +50,7 @@ public class GetTopRatingsHigherAverage implements Commands {
 
         rs.close();
         ps.close();
-        return col;
+        return new PrintGetTopRatingsHigherAverage(col);
     }
 
     private void getCollection(ResultSet rs, Collection<Movie> col) throws SQLException

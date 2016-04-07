@@ -7,11 +7,9 @@ import pt.isel.ls.command.model.Command;
 import pt.isel.ls.command.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.database.printers.Printable;
-import pt.isel.ls.model.Movie;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -53,7 +51,7 @@ public class GetAllMoviesTest {
     @Test
     public void checkResultsetFromMoviesQueary() throws SQLException {
 
-        connection = new ConnectionFactory().connectionFactory();
+        connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies"};
         command = new CommandGetter().getCommand(input);
         result = getAllMovies.execute(connection, command.getPath(), command.getParams()).toStringResult();

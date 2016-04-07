@@ -2,6 +2,7 @@ package pt.isel.ls.database.access;
 
 import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
+import pt.isel.ls.database.printers.PrintGetTopRatingsLowerAverage;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -32,7 +33,7 @@ public class GetTopRatingsLowerAverage implements Commands {
         {
             rs.close();
             ps.close();
-            return col;
+            return new PrintGetTopRatingsLowerAverage(col);
         }
 
         querry = "select * from Movie " +
@@ -51,7 +52,7 @@ public class GetTopRatingsLowerAverage implements Commands {
 
         rs.close();
         ps.close();
-        return col;
+        return new PrintGetTopRatingsLowerAverage(col);
     }
 
     private void getCollection(ResultSet rs, Collection<Movie> col) throws SQLException

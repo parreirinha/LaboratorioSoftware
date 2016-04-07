@@ -5,18 +5,16 @@ import pt.isel.ls.database.printers.Printable;
 import java.sql.ResultSet;
 
 /**
- * Class used to visualize the obtained ResultSet on console.
+ * Class used to visualize the obtained result on console.
  */
 public class Printer {
 
+    public void printResult(Printable printable ){
 
-    private Printable printable = null;
-
-    public Printer(Printable p){
-        printable = p;
-    }
-
-    public void printResult(){
+        if(printable != null)
         System.out.println(printable.toStringResult());
+
+        else
+            System.out.println("Error: Couldn't print result.");
     }
 }
