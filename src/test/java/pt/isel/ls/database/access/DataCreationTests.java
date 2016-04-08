@@ -25,7 +25,7 @@ public class DataCreationTests {
             new Movie(5,"Pulp Fiction",1994,30,8,34,13,20),
             new Movie(6,"American History X",1998,1,5,20,100,50),
             new Movie(7,"The Silence of the Lambs",1991,2,30,11,40,22),
-            new Movie(8, "PostMovieTest", 2016,0,0,0,0,0)
+
        };
 
     public final Review[] reviews= {
@@ -71,23 +71,6 @@ public class DataCreationTests {
             connection.close();
     }
 
-    public void deleteAllReviews() throws SQLException {
-        String query = "delete from Review where (ReviewID >= 0)";
-        connection = new ConnectionFactory().getNewConnection();
-        preparedStatement =connection.prepareStatement(query);
-        preparedStatement.executeUpdate();
-        if (connection != null)
-            connection.close();
-    }
-
-    public void deleteAllMovies() throws SQLException {
-        String query = "delete from Movie where (MovieID >= 0)";
-        connection = new ConnectionFactory().getNewConnection();
-        preparedStatement =connection.prepareStatement(query);
-        preparedStatement.executeUpdate();
-        if (connection != null)
-            connection.close();
-    }
 
     public void dropTables() throws SQLException {
 
@@ -105,8 +88,6 @@ public class DataCreationTests {
     }
 
     public void createTables() throws SQLException {
-
-
 
         String creatMovie =
                 "create table Movie\n" +
@@ -129,7 +110,7 @@ public class DataCreationTests {
 
 
         String createReview =
-                "create table Review\n" +
+                "create table Review" +
                 "(\n" +
                 "\tReviewID integer identity(1, 1),\n" +
                 "\tMovieID integer,\n" +

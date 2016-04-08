@@ -1,3 +1,4 @@
+use ls;
 create table Movie
 (
 	MovieID integer identity(1, 1),
@@ -24,3 +25,5 @@ create table Review
 )
 
 
+select * from Review;
+select * from Movie;

@@ -23,9 +23,11 @@ public class GetAllReviews implements Commands {
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
-        String query = "select * from Review order by ReviewID";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        ResultSet rs = preparedStatement.executeQuery();
+        int movieId = path.getPathInt("mid");
+        String query = "select * from Review where MovieID = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        AccessUtils.setValuesOnPreparedStatement(ps, movieId);
+        ResultSet rs = ps.executeQuery();
         Collection<Review> container = new ArrayList<Review>();
         Review review;
         while (rs.next()) {
@@ -39,7 +41,7 @@ public class GetAllReviews implements Commands {
             container.add(review);
         }
         rs.close();
-        preparedStatement.close();
+        ps.close();
         return new PrintGetAllReviews(container);
     }
 }

@@ -1,7 +1,10 @@
 package pt.isel.ls.database.access;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.command.model.Command;
+import pt.isel.ls.command.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.model.Movie;
 
@@ -12,51 +15,45 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by fabio on 26-Mar-16.
+ *  * POST /movies/{mid}/ratings
+ * submits a new rating for the movie identified by mid, given the following parameters:
+ *  rating - integer between 1 and 5.
  */
 public class PostMovieRatingTest {
 
-
-    private PreparedStatement preparedStatement = null;
-    private Connection connection = null;
+    private Connection connection;
     private PostMovieRating postMovieRating = new PostMovieRating();
-    private GetMovieRating getMovieRating = new GetMovieRating();
-    private Movie movie = null;
+    private Command command;
+    private String[] input;
+    private String expected;
+    private String result;
+    private DataCreationTests dataTests = new DataCreationTests();
 
-    @Test
-    public void incrementMatrizMovieStarTree() throws SQLException {
-
-
-    }
-
-    @Test
-    public void incrementSevenMovieStarFive() throws SQLException {
-
-    }
 
     @After
-    public void undoChanges() throws SQLException {
-
-        decrementValuesThatHaveBeenIncreasedInTest(2,5);
-        decrementValuesThatHaveBeenIncreasedInTest(3,2);
+    public void undoChangesAndCloseConnection() throws SQLException {
+        dataTests.dropTables();
         connection.close();
+    }
+    @Before
+    public void initConnectionAndDataBase() throws SQLException {
+        connection = new ConnectionFactory().getNewConnection();
+        dataTests.createTables();
+        dataTests.insertMoviesToTest();
+        dataTests.insertReviewsInMovies();
     }
 
 
 
-    public void decrementValuesThatHaveBeenIncreasedInTest(int movieID, int star) throws SQLException {
 
+    @Test
+    public void postRateMovieSevenWithFiveStars() throws SQLException {
 
-        /*String ratingColumnName = postMovieRating.getColumnName(star);
-        String query = "update Review set ? = ? - 1 where MovieID = ?";
-        connection = new ConnectionFactory().connectionFactory();
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, ratingColumnName);
-        preparedStatement.setString(2, ratingColumnName);
-        preparedStatement.setInt(3,movieID);
-        preparedStatement.executeUpdate();
-        connection.commit();
-        connection.close();
-        */
+        input = new String[]{"POST", "/movies/2/ratings","rating=5"};
+        command = new CommandGetter().getCommand(input);
+        result = postMovieRating.execute(connection, command.getPath(),command.getParams()).toStringResult();
+        expected = "rating posted with sucess";
+        assertEquals(expected, result);
+
     }
 }

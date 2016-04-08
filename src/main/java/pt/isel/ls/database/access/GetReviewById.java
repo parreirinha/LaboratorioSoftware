@@ -15,7 +15,6 @@ import java.sql.*;
  * GET /movies/{mid}/reviews/{rid}
  * returns the full information for the review rid of the movie identified by mid.
  *
- * returns a object Review
  */
 public class GetReviewById implements Commands {
 
@@ -24,14 +23,14 @@ public class GetReviewById implements Commands {
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
         int movieId = path.getPathInt("mid");
-        int reviewId = parameters.getParamInt("rid");
-        String query = "select * from Review where MovieId = ? and ReviewID = ?;";
+        int reviewId = path.getPathInt("rid");
+        String query = "select * from Review where MovieID = ? and ReviewID = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(preparedStatement,movieId,reviewId);
         ResultSet rs = preparedStatement.executeQuery();
-        Review review;
-        if(!rs.next())      // query nao encontrou resultados   //TODO verificar
-            return null;
+        Review review = null;
+        if(!rs.next())
+            return new PrintGetReviewById(null);
         review = new Review(
                 rs.getInt(1),
                 rs.getInt(2),

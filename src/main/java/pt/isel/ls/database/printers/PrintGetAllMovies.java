@@ -30,6 +30,6 @@ public class PrintGetAllMovies implements Printable {
                     "\nrelease year: " + m.getMovieRelease()+
                     "\n";
         }
-        return (s == null) ? "something went wrong!!\n" : s;
+        return (s == "") ? "something went wrong!!\n" : s;
     }
 }

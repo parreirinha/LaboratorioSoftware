@@ -1,24 +1,14 @@
 package pt.isel.ls.database.access;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.command.model.Command;
-import pt.isel.ls.command.model.Path;
 import pt.isel.ls.command.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.database.printers.Printable;
-import pt.isel.ls.model.Movie;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
-/**
- * Created by fabio on 21-Mar-16.
- */
 public class GetMovieTest {
 
     private Connection connection;
@@ -31,13 +21,13 @@ public class GetMovieTest {
 
 
     @After
-    private void undoChangesAndCloseConnection() throws SQLException {
-        dataTests.deleteAllMovies();
+    public void undoChangesAndCloseConnection() throws SQLException {
+
         dataTests.dropTables();
         connection.close();
     }
     @Before
-    private void initConnectionandDataBase() throws SQLException {
+    public void initConnectionandDataBase() throws SQLException {
         connection = new ConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
@@ -47,10 +37,10 @@ public class GetMovieTest {
     @Test
     public void  existingMoviesTest() throws SQLException {
 
-        input = new String[]{"GET", "/movies/{1}"};
+        input = new String[]{"GET", "/movies/1"};
         command = new CommandGetter().getCommand(input);
         result = getMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "movieid = 1; movie name = Fight Club; releaseyear = 199;\\n*20;**10;***15;****50;*****32.\\n";
+        expected = "movieid = 1; movie name = Fight Club; releaseyear = 1999;\n*20;**10;***15;****50;*****32.\n";
         assertEquals(expected, result);
     }
 
@@ -58,7 +48,7 @@ public class GetMovieTest {
     @Test
     public void nonExistingID() throws SQLException {
 
-        input = new String[]{"GET", "/movies/{100}"};
+        input = new String[]{"GET", "/movies/100"};
         command = new CommandGetter().getCommand(input);
         result = getMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
         expected = "something went wrong!!\n";

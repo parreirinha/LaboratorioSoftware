@@ -6,7 +6,6 @@ import org.junit.Test;
 import pt.isel.ls.command.model.Command;
 import pt.isel.ls.command.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.database.printers.Printable;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,14 +29,13 @@ public class GetAllMoviesTest {
 
 
     @After
-    private void undoChangesAndCloseConnection() throws SQLException {
-        dataTests.deleteAllMovies();
+    public void undoChangesAndCloseConnection() throws SQLException {
         dataTests.dropTables();
         connection.close();
     }
     @Before
-    private void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().connectionFactory();
+    public void initConnectionandDataBase() throws SQLException {
+        connection = new ConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
     }
@@ -61,13 +59,12 @@ public class GetAllMoviesTest {
 
     private String getAllMoviesString(){
         return
-            "movie id: 1\nmovie name: Fight Club\nrelease year: 1999\n" +
-            "movie id: 2\nmovie name: Seven\nrelease year: 1995\n" +
-            "movie id: 3\nmovie name: The Matrix\nrelease year: 1999\n" +
-            "movie id: 4\nmovie name: Inception\nrelease year: 2010\n" +
-            "movie id: 5\nmovie name: Pulp Fiction\nrelease year: 1994\n" +
-            "movie id: 6\nmovie name: American History X\nrelease year: 1998\n" +
-            "movie id: 7\nmovie name: The Silence of the Lambs\nrelease year: 1991\n" +
-            "movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
+            "movie id:1\nmovie name: Fight Club\nrelease year: 1999\n" +
+            "movie id:2\nmovie name: Seven\nrelease year: 1995\n" +
+            "movie id:3\nmovie name: The Matrix\nrelease year: 1999\n" +
+            "movie id:4\nmovie name: Inception\nrelease year: 2010\n" +
+            "movie id:5\nmovie name: Pulp Fiction\nrelease year: 1994\n" +
+            "movie id:6\nmovie name: American History X\nrelease year: 1998\n" +
+            "movie id:7\nmovie name: The Silence of the Lambs\nrelease year: 1991\n";            //"movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
     }
 }

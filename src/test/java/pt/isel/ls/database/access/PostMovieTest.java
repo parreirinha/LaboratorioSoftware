@@ -1,19 +1,13 @@
 package pt.isel.ls.database.access;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.command.mapping.CommandMapper;
 import pt.isel.ls.command.model.Command;
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
 import pt.isel.ls.command.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.model.Movie;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,14 +27,13 @@ public class PostMovieTest {
 
 
     @After
-    private void undoChangesAndCloseConnection() throws SQLException {
-        dataTests.deleteAllMovies();
+    public void undoChangesAndCloseConnection() throws SQLException {
         dataTests.dropTables();
         connection.close();
     }
     @Before
-    private void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().connectionFactory();
+    public void initConnectionandDataBase() throws SQLException {
+        connection = new ConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
     }
@@ -51,9 +44,20 @@ public class PostMovieTest {
         input = new String[]{"POST", "/movies", "title=Big Fish&releaseYear=2003"};
         command = new CommandGetter().getCommand(input);
         result = postMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "the id of the new movie is: 9";
+        expected = "the id of the new movie is: 8";
         assertEquals(expected, result);
     }
 
+/*
+    @Test
+    public void  postInvalidMovie() throws SQLException {
+        input = new String[]{"POST", "/movies", "title=Fight Club&releaseYear=1999"};
+        command = new CommandGetter().getCommand(input);
+        result = postMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
+        expected =  "something went wrong!!\n";
+        assertEquals(expected, result);
+
+    }
+*/
 
 }

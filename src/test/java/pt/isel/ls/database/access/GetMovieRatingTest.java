@@ -30,31 +30,32 @@ public class GetMovieRatingTest {
     private DataCreationTests dataTests = new DataCreationTests();
 
 
+
     @After
-    private void undoChangesAndCloseConnection() throws SQLException {
-        dataTests.deleteAllMovies();
-        dataTests.deleteAllReviews();
+    public void undoChangesAndCloseConnection() throws SQLException {
         dataTests.dropTables();
         connection.close();
     }
     @Before
-    private void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().connectionFactory();
+    public void initConnectionandDataBase() throws SQLException {
+        connection = new ConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
     }
 
+
+
+
     @Test
     public void verifyRatingForExistingMovie() throws SQLException {
 
-        connection = new ConnectionFactory().connectionFactory();
-        input = new String[]{"GET", "/movies/{6}/ratings"};
+        connection = new ConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/movies/6/ratings"};
         command = new CommandGetter().getCommand(input);
         result = getMovieRating.execute(connection, command.getPath(), command.getParams()).toStringResult();
-        expected = "the average rating for the movie with the id 6 is ##.\\n*1;**5;***20;****100;*****50n";
+        expected = "the average rating for the movie with the id 6 is 4.0.\n*1;**5;***20;****100;*****50\n";
         assertEquals(expected, result);
-        //TODO calcular média para a string expected. até dá false
     }
 
 }
