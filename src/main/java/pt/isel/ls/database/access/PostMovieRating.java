@@ -23,7 +23,7 @@ public class PostMovieRating implements Commands {
         int movieID = path.getPathInt("mid");
         int rating = parameters.getParamInt("rating");
         String ratingColumnName = AccessUtils.getColumnName(rating);
-        String query = "update Movie set ? = (? + 1) where MovieID = ?;";
+        String query = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?;";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, ratingColumnName, ratingColumnName, movieID);
         ps.executeUpdate();

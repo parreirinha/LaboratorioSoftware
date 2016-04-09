@@ -41,7 +41,7 @@ public class PostMovieReview implements Commands{
         connection.commit();
 
         //increment of the star given in the review
-        String query2 = "update Movie set ? = ? + 1 where MovieID = ?";
+        String query2 = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
         String star = AccessUtils.getColumnName(rating);
         ps = connection.prepareStatement(query2);
         AccessUtils.setValuesOnPreparedStatement(ps, star, star, movieId);
@@ -52,6 +52,7 @@ public class PostMovieReview implements Commands{
         String queary3 = "select @@identity";
         ps = connection.prepareStatement(queary3);
         ResultSet rs = ps.executeQuery();
+        rs.next();
         int rid = rs.getInt(1);
         ps.close();
 

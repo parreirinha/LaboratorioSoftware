@@ -42,13 +42,14 @@ public class Movie {
         movieRelease = date;
     }
 
-    public Movie(int id,int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
+    public Movie(int id,int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar, float avge) {
         movieID = id;
         this.oneStar = oneStar;
         this.twoStar = twoStar;
         this.treeStar = treeStar;
         this.fourStar = fourStar;
         this.fiveStar = fiveStar;
+        this.average = avge;
         movieName = null;
     }
 

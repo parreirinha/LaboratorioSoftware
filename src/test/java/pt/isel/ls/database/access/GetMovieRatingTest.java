@@ -54,7 +54,7 @@ public class GetMovieRatingTest {
         input = new String[]{"GET", "/movies/6/ratings"};
         command = new CommandGetter().getCommand(input);
         result = getMovieRating.execute(connection, command.getPath(), command.getParams()).toStringResult();
-        expected = "the average rating for the movie with the id 6 is 4.0.\n*1;**5;***20;****100;*****50\n";
+        expected = "the average rating for the movie with the id 6 is 4.097.\n*1 **5 ***20 ****100 *****50\n";
         assertEquals(expected, result);
     }
 

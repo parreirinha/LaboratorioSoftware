@@ -23,7 +23,7 @@ public class PrintGetAllReviews implements Printable {
      */
     @Override
     public String toStringResult() {
-        String s = null;
+        String s ="";
         for (Review r: reviews) {
             s +=    "reviewid: "+ r.getReviewID() +
                     ";\nreviewer name: " + r.getReviewName() +
@@ -31,7 +31,7 @@ public class PrintGetAllReviews implements Printable {
                     ";\nreview rating: " + r.getReviewRating() +
                     ";\n";
         }
-        return (s == null) ? "something went wrong!!\n" : s;
+        return (s == "") ? "something went wrong!!\n" : s;
     }
 
 

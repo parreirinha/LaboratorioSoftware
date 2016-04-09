@@ -25,7 +25,9 @@ public class GetMovieRating implements Commands {
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
         int id = path.getPathInt("mid");
-        String query = "select * from Movie where (MovieID = ?);";
+        String query = "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
+                "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) AS DECIMAL (4,0)))) as Average from Movie as M1\n" +
+                "where M1.MovieID = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, id);
         ResultSet rs = ps.executeQuery();
@@ -37,7 +39,8 @@ public class GetMovieRating implements Commands {
                     rs.getInt(5),
                     rs.getInt(6),
                     rs.getInt(7),
-                    rs.getInt(8)
+                    rs.getInt(8),
+                    rs.getFloat(9)
             );
         }
         rs.close();

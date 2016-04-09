@@ -47,6 +47,7 @@ public class PostMovieReviewTest {
         connection = new ConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
+        dataTests.insertReviewsInMovies();
     }
 
     @Test
@@ -56,12 +57,8 @@ public class PostMovieReviewTest {
         input = new String[]{"POST", "/movies/1/reviews", "reviewerName=Chico&reviewSummary=espectaculo&review=eish filme do catano&rating=5"};
         command = new CommandGetter().getCommand(input);
         result = postMovieReview.execute(connection, command.getPath(), command.getParams()).toStringResult();
-        expected = "review id: 3;\n";
+        expected = "review id: 10";
         assertEquals(expected, result);
-
-        //reviewerName=Chico&reviewSummary=espectaculo&review=eish filme do catano&rating=5
-
-
 
 
     }

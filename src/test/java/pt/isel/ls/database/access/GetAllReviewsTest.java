@@ -46,30 +46,47 @@ public class GetAllReviewsTest {
      * @throws SQLException
      */
     @Test
-    public void movieWithTwoReviews() throws SQLException {
+    public void movieWithThreeReviews() throws SQLException {
 
 
-        input = new String[]{"GET", "/movies/{1}/reviews"};
+        input = new String[]{"GET", "/movies/1/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();
         expected =
-                "reviewid: 1;\nreviewer name: Manel;\nreview sumary: Magnificent;\nreview rating: 5;\n" +
-                "reviewid: 2;\nreviewer name: Bad taste Reviwer;\nreview sumary: Horrible;\nreview rating: 1;\n";
+                "reviewid: 1;\n" +
+                        "reviewer name: Manel;\n" +
+                        "review sumary: Magnificent;\n" +
+                        "review rating: 5;\n" +
+                        "reviewid: 2;\n" +
+                        "reviewer name: Bad taste Reviwer;\n" +
+                        "review sumary: Horrible;\n" +
+                        "review rating: 1;\n" +
+                        "reviewid: 8;\n" +
+                        "reviewer name: Ze;\n" +
+                        "review sumary: Film of the year;\n" +
+                        "review rating: 5;\n";
         assertEquals(expected, result);
     }
 
     @Test
-    public void movieWithOneReview() throws SQLException{
-        input = new String[]{"GET", "/movies/{2}/reviews"};
+    public void movieWithTwoReview() throws SQLException{
+        input = new String[]{"GET", "/movies/2/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "reviewid: 4;\nreviewer name: Jack;\nreview sumary: Morgan Freeman is the best;\nreview rating: 2;\n";
+        expected = "reviewid: 4;\n" +
+                "reviewer name: Jack;\n" +
+                "review sumary: Morgan Freeman is the best;\n" +
+                "review rating: 2;\n" +
+                "reviewid: 7;\n" +
+                "reviewer name: Ze;\n" +
+                "review sumary: Film of the year candidate;\n" +
+                "review rating: 5;\n";
         assertEquals(expected, result);
     }
 
     @Test
     public void movieWithoutReviews() throws SQLException{
-        input = new String[]{"GET", "/movies/{666}/reviews"};
+        input = new String[]{"GET", "/movies/666/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();
         expected = "something went wrong!!\n";

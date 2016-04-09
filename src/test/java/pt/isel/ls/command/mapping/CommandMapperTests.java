@@ -95,12 +95,12 @@ public class CommandMapperTests {
 
     @Test
     public void GetTopCountReviewTest() {
-        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopReviewHigherCount)) instanceof GetTopReviewHigherCount);
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopReviewHigherCount)) instanceof GetTopMovieWithHigherReviewCount);
     }
 
     @Test
     public void GetTopNCounteReviewsTest() {
-        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNReviewHigherCount)) instanceof GetTopNMoviesWithHigherReview);
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNReviewHigherCount)) instanceof GetTopNMoviesWithHigherReviewCount);
 
     }
 
