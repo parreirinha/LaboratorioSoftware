@@ -26,7 +26,6 @@ public class PostMovieReview implements Commands{
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
-        //TODO tenho que incrementar o rating global correspondente!?!? verificar
 
         int movieId = path.getPathInt("mid");
         String reviwerName = parameters.getParamString("reviewerName");
@@ -34,7 +33,7 @@ public class PostMovieReview implements Commands{
         String review = parameters.getParamString("review");
         int rating = parameters.getParamInt("rating");
         String query =
-                "insert into Review (MovieID, ReviewrName, ReviewSummary, ReviewComplete, ReviewRating)" +
+                "insert into Review (MovieID, ReviewerName, ReviewSummary, ReviewComplete, ReviewRating)" +
                         "values(?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, movieId, reviwerName, reviewSummary, review, rating);
@@ -42,7 +41,7 @@ public class PostMovieReview implements Commands{
         connection.commit();
 
         //increment of the star given in the review
-        String query2 = "update table Movie set ? = ? + 1 where MovieID = ?";
+        String query2 = "update Movie set ? = ? + 1 where MovieID = ?";
         String star = AccessUtils.getColumnName(rating);
         ps = connection.prepareStatement(query2);
         AccessUtils.setValuesOnPreparedStatement(ps, star, star, movieId);

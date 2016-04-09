@@ -26,6 +26,6 @@ public class PrintGetMovieRating implements Printable {
                 "the average rating for the movie with the id " + movie.getMovieID() +
                 " is " +movie.getAverage()+ ".\n" +
                 "*" + movie.getOneStar() +";**" + movie.getTwoStar() + ";***" + movie.getTreeStar() +
-                ";****" + movie.getFourStar() + "*****" + movie.getFiveStar() + "\n";
+                ";****" + movie.getFourStar() + ";*****" + movie.getFiveStar() + "\n";
     }
 }

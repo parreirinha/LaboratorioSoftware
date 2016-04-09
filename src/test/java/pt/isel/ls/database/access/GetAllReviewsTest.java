@@ -6,12 +6,9 @@ import org.junit.Test;
 import pt.isel.ls.command.model.Command;
 import pt.isel.ls.command.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.database.printers.Printable;
-import pt.isel.ls.model.Review;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,15 +28,13 @@ public class GetAllReviewsTest {
 
 
     @After
-    private void undoChangesAndCloseConnection() throws SQLException {
-        dataTests.deleteAllReviews();
-        dataTests.deleteAllMovies();
+    public void undoChangesAndCloseConnection() throws SQLException {
         dataTests.dropTables();
         connection.close();
     }
     @Before
-    private void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().connectionFactory();
+    public void initConnectionandDataBase() throws SQLException {
+        connection = new ConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
@@ -64,7 +59,7 @@ public class GetAllReviewsTest {
     }
 
     @Test
-    private void movieWithOneReview() throws SQLException{
+    public void movieWithOneReview() throws SQLException{
         input = new String[]{"GET", "/movies/{2}/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();
@@ -73,7 +68,7 @@ public class GetAllReviewsTest {
     }
 
     @Test
-    private void movieWithoutReviews() throws SQLException{
+    public void movieWithoutReviews() throws SQLException{
         input = new String[]{"GET", "/movies/{666}/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();

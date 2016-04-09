@@ -1,7 +1,7 @@
 package pt.isel.ls.database.printers;
 
 /**
- * Created by fabio on 05-Apr-16.
+ *
  */
 public class PrintPostMovieReview implements Printable {
 
