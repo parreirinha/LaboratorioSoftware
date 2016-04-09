@@ -21,51 +21,26 @@ import java.util.Collection;
 public class GetTopsNRatingsHigherAverage implements Commands {
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
-        int aux = path.getPathInt("n");
-        int aux1 = aux;
-        String querry = "select * from Movie " +
-                            "inner join " +
-                                "(select top(?) x.MovieID from " +
-                                    "(select MovieID, ((OneStar + (TwoStar*2) + (TreeStar*3) + (FourStar*4) + (FiveStar*5))/(OneStar + TwoStar + TreeStar + FourStar + FiveStar)) as c from " +
-                                        "(select * from Movie " +
-                                            "where OneStar > 0 or TwoStar>0 or FourStar > 0 or TreeStar>0 or FiveStar>0 " +
-                                        ") b " +
-                                    ") x " +
-                                ") y " +
-                                "on y.MovieID = Movie.MovieID " +
-                            "order by Movie.MovieID asc";
-        PreparedStatement ps = connection.prepareStatement(querry);
-        ps.setInt(1, aux);
+        int n = path.getPathInt("n");
+
+        String query = "select top (?) * from(\n" +
+                "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
+                "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
+                "order by R.Average desc";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, n);
         ResultSet rs = ps.executeQuery();
-        Collection<Movie> col = new ArrayList<Movie>();
-        getCollection(rs, col, aux);
-        if(col.size() == aux1-1)
-        {
-            rs.close();
-            ps.close();
-            return new PrintGetTopsNRatingsHigherAverage(col);
-        }
-        querry = "select * from Movie " +
-                    "inner join " +
-                        "( select top(?) Movie.MovieID from Movie " +
-                            "where OneStar = 0 and TwoStar = 0 and FourStar = 0 and TreeStar = 0 and FiveStar = 0" +
-                        ") a " +
-                        "on a.MovieID = Movie.MovieID";
-        ps = connection.prepareStatement(querry);
-        ps.setInt(1, aux);
-        rs = ps.executeQuery();
-        getCollection(rs, col, aux);
+        PrintGetTopsNRatingsHigherAverage printer = new PrintGetTopsNRatingsHigherAverage(getCollection(rs, n));
         rs.close();
         ps.close();
-        return new PrintGetTopsNRatingsHigherAverage(col);
+        return printer;
     }
 
-    private void getCollection(ResultSet rs, Collection<Movie> col, int aux) throws SQLException
-    {
-        while(rs.next() && col.size() <= aux-1)
-        {
-            Movie movie = new Movie(rs.getString(2), rs.getInt(3));
-            col.add(movie);
+    private Collection<Movie> getCollection(ResultSet rs, int aux) throws SQLException {
+        Collection<Movie> col = new ArrayList<>();
+        while (rs.next() && col.size() <= aux - 1) {
+            col.add(new Movie(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getFloat(9)));
         }
+        return col;
     }
 }

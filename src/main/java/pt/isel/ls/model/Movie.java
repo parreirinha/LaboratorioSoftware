@@ -8,7 +8,8 @@ public class Movie {
     private int movieID, movieRelease;
     public String movieName;
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
-
+    private float average;
+    
     public Movie(int id, String movieName, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
         this.movieID = id;
         this.movieName = movieName;
@@ -18,6 +19,18 @@ public class Movie {
         this.treeStar = treeStar;
         this.fourStar = fourStar;
         this.fiveStar = fiveStar;
+    }
+
+    public Movie(int id, String movieName, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar, float avge) {
+        this.movieID = id;
+        this.movieName = movieName;
+        this.movieRelease = release;
+        this.oneStar = oneStar;
+        this.twoStar = twoStar;
+        this.treeStar = treeStar;
+        this.fourStar = fourStar;
+        this.fiveStar = fiveStar;
+        this.average = avge;
     }
 
     public Movie(String name) {
@@ -43,11 +56,6 @@ public class Movie {
         movieID = mid;
         movieName = moviename;
         movieRelease = movieyear;
-    }
-
-    public float average() {
-       return (oneStar != 0 && twoStar != 0 && treeStar != 0 && fourStar != 0 && fiveStar != 0) ?
-            (oneStar * 1 + twoStar * 2 + treeStar * 3 + fourStar * 4 + fiveStar * 5) / (oneStar + twoStar + treeStar + fourStar + fiveStar) : 0;
     }
 
     public int getOneStar() {
@@ -82,5 +90,9 @@ public class Movie {
 
     public int getMovieID() {
         return movieID;
+    }
+
+    public float getAverage() {
+        return average;
     }
 }

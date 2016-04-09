@@ -22,10 +22,15 @@ public class PrintGetTopsNRatingsHigherAverage implements Printable
         String str = "";
         for (Movie m : movieCollection)
         {
-            str+="\nID: " + m.getMovieName() + "\n" +
+            str+="\tID: " + m.getMovieID() + "\n" +
                     "\tName:" + m.getMovieName() + "\n" +
                     "\tYear: " + m.getMovieRelease() + "\n" +
-                    "\tAverage: "+m.average()+"\n";
+                    "\t*" + m.getOneStar() +"" +
+                    "  **" + m.getTwoStar()+"" +
+                    "  ***" + m.getTreeStar()+"" +
+                    "  ****" + m.getFourStar() +"" +
+                    "  *****" + m.getFiveStar() +"\n" +
+                    "\tAverage: "+m.getAverage()+"\n\n";
         }
         return str;
     }

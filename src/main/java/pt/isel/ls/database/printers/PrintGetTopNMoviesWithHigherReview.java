@@ -20,7 +20,7 @@ public class PrintGetTopNMoviesWithHigherReview implements Printable
     @Override
     public String toStringResult()
     {
-        String str = "\n";
+        String str = "";
         for (Movie m : movieCollection)
         {
             str += "Name: " + m.getMovieName() + "\tYear: " + m.getMovieRelease() + "\n";

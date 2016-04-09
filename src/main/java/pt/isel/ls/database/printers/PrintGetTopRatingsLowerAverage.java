@@ -10,28 +10,23 @@ import java.util.Collection;
  */
 public class PrintGetTopRatingsLowerAverage implements Printable
 {
-    private Collection<Movie> movieCollection;
+    private Movie movie;
 
-    public PrintGetTopRatingsLowerAverage(Collection<Movie> movies){
-        movieCollection = movies;
+    public PrintGetTopRatingsLowerAverage(Movie movie){
+        movie = movie;
     }
 
     @Override
     public String toStringResult()
     {
-        String str = "";
-        for (Movie m : movieCollection)
-        {
-            str+="\nID: " + m.getMovieName() + "\n" +
-                    "\tName:" + m.getMovieName() + "\n" +
-                    "\tYear: " + m.getMovieRelease() + "\n" +
-                    "\t*" + m.getOneStar() +"" +
-                    "  **" + m.getTwoStar()+"" +
-                    "  ***" + m.getTreeStar()+"" +
-                    "  ****" + m.getFourStar() +"" +
-                    "  *****" + m.getFiveStar() +"\n" +
-                    "\tAverage: "+m.average()+"\n";
-        }
-        return str;
+        return "\tID: " + movie.getMovieID() + "\n" +
+                "\tName:" + movie.getMovieName() + "\n" +
+                "\tYear: " + movie.getMovieRelease() + "\n" +
+                "\t*" + movie.getOneStar() +"" +
+                "  **" + movie.getTwoStar()+"" +
+                "  ***" + movie.getTreeStar()+"" +
+                "  ****" + movie.getFourStar() +"" +
+                "  *****" + movie.getFiveStar() +"\n" +
+                "\tAverage: "+movie.getAverage()+"\n";
     }
 }

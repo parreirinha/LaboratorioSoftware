@@ -24,7 +24,7 @@ public class PrintGetMovieRating implements Printable {
     public String toStringResult() {
         return (movie == null) ? "something went wrong!!\n" :
                 "the average rating for the movie with the id " + movie.getMovieID() +
-                " is " +movie.average()+ ".\n" +
+                " is " +movie.getAverage()+ ".\n" +
                 "*" + movie.getOneStar() +";**" + movie.getTwoStar() + ";***" + movie.getTreeStar() +
                 ";****" + movie.getFourStar() + "*****" + movie.getFiveStar() + "\n";
     }
