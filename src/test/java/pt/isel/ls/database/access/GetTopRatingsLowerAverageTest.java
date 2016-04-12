@@ -26,7 +26,7 @@ public class GetTopRatingsLowerAverageTest {
 
     @After
     public void undoChangesAndCloseConnection() throws SQLException {
-        //dataTests.dropTables();
+        dataTests.dropTables();
         connection.close();
     }
 
