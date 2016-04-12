@@ -67,7 +67,7 @@ public class Movie {
         return twoStar;
     }
 
-    public int getTreeStar() {
+    public int getThreeStar() {
         return treeStar;
     }
 

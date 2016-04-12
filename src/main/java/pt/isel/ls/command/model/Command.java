@@ -8,15 +8,12 @@ public class Command {
 
     private Method method;
     private Path path;
+    private Headers headers;
     private Parameters params;
 
-    public Command(Method method, Path path) {
+    public Command(Method method, Path path, Headers headers, Parameters params) {
         this.method = method;
-        this.path = path;
-    }
-
-    public Command(Method method, Path path, Parameters params) {
-        this.method = method;
+        this.headers = headers;
         this.path = path;
         this.params = params;
     }
@@ -28,6 +25,10 @@ public class Command {
 
     public Path getPath() {
         return path;
+    }
+
+    public Headers getHeaders() {
+        return headers;
     }
 
     public Parameters getParams() {

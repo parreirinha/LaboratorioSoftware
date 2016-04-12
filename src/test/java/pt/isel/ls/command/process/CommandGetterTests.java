@@ -1,6 +1,5 @@
 package pt.isel.ls.command.process;
 
-import org.junit.Assert;
 import org.junit.Test;
 import pt.isel.ls.command.model.Command;
 
@@ -12,86 +11,93 @@ import static junit.framework.Assert.assertNull;
  */
 public class CommandGetterTests {
 
-    private final String[] getWithMethod = {"GET"};
-    private final String[] getWithMethodAndPath = {"GET", "/movies/123"};
-    private final String[] getWithMethodAndPathAndParams = {"GET", "/movies", "title=pulp+fiction&releaseYear=1994"};
-    private final String[] postWithMethod = {"POST"};
-    private final String[] postWithMethodAndPath = {"POST", "/movies"};
-    private final String[] posttWithMethodAndPathAndParams = {"POST", "/movies", "title=pulp+fiction&releaseYear=1994"};
-    private final String[] nonExistingMethod = {"CLEAN"};
+    private final String[] GetWithMethodAndPath = {"GET", "/movies/123/"};
+    private final String[] GetWithMethodAndPathAndParams = {"GET", "/movies/", "sortBy=year"};
+    private final String[] GetWithPathAndHeadersAndParamaters = {"GET", "/movies/", "accept:text/html", "skip=6&top=3"};
+    private final String[] GetWithPathAndHeaders = {"GET", "/movies/", "accept:text/html"};
+    private final String[] PostWithMethodAndPathAndParams = {"POST", "/movies/", "title=pulp+fiction&releaseYear=1994"};
+    private final String[] GetCollectionWithPath = {"GET", "/collections/50/"};
+    private final String[] PostCollectionWithPathAndParams = {"GET", "/collections/50/movies/", "mid=123"};
+    private final String[] DeleteCollectionsWithPath = {"DELETE", "/collections/50/movies/123"};
+
 
     @Test
-    public void unknownMethodTest() {
-        Assert.assertNull(new CommandGetter().getCommand(nonExistingMethod));
-    }
-
-    @Test
-    public void tooMuchArgsGetTest() {
-        Assert.assertNull(new CommandGetter().getCommand(getWithMethodAndPathAndParams));
-    }
-
-    @Test
-    public void notEnoughArgsGetTest() {
-        Assert.assertNull(new CommandGetter().getCommand(getWithMethod));
-    }
-
-    @Test
-    public void returnGetCommandMethodTest() {
-        Command c = new CommandGetter().getCommand(getWithMethodAndPath);
+    public void getWithMethodAndPathTest() {
+        Command c = new CommandGetter().getCommand(GetWithMethodAndPath);
         assertEquals("GET", c.getMethod().getMethod());
-    }
-
-    @Test
-    public void returnGetCommandPathStringTest() {
-        Command c = new CommandGetter().getCommand(getWithMethodAndPath);
         assertEquals("moviesmid", c.getPath().getPathString());
+        assertEquals(123, (int) c.getPath().getPathInt("mid"));
+        assertNull(c.getHeaders());
+        assertNull(c.getParams());
     }
 
     @Test
-    public void returnGetCommandPathMidTest() {
-        Command c = new CommandGetter().getCommand(getWithMethodAndPath);
-        assertEquals(123, (int)c.getPath().getPathInt("mid"));
+    public void postWithMethodAndPathAndParamsTest() {
+        Command c = new CommandGetter().getCommand(PostWithMethodAndPathAndParams);
+        assertEquals("POST", c.getMethod().getMethod());
+        assertEquals("movies", c.getPath().getPathString());
+        assertEquals("pulp fiction", c.getParams().getParamString("title"));
+        assertEquals(1994, (int) c.getParams().getParamInt("releaseYear"));
     }
 
     @Test
-    public void returnGetCommandParamsTest() {
-        Command c = new CommandGetter().getCommand(getWithMethodAndPathAndParams);
-        assertNull(c);
+    public void getWithPathAndHeadersAndParamatersTest(){
+        Command c = new CommandGetter().getCommand(GetWithPathAndHeadersAndParamaters);
+        assertEquals("GET", c.getMethod().getMethod());
+        assertEquals("movies", c.getPath().getPathString());
+        assertEquals("text/html", c.getHeaders().getHeadersString("accept"));
+        assertEquals(6, c.getParams().getParamInt("skip"));
+        assertEquals(3, c.getParams().getParamInt("top"));
     }
 
     @Test
-    public void notEnoughArgsPostTest1() {
-        Assert.assertNull(new CommandGetter().getCommand(postWithMethod));
+    public void getWithPathAndHeadersAndNoParamatersTest(){
+        Command c = new CommandGetter().getCommand(GetWithPathAndHeaders);
+        assertEquals("GET", c.getMethod().getMethod());
+        assertEquals("movies", c.getPath().getPathString());
+        assertEquals("text/html", c.getHeaders().getHeadersString("accept"));
+        assertNull(c.getParams());
     }
 
     @Test
-    public void notEnoughArgsPostTest2() {
-        Assert.assertNull(new CommandGetter().getCommand(postWithMethodAndPath));
+    public void getWithMethodAndPathAndParamsTest(){
+        Command c = new CommandGetter().getCommand(GetWithMethodAndPathAndParams);
+        assertEquals("GET", c.getMethod().getMethod());
+        assertEquals("movies", c.getPath().getPathString());
+        assertEquals("year", c.getParams().getParamString("sortBy"));
+        assertNull(c.getHeaders());
     }
 
     @Test
-    public void returnPostCommandMethodTest() {
-        Command c = new CommandGetter().getCommand(posttWithMethodAndPathAndParams);
-        assertEquals("POST" ,c.getMethod().getMethod());
+    public void getCollectionWithPathTest(){
+        Command c = new CommandGetter().getCommand(GetCollectionWithPath);
+        assertEquals("GET", c.getMethod().getMethod());
+        assertEquals("collectionscid", c.getPath().getPathString());
+        assertEquals(50, c.getPath().getPathInt("cid"));
+        assertNull(c.getHeaders());
+        assertNull(c.getParams());
     }
 
     @Test
-    public void returnPostCommandPathStringTest() {
-        Command c = new CommandGetter().getCommand(posttWithMethodAndPathAndParams);
-        assertEquals("movies" ,c.getPath().getPathString());
+    public void postCollectionWithPathAndParamsTest(){
+        Command c = new CommandGetter().getCommand(PostCollectionWithPathAndParams);
+        assertEquals("GET", c.getMethod().getMethod());
+        assertEquals("collectionscidmovies", c.getPath().getPathString());
+        assertEquals(50, c.getPath().getPathInt("cid"));
+        assertNull(c.getHeaders());
+        assertEquals(123, c.getParams().getParamInt("mid"));
     }
 
     @Test
-    public void returnPostCommandParamsStringTest() {
-        Command c = new CommandGetter().getCommand(posttWithMethodAndPathAndParams);
+    public void deleteCollectionsWithPathTest(){
+        Command c = new CommandGetter().getCommand(DeleteCollectionsWithPath);
+        assertEquals("DELETE", c.getMethod().getMethod());
+        assertEquals("collectionscidmoviesmid", c.getPath().getPathString());
+        assertEquals(50, c.getPath().getPathInt("cid"));
+        assertEquals(123, c.getPath().getPathInt("mid"));
+        assertNull(c.getHeaders());
+        assertEquals(50, c.getPath().getPathInt("cid"));
 
-        assertEquals("pulp fiction" ,c.getParams().getParamString("title"));
-    }
-
-    @Test
-    public void returnPostCommandParamsIntTest() {
-        Command c = new CommandGetter().getCommand(posttWithMethodAndPathAndParams);
-
-        assertEquals(1994 ,(int)c.getParams().getParamInt("releaseYear"));
     }
 }
+

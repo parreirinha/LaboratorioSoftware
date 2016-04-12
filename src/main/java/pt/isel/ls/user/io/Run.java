@@ -4,6 +4,7 @@ import pt.isel.ls.command.mapping.CommandMapper;
 import pt.isel.ls.command.model.Command;
 import pt.isel.ls.command.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.localusage.commands.Exit;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -57,7 +58,7 @@ public class Run {
     }
 
     private void exit(){
-        System.exit(-1);
+        new Exit().execute();
     }
 
 }

@@ -32,12 +32,25 @@ public class CommandMapper {
         commmandMap.put("GETtopsnratingsloweraverage", new GetTopNRatingsLowerAverage());
         commmandMap.put("GETtopsreviewshighercount", new GetTopMovieWithHigherReviewCount());
         commmandMap.put("GETtopsnreviewshighercount", new GetTopNMoviesWithHigherReviewCount());
+        commmandMap.put("POSTcollections", null);
+        commmandMap.put("GETcollections", null);
+        commmandMap.put("GETcollectionscid", null);
+        commmandMap.put("POSTcollectionscidmovie", null);
+        commmandMap.put("DELETEcollectionscidmoviesmid", null);
+        commmandMap.put("OPTION", null);
+        commmandMap.put("EXIT", null);
+        commmandMap.put("", null);
     }
 
 
     public Commands getExecutionCommandInstance(Command command){
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
+
+        if(!commmandMap.containsKey(commandProcessedString)){
+            System.out.println("Error: Invalid Command.");
+            return null;
+        }
 
         return commmandMap.get(commandProcessedString);
     }

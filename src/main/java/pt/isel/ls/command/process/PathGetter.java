@@ -20,6 +20,10 @@ public class PathGetter {
     }
 
     public Path getPath(String path){
+        if(path == null || path == ""){
+            return null;
+        }
+
         pathParts = path.split("/");
 
         int j=0;
@@ -37,6 +41,9 @@ public class PathGetter {
 
                     if (pathParts[i - 1].equals("tops"))
                         key = "n";
+
+                    if (pathParts[i - 1].equals("collections"))
+                        key = "cid";
 
                     cleanPath += key;
                     pathIntegers.put(key, Integer.parseInt(pathParts[i]));

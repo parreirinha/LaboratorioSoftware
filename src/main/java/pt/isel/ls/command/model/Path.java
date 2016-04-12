@@ -21,11 +21,7 @@ public class Path {
     }
 
     public int getPathInt(String key) {
-        //TODO: fix verifications... they screw some tests...
-       /* if(key != "mid" || key != "rid" || key != "n"){
-            System.out.println("Error: the key doesn't match a number.");
-            return 0;
-        }*/
+
         return pathIntegers.get(key);
     }
 

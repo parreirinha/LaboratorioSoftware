@@ -29,7 +29,7 @@ public class PrintGetMovie implements Printable {
                 "; releaseyear = "+movie.getMovieRelease()+
                 ";\n*" + movie.getOneStar() +
                 ";**" + movie.getTwoStar()+
-                ";***" + movie.getTreeStar()+
+                ";***" + movie.getThreeStar()+
                 ";****" + movie.getFourStar() +
                 ";*****" + movie.getFiveStar() +
                 ".\n";

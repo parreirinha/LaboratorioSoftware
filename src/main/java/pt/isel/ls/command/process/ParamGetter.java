@@ -17,6 +17,9 @@ public class ParamGetter {
     }
 
     public Parameters getParams(String paramString) {
+        if(paramString == null || paramString == ""){
+            return null;
+        }
 
         String[] params = paramString.split("&");
 

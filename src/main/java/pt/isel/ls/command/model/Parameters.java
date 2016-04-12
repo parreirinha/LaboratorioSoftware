@@ -15,21 +15,12 @@ public class Parameters {
         this.paramStrings = strings;
     }
 
-    //TODO: fix verifications... they screw some tests...
     public String getParamString(String key){
-       /* if(key.equals("releaseYear") || key.equals("rating")){
-            System.out.println("Error: the key doesn't match a string.");
-            return null;
-        }*/
 
         return paramStrings.get(key);
     }
 
     public int getParamInt(String key){
-      /*  if(!key.equals("releaseYear") || !key.equals("rating")){
-            System.out.println("Error: the key doesn't match a number.");
-            return 0;
-        }*/
 
         return Integer.parseInt(paramStrings.get(key));
     }

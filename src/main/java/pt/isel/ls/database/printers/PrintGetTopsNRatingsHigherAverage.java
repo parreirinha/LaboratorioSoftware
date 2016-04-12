@@ -27,7 +27,7 @@ public class PrintGetTopsNRatingsHigherAverage implements Printable
                     "\tYear: " + m.getMovieRelease() + "\n" +
                     "\t*" + m.getOneStar() +"" +
                     "  **" + m.getTwoStar()+"" +
-                    "  ***" + m.getTreeStar()+"" +
+                    "  ***" + m.getThreeStar()+"" +
                     "  ****" + m.getFourStar() +"" +
                     "  *****" + m.getFiveStar() +"\n" +
                     "\tAverage: "+m.getAverage()+"\n\n";

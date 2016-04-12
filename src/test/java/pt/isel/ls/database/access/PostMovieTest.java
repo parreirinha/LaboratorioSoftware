@@ -53,7 +53,7 @@ public class PostMovieTest {
     public void  postInvalidMovie() throws SQLException {
         input = new String[]{"POST", "/movies", "title=Fight Club&releaseYear=1999"};
         command = new CommandGetter().getCommand(input);
-        result = postMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
+        result = postMovie.execute(connection, command.getPath(),command.getHeaders()).toStringResult();
         expected =  "something went wrong!!\n";
         assertEquals(expected, result);
 

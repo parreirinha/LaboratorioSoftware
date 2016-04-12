@@ -19,7 +19,6 @@ public class PostMovieRating implements Commands {
 
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
-//TODO erro ao realizar ps.executeUpdate(); provavelmente erro na query
         int movieID = path.getPathInt("mid");
         int rating = parameters.getParamInt("rating");
         String ratingColumnName = AccessUtils.getColumnName(rating);

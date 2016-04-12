@@ -2,8 +2,6 @@ package pt.isel.ls.database.printers;
 
 import pt.isel.ls.model.Movie;
 
-import java.util.Collection;
-
 /**
  * @author Tede Morgado
  *         Created at 06/04/2016
@@ -23,7 +21,7 @@ public class PrintGetTopReviewHigherCount implements Printable {
                 "\tYear: " + m.getMovieRelease() + "\n" +
                 "\t*" + m.getOneStar() + "" +
                 "  **" + m.getTwoStar() + "" +
-                "  ***" + m.getTreeStar() + "" +
+                "  ***" + m.getThreeStar() + "" +
                 "  ****" + m.getFourStar() + "" +
                 "  *****" + m.getFiveStar() + "\n";
     }

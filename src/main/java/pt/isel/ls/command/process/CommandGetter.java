@@ -3,6 +3,8 @@ package pt.isel.ls.command.process;
 import pt.isel.ls.command.model.Command;
 import pt.isel.ls.command.model.Method;
 
+import java.util.regex.Pattern;
+
 /**
  * Class used to generate a Command instance from the String array
  * command passed as argument.
@@ -10,48 +12,44 @@ import pt.isel.ls.command.model.Method;
 public class CommandGetter {
 
     /*
-    * Class used to returns a new Command instance from the String array
-    * command passed as argument, or null if the command is
-    * invalid.
-    * */
+    * Class used to return a new Command instance from the String array
+    * command passed as argument.
+    * * */
     public Command getCommand(String[] args) {
-        String method, path, params;
+        String method = "", path = "", headers = "", params = "";
 
-        if (!validate(args)) return null;
-
-        method = args[0];
-
-        path = args[1];
-
-        boolean hasParams = method.equals("POST") && args.length == 3;
-
-        if (hasParams) {
-            params = args[2];
-            return new Command(new Method(method), new PathGetter().getPath(path),
-                    new ParamGetter().getParams(params));
+        if (args.length >= 1) {
+            method = args[0];
         }
 
-        return new Command (new Method(method), new PathGetter().getPath(path));
+        if (args.length >= 2) {
+            path = args[1];
+        }
+
+        if (args.length == 3) {
+            if (hasHeaders(args[2])) {
+                headers = args[2];
+            } else {
+                params = args[2];
+            }
+        }
+
+        if (args.length == 4) {
+            headers = args[2];
+            params = args[3];
+        }
+
+        return new Command(
+                new Method(method),
+                new PathGetter().getPath(path),
+                new HeadersGetter().getHeaders(headers),
+                new ParamGetter().getParams(params));
+
     }
 
-    private boolean validate(String[] args) {
-        if (args.length < 2 || args[0].equals("POST") && args.length < 3) {
-            System.out.println("Error: not enough arguments.");
-            return false;
-        }
-
-        if (args.length > 3 || args[0].equals("GET") && args.length > 2) {
-            System.out.println("Error: too many arguments.");
-            return false;
-        }
-
-
-        if (!args[0].equals("GET") && !args[0].equals("POST")) {
-            System.out.println("Error: unkown action.");
-            return false;
-        }
-        return true;
+    private boolean hasHeaders(String arg) {
+        String[]aux = arg.split(Pattern.quote("|"));
+        return aux[0].contains(":") && !aux[0].contains("=");
     }
-
 
 }
