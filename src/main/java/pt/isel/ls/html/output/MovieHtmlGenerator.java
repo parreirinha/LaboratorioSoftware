@@ -13,8 +13,8 @@ public class MovieHtmlGenerator {
         this.movie=movie;
     }
 
-    public String htmlGenerate(){
-        String htmlMovieString = "<!DOCTYPE html>\n" +
+    public java.lang.String htmlGenerate(){
+        java.lang.String htmlMovieString = "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
                 "<title>Movie</title>\n" +

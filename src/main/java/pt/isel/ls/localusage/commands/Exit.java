@@ -5,6 +5,7 @@ import pt.isel.ls.command.model.Parameters;
 import pt.isel.ls.command.model.Path;
 import pt.isel.ls.database.access.Commands;
 import pt.isel.ls.database.printers.Printable;
+import pt.isel.ls.localusage.commands.Printers.PrintExit;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,11 +18,8 @@ public class Exit implements LocalCommands {
     @Override
     public Printable execute() {
         System.exit(-1);
-        return null;
-        /*
-        *TODO: WE NEED TO RETURN DIFERENT THINGS: TEXT , HTML, ...
-        *NEEDS AN ABSTRACT PRINT CLASS AND STRUCTURAL ADJUSTMENT
-        */
+        return new PrintExit();
+
     }
 
 }
