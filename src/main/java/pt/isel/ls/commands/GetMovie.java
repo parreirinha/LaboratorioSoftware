@@ -1,7 +1,7 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetMovie;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -9,12 +9,12 @@ import pt.isel.ls.model.Movie;
 import java.sql.*;
 
 /**
- * command nº3
+ * commandline nº3
  * GET /movies/{mid}
  * returns the detailed information for the movie identified by mid
  * returns a Movie object
  */
-public class GetMovie implements Commands {
+public class GetMovie implements CommandExecution {
 
 
     @Override

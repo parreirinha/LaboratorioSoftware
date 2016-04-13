@@ -1,8 +1,8 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetReviewById;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Review;
@@ -11,12 +11,12 @@ import java.sql.*;
 
 
 /**
- * command nº8
+ * commandline nº8
  * GET /movies/{mid}/reviews/{rid}
  * returns the full information for the review rid of the movie identified by mid.
  *
  */
-public class GetReviewById implements Commands {
+public class GetReviewById implements CommandExecution {
 
 
     @Override

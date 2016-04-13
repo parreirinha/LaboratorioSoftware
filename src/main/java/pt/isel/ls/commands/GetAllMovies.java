@@ -1,7 +1,7 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetAllMovies;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * command nº2
+ * commandline nº2
  * GET /movies
  * returns a collection with all movies
  */
-public class GetAllMovies implements Commands {
+public class GetAllMovies implements CommandExecution {
 
 
 

@@ -1,21 +1,21 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintPostMovie;
 import pt.isel.ls.database.printers.Printable;
 
 import java.sql.*;
 
 /**
- * command nº1
+ * commandline nº1
  * POST /movies
  * creates a new movie, given the following parameters:
  *      title - movie name.
  *      releaseYear - movie's release year.
- *      This command returns the movie unique identifier.
+ *      This commandline returns the movie unique identifier.
  */
-public class PostMovie implements Commands {
+public class PostMovie implements CommandExecution {
 
 
     @Override

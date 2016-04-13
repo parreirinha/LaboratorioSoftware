@@ -1,7 +1,7 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetTopReviewHigherCount;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -12,12 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * command nº 13
+ * commandline nº 13
  * <p>
  * GET /tops/reviews/higher/count
  * returns the detail for the movie with most reviews.
  */
-public class GetTopMovieWithHigherReviewCount implements Commands {
+public class GetTopMovieWithHigherReviewCount implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
         String query = "select top 1 * from Movie as M\n" +

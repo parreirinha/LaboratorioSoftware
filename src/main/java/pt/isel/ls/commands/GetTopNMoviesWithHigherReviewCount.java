@@ -1,9 +1,8 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetTopNMoviesWithHigherReview;
-import pt.isel.ls.database.printers.PrintGetTopReviewHigherCount;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -15,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * command nº14
+ * commandline nº14
  * <p>
  * GET /tops/{n}/reviews/higher/count
  * returns a list with the n movies with higher review count.
  */
-public class GetTopNMoviesWithHigherReviewCount implements Commands {
+public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
     /**
      * @param connection
      * @param path

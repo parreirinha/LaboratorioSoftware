@@ -1,9 +1,9 @@
-package pt.isel.ls.command.model;
+package pt.isel.ls.commandline.model;
 
 import java.util.HashMap;
 
 /**
- * Class whose instances are used to represent a command path,
+ * Class whose instances are used to represent a commandline path,
  * i.e. an object with 2 Collection fields: one of String type
  * and other of Integer type.
  */

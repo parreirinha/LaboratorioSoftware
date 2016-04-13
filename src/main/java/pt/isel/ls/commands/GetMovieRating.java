@@ -1,9 +1,8 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
-import pt.isel.ls.database.printers.PrintGetAllReviews;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetMovieRating;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -11,7 +10,7 @@ import pt.isel.ls.model.Movie;
 import java.sql.*;
 
 /**
- * command nº5
+ * commandline nº5
  * GET /movies/{mid}/ratings
  * returns the rating information for the movie identified by mid. This rating information include:
  * The rating average
@@ -19,7 +18,7 @@ import java.sql.*;
  *
  * returns a movie object only with the ratings
  */
-public class GetMovieRating implements Commands {
+public class GetMovieRating implements CommandExecution {
 
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {

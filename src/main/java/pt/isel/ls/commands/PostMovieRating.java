@@ -1,19 +1,19 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintPostMovieRating;
 import pt.isel.ls.database.printers.Printable;
 
 import java.sql.*;
 
 /**
- * command nº4
+ * commandline nº4
  * POST /movies/{mid}/ratings
  * submits a new rating for the movie identified by mid, given the following parameters:
  *  rating - integer between 1 and 5.
  */
-public class PostMovieRating implements Commands {
+public class PostMovieRating implements CommandExecution {
 
 
 

@@ -1,8 +1,6 @@
-package pt.isel.ls.command.process;
+package pt.isel.ls.commandline.process;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

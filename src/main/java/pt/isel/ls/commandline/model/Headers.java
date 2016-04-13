@@ -1,4 +1,4 @@
-package pt.isel.ls.command.model;
+package pt.isel.ls.commandline.model;
 
 import java.util.HashMap;
 

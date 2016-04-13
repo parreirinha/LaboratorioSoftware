@@ -1,10 +1,10 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * Auxiliar class that contains auxiliar methods that are used in more than one command
+ * Auxiliar class that contains auxiliar methods that are used in more than one commandline
  */
 public class AccessUtils {
 

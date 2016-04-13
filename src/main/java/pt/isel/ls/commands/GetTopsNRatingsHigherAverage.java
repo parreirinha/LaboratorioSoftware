@@ -1,8 +1,7 @@
-package pt.isel.ls.database.access;
+package pt.isel.ls.commands;
 
-import pt.isel.ls.command.model.Parameters;
-import pt.isel.ls.command.model.Path;
-import pt.isel.ls.database.printers.PrintGetTopNRatingsLowerAverage;
+import pt.isel.ls.commandline.model.Parameters;
+import pt.isel.ls.commandline.model.Path;
 import pt.isel.ls.database.printers.PrintGetTopsNRatingsHigherAverage;
 import pt.isel.ls.database.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -15,12 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * command nº12
- *
- * GET /tops/{n}/ratings/lower/average
- * returns a list with the n movies with the lower average ratings, sorted decreasingly
+ * commandline nº10
+ * GET /tops/{n}/ratings/higher/average
+ * returns a list with the n movies with higher average ratings, sorted decreasingly
  */
-public class GetTopNRatingsLowerAverage implements Commands {
+public class GetTopsNRatingsHigherAverage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
         int n = path.getPathInt("n");
@@ -28,7 +26,7 @@ public class GetTopNRatingsLowerAverage implements Commands {
         String query = "select top (?) * from(\n" +
                 "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
                 "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
-                "order by R.Average";
+                "order by R.Average desc";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, n);
         ResultSet rs = ps.executeQuery();
@@ -45,5 +43,4 @@ public class GetTopNRatingsLowerAverage implements Commands {
         }
         return col;
     }
-
 }
