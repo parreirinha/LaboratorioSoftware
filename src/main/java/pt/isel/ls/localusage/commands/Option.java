@@ -1,6 +1,5 @@
 package pt.isel.ls.localusage.commands;
 
-import pt.isel.ls.command.model.Command;
 import pt.isel.ls.database.printers.Printable;
 
 /**
