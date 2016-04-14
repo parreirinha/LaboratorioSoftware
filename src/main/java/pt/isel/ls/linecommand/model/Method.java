@@ -5,10 +5,6 @@ package pt.isel.ls.linecommand.model;
  */
 public class Method {
     public String getMethod() {
-        if(this.method == "" || this.method == null){
-            return null;
-        }
-
         return method;
     }
 

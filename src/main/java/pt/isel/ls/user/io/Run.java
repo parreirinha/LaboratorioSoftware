@@ -4,8 +4,6 @@ import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.executioncommands.Exit;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -14,20 +12,17 @@ import java.sql.SQLException;
  */
 public class Run {
     private Connection conn;
-
+    Command command;
     public void RunApp(String[] args) {
         try {
-            Command command = new CommandGetter().getCommand(args);
+            command = new CommandGetter().getCommand(args);
             conn = new ConnectionFactory().getNewConnection();
             conn.setAutoCommit(false);
-            if (command == null)
-                exit();
 
             new Printer().printResult(new CommandMapper()
                     .getExecutionCommandInstance(command)
                     .execute(conn, command.getPath(), command.getParams())
             );
-
 
         } catch (SQLException e) {
             tryRollback(conn);
@@ -39,11 +34,12 @@ public class Run {
 
     private void tryClose(Connection conn){
         try {
+            if(conn!=null){
             conn.close();
+            }
         } catch (SQLException e) {
             System.out.println("Error: Database Access Error.");
             e.printStackTrace();
-            exit();
         }
     }
 
@@ -53,12 +49,7 @@ public class Run {
         } catch (SQLException e) {
             System.out.println("Error: Database Access Error.");
             e.printStackTrace();
-            exit();
         }
-    }
-
-    private void exit(){
-        new Exit().execute();
     }
 
 }

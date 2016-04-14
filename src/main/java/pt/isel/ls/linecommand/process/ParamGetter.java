@@ -16,12 +16,10 @@ public class ParamGetter {
     }
 
     public Parameters getParams(String paramString) {
-        if(paramString == null || paramString == ""){
-            return null;
-        }
 
         String[] params = paramString.split("&");
 
+        if(paramString!="")
         for(int i = 0; i < params.length; ++i){
             String[] pair = params[i].split("=");
             String key = pair[0];

@@ -19,13 +19,10 @@ public class PathGetter {
     }
 
     public Path getPath(String path){
-        if(path == null || path == ""){
-            return null;
-        }
 
         pathParts = path.split("/");
 
-        int j=0;
+        if(path!="")
         for(int i = 0; i < pathParts.length; ++i) {
             if (!isAllDigits(pathParts[i]))
                 cleanPath += pathParts[i];

@@ -40,9 +40,9 @@ public class CommandMapper {
         commmandMap.put("GETcollectionscid", null);
         commmandMap.put("POSTcollectionscidmovie", null);
         commmandMap.put("DELETEcollectionscidmoviesmid", null);
-        commmandMap.put("OPTION", null);
-        commmandMap.put("EXIT", null);
-        commmandMap.put("", null);
+        commmandMap.put("OPTION", new Option());
+        commmandMap.put("EXIT", new Exit());
+        commmandMap.put("", new InteractiveMode());
     }
 
 

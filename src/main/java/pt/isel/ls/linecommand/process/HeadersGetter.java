@@ -14,12 +14,9 @@ public class HeadersGetter {
 
     public Headers getHeaders(String headersString) {
 
-        if(headersString == null || headersString == ""){
-            return null;
-        }
-
         String[] headers = headersString.split(Pattern.quote("|"));
 
+        if(headersString!="")
         for (int i = 0; i < headers.length; ++i) {
             String[] pair = headers[i].split(":");
             String key = pair[0];
