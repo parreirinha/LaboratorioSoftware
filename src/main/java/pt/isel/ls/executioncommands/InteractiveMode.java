@@ -1,0 +1,28 @@
+package pt.isel.ls.executioncommands;
+
+import pt.isel.ls.linecommand.model.Parameters;
+import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.printers.Printable;
+import pt.isel.ls.user.io.Run;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+/**
+ * Created by Dani on 13-04-2016.
+ */
+public class InteractiveMode implements CommandExecution{
+    private Run run;
+
+    public InteractiveMode() {
+        this.run = new Run();
+    }
+
+
+    @Override
+    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+        while(true){
+           // run.RunApp(); TODO how to pass arguments now?
+        }
+    }
+}

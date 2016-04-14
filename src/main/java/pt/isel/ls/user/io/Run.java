@@ -1,10 +1,10 @@
 package pt.isel.ls.user.io;
 
-import pt.isel.ls.command.mapping.CommandMapper;
-import pt.isel.ls.command.model.Command;
-import pt.isel.ls.command.process.*;
+import pt.isel.ls.linecommand.mapping.CommandMapper;
+import pt.isel.ls.linecommand.model.Command;
+import pt.isel.ls.linecommand.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
-import pt.isel.ls.localusage.commands.Exit;
+import pt.isel.ls.executioncommands.Exit;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,8 +1,6 @@
 package pt.isel.ls.user.io;
 
-import pt.isel.ls.database.printers.Printable;
-
-import java.sql.ResultSet;
+import pt.isel.ls.printers.Printable;
 
 /**
  * Class used to visualize the obtained result on console.
