@@ -14,8 +14,7 @@ public class PrintPostMovie implements Printable {
 
     @Override
     public String toStringResult() {
-        return (id == 0) ?
-                "something went wrong!!\n" :
-                "the id of the new movie is: " + id;
+        return (id == 0) ? new PrintError("something went wrong!!\n").toStringResult() : "The ID of the new movie is: " +
+                "" + id;
     }
 }

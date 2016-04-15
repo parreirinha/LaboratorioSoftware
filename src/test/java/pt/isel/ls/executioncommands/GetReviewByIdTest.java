@@ -51,11 +51,12 @@ public class GetReviewByIdTest {
 
     @Test
     public void getReviewFromValidMovieWithTwoReviews() throws SQLException {
-
+        //"Review ID = ##\n\tMovie ID = ##\n\tReviewer Name = ##\tReview Rating = ##\n\tSummary Review = ##\n\tComplete Review = ##\n"
         input = new String[]{"GET", "/movies/1/reviews/2"};
         command = new CommandGetter().getCommand(input);
         result = getReviewById.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "reviewid: 2\nmovie id: 1\nreviewer name: Bad taste Reviwer\nreview rating: 1\nreview summary: Horrible\ncomplete review: This is the worst movie i have seen in my life\n";
+        expected = "Review ID = 2\n\tMovie ID = 1\n\tReviewer Name = Bad taste Reviwer\tReview Rating = 1" +
+                "\n\tSummary Review = Horrible\n\tComplete Review = This is the worst movie i have seen in my life\n";
         assertEquals(expected, result);
     }
 
@@ -66,7 +67,9 @@ public class GetReviewByIdTest {
         input = new String[]{"GET", "/movies/2/reviews/4"};
         command = new CommandGetter().getCommand(input);
         result = getReviewById.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "reviewid: 4\nmovie id: 2\nreviewer name: Jack\nreview rating: 2\nreview summary: Morgan Freeman is the best\ncomplete review: Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his modus operandi\n";
+        expected = "Review ID = 4\n\tMovie ID = 2\n\tReviewer Name = Jack\tReview Rating = 2" +
+                "\n\tSummary Review = Morgan Freeman is the best\n" +
+                "\tComplete Review = Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his modus operandi\n";
         assertEquals(expected, result);
     }
 }

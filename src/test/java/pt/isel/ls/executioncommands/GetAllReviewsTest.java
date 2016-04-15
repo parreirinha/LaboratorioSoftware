@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * GET /movies/{mid}/reviews
- * "reviewid: #;\nreviewer name: #;\nreview sumary: #####;\nreview rating: ##;\n"
+ * "Review ID = #\n\tReviewer Name = ##\tReview Rating = ##\n\tSummary Review = ##\n"
  */
 public class GetAllReviewsTest {
 
@@ -52,19 +52,19 @@ public class GetAllReviewsTest {
         input = new String[]{"GET", "/movies/1/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected =
-                "reviewid: 1;\n" +
-                        "reviewer name: Manel;\n" +
-                        "review sumary: Magnificent;\n" +
-                        "review rating: 5;\n" +
-                        "reviewid: 2;\n" +
-                        "reviewer name: Bad taste Reviwer;\n" +
-                        "review sumary: Horrible;\n" +
-                        "review rating: 1;\n" +
-                        "reviewid: 8;\n" +
-                        "reviewer name: Ze;\n" +
-                        "review sumary: Film of the year;\n" +
-                        "review rating: 5;\n";
+        expected ="Review ID = 1" +
+                        "\n\tReviewer Name = Manel" +
+                        "\tReview Rating = 5"+
+                        "\n\tSummary Review = Magnificent\n" +
+                        "Review ID = 2" +
+                        "\n\tReviewer Name = Bad taste Reviwer" +
+                        "\tReview Rating = 1"+
+                        "\n\tSummary Review = Horrible\n" +
+                        "Review ID = 8" +
+                        "\n\tReviewer Name = Ze" +
+                        "\tReview Rating = 5"+
+                        "\n\tSummary Review = Film of the year\n";
+
         assertEquals(expected, result);
     }
 
@@ -73,14 +73,15 @@ public class GetAllReviewsTest {
         input = new String[]{"GET", "/movies/2/reviews"};
         command = new CommandGetter().getCommand(input);
         result = getAllReviews.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "reviewid: 4;\n" +
-                "reviewer name: Jack;\n" +
-                "review sumary: Morgan Freeman is the best;\n" +
-                "review rating: 2;\n" +
-                "reviewid: 7;\n" +
-                "reviewer name: Ze;\n" +
-                "review sumary: Film of the year candidate;\n" +
-                "review rating: 5;\n";
+        expected = "Review ID = 4" +
+                "\n\tReviewer Name = Jack" +
+                "\tReview Rating = 2"+
+                "\n\tSummary Review = Morgan Freeman is the best\n" +
+                "Review ID = 7" +
+                "\n\tReviewer Name = Ze" +
+                "\tReview Rating = 5"+
+                "\n\tSummary Review = Film of the year candidate\n";
+
         assertEquals(expected, result);
     }
 

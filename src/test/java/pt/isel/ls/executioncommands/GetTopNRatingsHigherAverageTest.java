@@ -49,17 +49,16 @@ public class GetTopNRatingsHigherAverageTest {
     }
 
     private String getTopsNRatingsHigherAverageString() {
-        return "\tID: 4\n" +
-                "\tName:Inception\n" +
-                "\tYear: 2010\n" +
-                "\t*0  **5  ***30  ****44  *****60\n" +
-                "\tAverage: 4.144\n" +
-                "\n" +
-                "\tID: 6\n" +
-                "\tName:American History X\n" +
-                "\tYear: 1998\n" +
-                "\t*1  **5  ***20  ****100  *****50\n" +
-                "\tAverage: 4.097\n\n";
+        return "Movie ID = 4\n" +
+                "\tName = Inception" +
+                "\tRelease = 2010\n" +
+                "\t* = 0   ** = 5   *** = 30   **** = 44   ***** = 60\n" +
+                "\tAverage = 4.144\n" +
+                "Movie ID = 6\n" +
+                "\tName = American History X" +
+                "\tRelease = 1998\n" +
+                "\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n" +
+                "\tAverage = 4.097\n";
 
     }
 }

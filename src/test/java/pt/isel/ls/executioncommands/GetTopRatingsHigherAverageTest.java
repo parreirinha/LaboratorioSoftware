@@ -49,11 +49,11 @@ public class GetTopRatingsHigherAverageTest {
     }
 
     private String getTopRatingsHigherAverageString() {
-        return "\tID: 4\n" +
-                "\tName:Inception\n" +
-                "\tYear: 2010\n" +
-                "\t*0  **5  ***30  ****44  *****60\n" +
-                "\tAverage: 4.144\n";
+        return "Movie ID = 4\n" +
+                "\tName = Inception" +
+                "\tRelease = 2010\n" +
+                "\t* = 0   ** = 5   *** = 30   **** = 44   ***** = 60\n" +
+                "\tAverage = 4.144\n";
 
     }
 }

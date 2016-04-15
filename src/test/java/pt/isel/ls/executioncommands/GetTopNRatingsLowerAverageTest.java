@@ -49,23 +49,21 @@ public class GetTopNRatingsLowerAverageTest {
     }
 
     private String getTopsNRatingsLowerAverageString() {
-        return "\tID: 3\n" +
-                "\tName:The Matrix\n" +
-                "\tYear: 1999\n" +
-                "\t*33  **14  ***70  ****15  *****1\n" +
-                "\tAverage: 2.526\n" +
-                "\n" +
-                "\tID: 5\n" +
-                "\tName:Pulp Fiction\n" +
-                "\tYear: 1994\n" +
-                "\t*30  **8  ***34  ****13  *****20\n" +
-                "\tAverage: 2.857\n" +
-                "\n" +
-                "\tID: 2\n" +
-                "\tName:Seven\n" +
-                "\tYear: 1995\n" +
-                "\t*5  **20  ***40  ****35  *****22\n" +
-                "\tAverage: 3.402\n\n";
+        return "Movie ID = 3\n" +
+                "\tName = The Matrix" +
+                "\tRelease = 1999\n" +
+                "\t* = 33   ** = 14   *** = 70   **** = 15   ***** = 1\n" +
+                "\tAverage = 2.526\n"+
+                "Movie ID = 5\n" +
+                "\tName = Pulp Fiction" +
+                "\tRelease = 1994\n" +
+                "\t* = 30   ** = 8   *** = 34   **** = 13   ***** = 20\n" +
+                "\tAverage = 2.857\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven" +
+                "\tRelease = 1995\n" +
+                "\t* = 5   ** = 20   *** = 40   **** = 35   ***** = 22\n" +
+                "\tAverage = 3.402\n";
 
     }
 }

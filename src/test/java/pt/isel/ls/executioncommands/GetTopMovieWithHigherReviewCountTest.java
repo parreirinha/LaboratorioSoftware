@@ -50,10 +50,7 @@ public class GetTopMovieWithHigherReviewCountTest {
 
     private String getTopMovieWithHihgerReviewCountString() {
         return
-        "\tID: 1\n"+
-        "\tName:Fight Club\n"+
-        "\tYear: 1999\n"+
-        "\t*20  **10  ***15  ****50  *****32\n";
+        "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n\t* = 20   ** = 10   *** = 15   **** = 50   ***** = 32\n\tAverage = 0.0\n";
 
     }
 }
