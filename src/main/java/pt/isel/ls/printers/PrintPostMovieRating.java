@@ -6,6 +6,6 @@ package pt.isel.ls.printers;
 public class PrintPostMovieRating implements Printable {
     @Override
     public String toStringResult() {
-        return "rating posted with sucess";
+        return "Rating posted with sucess";
     }
 }

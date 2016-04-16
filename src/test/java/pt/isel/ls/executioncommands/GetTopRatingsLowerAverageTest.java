@@ -49,10 +49,10 @@ public class GetTopRatingsLowerAverageTest {
     }
 
     private String getTopRatingsLowerAverageString() {
-        return "\tID: 3\n" +
-                "\tName:The Matrix\n" +
-                "\tYear: 1999\n" +
-                "\t*33  **14  ***70  ****15  *****1\n" +
-                "\tAverage: 2.526\n";
+        return "Movie ID = 3\n" +
+                "\tName = The Matrix" +
+                "\tRelease = 1999\n" +
+                "\t* = 33   ** = 14   *** = 70   **** = 15   ***** = 1\n" +
+                "\tAverage = 2.526\n";
     }
 }

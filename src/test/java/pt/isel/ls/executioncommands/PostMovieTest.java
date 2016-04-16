@@ -44,7 +44,7 @@ public class PostMovieTest {
         input = new String[]{"POST", "/movies", "title=Big Fish&releaseYear=2003"};
         command = new CommandGetter().getCommand(input);
         result = postMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "the id of the new movie is: 8";
+        expected = "The ID of the new movie is: 8";
         assertEquals(expected, result);
     }
 

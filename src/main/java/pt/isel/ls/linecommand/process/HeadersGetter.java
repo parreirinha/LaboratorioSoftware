@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * Created by Dani on 11-04-2016.
  */
 public class HeadersGetter {
-    private HashMap<String, String> headersStrings = new HashMap<>();
+    private HashMap<String, String> headersStrings = new HashMap<String, String >();
 
     public Headers getHeaders(String headersString) {
 

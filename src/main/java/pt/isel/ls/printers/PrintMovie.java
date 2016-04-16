@@ -7,17 +7,17 @@ import java.util.Collection;
 /**
  * Created by fabio on 05-Apr-16.
  */
-public class PrintGetAllMovies implements Printable {
+public class PrintMovie implements Printable {
 
     private Collection<Movie> movieCollection;
 
-    public PrintGetAllMovies(Collection<Movie> movies){
+    public PrintMovie(Collection<Movie> movies){
         movieCollection = movies;
     }
 
     /**
      * String template to be returned:
-     * "movie id: ##\nmovie name: ##\nrelease year: ##\n"
+     * "Movie ID = ##\n\tName = ##\tRelease = ##\n"
      *
      * @return
      */
@@ -25,11 +25,11 @@ public class PrintGetAllMovies implements Printable {
     public String toStringResult() {
         String s = "";
         for (Movie m:movieCollection) {
-            s +=    "movie id:" + m.getMovieID()+
-                    "\nmovie name: " + m.getMovieName()+
-                    "\nrelease year: " + m.getMovieRelease()+
+            s +=    "Movie ID = " + m.getMovieID()+
+                    "\n\tName = " + m.getMovieName()+
+                    "\tRelease = " + m.getMovieRelease()+
                     "\n";
         }
-        return (s == "") ? "something went wrong!!\n" : s;
+        return (s == "") ? new PrintError("something went wrong!!\n").toStringResult() : s;
     }
 }

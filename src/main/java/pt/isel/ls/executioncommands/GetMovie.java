@@ -2,11 +2,13 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Parameters;
 import pt.isel.ls.linecommand.model.Path;
-import pt.isel.ls.printers.PrintGetMovie;
+import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * linecommand nº3
@@ -25,9 +27,15 @@ public class GetMovie implements CommandExecution {
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, id);
         ResultSet rs = ps.executeQuery();
-        Movie res = null;
-        while (rs.next()) {
-            res = new Movie(
+        Collection<Movie> res = getCollection(rs);
+        return new PrintDetailedMovie(res);
+    }
+
+    private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
+        Collection<Movie> res = new ArrayList<Movie>();
+        while (rs.next())
+        {
+            res.add(new Movie(
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getInt(3),
@@ -36,10 +44,9 @@ public class GetMovie implements CommandExecution {
                     rs.getInt(6),
                     rs.getInt(7),
                     rs.getInt(8)
-            );
+            ));
         }
-        rs.close();
-        ps.close();
-        return new PrintGetMovie(res);
+        return res;
     }
+
 }

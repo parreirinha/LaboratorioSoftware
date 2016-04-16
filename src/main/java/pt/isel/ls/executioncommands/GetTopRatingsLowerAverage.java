@@ -2,7 +2,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Parameters;
 import pt.isel.ls.linecommand.model.Path;
-import pt.isel.ls.printers.PrintGetTopRatingsHigherAverage;
+import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * commmand nº11
@@ -27,17 +29,27 @@ public class GetTopRatingsLowerAverage implements CommandExecution {
                 "order by R.Average";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        PrintGetTopRatingsHigherAverage printer = new PrintGetTopRatingsHigherAverage(getMovie(rs));
-
-        rs.close();
-        ps.close();
-        return printer;
+        Collection<Movie> res = getCollection(rs);
+        return new PrintDetailedMovie(res);
     }
 
-    private Movie getMovie(ResultSet rs) throws SQLException {
-        if (rs.next()) {
-            return new Movie(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getFloat(9));
+    private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
+        Collection<Movie> res = new ArrayList<Movie>();
+        while (rs.next())
+        {
+            res.add(new Movie(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getInt(3),
+                    rs.getInt(4),
+                    rs.getInt(5),
+                    rs.getInt(6),
+                    rs.getInt(7),
+                    rs.getInt(8),
+                    rs.getFloat(9)
+            ));
         }
-        return null;
+        return res;
     }
+
 }

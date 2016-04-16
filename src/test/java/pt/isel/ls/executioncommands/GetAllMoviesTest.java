@@ -43,7 +43,7 @@ public class GetAllMoviesTest {
 
     /**
      * GET /movies
-     * "movie id: ##\nmovie name: ##\nrelease year: ##\n"
+     * "Movie ID = ##\n\tName = ##\tRelease = ##\n"
      * @throws SQLException
      */
     @Test
@@ -58,13 +58,12 @@ public class GetAllMoviesTest {
     }
 
     private String getAllMoviesString(){
-        return
-            "movie id:1\nmovie name: Fight Club\nrelease year: 1999\n" +
-            "movie id:2\nmovie name: Seven\nrelease year: 1995\n" +
-            "movie id:3\nmovie name: The Matrix\nrelease year: 1999\n" +
-            "movie id:4\nmovie name: Inception\nrelease year: 2010\n" +
-            "movie id:5\nmovie name: Pulp Fiction\nrelease year: 1994\n" +
-            "movie id:6\nmovie name: American History X\nrelease year: 1998\n" +
-            "movie id:7\nmovie name: The Silence of the Lambs\nrelease year: 1991\n";            //"movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
+        return "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n"+
+            "Movie ID = 2\n\tName = Seven\tRelease = 1995\n" +
+            "Movie ID = 3\n\tName = The Matrix\tRelease = 1999\n" +
+            "Movie ID = 4\n\tName = Inception\tRelease = 2010\n" +
+            "Movie ID = 5\n\tName = Pulp Fiction\tRelease = 1994\n" +
+            "Movie ID = 6\n\tName = American History X\tRelease = 1998\n" +
+            "Movie ID = 7\n\tName = The Silence of the Lambs\tRelease = 1991\n";           //"movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
     }
 }

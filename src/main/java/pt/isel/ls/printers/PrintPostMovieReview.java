@@ -13,7 +13,7 @@ public class PrintPostMovieReview implements Printable {
 
     @Override
     public String toStringResult() {
-        return (id == 0) ? "something went wrong!!\n"
-                            : "review id: " + id;
+        return (id == 0) ? new PrintError("something went wrong!!\n").toStringResult()
+                            : "Review ID is: " + id;
     }
 }

@@ -3,7 +3,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Parameters;
 import pt.isel.ls.linecommand.model.Path;
-import pt.isel.ls.printers.PrintGetAllReviews;
+import pt.isel.ls.printers.PrintReview;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Review;
 
@@ -28,20 +28,23 @@ public class GetAllReviews implements CommandExecution {
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, movieId);
         ResultSet rs = ps.executeQuery();
-        Collection<Review> container = new ArrayList<Review>();
-        Review review;
-        while (rs.next()) {
-            review = new Review(
+        Collection<Review> res = getCollection(rs);
+        return new PrintReview(res);
+    }
+
+    private Collection<Review> getCollection(ResultSet rs) throws SQLException {
+        Collection<Review> res = new ArrayList<Review>();
+        while (rs.next())
+        {
+            res.add(new Review(
                     rs.getInt(1),
                     rs.getInt(2),
                     rs.getString(3),
                     rs.getString(4),
                     rs.getInt(6)
-            );
-            container.add(review);
+            ));
         }
-        rs.close();
-        ps.close();
-        return new PrintGetAllReviews(container);
+        return res;
     }
+
 }

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * GET /movies/{mid}/ratings
- * "the average rating for the movie with the id ## is ##.\n*##;**##;***##;****##;*****##\n"
+ * "The average rating for the movie with the ID ## is ##.\n\t* = ##   ** = ##   *** = ##   **** = ##   ***** = ##\n"
  *
  */
 public class GetMovieRatingTest {
@@ -53,7 +53,7 @@ public class GetMovieRatingTest {
         input = new String[]{"GET", "/movies/6/ratings"};
         command = new CommandGetter().getCommand(input);
         result = getMovieRating.execute(connection, command.getPath(), command.getParams()).toStringResult();
-        expected = "the average rating for the movie with the id 6 is 4.097.\n*1 **5 ***20 ****100 *****50\n";
+        expected = "The average rating for the movie with the ID 6 is 4.097.\n\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n";
         assertEquals(expected, result);
     }
 

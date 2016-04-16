@@ -40,7 +40,8 @@ public class GetMovieTest {
         input = new String[]{"GET", "/movies/1"};
         command = new CommandGetter().getCommand(input);
         result = getMovie.execute(connection, command.getPath(),command.getParams()).toStringResult();
-        expected = "movieid = 1; movie name = Fight Club; releaseyear = 1999;\n*20;**10;***15;****50;*****32.\n";
+        expected = "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n\t* = 20   ** = 10   *** = 15" +
+                "   **** = 50   ***** = 32\n\tAverage = 0.0\n";
         assertEquals(expected, result);
     }
 

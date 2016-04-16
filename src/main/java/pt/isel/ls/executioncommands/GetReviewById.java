@@ -3,11 +3,13 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Parameters;
 import pt.isel.ls.linecommand.model.Path;
-import pt.isel.ls.printers.PrintGetReviewById;
+import pt.isel.ls.printers.PrintDetailedReview;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Review;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -28,19 +30,24 @@ public class GetReviewById implements CommandExecution {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(preparedStatement,movieId,reviewId);
         ResultSet rs = preparedStatement.executeQuery();
-        Review review = null;
-        if(!rs.next())
-            return new PrintGetReviewById(null);
-        review = new Review(
-                rs.getInt(1),
-                rs.getInt(2),
-                rs.getString(3),
-                rs.getString(4),
-                rs.getString(5),
-                rs.getInt(6)
-        );
-        rs.close();
-        preparedStatement.close();
-        return new PrintGetReviewById(review);
+        Collection<Review> res = getCollection(rs);
+        return new PrintDetailedReview(res);
     }
+
+    private Collection<Review> getCollection(ResultSet rs) throws SQLException {
+        Collection<Review> res = new ArrayList<Review>();
+        while (rs.next())
+        {
+            res.add(new Review(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getInt(6)
+            ));
+        }
+        return res;
+    }
+
 }

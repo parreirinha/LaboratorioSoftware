@@ -2,7 +2,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Parameters;
 import pt.isel.ls.linecommand.model.Path;
-import pt.isel.ls.printers.PrintGetTopNMoviesWithHigherReview;
+import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -36,17 +36,18 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, path.getPathInt("n"));
         ResultSet rs = ps.executeQuery();
-        PrintGetTopNMoviesWithHigherReview printer = new PrintGetTopNMoviesWithHigherReview(getCollection(rs));
-        rs.close();
-        ps.close();
-        return printer;
+        Collection<Movie> res = getCollection(rs);
+        return new PrintMovie(res);
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
-        Collection<Movie> col = new ArrayList<Movie>();
+        Collection<Movie> res = new ArrayList<Movie>();
         while (rs.next())
-            col.add(new Movie(rs.getString(2), rs.getInt(3)));
-        return col;
+            res.add(new Movie(
+                    rs.getString(2),
+                    rs.getInt(3)
+            ));
+        return res;
     }
 
 }
