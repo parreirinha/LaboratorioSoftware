@@ -20,6 +20,9 @@ import java.util.Collection;
  * returns the detail for the movie with most reviews.
  */
 public class GetTopMovieWithHigherReviewCount implements CommandExecution {
+
+    private int[] stars = new int[5];
+
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
         String query = "select top 1 * from Movie as M\n" +
@@ -42,11 +45,7 @@ public class GetTopMovieWithHigherReviewCount implements CommandExecution {
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getInt(3),
-                    rs.getInt(4),
-                    rs.getInt(5),
-                    rs.getInt(6),
-                    rs.getInt(7),
-                    rs.getInt(8)
+                    AccessUtils.returnArrayStarsGivenAResultSet(rs)
             ));
         }
         return res;

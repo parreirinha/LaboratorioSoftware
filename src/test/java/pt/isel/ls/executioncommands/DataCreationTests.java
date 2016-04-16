@@ -19,14 +19,14 @@ public class DataCreationTests {
     // Arrays to compare values in the assertEquals methods
     public final Movie[] movies = {
 
-            new Movie(1, "Fight Club", 1999, 20, 10, 15, 50, 32),
-            new Movie(2, "Seven", 1995, 5, 20, 40, 35, 22),
-            new Movie(3, "The Matrix", 1999, 33, 14, 70, 15, 1),
-            new Movie(4, "Inception", 2010, 0, 5, 30, 44, 60),
-            new Movie(5, "Pulp Fiction", 1994, 30, 8, 34, 13, 20),
-            new Movie(6, "American History X", 1998, 1, 5, 20, 100, 50),
-            new Movie(7, "The Silence of the Lambs", 1991, 2, 30, 11, 40, 22),
-            new Movie(8, "PostMovieTest", 2016, 0, 0, 0, 0, 0)
+            new Movie(1, "Fight Club", 1999, new int[] {20, 10, 15, 50, 32}),
+            new Movie(2, "Seven", 1995, new int[] {5, 20, 40, 35, 22}),
+            new Movie(3, "The Matrix", 1999, new int[] {33, 14, 70, 15, 1}),
+            new Movie(4, "Inception", 2010, new int[] {0, 5, 30, 44, 60}),
+            new Movie(5, "Pulp Fiction", 1994, new int[] {30, 8, 34, 13, 20}),
+            new Movie(6, "American History X", 1998, new int[] {1, 5, 20, 100, 50}),
+            new Movie(7, "The Silence of the Lambs", 1991, new int[] {2, 30, 11, 40, 22}),
+            new Movie(8, "PostMovieTest", 2016, new int[] {0, 0, 0, 0, 0})
     };
 
 

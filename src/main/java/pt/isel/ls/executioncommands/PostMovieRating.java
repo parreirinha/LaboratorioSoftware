@@ -27,7 +27,6 @@ public class PostMovieRating implements CommandExecution {
         AccessUtils.setValuesOnPreparedStatement(ps, ratingColumnName, ratingColumnName, movieID);
         ps.executeUpdate();
         connection.commit();
-        ps.close();
         return new PrintPostMovieRating();
     }
 
