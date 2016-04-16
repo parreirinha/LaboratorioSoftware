@@ -15,8 +15,9 @@ public class Exit implements CommandExecution{
 
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
-        System.exit(-1);
-        return new PrintExit();
+        System.out.println("Exiting...");
+        System.exit(0);
+        return new PrintExit();//nao chega aqui...
 
     }
 }
