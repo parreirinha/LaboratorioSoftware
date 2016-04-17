@@ -43,7 +43,7 @@ public class GetTopNRatingsLowerAverageTest {
         connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/tops/3/ratings/lower/average"};
         command = new CommandGetter().getCommand(input);
-        result = getTopsNRatingsLowerAverage.execute(connection, command.getPath(), command.getParams()).toStringResult();
+        result = getTopsNRatingsLowerAverage.execute(connection, command).toStringResult();
         expected = getTopsNRatingsLowerAverageString();
         assertEquals(expected, result);
     }

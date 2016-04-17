@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -22,11 +21,10 @@ import java.util.Collection;
 public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
     /**
      * @param connection
-     * @param path
-     * @param parameters @return a collection
+     * @param command
      */
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
         String query = "select top (?) * from Movie as M\n" +
                 "inner join(\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
@@ -34,7 +32,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
                 "on M.MovieID = T.MovieID\n" +
                 "order by M.MovieID";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, path.getPathInt("n"));
+        ps.setInt(1, command.getPath().getPathInt("n"));
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         return new PrintMovie(res);

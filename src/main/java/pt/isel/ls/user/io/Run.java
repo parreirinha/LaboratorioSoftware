@@ -21,7 +21,7 @@ public class Run {
 
             new Printer().printResult(new CommandMapper()
                     .getExecutionCommandInstance(command)
-                    .execute(conn, command.getPath(), command.getParams())
+                    .execute(conn, command)
             );
 
         } catch (SQLException e) {
