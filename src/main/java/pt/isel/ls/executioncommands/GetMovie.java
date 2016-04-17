@@ -19,6 +19,8 @@ import java.util.Collection;
 public class GetMovie implements CommandExecution {
 
 
+    private int[] stars = new int[5];
+
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
 
@@ -33,20 +35,18 @@ public class GetMovie implements CommandExecution {
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
         Collection<Movie> res = new ArrayList<Movie>();
-        while (rs.next())
-        {
+        while (rs.next()) {
+
             res.add(new Movie(
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getInt(3),
-                    rs.getInt(4),
-                    rs.getInt(5),
-                    rs.getInt(6),
-                    rs.getInt(7),
-                    rs.getInt(8)
-            ));
+                    AccessUtils.returnArrayStarsGivenAResultSet(rs)));
         }
         return res;
     }
 
+
+
 }
+

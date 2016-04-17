@@ -10,27 +10,27 @@ public class Movie {
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
     private float average;
     
-    public Movie(int id, String movieName, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar) {
+    public Movie(int id, String movieName, int release, int[] stars) {
         this.movieID = id;
         this.movieName = movieName;
         this.movieRelease = release;
-        this.oneStar = oneStar;
-        this.twoStar = twoStar;
-        this.treeStar = treeStar;
-        this.fourStar = fourStar;
-        this.fiveStar = fiveStar;
+        this.oneStar = stars[0];
+        this.twoStar = stars[1];
+        this.treeStar = stars[2];
+        this.fourStar = stars[3];
+        this.fiveStar = stars[4];
     }
 
-    public Movie(int id, String movieName, int release, int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar, float avge) {
+    public Movie(int id, String movieName, int release, int[] stars, float avge) {
         this.movieID = id;
         this.movieName = movieName;
-        this.movieRelease = release;
-        this.oneStar = oneStar;
-        this.twoStar = twoStar;
-        this.treeStar = treeStar;
-        this.fourStar = fourStar;
-        this.fiveStar = fiveStar;
+        this.oneStar = stars[0];
+        this.twoStar = stars[1];
+        this.treeStar = stars[2];
+        this.fourStar = stars[3];
+        this.fiveStar = stars[4];
         this.average = avge;
+        movieRelease = release;
     }
 
     public Movie(String name) {
@@ -42,13 +42,13 @@ public class Movie {
         movieRelease = date;
     }
 
-    public Movie(int id,int oneStar, int twoStar, int treeStar, int fourStar, int fiveStar, float avge) {
+    public Movie(int id,int[] stars, float avge) {
         movieID = id;
-        this.oneStar = oneStar;
-        this.twoStar = twoStar;
-        this.treeStar = treeStar;
-        this.fourStar = fourStar;
-        this.fiveStar = fiveStar;
+        this.oneStar = stars[0];
+        this.twoStar = stars[1];
+        this.treeStar = stars[2];
+        this.fourStar = stars[3];
+        this.fiveStar = stars[4];
         this.average = avge;
         movieName = null;
     }
