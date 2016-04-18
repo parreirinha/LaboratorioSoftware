@@ -44,7 +44,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
         connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"GET","/tops/2/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
-        result = getTopNMoviesWithHigherReviewCount.execute(connection, command.getPath(), command.getParams()).toStringResult();
+        result = getTopNMoviesWithHigherReviewCount.execute(connection, command).toStringResult();
         expected = getTop2MoviesWithHihgerReviewCountString();
         assertEquals(expected, result);
     }

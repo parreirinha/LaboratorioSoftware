@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -22,9 +21,9 @@ public class GetMovie implements CommandExecution {
     private int[] stars = new int[5];
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
-        int id = path.getPathInt("mid");
+        int id = command.getPath().getPathInt("mid");
         String query = "select * from Movie where (MovieID = ?);";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, id);

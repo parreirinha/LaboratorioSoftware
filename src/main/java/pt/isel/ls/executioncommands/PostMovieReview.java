@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintPostMovieReview;
 import pt.isel.ls.printers.Printable;
 
@@ -21,13 +20,13 @@ public class PostMovieReview implements CommandExecution {
 
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
-        int movieId = path.getPathInt("mid");
-        String reviwerName = parameters.getParamString("reviewerName");
-        String reviewSummary = parameters.getParamString("reviewSummary");
-        String review = parameters.getParamString("review");
-        int rating = parameters.getParamInt("rating");
+        int movieId = command.getPath().getPathInt("mid");
+        String reviwerName = command.getParams().getParamString("reviewerName");
+        String reviewSummary = command.getParams().getParamString("reviewSummary");
+        String review = command.getParams().getParamString("review");
+        int rating = command.getParams().getParamInt("rating");
         String query = "insert into Review " +
                 "(MovieID, ReviewerName, ReviewSummary, ReviewComplete, ReviewRating)" +
                 "values(?,?,?,?,?)";

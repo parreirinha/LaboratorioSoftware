@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -20,8 +19,8 @@ import java.util.Collection;
  */
 public class GetTopsNRatingsHigherAverage implements CommandExecution {
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
-        int n = path.getPathInt("n");
+    public Printable execute(Connection connection, Command command) throws SQLException {
+        int n = command.getPath().getPathInt("n");
 
         String query = "select top (?) * from(\n" +
                 "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +

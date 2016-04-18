@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.user.io.ContinuousInputOutput;
 import pt.isel.ls.user.io.Run;
@@ -21,7 +20,7 @@ public class InteractiveMode implements CommandExecution{
 
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
         System.out.println("Interactive Mode: type commands...");
         new ContinuousInputOutput().start();
         return null;

@@ -1,8 +1,7 @@
 package pt.isel.ls.executioncommands;
 
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovieRating;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -23,9 +22,9 @@ import java.util.Collection;
 public class GetMovieRating implements CommandExecution {
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
-        int id = path.getPathInt("mid");
+        int id = command.getPath().getPathInt("mid");
         String query = "select *, CONVERT(DECIMAL(4,3), " +
             "((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
             "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) " +

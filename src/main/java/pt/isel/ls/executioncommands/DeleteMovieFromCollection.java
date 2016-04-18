@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMensage;
 import pt.isel.ls.printers.Printable;
 import java.sql.*;
@@ -15,10 +14,10 @@ import java.sql.*;
  */
 public class DeleteMovieFromCollection implements CommandExecution {
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
-        int cid = path.getPathInt("cid");
-        int mid = path.getPathInt("mid");
+        int cid = command.getPath().getPathInt("cid");
+        int mid = command.getPath().getPathInt("mid");
         String query = "delete from MovieCollection where CID = ? and MovieID = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, cid, mid);

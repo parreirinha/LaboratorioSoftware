@@ -49,7 +49,7 @@ public class PostMovieRatingTest {
 
         input = new String[]{"POST", "/movies/2/ratings","rating=5"};
         command = new CommandGetter().getCommand(input);
-        result = postMovieRating.execute(connection, command.getPath(),command.getParams()).toStringResult();
+        result = postMovieRating.execute(connection, command).toStringResult();
         expected = "Rating posted with sucess";
         assertEquals(expected, result);
 

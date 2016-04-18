@@ -1,8 +1,7 @@
 package pt.isel.ls.executioncommands;
 
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintReview;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Review;
@@ -21,9 +20,9 @@ public class GetAllReviews implements CommandExecution {
 
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
-        int movieId = path.getPathInt("mid");
+        int movieId = command.getPath().getPathInt("mid");
         String query = "select * from Review where MovieID = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, movieId);

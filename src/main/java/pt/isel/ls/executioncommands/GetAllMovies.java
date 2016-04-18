@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -18,7 +17,7 @@ import java.util.Collection;
 public class GetAllMovies implements CommandExecution {
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException
+    public Printable execute(Connection connection, Command command) throws SQLException
     {
         String query = "select * from Movie order by MovieID";
         PreparedStatement ps = connection.prepareStatement(query);

@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintPostMovie;
 import pt.isel.ls.printers.Printable;
 
@@ -19,10 +18,10 @@ public class PostMovie implements CommandExecution {
 
 
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
-        String movieName = parameters.getParamString("title");
-        int movieRelease = parameters.getParamInt("releaseYear");
+        String movieName = command.getParams().getParamString("title");
+        int movieRelease = command.getParams().getParamInt("releaseYear");
         String query = "insert into Movie (movieName, movieRelease) " + "values(?,?)";
         PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         AccessUtils.setValuesOnPreparedStatement(ps, movieName, movieRelease);

@@ -44,7 +44,7 @@ public class DeleteMovieFromCollectionTest {
     public void deleteTest() throws SQLException {
         input = new String[] {"DELETE", "/collections/1/movies/4"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command.getPath(),command.getParams()).toStringResult();
+        result = exe.execute(connection, command).toStringResult();
         expected = "Movie with id = " + 4 + " was deleted with sucess from collection";
         assertEquals(expected, result);
     }

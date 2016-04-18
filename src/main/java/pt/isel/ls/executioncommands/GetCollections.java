@@ -1,7 +1,6 @@
 package pt.isel.ls.executioncommands;
 
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.printers.PrintGetCollections;
 import pt.isel.ls.printers.PrintMensage;
@@ -22,7 +21,7 @@ import java.util.Collection;
  */
 public class GetCollections implements CommandExecution {
     @Override
-    public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException {
 
 
 
