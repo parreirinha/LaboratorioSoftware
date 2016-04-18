@@ -2,7 +2,6 @@ package pt.isel.ls.printers;
 
 import pt.isel.ls.model.Review;
 
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import java.util.Collection;
 
 /**
@@ -22,7 +21,7 @@ public class PrintDetailedReview implements  Printable{
      * @return
      */
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         String str = "";
         for(Review r : review)
             str += "Review ID = " + r.getReviewID() +
@@ -32,7 +31,12 @@ public class PrintDetailedReview implements  Printable{
                     "\n\tSummary Review = " + r.getReviewSummary() +
                     "\n\tComplete Review = " +r.getCompleteReview() +
                     "\n";
-        return (str == "") ? new PrintError("something went wrong!!\n").toStringResult() : str;
+        return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
+    }
+
+    @Override
+    public String toStringHtml(String[] head) {
+        return null;
     }
 }
 

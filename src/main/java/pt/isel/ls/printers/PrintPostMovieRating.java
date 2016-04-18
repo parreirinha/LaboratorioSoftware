@@ -5,7 +5,12 @@ package pt.isel.ls.printers;
  */
 public class PrintPostMovieRating implements Printable {
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         return "Rating posted with sucess";
+    }
+
+    @Override
+    public String toStringHtml(String[] head) {
+        return null;
     }
 }

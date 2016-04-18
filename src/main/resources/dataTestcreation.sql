@@ -1,3 +1,4 @@
+use ls
 insert into Movie (MovieName, MovieRelease, OneStar, TwoStar, TreeStar, FourStar, FiveStar) 
 	select 'Fight Club', 1999, 20, 10, 15, 50, 32 union all 
 	select 'Seven', 1995, 5, 20, 40, 35, 22 union all 

@@ -16,15 +16,13 @@ public class PrintDetailedMovie implements Printable {
     public PrintDetailedMovie(Collection<Movie> movieCollection){
         this.movieCollection = movieCollection;
     }
-
-
     /**
      * String template to be returned:
      * "Movie ID = ##\n\tName = ##\tRelease = ##\n\t* = ##   ** = ##   *** = ##   **** = ##   ***** = ##\n\tAverage = ##\n"
      * @return
      */
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         String str = "";
         for(Movie m : movieCollection)
             str += "Movie ID = "+m.getMovieID() +"\n"+
@@ -36,6 +34,12 @@ public class PrintDetailedMovie implements Printable {
                     "   **** = " + m.getFourStar() +
                     "   ***** = " + m.getFiveStar() +
                     "\n\tAverage = "+m.getAverage()+"\n";
-        return (str == "") ? new PrintError("something went wrong!!\n").toStringResult() : str;
+        return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
+    }
+
+    @Override
+    public String toStringHtml(String[] head)
+    {
+        return null;
     }
 }

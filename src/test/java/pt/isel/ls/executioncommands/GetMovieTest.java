@@ -39,7 +39,7 @@ public class GetMovieTest {
 
         input = new String[]{"GET", "/movies/1"};
         command = new CommandGetter().getCommand(input);
-        result = getMovie.execute(connection,  command).toStringResult();
+        result = getMovie.execute(connection,  command).toStringText();
         expected = "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n\t* = 20   ** = 10   *** = 15" +
                 "   **** = 50   ***** = 32\n\tAverage = 0.0\n";
         assertEquals(expected, result);
@@ -51,7 +51,7 @@ public class GetMovieTest {
 
         input = new String[]{"GET", "/movies/100"};
         command = new CommandGetter().getCommand(input);
-        result = getMovie.execute(connection, command).toStringResult();
+        result = getMovie.execute(connection, command).toStringText();
         expected = "something went wrong!!\n";
         assertEquals(expected, result);
 

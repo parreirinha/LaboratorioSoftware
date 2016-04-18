@@ -1,19 +1,31 @@
 package pt.isel.ls.html.output;
 
-import pt.isel.ls.model.Movie;
+
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.function.Function;
 
 /**
  * Created by Dani on 12-04-2016.
  */
-public class MovieHtmlGenerator {
+public class MovieHtmlGenerator<T> {
 
-    private Movie movie;
+    private Collection<T> col;
 
-    public MovieHtmlGenerator(Movie movie){
-        this.movie=movie;
+    public <T> MovieHtmlGenerator(Collection<T> col){
+       //this.col = col;
     }
 
-    public java.lang.String htmlGenerate(){
+    public String htmlGenerate(String[] head, Function<T, String>[] func)
+    {
+        String str = "";
+        return null;
+    }
+
+
+    //public java.lang.String htmlGenerate(){
+
+        /*
         java.lang.String htmlMovieString = "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -50,7 +62,7 @@ public class MovieHtmlGenerator {
                 "\n" +
                 "</body>\n" +
                 "</html>";
-
-        return htmlMovieString;
-    }
+*/
+      //  return htmlMovieString;
+   // }
 }

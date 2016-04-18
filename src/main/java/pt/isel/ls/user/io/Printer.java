@@ -10,7 +10,7 @@ public class Printer {
     public void printResult(Printable printable ){
 
         if(printable != null)
-        System.out.println(printable.toStringResult());
+        System.out.println(printable.toStringText());
 
         else
             System.out.println("Error: Couldn't print result.");

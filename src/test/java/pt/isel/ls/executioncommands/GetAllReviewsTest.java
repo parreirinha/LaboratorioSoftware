@@ -51,7 +51,7 @@ public class GetAllReviewsTest {
 
         input = new String[]{"GET", "/movies/1/reviews"};
         command = new CommandGetter().getCommand(input);
-        result = getAllReviews.execute(connection, command).toStringResult();
+        result = getAllReviews.execute(connection, command).toStringText();
         expected ="Review ID = 1" +
                         "\n\tReviewer Name = Manel" +
                         "\tReview Rating = 5"+
@@ -72,7 +72,7 @@ public class GetAllReviewsTest {
     public void movieWithTwoReview() throws SQLException{
         input = new String[]{"GET", "/movies/2/reviews"};
         command = new CommandGetter().getCommand(input);
-        result = getAllReviews.execute(connection, command).toStringResult();
+        result = getAllReviews.execute(connection, command).toStringText();
         expected = "Review ID = 4" +
                 "\n\tReviewer Name = Jack" +
                 "\tReview Rating = 2"+
@@ -89,7 +89,7 @@ public class GetAllReviewsTest {
     public void movieWithoutReviews() throws SQLException{
         input = new String[]{"GET", "/movies/666/reviews"};
         command = new CommandGetter().getCommand(input);
-        result = getAllReviews.execute(connection, command).toStringResult();
+        result = getAllReviews.execute(connection, command).toStringText();
         expected = "something went wrong!!\n";
         assertEquals(expected, result);
     }
