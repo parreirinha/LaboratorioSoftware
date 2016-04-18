@@ -81,59 +81,128 @@ public class DataCreationTests {
 
     public void dropTables() throws SQLException {
 
-        String query = "drop table Review";
         connection = new ConnectionFactory().getNewConnection();
+
+        String query = "drop table MovieCollection";
+        preparedStatement =connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+
+        query = "drop table Collections";
+        preparedStatement =connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+
+        query = "drop table Review";
         preparedStatement =connection.prepareStatement(query);
         preparedStatement.executeUpdate();
 
         query = "drop table Movie";
-        connection = new ConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(query);
         preparedStatement.executeUpdate();
+
         if (connection != null)
             connection.close();
     }
 
     public void createTables() throws SQLException {
 
-        String creatMovie =
-                "create table Movie\n" +
-                "(\n" +
-                "\tMovieID integer identity(1, 1),\n" +
-                "\tMovieName varchar(50),\n" +
-                "\tMovieRelease integer,\n" +
-                "\tOneStar integer default 0,\n" +
-                "\tTwoStar integer default 0,\n" +
-                "\tTreeStar integer default 0,\n" +
-                "\tFourStar integer default 0,\n" +
-                "\tFiveStar integer default 0,\n" +
-                "\tunique(MovieName, MovieRelease),\n" +
-                "\tprimary key(MovieID)\n" +
-                ")";
         connection = new ConnectionFactory().getNewConnection();
+
+        String creatMovie =
+            "create table Movie\n" +
+            "(\n" +
+            "\tMovieID integer identity(1, 1),\n" +
+            "\tMovieName varchar(50),\n" +
+            "\tMovieRelease integer,\n" +
+            "\tOneStar integer default 0,\n" +
+            "\tTwoStar integer default 0,\n" +
+            "\tTreeStar integer default 0,\n" +
+            "\tFourStar integer default 0,\n" +
+            "\tFiveStar integer default 0,\n" +
+            "\tunique(MovieName, MovieRelease),\n" +
+            "\tprimary key(MovieID)\n" +
+            ")";
         preparedStatement =connection.prepareStatement(creatMovie);
         preparedStatement.executeUpdate();
 
-
-
         String createReview =
-                "create table Review" +
-                "(\n" +
-                "\tReviewID integer identity(1, 1),\n" +
-                "\tMovieID integer,\n" +
-                "\tReviewerName varchar(50) not null,\n" +
-                "\tReviewSummary varchar(100) not null,\n" +
-                "\tReviewComplete varchar(500) not null,\n" +
-                "\tReviewRating integer not null check (ReviewRating >= 1 AND ReviewRating <= 5),\n" +
-                "\tforeign key(MovieID) references Movie(MovieID),\n" +
-                "\tprimary key(ReviewID, MovieID)\n" +
-                ")";
-        connection = new ConnectionFactory().getNewConnection();
+            "create table Review" +
+            "(\n" +
+            "\tReviewID integer identity(1, 1),\n" +
+            "\tMovieID integer,\n" +
+            "\tReviewerName varchar(50) not null,\n" +
+            "\tReviewSummary varchar(100) not null,\n" +
+            "\tReviewComplete varchar(500) not null,\n" +
+            "\tReviewRating integer not null check (ReviewRating >= 1 AND ReviewRating <= 5),\n" +
+            "\tforeign key(MovieID) references Movie(MovieID),\n" +
+            "\tprimary key(ReviewID, MovieID)\n" +
+            ")";
         preparedStatement =connection.prepareStatement(createReview);
+        preparedStatement.executeUpdate();
+
+        String createCollections =
+            "create table Collections ( " +
+            "\nCollectionID integer identity(1, 1) unique, " +
+            "\nName varchar(50), " +
+            "\nDescription varchar(200), " +
+            "\nCreateDate date default getdate(), " +
+            "\nprimary key (CollectionID))";
+        connection = new ConnectionFactory().getNewConnection();
+        preparedStatement =connection.prepareStatement(createCollections);
+        preparedStatement.executeUpdate();
+
+        String createMovieCollection =
+            "create table MovieCollection( " +
+            "CID integer not null, " +
+            "MovieID integer not null, " +
+            "AddedDate datetime not null default getdate(), " +
+            "primary key(CID, MovieID), " +
+            "foreign key (CID) references Collections (CollectionID), " +
+            "foreign key (MovieID) references Movie(MovieID));";
+        preparedStatement =connection.prepareStatement(createMovieCollection);
         preparedStatement.executeUpdate();
 
         if (connection != null)
             connection.close();
+    }
+
+    public void insertCollections() throws SQLException {
+        String query =
+            "insert into Collections (Name, Description) " +
+            "select 'STARWARS','serie de filmes da saga starwars' union all " +
+            "select 'Before 2000','movies before 2000' union all " +
+            "select 'movies after 2000', 'movies from this century'";
+        connection = new ConnectionFactory().getNewConnection();
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+        if (connection != null)
+            connection.close();
+    }
+
+
+    public void insertMovieCollection() throws SQLException {
+        String query =
+            "insert into MovieCollection (CID, MovieID) " +
+            "select 2, 1 union all " +
+            "select 2, 2 union all " +
+            "select 2, 3 union all " +
+            "select 1, 4 union all " +
+            "select 2, 5 union all " +
+            "select 2, 6 union all " +
+            "select 2, 7" ;
+
+        connection = new ConnectionFactory().getNewConnection();
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.executeUpdate();
+        if (connection != null)
+            connection.close();
+    }
+
+    public void initValuesInDBToTests() throws SQLException {
+        createTables();
+        insertMoviesToTest();
+        insertReviewsInMovies();
+        insertCollections();
+        insertMovieCollection();
     }
 
 }

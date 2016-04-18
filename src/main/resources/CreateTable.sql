@@ -1,4 +1,7 @@
-use ls;
+--use ls;
+
+
+use ls_tests
 create table Movie
 (
 	MovieID integer identity(1, 1),
@@ -9,6 +12,7 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
+	AddedDate datetime not null default getdate(),
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )
@@ -24,6 +28,33 @@ create table Review
 	primary key(ReviewID, MovieID)
 )
 
+create table Collections
+(
+	CollectionID integer identity(1, 1) unique,
+	Name varchar(50),
+	Description varchar(200),
+	CreateDate date default getdate(),
+	primary key (CollectionID)
+)
 
-select * from Review;
-select * from Movie;
+create table MovieCollection
+(
+	CID integer,
+	MovieID integer,
+	AddedDate datetime not null default getdate(),
+	primary key(CID, MovieID),
+	foreign key (CID) references Collections (CollectionID),
+	foreign key (MovieID) references Movie(MovieID)
+);
+
+
+
+
+--select * from Review;
+--select * from Movie;
+select * from Collections;
+select * from MovieCollection;
+
+
+--drop table MovieCollection;
+--drop table Collections;

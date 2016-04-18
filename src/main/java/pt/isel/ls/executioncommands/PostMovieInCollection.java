@@ -2,9 +2,11 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Parameters;
 import pt.isel.ls.linecommand.model.Path;
+import pt.isel.ls.printers.PrintMensage;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -17,6 +19,15 @@ import java.sql.SQLException;
 public class PostMovieInCollection implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Path path, Parameters parameters) throws SQLException {
-        return null;
+
+        int cid = path.getPathInt("cid");
+        int mid = parameters.getParamInt("mid");
+        String query = "insert into MovieCollection (CID, MovieID) values(?, ?)";
+        PreparedStatement ps = connection.prepareStatement(query);
+        AccessUtils.setValuesOnPreparedStatement(ps,cid, mid);
+        int res = ps.executeUpdate();
+        if(res > 0)
+            return new PrintMensage("The movie with id = " + mid + " was added with sucess to the collection");
+        return new PrintMensage("Could't post the movie in the especified collection");
     }
 }
