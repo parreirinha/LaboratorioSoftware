@@ -1,4 +1,5 @@
-use ls
+use ls;
+
 insert into Movie (MovieName, MovieRelease, OneStar, TwoStar, TreeStar, FourStar, FiveStar) 
 	select 'Fight Club', 1999, 20, 10, 15, 50, 32 union all 
 	select 'Seven', 1995, 5, 20, 40, 35, 22 union all 
@@ -16,3 +17,19 @@ insert into Review (MovieID,ReviewerName, ReviewSummary,ReviewComplete,ReviewRat
         select 3, 'IT guy', 'interesting concept', 'In a futuristic world some heroes battles the forces of evil in a cybernetic world',3 union all 
         select 4, 'Manel', 'Film of the year candidate', 'Interesting concept movie about dreams hunters',5;
         
+
+
+insert into Collections (Name, Description) 
+	select 'STARWARS','serie de filmes da saga starwars' union all
+	select 'Before 2000','movies before 2000' union all
+	select 'movies after 2000', 'movies from this century';
+
+insert into MovieCollection (CID, MovieID)
+	select 2, 1 union all
+	select 2, 2 union all
+	select 2, 3 union all
+	select 1, 4 union all
+	select 2, 5 union all
+	select 2, 6 union all
+	select 2, 7 ;
+
