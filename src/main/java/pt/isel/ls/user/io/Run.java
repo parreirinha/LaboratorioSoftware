@@ -57,11 +57,11 @@ public class Run {
     private String identifyOutputFormat(Command command, Printable p) {
         String format = command.getHeaders().getHeadersString("text");
         if (format.equals("text")) {
-            //return p.toStringText();
-            return null;
+            return p.toStringText();
+
         } else {
-            //return p.toStringHtml();
-            return null;
+            return p.toStringHtml();
+
         }
     }
 

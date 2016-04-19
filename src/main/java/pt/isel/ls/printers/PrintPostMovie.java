@@ -19,7 +19,7 @@ public class PrintPostMovie implements Printable {
     }
 
     @Override
-    public String toStringHtml(String[] head) {
+    public String toStringHtml() {
         return null;
     }
 }

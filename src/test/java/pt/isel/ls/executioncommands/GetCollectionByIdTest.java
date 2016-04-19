@@ -46,7 +46,7 @@ public class GetCollectionByIdTest {
         input = new String[] {"GET", "/collections/1"};
         command = new CommandGetter().getCommand(input);
         //TODO - falta fazer o método
-        result = exe.execute(connection, command).toStringResult();
+        result = exe.execute(connection, command).toStringText();
         expected = "";
         assertEquals(expected, result);
     }

@@ -7,6 +7,6 @@ package pt.isel.ls.printers;
 public interface Printable {
 
     public String toStringText();
-    public String toStringHtml(String[] head);
+    public String toStringHtml();
 
 }

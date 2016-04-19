@@ -35,7 +35,7 @@ public class PrintDetailedReview implements  Printable{
     }
 
     @Override
-    public String toStringHtml(String[] head) {
+    public String toStringHtml() {
         return null;
     }
 }

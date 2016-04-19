@@ -45,7 +45,7 @@ public class PostCollectionTest {
     public void insertAValidCollection() throws SQLException {
         input = new String[] {"POST", "/collections", "name=Rocky&description=movies about boxe"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringResult();
+        result = exe.execute(connection, command).toStringText();
         expected = "Collection posted with success, the id of the new collection is 4";
         assertEquals(expected, result);
     }

@@ -36,7 +36,7 @@ public class PrintMovieRating implements Printable {
     }
 
     @Override
-    public String toStringHtml(String[] head) {
+    public String toStringHtml() {
         return null;
     }
 }

@@ -1,7 +1,5 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.printers.Printable;
-
 /**
  * Created by Dani on 13-04-2016.
  */
@@ -12,7 +10,7 @@ public class PrintExit implements Printable {
     }
 
     @Override
-    public String toStringHtml(String[] head) {
+    public String toStringHtml() {
         return null;
     }
 }
