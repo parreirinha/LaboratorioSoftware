@@ -52,7 +52,7 @@ public class GetAllMoviesTest {
         connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies"};
         command = new CommandGetter().getCommand(input);
-        result = getAllMovies.execute(connection, command).toStringResult();
+        result = getAllMovies.execute(connection, command).toStringText();
         expected = getAllMoviesString();
         assertEquals(expected, result);
     }

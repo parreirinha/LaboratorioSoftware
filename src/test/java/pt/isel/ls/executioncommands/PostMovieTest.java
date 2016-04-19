@@ -43,7 +43,7 @@ public class PostMovieTest {
 
         input = new String[]{"POST", "/movies", "title=Big Fish&releaseYear=2003"};
         command = new CommandGetter().getCommand(input);
-        result = postMovie.execute(connection, command).toStringResult();
+        result = postMovie.execute(connection, command).toStringText();
         expected = "The ID of the new movie is: 8";
         assertEquals(expected, result);
     }
@@ -53,7 +53,7 @@ public class PostMovieTest {
     public void  postInvalidMovie() throws SQLException {
         input = new String[]{"POST", "/movies", "title=Fight Club&releaseYear=1999"};
         linecommand = new CommandGetter().getCommand(input);
-        result = postMovie.execute(connection, linecommand.getPath(),linecommand.getHeaders()).toStringResult();
+        result = postMovie.execute(connection, linecommand.getPath(),linecommand.getHeaders()).toStringText();
         expected =  "something went wrong!!\n";
         assertEquals(expected, result);
 

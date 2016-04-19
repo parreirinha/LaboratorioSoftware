@@ -43,7 +43,7 @@ public class GetTopMovieWithHigherReviewCountTest {
         connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"GET","/tops/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
-        result = getTopMovieWithHigherReviewCount.execute(connection, command).toStringResult();
+        result = getTopMovieWithHigherReviewCount.execute(connection, command).toStringText();
         expected = getTopMovieWithHihgerReviewCountString();
         assertEquals(expected, result);
     }

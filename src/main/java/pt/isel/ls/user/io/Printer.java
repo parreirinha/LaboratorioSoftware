@@ -11,7 +11,6 @@ public class Printer {
 
         if(out != null)
         System.out.println(out);
-
         else
             System.out.println("Error: Couldn't print result.");
     }

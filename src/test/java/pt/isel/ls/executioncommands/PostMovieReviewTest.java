@@ -55,7 +55,7 @@ public class PostMovieReviewTest {
         connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"POST", "/movies/1/reviews", "reviewerName=Chico&reviewSummary=espectaculo&review=eish filme do catano&rating=5"};
         command = new CommandGetter().getCommand(input);
-        result = postMovieReview.execute(connection, command).toStringResult();
+        result = postMovieReview.execute(connection, command).toStringText();
         expected = "Review ID is: 10";
         assertEquals(expected, result);
 

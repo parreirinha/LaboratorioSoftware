@@ -52,7 +52,7 @@ public class GetMovieRatingTest {
         connection = new ConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies/6/ratings"};
         command = new CommandGetter().getCommand(input);
-        result = getMovieRating.execute(connection, command).toStringResult();
+        result = getMovieRating.execute(connection, command).toStringText();
         expected = "The average rating for the movie with the ID 6 is 4.097.\n\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n";
         assertEquals(expected, result);
     }

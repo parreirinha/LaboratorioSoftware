@@ -42,6 +42,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
         Collection<Movie> res = new ArrayList<Movie>();
         while (rs.next())
             res.add(new Movie(
+                    //TODO falta completar o id correcto. está a preencher com default = 0
                     rs.getString(2),
                     rs.getInt(3)
             ));

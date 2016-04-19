@@ -22,7 +22,7 @@ public class PrintReview implements Printable {
      * @return
      */
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         String s ="";
         for (Review r: reviews) {
             s += "Review ID = " + r.getReviewID() +
@@ -31,7 +31,12 @@ public class PrintReview implements Printable {
                     "\n\tSummary Review = " + r.getReviewSummary() +
                     "\n";
         }
-        return (s == "") ? new PrintError("something went wrong!!\n").toStringResult() : s;
+        return (s == "") ? new PrintError("something went wrong!!\n").toStringText() : s;
+    }
+
+    @Override
+    public String toStringHtml(String[] head) {
+        return null;
     }
 
 

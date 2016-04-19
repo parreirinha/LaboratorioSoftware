@@ -22,7 +22,7 @@ public class PrintMovie implements Printable {
      * @return
      */
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         String s = "";
         for (Movie m:movieCollection) {
             s +=    "Movie ID = " + m.getMovieID()+
@@ -30,6 +30,11 @@ public class PrintMovie implements Printable {
                     "\tRelease = " + m.getMovieRelease()+
                     "\n";
         }
-        return (s == "") ? new PrintError("something went wrong!!\n").toStringResult() : s;
+        return (s == "") ? new PrintError("something went wrong!!\n").toStringText() : s;
+    }
+
+    @Override
+    public String toStringHtml(String[] head) {
+        return null;
     }
 }
