@@ -70,7 +70,7 @@ public class Run {
         if (filename != null) {
             new Printer().printResult(out);
         } else {
-            new FileWriter().writeToFile(out, "filename");
+            new Writer().writeToFile(out, "filename");
         }
     }
 
