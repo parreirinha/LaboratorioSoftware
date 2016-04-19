@@ -4,6 +4,8 @@ import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.printers.Printable;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -13,29 +15,29 @@ import java.sql.SQLException;
 public class Run {
     private Connection conn;
     Command command;
+
     public void RunApp(String[] args) {
         try {
             command = new CommandGetter().getCommand(args);
             conn = new ConnectionFactory().getNewConnection();
             conn.setAutoCommit(false);
 
-            new Printer().printResult(new CommandMapper()
+            identifyOutputType(command, identifyOutputFormat(command, new CommandMapper()
                     .getExecutionCommandInstance(command)
-                    .execute(conn, command)
-            );
+                    .execute(conn, command)));
 
         } catch (SQLException e) {
             tryRollback(conn);
             e.printStackTrace();
         } finally {
-          tryClose(conn);
+            tryClose(conn);
         }
     }
 
-    private void tryClose(Connection conn){
+    private void tryClose(Connection conn) {
         try {
-            if(conn!=null){
-            conn.close();
+            if (conn != null) {
+                conn.close();
             }
         } catch (SQLException e) {
             System.out.println("Error: Database Access Error.");
@@ -49,6 +51,26 @@ public class Run {
         } catch (SQLException e) {
             System.out.println("Error: Database Access Error.");
             e.printStackTrace();
+        }
+    }
+
+    private String identifyOutputFormat(Command command, Printable p) {
+        String format = command.getHeaders().getHeadersString("text");
+        if (format.equals("text")) {
+            //return p.toStringText();
+            return null;
+        } else {
+            //return p.toStringHtml();
+            return null;
+        }
+    }
+
+    private void identifyOutputType(Command command, String out) {
+        String filename = command.getHeaders().getHeadersString("file-name");
+        if (filename != null) {
+            new Printer().printResult(out);
+        } else {
+            new FileWriter().writeToFile(out, "filename");
         }
     }
 
