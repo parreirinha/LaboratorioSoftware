@@ -35,11 +35,11 @@ public class CommandMapper {
         commmandMap.put("GETtopsnratingsloweraverage", new GetTopNRatingsLowerAverage());
         commmandMap.put("GETtopsreviewshighercount", new GetTopMovieWithHigherReviewCount());
         commmandMap.put("GETtopsnreviewshighercount", new GetTopNMoviesWithHigherReviewCount());
-        commmandMap.put("POSTcollections", null);
-        commmandMap.put("GETcollections", null);
-        commmandMap.put("GETcollectionscid", null);
-        commmandMap.put("POSTcollectionscidmovie", null);
-        commmandMap.put("DELETEcollectionscidmoviesmid", null);
+        commmandMap.put("POSTcollections", new PostCollection());
+        commmandMap.put("GETcollections", new GetCollections());
+        commmandMap.put("GETcollectionscid", new GetCollectionById());
+        commmandMap.put("POSTcollectionscidmovie", new PostMovieInCollection());
+        commmandMap.put("DELETEcollectionscidmoviesmid", new DeleteMovieFromCollection());
         commmandMap.put("OPTION", new Option());
         commmandMap.put("EXIT", new Exit());
         commmandMap.put("", new InteractiveMode());
