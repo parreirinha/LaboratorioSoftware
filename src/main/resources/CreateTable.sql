@@ -1,7 +1,7 @@
---use ls;
+use ls;
 
 
-use ls_tests
+--use ls_tests
 create table Movie
 (
 	MovieID integer identity(1, 1),
