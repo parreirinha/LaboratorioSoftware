@@ -5,58 +5,105 @@ import pt.isel.ls.linecommand.model.Path;
 import java.util.HashMap;
 
 /**
- * Class used to process a path string and generate the
- * correspondent Path instance.
+ * Class responsible to create a new Path instance from the
+ * path string given in the command line.
  */
 public class PathGetter {
     private String[] pathParts;
-    private String cleanPath;
+    private String cleanPath="";
     private HashMap<String, Integer> pathIntegers;
 
-    public PathGetter(){
-        cleanPath = "";
-        pathIntegers = new HashMap<String, Integer>();
-    }
+    private final String[][] PathTemplateContainer = {
+            {"movies", "{mid}"},
+            {"movies"},
+            {"movies", "{mid}", "ratings"},
+            {"movies", "{mid}", "reviews"},
+            {"movies", "{mid}", "reviews", "{rid}"},
+            {"tops", "ratings", "higher", "average"},
+            {"tops", "{n}", "ratings", "higher", "average"},
+            {"tops", "ratings", "lower", "average"},
+            {"tops", "{n}", "ratings", "lower", "average"},
+            {"tops", "reviews", "higher", "count"},
+            {"tops", "{n}", "reviews", "higher", "count"},
+            {"collections"},
+            {"collections", "{cid}"},
+            {"collections", "{cid}", "movies"},
+            {"collections", "{cid}", "movies", "{mid}"}
+    };
 
-    public Path getPath(String path){
+    public Path getPath(String path) {
+        if (!path.equals("")) {
+            pathParts = path.split("/");
+            pathParts = cleanFirstPositionOfStringArray(pathParts);
 
-        pathParts = path.split("/");
-
-        if(path!="")
-        for(int i = 0; i < pathParts.length; ++i) {
-            if (!isAllDigits(pathParts[i]))
-                cleanPath += pathParts[i];
-            else{
-                if(i>0) {
-                    String key="";
-                    if (pathParts[i - 1].equals("movies"))
-                        key = "mid";
-
-                    if (pathParts[i - 1].equals("reviews"))
-                        key = "rid";
-
-                    if (pathParts[i - 1].equals("tops"))
-                        key = "n";
-
-                    if (pathParts[i - 1].equals("collections"))
-                        key = "cid";
-
-                    cleanPath += key;
-                    pathIntegers.put(key, Integer.parseInt(pathParts[i]));
+            for (int i = 0; i < PathTemplateContainer.length; ++i) {
+                if (pathTemplateComparator(pathParts, PathTemplateContainer[i])) {
+                    cleanPath = getStringFromPathTemplate(PathTemplateContainer[i]);
+                    pathIntegers = putIdsInPathMap(pathParts, PathTemplateContainer[i]);
+                    break;
                 }
             }
         }
-
         return new Path(cleanPath, pathIntegers);
     }
 
-    static boolean isAllDigits(String pathPart){
-        boolean itIs = true;
-
-        for(int i = 0; i < pathPart.length(); ++i){
-            if(pathPart.charAt(i) < '0' || pathPart.charAt(i) > '9')
-                itIs = false;
+    private HashMap<String, Integer> putIdsInPathMap(String[] pathParts, String[] template) {
+        HashMap<String, Integer> map = new HashMap<>();
+        int size = pathParts.length;
+        for (int i = 0; i < size; ++i) {
+            if (isPathVariable(template[i])) {
+                map.put(cleanPathPart(template[i]), Integer.parseInt(pathParts[i]));
+            }
         }
-        return itIs;
+        return map;
     }
+
+    private String[] cleanFirstPositionOfStringArray(String[] pathParts) {
+        String[] aux = new String[pathParts.length - 1];
+        for (int i = 0; i < aux.length; ++i) {
+            aux[i] = pathParts[i + 1];
+        }
+        return aux;
+    }
+
+    private String getStringFromPathTemplate(String[] strings) {
+        String s = "";
+        for (int i = 0; i < strings.length; ++i) {
+            if (isPathVariable(strings[i])) {
+                s += cleanPathPart(strings[i]);
+            } else {
+                s += strings[i];
+            }
+        }
+        return s;
+    }
+
+    private String cleanPathPart(String string) {
+        String s = "";
+        for (int i = 1; i < string.length() - 1; ++i) {
+            s += string.charAt(i);
+        }
+        return s;
+    }
+
+    private boolean pathTemplateComparator(String[] path, String[] template) {
+        int size = path.length;
+        if (size != template.length) {
+            return false;
+        }
+        boolean isSamePath = true;
+        for (int i = 0; i < size; ++i) {
+            if (!path[i].equals(template[i]) && !isPathVariable(template[i])) {
+                isSamePath = false;
+                break;
+            }
+        }
+
+        return isSamePath;
+    }
+
+    private boolean isPathVariable(String s) {
+        return s.charAt(0) == '{' && s.charAt(s.length() - 1) == '}';
+    }
+
 }

@@ -33,8 +33,11 @@ public class CommandMapperTests {
     private final String[] postCollection = {"POST", "/collections/", "name=Star+Wars&description=All six star wars movies."};
     private final String[] getCollections = {"GET", "/collections/"};
     private final String[] getCollection = {"GET", "/collections/10"};
-    private final String[] addMovieToCollection = {"GET", "/collections/10", "mid=123"};
+    private final String[] addMovieToCollection = {"POST", "/collections/10/movies", "mid=123"};
     private final String[] deleteMovieFromCollection = {"DELETE", "/collections/10/movies/123"};
+    private final String[] Option = {"OPTION"};
+    private final String[] Exit = {"EXIT"};
+    private final String[] InteractiveMode = {""};
 
     CommandMapper map = new CommandMapper();
 
@@ -110,4 +113,51 @@ public class CommandMapperTests {
 
     }
 
+    @Test
+    public void GetCollectionsTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getCollections)) instanceof GetCollections);
+
+    }
+
+    @Test
+    public void GetCollectionTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getCollection)) instanceof GetCollectionById);
+
+    }
+
+    @Test
+    public void AddMovieToCollectionTest() {
+        assertTrue( map.getExecutionCommandInstance(new CommandGetter().getCommand(addMovieToCollection)) instanceof PostMovieInCollection);
+
+    }
+
+    @Test
+    public void PostCollectionTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(postCollection)) instanceof PostCollection);
+
+    }
+
+    @Test
+    public void deleteMovieFromCollectionTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(deleteMovieFromCollection)) instanceof DeleteMovieFromCollection);
+
+    }
+
+    @Test
+    public void exitTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(Exit)) instanceof Exit);
+
+    }
+
+    @Test
+    public void optionTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(Option)) instanceof Option);
+
+    }
+
+    @Test
+    public void interactiveModeTest() {
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(InteractiveMode)) instanceof InteractiveMode);
+
+    }
 }

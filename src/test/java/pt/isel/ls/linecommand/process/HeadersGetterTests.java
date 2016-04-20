@@ -11,6 +11,12 @@ import static org.junit.Assert.assertEquals;
 public class HeadersGetterTests {
     private final String OneArgHeaders = "accept:text/html";
     private final String TwoArgsHeaders = "accept:text/plain|accept-language:en-gb";
+    private final String FileNameHeader = "file-name:newfilename";
+
+    @Test
+    public  void filenameHeadersTest(){
+        assertEquals("newfilename" ,new HeadersGetter().getHeaders(FileNameHeader).getHeadersString("file-name"));
+    }
 
     @Test
     public  void noHeadersArgumentTest(){

@@ -16,7 +16,7 @@ public class PrintGetCollections implements Printable {
     }
 
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         String s = "";
         for (pt.isel.ls.model.Collections collection:col) {
             s +=    "\nCollection id = " + collection.getCollectionID() +
@@ -25,5 +25,10 @@ public class PrintGetCollections implements Printable {
                     "\nDate of creation = " +collection.getCreationDate();
         }
         return s + "\n";
+    }
+
+    @Override
+    public String toStringHtml() {
+        return null;
     }
 }

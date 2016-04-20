@@ -14,7 +14,12 @@ public class PrintError implements Printable
         this.str = str;
     }
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         return str;
+    }
+
+    @Override
+    public String toStringHtml() {
+        return null;
     }
 }

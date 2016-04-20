@@ -22,7 +22,7 @@ public class PrintMovieRating implements Printable {
      * @return
      */
     @Override
-    public String toStringResult() {
+    public String toStringText() {
         String str = "";
         for(Movie m : movie)
             str += "The average rating for the movie with the ID " + m.getMovieID() +
@@ -32,6 +32,11 @@ public class PrintMovieRating implements Printable {
                     "   *** = " + m.getThreeStar()+
                     "   **** = " + m.getFourStar() +
                     "   ***** = " + m.getFiveStar() + "\n";
-        return (str == "") ? new PrintError("something went wrong!!\n").toStringResult() : str;
+        return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
+    }
+
+    @Override
+    public String toStringHtml() {
+        return null;
     }
 }

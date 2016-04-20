@@ -22,20 +22,25 @@ public class PrintGetCollectionsById implements Printable {
 
 
     @Override
-    public String toStringResult() {
-
+    public String toStringText() {
         String s =
                 "\nCollection id: " + movieCollection.getCollections().getCollectionID() +
-                "\nCollection name: " + movieCollection.getCollections().getName() +
-                "\nCollection description: " + movieCollection.getCollections().getDescription() +
-                "\nCollection creation date: " + movieCollection.getCollections().getCreationDate() +
-                "\n\nMovies in the collection:";
+                        "\nCollection name: " + movieCollection.getCollections().getName() +
+                        "\nCollection description: " + movieCollection.getCollections().getDescription() +
+                        "\nCollection creation date: " + movieCollection.getCollections().getCreationDate() +
+                        "\n\nMovies in the collection:";
         for (Movie movie : movieCollection.getMovies()) {
             s +=
-                "\nMovie id: " + movie.getMovieID() +
-                "\nMovie name: " + movie.getMovieName() +
-                "\nDate of insertion in the collection: " + movie.getDate();
+                    "\nMovie id: " + movie.getMovieID() +
+                            "\nMovie name: " + movie.getMovieName() +
+                            "\nDate of insertion in the collection: " + movie.getDate();
         }
         return s+"\n";
+    }
+
+    @Override
+    public String toStringHtml() {
+        //TODO
+        return null;
     }
 }
