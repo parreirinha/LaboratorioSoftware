@@ -50,7 +50,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
     }
 
     private String getTop2MoviesWithHihgerReviewCountString() {
-        return "Movie ID = 0\n\tName = Fight Club\tRelease = 1999\n" +
-                "Movie ID = 0\n\tName = Seven\tRelease = 1995\n";
+        return "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n" +
+                "Movie ID = 2\n\tName = Seven\tRelease = 1995\n";
     }
 }

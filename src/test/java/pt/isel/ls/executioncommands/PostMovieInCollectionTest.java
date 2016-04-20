@@ -41,10 +41,10 @@ public class PostMovieInCollectionTest {
         connection.close();
     }
 
-    //TODO erro - falar com o daniel
+
     @Test
     public void insertMovieInCollection() throws SQLException {
-        input = new String[] {"POST", "/collections/1/movies/", "1"};
+        input = new String[] {"POST", "/collections/1/movies/", "mid=1"};
         command = new CommandGetter().getCommand(input);
         result = exe.execute(connection, command).toStringResult();
         expected = "The movie with id = 1 was added with sucess to the collection";

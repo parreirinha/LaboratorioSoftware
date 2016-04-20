@@ -1,5 +1,7 @@
 package pt.isel.ls.model;
 
+import java.sql.Date;
+
 /**
  * Class whose instances are used to represent a model of a movie.
  */
@@ -9,6 +11,13 @@ public class Movie {
     public String movieName;
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
     private float average;
+    private Date date;
+
+    public Movie(int id, String name, Date date){
+        movieID = id;
+        movieName = name;
+        this.date = date;
+    }
     
     public Movie(int id, String movieName, int release, int[] stars) {
         this.movieID = id;
@@ -42,7 +51,7 @@ public class Movie {
         movieRelease = date;
     }
 
-    public Movie(int id,int[] stars, float avge) {
+    public Movie(int id, int[] stars, float avge) {
         movieID = id;
         this.oneStar = stars[0];
         this.twoStar = stars[1];
@@ -95,5 +104,9 @@ public class Movie {
 
     public float getAverage() {
         return average;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }
