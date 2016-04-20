@@ -2,6 +2,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
+import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -24,16 +25,17 @@ public class GetTopMovieWithHigherReviewCount implements CommandExecution {
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
-        String query = "select top 1 * from Movie as M\n" +
-                "inner join(\n" +
+        String query = "select top 1 * from (\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
-                "group by R.MovieID)as T\n" +
-                "on M.MovieID = T.MovieID\n" +
-                "order by M.MovieID";
+                "group by R.MovieID) as ct\n" +
+                "inner join Movie as M\n" +
+                "on\n" +
+                "M.MovieId = ct.MovieID\n" +
+                "order by c desc ";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
-        return new PrintDetailedMovie(res);
+        return new PrintMovie(res);
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
@@ -41,10 +43,9 @@ public class GetTopMovieWithHigherReviewCount implements CommandExecution {
         while (rs.next())
         {
             res.add(new Movie(
-                    rs.getInt(1),
-                    rs.getString(2),
                     rs.getInt(3),
-                    AccessUtils.returnArrayStarsGivenAResultSet(rs)
+                    rs.getString(4),
+                    rs.getInt(5)
             ));
         }
         return res;
