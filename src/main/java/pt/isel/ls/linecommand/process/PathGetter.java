@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class PathGetter {
     private String[] pathParts;
-    private String cleanPath;
+    private String cleanPath="";
     private HashMap<String, Integer> pathIntegers;
 
     private final String[][] PathTemplateContainer = {
@@ -32,15 +32,16 @@ public class PathGetter {
     };
 
     public Path getPath(String path) {
+        if (!path.equals("")) {
+            pathParts = path.split("/");
+            pathParts = cleanFirstPositionOfStringArray(pathParts);
 
-        pathParts = path.split("/");
-        pathParts = cleanFirstPositionOfStringArray(pathParts);
-
-        for (int i = 0; i < PathTemplateContainer.length; ++i) {
-            if (pathTemplateComparator(pathParts, PathTemplateContainer[i])) {
-                cleanPath = getStringFromPathTemplate(PathTemplateContainer[i]);
-                pathIntegers = putIdsInPathMap(pathParts, PathTemplateContainer[i]);
-                break;
+            for (int i = 0; i < PathTemplateContainer.length; ++i) {
+                if (pathTemplateComparator(pathParts, PathTemplateContainer[i])) {
+                    cleanPath = getStringFromPathTemplate(PathTemplateContainer[i]);
+                    pathIntegers = putIdsInPathMap(pathParts, PathTemplateContainer[i]);
+                    break;
+                }
             }
         }
         return new Path(cleanPath, pathIntegers);
