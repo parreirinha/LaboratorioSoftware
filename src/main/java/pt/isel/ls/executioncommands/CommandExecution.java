@@ -16,3 +16,5 @@ public interface CommandExecution {
 
     public Printable execute(Connection connection, Command command) throws SQLException;
 }
+
+//TODO Não esquecer criar a hierarquia de excepções!!!!

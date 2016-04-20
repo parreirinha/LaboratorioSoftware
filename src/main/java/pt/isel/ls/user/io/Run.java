@@ -55,22 +55,21 @@ public class Run {
     }
 
     private String identifyOutputFormat(Command command, Printable p) {
-        String format = command.getHeaders().getHeadersString("text");
-        if (format.equals("text")) {
+        String format = command.getHeaders().getHeadersString("access");
+        if (format != null && format.equals("text/plain")) {
             return p.toStringText();
-
         } else {
             return p.toStringHtml();
-
         }
     }
 
     private void identifyOutputType(Command command, String out) {
         String filename = command.getHeaders().getHeadersString("file-name");
-        if (filename != null) {
+
+        if (filename == null) {
             new Printer().printResult(out);
         } else {
-            new Writer().writeToFile(out, "filename");
+            new Writer().writeToFile(out, filename);
         }
     }
 

@@ -41,6 +41,10 @@ public class PostMovieInCollectionTest {
         connection.close();
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0ded0cca91a503832f754778d84b91087a998662
     @Test
     public void insertMovieInCollection() throws SQLException {
         input = new String[] {"POST", "/collections/1/movies/", "mid=1"};

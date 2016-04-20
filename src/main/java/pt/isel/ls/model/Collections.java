@@ -1,18 +1,21 @@
 package pt.isel.ls.model;
 
+import java.sql.Date;
+
 /**
  * Created by fabio on 17-Apr-16.
  */
 public class Collections {
 
     private int collectionID;
-    private String name, description, creationDate;
+    private String name, description;
 
-    public Collections(int id, String name, String desc, String date){
+
+    public Collections(int id, String name, String desc, Date date){
         collectionID = id;
         this.name = name;
         description = desc;
-        creationDate = date;
+
     }
 
     public int getCollectionID() {
@@ -27,7 +30,4 @@ public class Collections {
         return description;
     }
 
-    public String getCreationDate() {
-        return creationDate;
-    }
 }

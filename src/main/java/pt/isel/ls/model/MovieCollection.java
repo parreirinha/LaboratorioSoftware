@@ -5,24 +5,22 @@ package pt.isel.ls.model;
  */
 public class MovieCollection {
 
-    private int movieID, collectionID;
-    private String addedDate;
+    private Movie[] movies;
+    private Collections collections;
 
-    public MovieCollection(int mid, int cid, String date){
-        movieID = mid;
-        collectionID = cid;
-        addedDate = date;
+
+    public MovieCollection(Movie[] movies, Collections collections){
+
+        this.movies = movies;
+        this.collections = collections;
     }
 
-    public int getMovieID() {
-        return movieID;
+
+    public Movie[] getMovies() {
+        return movies;
     }
 
-    public int getCollectionID() {
-        return collectionID;
-    }
-
-    public String getAddedDate() {
-        return addedDate;
+    public Collections getCollections() {
+        return collections;
     }
 }

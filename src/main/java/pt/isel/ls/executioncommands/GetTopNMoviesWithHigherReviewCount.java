@@ -19,18 +19,20 @@ import java.util.Collection;
  * returns a list with the n movies with higher review count.
  */
 public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
+
     /**
      * @param connection
      * @param command
      */
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
-        String query = "select top (?) * from Movie as M\n" +
-                "inner join(\n" +
+        String query = "select top (?) * from (\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
-                "group by R.MovieID)as T\n" +
-                "on M.MovieID = T.MovieID\n" +
-                "order by M.MovieID";
+                "group by R.MovieID) as ct\n" +
+                "inner join Movie as M\n" +
+                "on\n" +
+                "M.MovieId = ct.MovieID\n" +
+                "order by c desc";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, command.getPath().getPathInt("n"));
         ResultSet rs = ps.executeQuery();
@@ -42,9 +44,9 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
         Collection<Movie> res = new ArrayList<Movie>();
         while (rs.next())
             res.add(new Movie(
-                    //TODO falta completar o id correcto. está a preencher com default = 0
-                    rs.getString(2),
-                    rs.getInt(3)
+                    rs.getInt(3),
+                    rs.getString(4),
+                    rs.getInt(5)
             ));
         return res;
     }

@@ -13,6 +13,27 @@ public class ParamGetterTests {
     private final String movieNameAndYear = "title=pulp+fiction&releaseYear=1994";
     private final String reviewFullParams = "reviewerName=Michael+Java&reviewSummary=This is a software test!&" +
             "review=Really, I mean it, it was a good movie but this is only a software test dude!&rating=5";
+    private final String skipAndTopParams = "skip=6&top=3";
+    private final String sortByYear = "sortBy=year";
+    private final String sortByTitleDesc = "sortBy=titleDesc";
+
+    @Test
+    public void sortByDescAsParamTest(){
+        assertEquals("titleDesc", new ParamGetter().getParams(sortByTitleDesc).getParamString("sortBy"));
+
+    }
+
+    @Test
+    public void sortByAsParamTest(){
+        assertEquals("year", new ParamGetter().getParams(sortByYear).getParamString("sortBy"));
+
+    }
+
+    @Test
+    public void skipAndTopAsParamsTest(){
+        assertEquals(6, (int)new ParamGetter().getParams(skipAndTopParams).getParamInt("skip"));
+        assertEquals(3, (int)new ParamGetter().getParams(skipAndTopParams).getParamInt("top"));
+    }
 
     @Test
     public void onlyRatingAsParamTest(){

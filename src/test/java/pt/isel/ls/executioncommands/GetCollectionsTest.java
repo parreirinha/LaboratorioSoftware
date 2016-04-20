@@ -47,11 +47,8 @@ public class GetCollectionsTest  {
         result = exe.execute(connection, command).toStringText();
         expected =
             "\nCollection id = 1\nName = STARWARS\nDescription = serie de filmes da saga starwars" +
-                    "\nDate of creation = 2016-04-18" +
             "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000" +
-                    "\nDate of creation = 2016-04-18" +
             "\nCollection id = 3\nName = movies after 2000\nDescription = movies from this century" +
-                    "\nDate of creation = 2016-04-18" +
             "\n";
         assertEquals(expected, result);
     }

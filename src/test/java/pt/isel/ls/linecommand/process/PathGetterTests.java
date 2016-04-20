@@ -1,6 +1,7 @@
 package pt.isel.ls.linecommand.process;
 
 import org.junit.Test;
+import pt.isel.ls.linecommand.model.Path;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
@@ -22,6 +23,44 @@ public class PathGetterTests {
     private final String topsNRatingsLowerAveragePath = "/tops/10/ratings/lower/average";
     private final String topsReviewsHigherCountPath = "/tops/reviews/higher/count";
     private final String topsNReviewsHigherCountPath = "/tops/10/reviews/higher/count";
+    private final String OnlyCollectionsPath = "/collections/";
+    private final String CollectionsAndCidPath ="/collections/10";
+    private final String CollectionsAndCidPathAndMoviesPath ="/collections/10/movies";
+    private final String CollectionsAndCidPathAndMoviesAndMidPath = "/collections/10/movies/123";
+    private final String EmptyPath = "";
+
+    @Test
+    public void emptyPathTest() {
+        Path p = new PathGetter().getPath(EmptyPath);
+        assertEquals("", p.getPathString());
+    }
+
+    @Test
+    public void collectionsAndCidAndMoviesAndMidPathTest() {
+        Path p = new PathGetter().getPath(CollectionsAndCidPathAndMoviesAndMidPath);
+        assertEquals("collectionscidmoviesmid", p.getPathString());
+        assertEquals(10, p.getPathInt("cid"));
+        assertEquals(123, p.getPathInt("mid"));
+    }
+
+    @Test
+    public void collectionsAndCidAndMoviesPathTest() {
+        Path p = new PathGetter().getPath(CollectionsAndCidPathAndMoviesPath);
+        assertEquals("collectionscidmovies", p.getPathString());
+        assertEquals(10, p.getPathInt("cid"));
+    }
+
+    @Test
+    public void collectionsAndCidPathTest() {
+        Path p = new PathGetter().getPath(CollectionsAndCidPath);
+        assertEquals("collectionscid", p.getPathString());
+        assertEquals(10, p.getPathInt("cid"));
+    }
+
+    @Test
+    public void onlyCollectionsStringPathTest() {
+        assertEquals("collections", new PathGetter().getPath(OnlyCollectionsPath).getPathString());
+    }
 
     @Test
     public void onlyMoviesStringPathTest() {

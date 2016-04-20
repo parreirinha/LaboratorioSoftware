@@ -19,7 +19,28 @@ public class CommandGetterTests {
     private final String[] GetCollectionWithPath = {"GET", "/collections/50/"};
     private final String[] PostCollectionWithPathAndParams = {"GET", "/collections/50/movies/", "mid=123"};
     private final String[] DeleteCollectionsWithPath = {"DELETE", "/collections/50/movies/123"};
+    private final String[] Exit = {"EXIT"};
+    private final String[] Option = {"OPTION"};
+    private final String[] InteractiveMode = {""};
 
+
+    @Test
+    public void IntModeTest() {
+        Command c = new CommandGetter().getCommand(InteractiveMode);
+        assertEquals("", c.getMethod().getMethod());
+    }
+
+    @Test
+    public void optionTest() {
+        Command c = new CommandGetter().getCommand(Exit);
+        assertEquals("EXIT", c.getMethod().getMethod());
+    }
+
+    @Test
+    public void exitTest() {
+        Command c = new CommandGetter().getCommand(Option);
+        assertEquals("OPTION", c.getMethod().getMethod());
+    }
 
     @Test
     public void getWithMethodAndPathTest() {
@@ -27,8 +48,6 @@ public class CommandGetterTests {
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("moviesmid", c.getPath().getPathString());
         assertEquals(123, (int) c.getPath().getPathInt("mid"));
-        assertNull(c.getHeaders());
-        assertNull(c.getParams());
     }
 
     @Test
@@ -56,7 +75,6 @@ public class CommandGetterTests {
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("movies", c.getPath().getPathString());
         assertEquals("text/html", c.getHeaders().getHeadersString("accept"));
-        assertNull(c.getParams());
     }
 
     @Test
@@ -65,7 +83,6 @@ public class CommandGetterTests {
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("movies", c.getPath().getPathString());
         assertEquals("year", c.getParams().getParamString("sortBy"));
-        assertNull(c.getHeaders());
     }
 
     @Test
@@ -74,8 +91,6 @@ public class CommandGetterTests {
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("collectionscid", c.getPath().getPathString());
         assertEquals(50, c.getPath().getPathInt("cid"));
-        assertNull(c.getHeaders());
-        assertNull(c.getParams());
     }
 
     @Test
@@ -84,7 +99,6 @@ public class CommandGetterTests {
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("collectionscidmovies", c.getPath().getPathString());
         assertEquals(50, c.getPath().getPathInt("cid"));
-        assertNull(c.getHeaders());
         assertEquals(123, c.getParams().getParamInt("mid"));
     }
 
@@ -95,7 +109,6 @@ public class CommandGetterTests {
         assertEquals("collectionscidmoviesmid", c.getPath().getPathString());
         assertEquals(50, c.getPath().getPathInt("cid"));
         assertEquals(123, c.getPath().getPathInt("mid"));
-        assertNull(c.getHeaders());
         assertEquals(50, c.getPath().getPathInt("cid"));
 
     }
