@@ -38,7 +38,7 @@ public class CommandMapper {
         commmandMap.put("POSTcollections", new PostCollection());
         commmandMap.put("GETcollections", new GetCollections());
         commmandMap.put("GETcollectionscid", new GetCollectionById());
-        commmandMap.put("POSTcollectionscidmovie", new PostMovieInCollection());
+        commmandMap.put("POSTcollectionscidmovies", new PostMovieInCollection());
         commmandMap.put("DELETEcollectionscidmoviesmid", new DeleteMovieFromCollection());
         commmandMap.put("OPTION", new Option());
         commmandMap.put("EXIT", new Exit());

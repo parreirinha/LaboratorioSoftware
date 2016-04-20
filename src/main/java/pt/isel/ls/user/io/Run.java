@@ -55,8 +55,8 @@ public class Run {
     }
 
     private String identifyOutputFormat(Command command, Printable p) {
-        String format = command.getHeaders().getHeadersString("text");
-        if (format.equals("text")) {
+        String format = command.getHeaders().getHeadersString("access");
+        if (format.equals("text/plain")) {
             return p.toStringText();
 
         } else {
