@@ -11,12 +11,10 @@ public class Movie {
     public String movieName;
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
     private float average;
-    private Date date;
 
-    public Movie(int id, String name, Date date){
+    public Movie(int id, String name){
         movieID = id;
         movieName = name;
-        this.date = date;
     }
     
     public Movie(int id, String movieName, int release, int[] stars) {
@@ -106,7 +104,5 @@ public class Movie {
         return average;
     }
 
-    public Date getDate() {
-        return date;
-    }
+
 }

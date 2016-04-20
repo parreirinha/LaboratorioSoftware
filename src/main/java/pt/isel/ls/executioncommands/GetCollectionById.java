@@ -28,6 +28,7 @@ public class GetCollectionById implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
 
+        //TODO erro rs está vazio fazer debug
         int collectionId = command.getPath().getPathInt("cid");
         String query =
             "select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName\n" +
@@ -46,7 +47,7 @@ public class GetCollectionById implements CommandExecution {
     private void setParametersForObjectMovieCollectionFromResultSet(ResultSet rs) throws SQLException {
         collections = new Collections(rs.getInt(1), rs.getString(4),rs.getString(5), rs.getDate(7));
         for(int i = 0; rs.next(); i++){
-            movies[i] = new Movie(rs.getInt(2), rs.getString(6), rs.getDate(3));
+            movies[i] = new Movie(rs.getInt(2), rs.getString(6));
         }
     }
 }

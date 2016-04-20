@@ -5,7 +5,7 @@ import java.util.Collection;
 
 
 /**
- * "\nCollection id = #\nName = #\nDescription = #\nDate of creation = #"; (NOTA: nao esquecer \n final)
+ * "\nCollection id = #\nName = #\nDescription = #"; (NOTA: nao esquecer \n final)
  */
 public class PrintGetCollections implements Printable {
 
@@ -21,8 +21,7 @@ public class PrintGetCollections implements Printable {
         for (pt.isel.ls.model.Collections collection:col) {
             s +=    "\nCollection id = " + collection.getCollectionID() +
                     "\nName = " + collection.getName() +
-                    "\nDescription = " + collection.getDescription() +
-                    "\nDate of creation = " +collection.getCreationDate();
+                    "\nDescription = " + collection.getDescription();
         }
         return s + "\n";
     }

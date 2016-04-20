@@ -14,10 +14,12 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * GET /collections
- * returns the list of collections, using the insertion order.
+ * POST /collections/{cid}/movies/
+ * adds a movie to the cid collection, given
+ *  mid - the movie unique identifier.
  */
-public class GetCollectionsTest  {
+public class PostMovieInCollectionTest {
+
 
     private Connection connection;
     private Command command;
@@ -25,8 +27,7 @@ public class GetCollectionsTest  {
     private String expected;
     private String result;
     private DataCreationTests dataTests = new DataCreationTests();
-    private GetCollections exe = new GetCollections();
-
+    private PostMovieInCollection exe = new PostMovieInCollection();
 
     @Before
     public void beforeTest() throws SQLException {
@@ -40,16 +41,16 @@ public class GetCollectionsTest  {
         connection.close();
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0ded0cca91a503832f754778d84b91087a998662
     @Test
-    public void someTest() throws SQLException {
-        input = new String[] {"POST", "/collections", "name=Rocky&description=movies about boxe"};
+    public void insertMovieInCollection() throws SQLException {
+        input = new String[] {"POST", "/collections/1/movies/", "mid=1"};
         command = new CommandGetter().getCommand(input);
         result = exe.execute(connection, command).toStringText();
-        expected =
-            "\nCollection id = 1\nName = STARWARS\nDescription = serie de filmes da saga starwars" +
-            "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000" +
-            "\nCollection id = 3\nName = movies after 2000\nDescription = movies from this century" +
-            "\n";
+        expected = "The movie with id = 1 was added with sucess to the collection";
         assertEquals(expected, result);
     }
 }

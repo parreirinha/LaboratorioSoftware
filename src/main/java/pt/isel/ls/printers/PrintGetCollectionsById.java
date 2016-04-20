@@ -9,7 +9,7 @@ import pt.isel.ls.model.MovieCollection;
  * \nCollection description: #
  * \nCollection creation date: #
  * \n\nMovies in the collection:
- * \nMovie id: #\nMovie name: #\nDate of insertion in the collection: #
+ * \nMovie id: #\nMovie name: #
  *
  */
 public class PrintGetCollectionsById implements Printable {
@@ -27,13 +27,9 @@ public class PrintGetCollectionsById implements Printable {
                 "\nCollection id: " + movieCollection.getCollections().getCollectionID() +
                         "\nCollection name: " + movieCollection.getCollections().getName() +
                         "\nCollection description: " + movieCollection.getCollections().getDescription() +
-                        "\nCollection creation date: " + movieCollection.getCollections().getCreationDate() +
                         "\n\nMovies in the collection:";
         for (Movie movie : movieCollection.getMovies()) {
-            s +=
-                    "\nMovie id: " + movie.getMovieID() +
-                            "\nMovie name: " + movie.getMovieName() +
-                            "\nDate of insertion in the collection: " + movie.getDate();
+            s += "\nMovie id: " + movie.getMovieID() + "\nMovie name: " + movie.getMovieName();
         }
         return s+"\n";
     }

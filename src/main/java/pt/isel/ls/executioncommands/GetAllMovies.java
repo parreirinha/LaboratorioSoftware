@@ -32,8 +32,7 @@ public class GetAllMovies implements CommandExecution {
         {
             res.add(new Movie(
                     rs.getInt(1),
-                    rs.getString(2),
-                    rs.getDate(3)
+                    rs.getString(2)
              ));
         }
         return res;

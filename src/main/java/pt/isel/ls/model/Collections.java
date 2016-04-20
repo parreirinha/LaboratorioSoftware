@@ -9,13 +9,13 @@ public class Collections {
 
     private int collectionID;
     private String name, description;
-    private Date date;
+
 
     public Collections(int id, String name, String desc, Date date){
         collectionID = id;
         this.name = name;
         description = desc;
-        this.date = date;
+
     }
 
     public int getCollectionID() {
@@ -30,7 +30,4 @@ public class Collections {
         return description;
     }
 
-    public Date getCreationDate() {
-        return date;
-    }
 }
