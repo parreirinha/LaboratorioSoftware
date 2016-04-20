@@ -40,7 +40,7 @@ public class GetCollectionByIdTest {
         dataTests.dropTables();
         connection.close();
     }
-
+/*
     @Test
     public void someTest() throws SQLException {
         input = new String[] {"GET", "/collections/1"};
@@ -50,4 +50,5 @@ public class GetCollectionByIdTest {
         expected = "";
         assertEquals(expected, result);
     }
+    */
 }
