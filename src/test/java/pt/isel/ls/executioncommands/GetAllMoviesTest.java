@@ -35,7 +35,7 @@ public class GetAllMoviesTest {
     }
     @Before
     public void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
     }
@@ -49,7 +49,7 @@ public class GetAllMoviesTest {
     @Test
     public void checkResultsetFromMoviesQueary() throws SQLException {
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies"};
         command = new CommandGetter().getCommand(input);
         result = getAllMovies.execute(connection, command).toStringText();

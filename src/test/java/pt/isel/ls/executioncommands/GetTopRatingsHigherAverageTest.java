@@ -32,7 +32,7 @@ public class GetTopRatingsHigherAverageTest {
 
     @Before
     public void initConnectionAndDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
@@ -40,7 +40,7 @@ public class GetTopRatingsHigherAverageTest {
 
     @Test
     public void checkResultsetGetTopRatingsHigherAverageTestQuery() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/tops/ratings/higher/average"};
         command = new CommandGetter().getCommand(input);
         result = getTopRatingsHigherAverage.execute(connection, command).toStringText();

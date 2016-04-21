@@ -35,7 +35,7 @@ public class PostMovieRatingTest {
     }
     @Before
     public void initConnectionAndDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();

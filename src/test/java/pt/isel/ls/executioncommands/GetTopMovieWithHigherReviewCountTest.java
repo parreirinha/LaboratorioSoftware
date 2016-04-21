@@ -32,7 +32,7 @@ public class GetTopMovieWithHigherReviewCountTest {
 
     @Before
     public void initConnectionAndDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
@@ -40,7 +40,7 @@ public class GetTopMovieWithHigherReviewCountTest {
 
     @Test
     public void checkResultsetGetTopNMoviesWithHigherReviewCountQuery() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET","/tops/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
         result = getTopMovieWithHigherReviewCount.execute(connection, command).toStringText();

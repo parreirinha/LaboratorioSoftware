@@ -6,6 +6,7 @@ import pt.isel.ls.linecommand.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.printers.Printable;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
