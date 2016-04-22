@@ -11,6 +11,6 @@ public class PrintExit implements Printable {
 
     @Override
     public String toStringHtml() {
-        return null;
+        return String.format(HtmlGenerator.template, "Exiting application. Thank you and good bye.");
     }
 }

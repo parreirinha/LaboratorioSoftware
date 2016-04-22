@@ -19,6 +19,6 @@ public class PrintPostMovieReview implements Printable {
 
     @Override
     public String toStringHtml() {
-        return null;
+        return String.format(HtmlGenerator.template, "Review ID is: " + id);
     }
 }

@@ -20,6 +20,7 @@ public class PrintPostMovie implements Printable {
 
     @Override
     public String toStringHtml() {
-        return null;
+        String str = "The ID of the new movie is: " + id;
+        return String.format(HtmlGenerator.template, str);
     }
 }

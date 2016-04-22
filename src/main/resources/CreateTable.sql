@@ -46,19 +46,19 @@ create table MovieCollection
 	foreign key (CID) references Collections (CollectionID),
 	foreign key (MovieID) references Movie(MovieID)
 );
-
+/*
 	select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName
 	from MovieCollection as MC 
 	inner join Collections as C on MC.CID = C.CollectionID
 	inner join Movie as M on M.MovieID = MC.MovieID
 	where CID = 1
 	
-
+	*/
 
 --select * from Review;
 --select * from Movie;
-select * from Collections;
-select * from MovieCollection;
+--select * from Collections;
+--select * from MovieCollection;
 
 
 --drop table MovieCollection;

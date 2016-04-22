@@ -6,8 +6,8 @@ package pt.isel.ls.printers;
  */
 public interface Printable
 {
-    /*
-    default public String getHead()
+/*
+    default public String getTemplate()
     {
         return "<!DOCTYPE>\n" +
                 "\t<html>\n" +
@@ -20,7 +20,7 @@ public interface Printable
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n\n" +
-                "\t\t\t%s" +
+                "%s" +
                 "\n" +
                 "\t\t</body>\n" +
                 "\t</html>";

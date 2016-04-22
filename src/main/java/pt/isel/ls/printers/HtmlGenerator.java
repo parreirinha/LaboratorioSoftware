@@ -12,7 +12,7 @@ import java.util.function.Function;
  */
 public class HtmlGenerator<T>
 {
-    private final static String s = "<!DOCTYPE>\n" +
+    public final static String template = "<!DOCTYPE>\n" +
             "\t<html>\n" +
             "\t\t<head>\n" +
             "\t\t\t<meta\n" +
@@ -23,7 +23,7 @@ public class HtmlGenerator<T>
             "\t\t</head>\n" +
             "\n" +
             "\t\t<body>\n" +
-            "\t\t\t%s" +
+            "%s" +
             "\n" +
             "\t\t</body>\n" +
             "\t</html>";
@@ -31,47 +31,47 @@ public class HtmlGenerator<T>
     public static <T> String htmlGenerate(Collection<T> col, String[] head, Function<T, String>[] func)
     {
         if(col.size() == 1)
-            return String.format(s, getText(col, head, func));
-        return String.format(s, getTable(col, head, func));
+            return String.format(template, getText(col, head, func));
+        return String.format(template, getTable(col, head, func));
     }
 
     private static <T> String getTable(Collection<T> col, String[] head, Function<T, String>[] func)
     {
-        String str = "<table border=\"1\" style=\"width:100%\">\n" + getHead(head);
+        String str = "\t\t\t<table border=\"1\" style=\"width:100%\">\n" + getHead(head);
         for(T t : col)
         {
-            str += "<tr>\n";
+            str += "\t\t\t\t<tr>\n";
             for(Function<T,String> f : func)
             {
-                str += "\t\t<td>"+f.apply(t)+"</td>\n";
+                str += "\t\t\t\t\t<td>"+f.apply(t)+"</td>\n";
             }
-            str += "</tr>\n";
+            str += "\t\t\t\t</tr>\n";
         }
-        str += "</table>";
+        str += "\t\t\t</table>";
         return str;
     }
 
     private static <T> String getText(Collection<T> col, String[] head, Function<T, String>[] func)
     {
-        String str = "<ul>\n" +
-                "<li>"+head[0]+": "+func[0]+"</li>\n" +
-                "<li>\n" +
-                "<ul>\n";
+        T t = col.iterator().next();
+        String str = "\t\t\t<ul>\n" +
+                "\t\t\t\t<li>"+head[0]+": "+func[0].apply(t)+"</li>\n" +
+                "\t\t\t\t<ul>\n";
         for(int i = 1; i < head.length; ++i)
         {
-            str += "<li>"+head[i]+": "+func[i]+"</li>\n";
+            str += "\t\t\t\t\t<li>"+head[i]+": "+func[i].apply(t)+"</li>\n";
         }
-        str += "</ul>\n" +
-                "</li>\n";
+        str += "\t\t\t\t</ul>\n" +
+                "\t\t\t</ul>\n";
         return str;
     }
 
     private static String getHead(String[] head)
     {
-        String str = "<tr>\n";
+        String str = "\t\t\t\t<tr>\n";
         for(int i = 0; i < head.length; ++i)
-            str += "\t\t<td>"+head[i]+"</td>\n";
-        return str + "</tr>\n";
+            str += "\t\t\t\t\t<td>"+head[i]+"</td>\n";
+        return str + "\t\t\t\t</tr>\n";
     }
 
 }
