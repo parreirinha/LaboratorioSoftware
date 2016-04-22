@@ -37,7 +37,7 @@ public class GetMovieRatingTest {
     }
     @Before
     public void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
@@ -49,7 +49,7 @@ public class GetMovieRatingTest {
     @Test
     public void verifyRatingForExistingMovie() throws SQLException {
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies/6/ratings"};
         command = new CommandGetter().getCommand(input);
         result = getMovieRating.execute(connection, command).toStringText();

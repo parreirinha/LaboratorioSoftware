@@ -45,7 +45,8 @@ public class GetCollectionById implements CommandExecution {
     }
 
     private void setParametersForObjectMovieCollectionFromResultSet(ResultSet rs) throws SQLException {
-        collections = new Collections(rs.getInt(1), rs.getString(4),rs.getString(5), rs.getDate(7));
+        rs.next();
+        collections = new Collections(rs.getInt(1), rs.getString(4),rs.getString(5), rs.getDate(6));
         for(int i = 0; rs.next(); i++){
             movies[i] = new Movie(rs.getInt(2), rs.getString(6));
         }

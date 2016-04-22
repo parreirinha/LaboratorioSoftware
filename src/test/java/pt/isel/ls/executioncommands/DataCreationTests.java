@@ -51,7 +51,7 @@ public class DataCreationTests {
             "select 'Pulp Fiction', 1994, 30, 8, 34, 13, 20 union all " +
             "select 'American History X', 1998, 1, 5, 20, 100, 50  union all " +
             "select 'The Silence of the Lambs', 1991, 2, 30, 11, 40,22;";
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -71,7 +71,7 @@ public class DataCreationTests {
                         "select 1, 'Ze', 'Film of the year', 'Interesting concept movie about dreams hunters',5 union all " +
                         "select 5, 'To', 'Film of the year candidate', 'Interesting concept movie about dreams hunters',5;";
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -81,7 +81,7 @@ public class DataCreationTests {
 
     public void dropTables() throws SQLException {
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
 
         String query = "drop table MovieCollection";
         preparedStatement =connection.prepareStatement(query);
@@ -105,7 +105,7 @@ public class DataCreationTests {
 
     public void createTables() throws SQLException {
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
 
         String creatMovie =
             "create table Movie\n" +
@@ -146,7 +146,7 @@ public class DataCreationTests {
             "\nDescription varchar(200), " +
             "\nCreateDate date default getdate(), " +
             "\nprimary key (CollectionID))";
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(createCollections);
         preparedStatement.executeUpdate();
 
@@ -171,7 +171,7 @@ public class DataCreationTests {
             "select 'STARWARS','serie de filmes da saga starwars' union all " +
             "select 'Before 2000','movies before 2000' union all " +
             "select 'movies after 2000', 'movies from this century'";
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)
@@ -190,7 +190,7 @@ public class DataCreationTests {
             "select 2, 6 union all " +
             "select 2, 7" ;
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.executeUpdate();
         if (connection != null)

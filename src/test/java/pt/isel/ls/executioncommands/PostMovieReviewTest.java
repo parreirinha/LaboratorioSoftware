@@ -43,7 +43,7 @@ public class PostMovieReviewTest {
     }
     @Before
     public void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
@@ -52,7 +52,7 @@ public class PostMovieReviewTest {
     @Test
     public void insertReviewInAValidMovieWithOneReview() throws SQLException {
 
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"POST", "/movies/1/reviews", "reviewerName=Chico&reviewSummary=espectaculo&review=eish filme do catano&rating=5"};
         command = new CommandGetter().getCommand(input);
         result = postMovieReview.execute(connection, command).toStringText();

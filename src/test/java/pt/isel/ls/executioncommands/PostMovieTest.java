@@ -33,7 +33,7 @@ public class PostMovieTest {
     }
     @Before
     public void initConnectionandDataBase() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.createTables();
         dataTests.insertMoviesToTest();
     }

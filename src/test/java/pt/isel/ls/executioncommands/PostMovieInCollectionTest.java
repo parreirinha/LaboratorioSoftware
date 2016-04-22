@@ -31,7 +31,7 @@ public class PostMovieInCollectionTest {
 
     @Before
     public void beforeTest() throws SQLException {
-        connection = new ConnectionFactory().getNewConnection();
+        connection = new TestConnectionFactory().getNewConnection();
         dataTests.initValuesInDBToTests();
     }
 
