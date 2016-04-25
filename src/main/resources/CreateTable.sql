@@ -1,12 +1,11 @@
 use ls;
 
 
-
-
 if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE dbo.MovieCollection
 if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE dbo.Collections
 if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE dbo.Review
 if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE dbo.Movie
+
 
 
 --use ls_tests
@@ -20,7 +19,6 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
-	Rating float default 0.0,
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )
@@ -52,6 +50,7 @@ create table MovieCollection
 	foreign key (CID) references Collections (CollectionID),
 	foreign key (MovieID) references Movie(MovieID)
 );
+<<<<<<< HEAD
 
 /*
 select *
@@ -78,11 +77,21 @@ where RowNumber BETWEEN 2 AND 5
 order by rating
 
 
+=======
+/*
+	select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName
+	from MovieCollection as MC 
+	inner join Collections as C on MC.CID = C.CollectionID
+	inner join Movie as M on M.MovieID = MC.MovieID
+	where CID = 1
+	
+	*/
+>>>>>>> 8c71617925d8e4f8f9d7f1ed6fa454b284e68bbd
 
 --select * from Review;
 --select * from Movie;
-select * from Collections;
-select * from MovieCollection;
+--select * from Collections;
+--select * from MovieCollection;
 
 
 --drop table MovieCollection;
