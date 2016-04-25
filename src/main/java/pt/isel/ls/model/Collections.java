@@ -11,7 +11,7 @@ public class Collections {
     private String name, description;
 
 
-    public Collections(int id, String name, String desc, Date date){
+    public Collections(int id, String name, String desc){
         collectionID = id;
         this.name = name;
         description = desc;

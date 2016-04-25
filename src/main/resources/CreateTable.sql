@@ -1,7 +1,15 @@
---use ls;
+use ls;
 
 
-use ls_tests
+
+
+if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE dbo.MovieCollection
+if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE dbo.Collections
+if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE dbo.Review
+if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE dbo.Movie
+
+
+--use ls_tests
 create table Movie
 (
 	MovieID integer identity(1, 1),
@@ -12,7 +20,7 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
-	AddedDate datetime not null default getdate(),
+	Rating float default 0.0,
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )
@@ -33,7 +41,6 @@ create table Collections
 	CollectionID integer identity(1, 1) unique,
 	Name varchar(50),
 	Description varchar(200),
-	CreateDate date default getdate(),
 	primary key (CollectionID)
 )
 
@@ -41,18 +48,35 @@ create table MovieCollection
 (
 	CID integer,
 	MovieID integer,
-	AddedDate datetime not null default getdate(),
 	primary key(CID, MovieID),
 	foreign key (CID) references Collections (CollectionID),
 	foreign key (MovieID) references Movie(MovieID)
 );
 
-	select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName
-	from MovieCollection as MC 
-	inner join Collections as C on MC.CID = C.CollectionID
-	inner join Movie as M on M.MovieID = MC.MovieID
-	where CID = 1
-	
+/*
+select *
+from(
+	select MC.CID, MC.MovieID, C.Name, C.Description, M.MovieName, ROW_NUMBER() OVER (ORDER BY MC.MovieID) AS RowNumber
+		from MovieCollection as MC 
+			inner join Collections as C on MC.CID = C.CollectionID
+			inner join Movie as M on M.MovieID = MC.MovieID
+		where CID = 2
+	) as res	
+where RowNumber BETWEEN 3 AND 6 */
+
+
+select * from(
+	select  MC.CID, MC.MovieID, C.Name, C.Description, M.MovieName, ROW_NUMBER() OVER (ORDER BY M.MovieID) AS RowNumber,
+	CONVERT(DECIMAL(4,3), ((M.OneStar + M.TwoStar*2 + M.TreeStar * 3 + M.FourStar * 4 + M.FiveStar * 5)/ 
+	cast(((M.OneStar + M.TwoStar + M.TreeStar + M.FourStar + M.FiveStar)) AS DECIMAL (4,0)))) as rating
+		from MovieCollection as MC 
+			inner join Collections as C on MC.CID = C.CollectionID
+			inner join Movie as M on M.MovieID = MC.MovieID
+		where CID = 2
+) as res
+where RowNumber BETWEEN 2 AND 5
+order by rating
+
 
 
 --select * from Review;

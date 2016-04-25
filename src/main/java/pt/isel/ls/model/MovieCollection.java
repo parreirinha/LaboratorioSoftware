@@ -1,22 +1,25 @@
 package pt.isel.ls.model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by fabio on 17-Apr-16.
  */
 public class MovieCollection {
 
-    private Movie[] movies;
+    private ArrayList<Movie> movies;
     private Collections collections;
 
 
-    public MovieCollection(Movie[] movies, Collections collections){
+    public MovieCollection(ArrayList<Movie> movies, Collections collections){
 
         this.movies = movies;
         this.collections = collections;
     }
 
 
-    public Movie[] getMovies() {
+    public ArrayList<Movie> getMovies() {
         return movies;
     }
 

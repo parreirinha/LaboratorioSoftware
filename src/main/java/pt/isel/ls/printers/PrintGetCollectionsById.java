@@ -24,12 +24,12 @@ public class PrintGetCollectionsById implements Printable {
     @Override
     public String toStringText() {
         String s =
-                "\nCollection id: " + movieCollection.getCollections().getCollectionID() +
-                        "\nCollection name: " + movieCollection.getCollections().getName() +
-                        "\nCollection description: " + movieCollection.getCollections().getDescription() +
-                        "\n\nMovies in the collection:";
+                "Collection id: " + movieCollection.getCollections().getCollectionID() +
+                "\nCollection name: " + movieCollection.getCollections().getName() +
+                "\nCollection description: " + movieCollection.getCollections().getDescription() +
+                "\n\nMovies in the collection:";
         for (Movie movie : movieCollection.getMovies()) {
-            s += "\nMovie id: " + movie.getMovieID() + "\nMovie name: " + movie.getMovieName();
+            s += "\nMovie id: " + movie.getMovieID() + "\tMovie name: " + movie.getMovieName();
         }
         return s+"\n";
     }

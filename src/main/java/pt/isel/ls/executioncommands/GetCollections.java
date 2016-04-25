@@ -25,7 +25,7 @@ public class GetCollections implements CommandExecution {
 
 
 
-        String query = "select * from Collections order by CreateDate";
+        String query = "select * from Collections order by CollectionID";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         Collection<Collections> res = getCollection(rs);
@@ -41,8 +41,7 @@ public class GetCollections implements CommandExecution {
             res.add(new Collections(
                     rs.getInt(1),
                     rs.getString(2),
-                    rs.getString(3),
-                    rs.getDate(4)
+                    rs.getString(3)
             ));
         }
         return res;
