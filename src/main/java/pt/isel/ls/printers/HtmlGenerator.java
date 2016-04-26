@@ -1,9 +1,6 @@
 package pt.isel.ls.printers;
 
 
-import com.sun.xml.internal.messaging.saaj.util.SAAJUtil;
-
-import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.function.Function;
 
