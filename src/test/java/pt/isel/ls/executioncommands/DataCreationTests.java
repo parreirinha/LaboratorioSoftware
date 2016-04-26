@@ -144,7 +144,6 @@ public class DataCreationTests {
             "\nCollectionID integer identity(1, 1) unique, " +
             "\nName varchar(50), " +
             "\nDescription varchar(200), " +
-            "\nCreateDate date default getdate(), " +
             "\nprimary key (CollectionID))";
         connection = new TestConnectionFactory().getNewConnection();
         preparedStatement =connection.prepareStatement(createCollections);
@@ -154,7 +153,6 @@ public class DataCreationTests {
             "create table MovieCollection( " +
             "CID integer not null, " +
             "MovieID integer not null, " +
-            "AddedDate datetime not null default getdate(), " +
             "primary key(CID, MovieID), " +
             "foreign key (CID) references Collections (CollectionID), " +
             "foreign key (MovieID) references Movie(MovieID));";

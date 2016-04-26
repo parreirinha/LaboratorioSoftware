@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -22,16 +23,16 @@ import java.util.Collection;
  */
 public class GetCollectionById implements CommandExecution {
 
-    private Movie[] movies;
+    private ArrayList<Movie> movies = new ArrayList<Movie>();
     private Collections collections;
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
 
-        //TODO erro rs está vazio fazer debug
+
         int collectionId = command.getPath().getPathInt("cid");
         String query =
-            "select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName\n" +
+            "select MC.CID, MC.MovieID, C.Name, C.Description, M.MovieName\n" +
                 "from MovieCollection as MC \n" +
                 "inner join Collections as C on MC.CID = C.CollectionID\n" +
                 "inner join Movie as M on M.MovieID = MC.MovieID\n" +
@@ -46,9 +47,11 @@ public class GetCollectionById implements CommandExecution {
 
     private void setParametersForObjectMovieCollectionFromResultSet(ResultSet rs) throws SQLException {
         rs.next();
-        collections = new Collections(rs.getInt(1), rs.getString(4),rs.getString(5), rs.getDate(6));
-        for(int i = 0; rs.next(); i++){
-            movies[i] = new Movie(rs.getInt(2), rs.getString(6));
+        collections = new Collections(rs.getInt(1), rs.getString(3),rs.getString(4));
+        int i = 0;
+        do{
+            movies.add(i++, new Movie(rs.getInt(2), rs.getString(5)));
         }
+        while(rs.next());
     }
 }
