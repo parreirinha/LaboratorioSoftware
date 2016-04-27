@@ -22,10 +22,8 @@ public class GetTopsNRatingsHigherAverage implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException {
         int n = command.getPath().getPathInt("n");
 
-        String query = "select top (?) * from(\n" +
-                "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
-                "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
-                "order by R.Average desc";
+        String query = "select top (?) * from\n" +
+                "dbo.Movie as M order by M.Average desc";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, n);
         ResultSet rs = ps.executeQuery();
