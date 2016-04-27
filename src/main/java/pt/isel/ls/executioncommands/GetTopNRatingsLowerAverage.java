@@ -30,8 +30,8 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
                     "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) " +
                     "AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
                 "order by R.Average";
-        //PreparedStatement ps = connection.prepareStatement(query);
-        PreparedStatement ps = preparedStatementWithPaging(connection, query, command, " R.Average");
+        PreparedStatement ps = connection.prepareStatement(query);
+        //PreparedStatement ps = preparedStatementWithPaging(connection, query, command, " R.Average");
         ps.setInt(1, n);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs, n);

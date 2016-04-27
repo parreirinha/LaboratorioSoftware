@@ -26,9 +26,16 @@ public class GetAllReviews implements CommandExecution {
 
         int movieId = command.getPath().getPathInt("mid");
         String query = "select *, " + setClumnRowCountString(command, null) + " from Review where MovieID = ?";
-        //PreparedStatement ps = connection.prepareStatement(query);
-        PreparedStatement ps = preparedStatementWithPaging(connection, query, command, null);
-        AccessUtils.setValuesOnPreparedStatement(ps, movieId);
+        PreparedStatement ps;
+        if (pagingVerification(command)){
+            int[]val = getSkipAndTopValuesToUseInPaging(command);
+            query = concatenateQuearyIfExistsPaging(query, command, "MovieID");
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, movieId, val[0], val[1]);
+        }else {
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, movieId);
+        }
         ResultSet rs = ps.executeQuery();
         Collection<Review> res = getCollection(rs);
         return new PrintReview(res);

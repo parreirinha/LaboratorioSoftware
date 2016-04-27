@@ -1,4 +1,9 @@
 use ls;
+
+if object_id('dbo.MovieCollection') is not null
+	drop table MovieCollection
+if object_id('dbo.Collections') is not null
+	drop table Collections
 if object_id('dbo.Review') is not null
 	drop table Review
 if object_id('dbo.Movie') is not null
@@ -6,8 +11,6 @@ if object_id('dbo.Movie') is not null
 
 
 
-if object_id('dbo.Collections') is not null
-	drop table Collections
-if object_id('dbo.MovieCollection') is not null
-	drop table MovieCollection
+
+
 

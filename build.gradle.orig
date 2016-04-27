@@ -7,7 +7,14 @@ dependencies {
     testCompile fileTree(dir: 'vendor/test', include: '*.jar')
 }
 
+<<<<<<< HEAD
+compileJava{
+
+    options.compilerArgs<<"-Xlint:unchecked"
+
+}
+=======
 compileJava {
     options.compilerArgs<<"-Xlint:unchecked"
 }
-
+>>>>>>> d98f81e0761bf53a38481cae722cb3ccbe3cc18a

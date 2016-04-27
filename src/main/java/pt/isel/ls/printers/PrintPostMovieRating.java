@@ -11,6 +11,6 @@ public class PrintPostMovieRating implements Printable {
 
     @Override
     public String toStringHtml() {
-        return null;
+        return String.format(HtmlGenerator.template, "Rating posted with sucess");
     }
 }

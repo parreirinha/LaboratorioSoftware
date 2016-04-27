@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
+
 
 import java.sql.Connection;
 import java.sql.SQLException;

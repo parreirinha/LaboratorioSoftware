@@ -95,6 +95,20 @@ public class GetAllReviewsTest {
     }
 
 
-    //todo teste com paging
+    @Test
+    public void pagingTest() throws SQLException {
+
+
+        input = new String[]{"GET", "/movies/1/reviews", "skip=1&top=1"};
+        command = new CommandGetter().getCommand(input);
+        result = getAllReviews.execute(connection, command).toStringText();
+        expected =
+                "Review ID = 2" +
+                "\n\tReviewer Name = Bad taste Reviwer" +
+                "\tReview Rating = 1"+
+                "\n\tSummary Review = Horrible\n";
+
+        assertEquals(expected, result);
+    }
 
 }

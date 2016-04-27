@@ -55,7 +55,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
     }
 
 
-    //todo not set to 3 parameter
+
     @Test
     public void pagingTest() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();

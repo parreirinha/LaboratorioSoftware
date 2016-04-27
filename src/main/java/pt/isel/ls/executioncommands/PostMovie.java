@@ -1,7 +1,7 @@
 package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.printers.PrintPostMovie;
+import pt.isel.ls.printers.PrintPostMovieAndReview;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.*;
@@ -29,6 +29,6 @@ public class PostMovie implements CommandExecution {
         ResultSet rs = ps.getGeneratedKeys();
         rs.next();
         int id = rs.getInt(1);
-        return new PrintPostMovie(id);
+        return new PrintPostMovieAndReview(id, "The ID of the new movie is");
     }
 }

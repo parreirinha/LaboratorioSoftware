@@ -34,9 +34,19 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
                 "on\n" +
                 "M.MovieId = ct.MovieID\n" +
                 "order by c desc";
-        //PreparedStatement ps = connection.prepareStatement(query);
-        PreparedStatement ps = preparedStatementWithPaging(connection,query,command, " c desc");
-        ps.setInt(1, command.getPath().getPathInt("n"));
+        PreparedStatement ps = connection.prepareStatement(query);
+        if (pagingVerification(command)){
+            int[]val = getSkipAndTopValuesToUseInPaging(command);
+            query = concatenateQuearyIfExistsPaging(query, command, " c desc");
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, command.getPath().getPathInt("n"), val[0], val[1]);
+        }else {
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, command.getPath().getPathInt("n"));
+        }
+
+
+        //ps.setInt(1, command.getPath().getPathInt("n"));
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         return new PrintMovie(res);

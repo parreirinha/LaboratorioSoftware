@@ -20,6 +20,6 @@ public class PrintError implements Printable
 
     @Override
     public String toStringHtml() {
-        return null;
+        return String.format(HtmlGenerator.template, str);
     }
 }

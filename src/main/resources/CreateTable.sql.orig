@@ -1,12 +1,20 @@
 use ls;
 
 
+<<<<<<< HEAD
 
 
 if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE MovieCollection
 if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE Collections
 if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE Review
 if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE Movie
+=======
+if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE dbo.MovieCollection
+if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE dbo.Collections
+if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE dbo.Review
+if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE dbo.Movie
+>>>>>>> d98f81e0761bf53a38481cae722cb3ccbe3cc18a
+
 
 
 --use ls_tests
@@ -20,7 +28,11 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
-	
+<<<<<<< HEAD
+=======
+	Average as convert(decimal(4,3),((OneStar + TwoStar*2 + TreeStar * 3 + FourStar * 4 + FiveStar * 5) /
+    cast((OneStar + TwoStar + TreeStar + FourStar + FiveStar)AS DECIMAL (4,0)))),
+>>>>>>> d98f81e0761bf53a38481cae722cb3ccbe3cc18a
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )
@@ -52,6 +64,7 @@ create table MovieCollection
 	foreign key (CID) references Collections (CollectionID),
 	foreign key (MovieID) references Movie(MovieID)
 );
+<<<<<<< HEAD
 
 /*
 select *
@@ -69,7 +82,7 @@ select * from(
 	select  MC.CID, MC.MovieID, C.Name, C.Description, M.MovieName, ROW_NUMBER() OVER (ORDER BY M.MovieID) AS RowNumber,
 	CONVERT(DECIMAL(4,3), ((M.OneStar + M.TwoStar*2 + M.TreeStar * 3 + M.FourStar * 4 + M.FiveStar * 5)/ 
 	cast(((M.OneStar + M.TwoStar + M.TreeStar + M.FourStar + M.FiveStar)) AS DECIMAL (4,0)))) as rating
-from MovieCollection as MC 
+		from MovieCollection as MC 
 			inner join Collections as C on MC.CID = C.CollectionID
 			inner join Movie as M on M.MovieID = MC.MovieID
 		where CID = 2
@@ -78,11 +91,19 @@ where RowNumber BETWEEN 2 AND 5
 order by rating
 
 
+/*
+	select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName
+	from MovieCollection as MC 
+	inner join Collections as C on MC.CID = C.CollectionID
+	inner join Movie as M on M.MovieID = MC.MovieID
+	where CID = 1
+	
+	*/
 
 --select * from Review;
 --select * from Movie;
-select * from Collections;
-select * from MovieCollection;
+--select * from Collections;
+--select * from MovieCollection;
 
 
 --drop table MovieCollection;

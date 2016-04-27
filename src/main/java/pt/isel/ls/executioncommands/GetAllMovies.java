@@ -23,11 +23,14 @@ public class GetAllMovies implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException
     {
-        String query = "select *, "+ setClumnRowCountString(command, null) + ", " + getRatingColumnFormula() +
+        String query = "select *, "+ setClumnRowCountString(command, null) +
                 " from Movie\n";
-        //TODO funciona com paging excepto no rating
-        PreparedStatement ps = preparedStatementWithPaging(connection, query, command, null);
-        //PreparedStatement ps = connection.prepareStatement(query);
+        query = concatenateQuearyIfExistsPaging(query, command, null);
+        PreparedStatement ps = connection.prepareStatement(query);
+        if (pagingVerification(command)){
+            int[]val = getSkipAndTopValuesToUseInPaging(command);
+            setValuesOnPreparedStatement(ps, val[0], val[1]);
+        }
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         return new PrintMovie(res);
