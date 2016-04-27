@@ -114,7 +114,7 @@ public class AccessUtils {
     public static String getRatingColumnFormula(){
         return "CONVERT(DECIMAL(4,3), " +
                 "((Movie.OneStar + Movie.TwoStar*2 + Movie.TreeStar * 3 + Movie.FourStar * 4 + Movie.FiveStar * 5)/" +
-                "cast(((Movie.OneStar + Movie.TwoStar + Movie.TreeStar + Movie.FourStar + Movie.FiveStar)) AS DECIMAL (4,0)))) as Average";
+                "cast(((Movie.OneStar + Movie.TwoStar + Movie.TreeStar + Movie.FourStar + Movie.FiveStar)) AS DECIMAL (4,0)))) as rating";
     }
 
 }

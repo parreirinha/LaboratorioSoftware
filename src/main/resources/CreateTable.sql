@@ -19,6 +19,8 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
+	Average as convert(decimal(4,3),((OneStar + TwoStar*2 + TreeStar * 3 + FourStar * 4 + FiveStar * 5) /
+    cast((OneStar + TwoStar + TreeStar + FourStar + FiveStar)AS DECIMAL (4,0)))),
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )
@@ -77,7 +79,6 @@ where RowNumber BETWEEN 2 AND 5
 order by rating
 
 
-=======
 /*
 	select MC.CID, MC.MovieID, MC.AddedDate, C.Name, C.Description, C.CreateDate, M.MovieName
 	from MovieCollection as MC 
@@ -86,7 +87,6 @@ order by rating
 	where CID = 1
 	
 	*/
->>>>>>> 8c71617925d8e4f8f9d7f1ed6fa454b284e68bbd
 
 --select * from Review;
 --select * from Movie;

@@ -4,49 +4,46 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
+
 import pt.isel.ls.model.Movie;
 
 import java.util.Collection;
 
 /**
-*
-*                                               .
-*                                              / \
-*                                             /   \
-*                                            /  |  \
-*                                           /   |   \
-*                                          /    |    \
-*                                         /     |     \
-*                                        /      |      \
-*                                       /       |       \
-*                                      /        .        \
-*                                     /                   \
-*                                     ---------------------
-*
-*
-*
-*
-* Para o metodo toStringHtml() deixar de ser generico, basta trocar a ordem dos comentarios no metodo e,
-* Descomentar os metodos:
-*                       - getTable()
-*                       - getText()
-*                       - getFullHtmlDescription(Movie m)
-*                       -getFullHtmlTitle()
-*E também é necessario descomentar o metodo default getTemplate() da interface Printable
-*
- *
-*/
+ * .
+ * / \
+ * /   \
+ * /  |  \
+ * /   |   \
+ * /    |    \
+ * /     |     \
+ * /      |      \
+ * /       |       \
+ * /        .        \
+ * /                   \
+ * ---------------------
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * Para o metodo toStringHtml() deixar de ser generico, basta trocar a ordem dos comentarios no metodo e,
+ * Descomentar os metodos:
+ * - getTable()
+ * - getText()
+ * - getFullHtmlDescription(Movie m)
+ * -getFullHtmlTitle()
+ * E também é necessario descomentar o metodo default getTemplate() da interface Printable
+ */
 
-public class PrintDetailedMovie implements Printable
-{
+public class PrintDetailedMovie implements Printable {
 
 
     private Collection<Movie> movieCollection;
     private final String[] head =
-        {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
+            {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
     private ArrayList<Function<Movie, String >> function = new ArrayList<>();
 
-    public PrintDetailedMovie(Collection<Movie> movieCollection){
+    public PrintDetailedMovie(Collection<Movie> movieCollection) {
         this.movieCollection = movieCollection;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> "" + movie.getMovieID());
@@ -59,15 +56,17 @@ public class PrintDetailedMovie implements Printable
         function.add(movie -> "" + movie.getFiveStar());
         function.add(movie -> "" + movie.getAverage());
     }
+
     /**
      * String template to be returned:
      * "Movie ID = ##\n\tName = ##\tRelease = ##\n\t* = ##   ** = ##   *** = ##   **** = ##   ***** = ##\n\tAverage = ##\n"
+     *
      * @return
      */
     @Override
     public String toStringText() {
         String str = "";
-        for(Movie m : movieCollection)
+        for (Movie m : movieCollection)
              str += head[0] + " = "+function.get(0).apply(m) +"\n"+
                      head[1] + " = "+ function.get(1).apply(m) +
                     "\t" + head[2] +" = "+ function.get(2).apply(m) +"\n"+
