@@ -48,27 +48,18 @@ public class AccessUtils {
         return stars;
     }
 
-    public static String ratingAverageFormula() {
-        return
-                "CONVERT(DECIMAL(4,3), " +
-                        "((Movie.OneStar + Movie.TwoStar*2 + Movie.TreeStar * 3 + Movie.FourStar * 4 " +
-                        "+ Movie.FiveStar * 5)/" +
-                        "cast(((Movie.OneStar + Movie.TwoStar + Movie.TreeStar + Movie.FourStar + " +
-                        "Movie.FiveStar)) " +
-                        "AS DECIMAL (4,0)))) as rating ";
-    }
 
-    public static PreparedStatement preparedStatementWithPaging(Connection connection, String query, Command command)
+    public static PreparedStatement preparedStatementWithPaging(Connection connection, String query, Command command, String orderBy)
             throws SQLException {
+
         PreparedStatement ps;
         if (pagingVerification(command)) {
             int skip = command.getParams().getParamInt("skip") + 1;
             int top = skip + command.getParams().getParamInt("top") - 1;
+
             String pagingQuery =
-                "select * from ( " +
-                        query + " ) as res \n " +
-                "where RowNumber BETWEEN ? AND ? " +
-                setOrderByClause(command);
+                "select * from ( " + query + " ) as res \n " +
+                "where RowNumber BETWEEN ? AND ? " + setOrderByClause(command, orderBy );
             ps = connection.prepareStatement(pagingQuery);
             setValuesOnPreparedStatement(ps, skip, top);
             return ps;
@@ -76,16 +67,18 @@ public class AccessUtils {
         return (ps = connection.prepareStatement(query));
     }
 
-    protected static boolean pagingVerification(Command command) {
-        //todo nesta verificação se nao existir skip e top lança excepção
+    private static boolean pagingVerification(Command command) {
         Integer i1 = command.getParams().getParamInt("skip");
         Integer i2 = command.getParams().getParamInt("top");
-        return (i1 == null) || (i2 == null) ? false : true;
+        return (i1 < 0) || (i2 < 0) ? false : true;
     }
 
 
 
-    public static String setOrderByClause(Command command) {
+    public static String setOrderByClause(Command command, String orderBy) {
+        if (orderBy != null) {
+            return "order by " + orderBy;
+        }
         if (command.getParams().getParamString("sortBy") != null) {
             initSortDecoderHashMap();
             return sortDecoder.get(command.getParams().getParamString("sortBy"));
@@ -107,14 +100,17 @@ public class AccessUtils {
         sortDecoder.put("ratingDesc", "order by rating DESC");
     }
 
-    public static String getClumnRowCountString(Command command){
-        return "ROW_NUMBER() OVER (" +setOrderByClause(command)+ ") AS RowNumber";
+    public static String setClumnRowCountString(Command command, String orderBy){
+        return "ROW_NUMBER() OVER (" +setOrderByClause(command, orderBy )+ ") AS RowNumber";
     }
 
     public static String getRatingColumnFormula(){
         return "CONVERT(DECIMAL(4,3), " +
-                "((Movie.OneStar + Movie.TwoStar*2 + Movie.TreeStar * 3 + Movie.FourStar * 4 + Movie.FiveStar * 5)/" +
-                "cast(((Movie.OneStar + Movie.TwoStar + Movie.TreeStar + Movie.FourStar + Movie.FiveStar)) AS DECIMAL (4,0)))) as Average";
+                "((Movie.OneStar + Movie.TwoStar*2 + Movie.TreeStar * 3 + " +
+                    "Movie.FourStar * 4 + Movie.FiveStar * 5)/" +
+                "cast(((Movie.OneStar + Movie.TwoStar + Movie.TreeStar + Movie.FourStar + " +
+                    "Movie.FiveStar)) AS DECIMAL (4,0)))) as rating";
     }
+
 
 }

@@ -53,4 +53,19 @@ public class GetTopNMoviesWithHigherReviewCountTest {
         return "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n" +
                 "Movie ID = 2\n\tName = Seven\tRelease = 1995\n";
     }
+
+
+    //todo not set to 3 parameter
+    @Test
+    public void pagingTest() throws SQLException {
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET","/tops/5/reviews/higher/count", "skip=2&top=2"};
+        command = new CommandGetter().getCommand(input);
+        result = getTopNMoviesWithHigherReviewCount.execute(connection, command).toStringText();
+        expected = "Movie ID = 3\n" +
+                "\tName = The Matrix\tRelease = 1999\n" +
+                "Movie ID = 4\n" +
+                "\tName = Inception\tRelease = 2010\n";
+        assertEquals(expected, result);
+    }
 }

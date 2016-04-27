@@ -17,6 +17,10 @@ public class Headers {
     }
 
     public int getHeadersInt(String key){
-        return Integer.parseInt(headersStrings.get(key));
+
+        if (headersStrings.containsKey(key)) {
+            return Integer.parseInt(headersStrings.get(key));
+        }
+        return -1;
     }
 }

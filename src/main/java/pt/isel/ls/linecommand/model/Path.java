@@ -22,7 +22,10 @@ public class Path {
 
     public int getPathInt(String key) {
 
-        return pathIntegers.get(key);
+        if (pathIntegers.containsKey(key)) {
+            return pathIntegers.get(key);
+        }
+        return -1;
     }
 
 }

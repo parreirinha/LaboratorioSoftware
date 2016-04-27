@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static pt.isel.ls.executioncommands.AccessUtils.*;
+
 /**
  * phase 2 - Command 2
  *
@@ -23,10 +25,10 @@ public class GetCollections implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
 
-
-
-        String query = "select * from Collections order by CollectionID";
-        PreparedStatement ps = connection.prepareStatement(query);
+        String query = "select *, " + setClumnRowCountString(null, "CollectionID") +
+                " from Collections";
+        //PreparedStatement ps = connection.prepareStatement(query);
+        PreparedStatement ps = preparedStatementWithPaging(connection, query, command, "CollectionID");
         ResultSet rs = ps.executeQuery();
         Collection<Collections> res = getCollection(rs);
         if(res.toArray()[0] == "") {

@@ -3,10 +3,10 @@ use ls;
 
 
 
-if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE dbo.MovieCollection
-if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE dbo.Collections
-if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE dbo.Review
-if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE dbo.Movie
+if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE MovieCollection
+if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE Collections
+if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE Review
+if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE Movie
 
 
 --use ls_tests
@@ -20,7 +20,6 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
-	Rating float default 0.0,
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )

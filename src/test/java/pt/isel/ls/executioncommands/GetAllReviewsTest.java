@@ -94,4 +94,7 @@ public class GetAllReviewsTest {
         assertEquals(expected, result);
     }
 
+
+    //todo teste com paging
+
 }

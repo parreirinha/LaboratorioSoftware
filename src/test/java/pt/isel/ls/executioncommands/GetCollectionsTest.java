@@ -41,8 +41,8 @@ public class GetCollectionsTest  {
     }
 
     @Test
-    public void someTest() throws SQLException {
-        input = new String[] {"POST", "/collections", "name=Rocky&description=movies about boxe"};
+    public void getAllCollectionsTest() throws SQLException {
+        input = new String[] {"GET", "/collections"};
         command = new CommandGetter().getCommand(input);
         result = exe.execute(connection, command).toStringText();
         expected =
@@ -52,4 +52,19 @@ public class GetCollectionsTest  {
             "\n";
         assertEquals(expected, result);
     }
+
+    @Test
+    public void simplePagingTest() throws SQLException {
+
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/collections", "skip=1&top=2"};
+        command = new CommandGetter().getCommand(input);
+        result = exe.execute(connection, command).toStringText();
+        expected =
+                "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000\n" +
+                "Collection id = 3\nName = movies after 2000\nDescription = movies from this century\n";
+        assertEquals(expected, result);
+    }
+
+
 }

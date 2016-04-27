@@ -66,4 +66,20 @@ public class GetTopNRatingsLowerAverageTest {
                 "\tAverage = 3.402\n";
 
     }
+
+    //todo not set for parameter 3
+    @Test
+    public void pagingTest() throws SQLException {
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/tops/3/ratings/lower/average", "skip=1&top=1"};
+        command = new CommandGetter().getCommand(input);
+        result = getTopsNRatingsLowerAverage.execute(connection, command).toStringText();
+        expected = "Movie ID = 5\n" +
+                "\tName = Pulp Fiction" +
+                "\tRelease = 1994\n" +
+                "\t* = 30   ** = 8   *** = 34   **** = 13   ***** = 20\n" +
+                "	Average = 2.857\n";
+        ;
+        assertEquals(expected, result);
+    }
 }

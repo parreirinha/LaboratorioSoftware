@@ -21,6 +21,9 @@ public class Parameters {
 
     public int getParamInt(String key){
 
-        return Integer.parseInt(paramStrings.get(key));
+        if (paramStrings.containsKey(key)) {
+            return Integer.parseInt(paramStrings.get(key));
+        }
+        return -1;
     }
 }

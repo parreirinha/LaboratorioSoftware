@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import static pt.isel.ls.executioncommands.AccessUtils.*;
 
 /**
  * linecommand nº12
@@ -23,11 +24,14 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException {
         int n = command.getPath().getPathInt("n");
 
-        String query = "select top (?) * from(\n" +
-                "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
-                "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
+        String query = "select top (?) *, " +setClumnRowCountString(null, " R.Average")+ " from(\n" +
+                "select *, CONVERT(DECIMAL(4,3), " +
+                    "((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
+                    "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) " +
+                    "AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
                 "order by R.Average";
-        PreparedStatement ps = connection.prepareStatement(query);
+        //PreparedStatement ps = connection.prepareStatement(query);
+        PreparedStatement ps = preparedStatementWithPaging(connection, query, command, " R.Average");
         ps.setInt(1, n);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs, n);

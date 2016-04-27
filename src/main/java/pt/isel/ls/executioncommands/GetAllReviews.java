@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static pt.isel.ls.executioncommands.AccessUtils.*;
+
 /**
  * linecommand nº7
  * GET /movies/{mid}/reviews
@@ -23,8 +25,9 @@ public class GetAllReviews implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException {
 
         int movieId = command.getPath().getPathInt("mid");
-        String query = "select * from Review where MovieID = ?";
-        PreparedStatement ps = connection.prepareStatement(query);
+        String query = "select *, " + setClumnRowCountString(command, null) + " from Review where MovieID = ?";
+        //PreparedStatement ps = connection.prepareStatement(query);
+        PreparedStatement ps = preparedStatementWithPaging(connection, query, command, null);
         AccessUtils.setValuesOnPreparedStatement(ps, movieId);
         ResultSet rs = ps.executeQuery();
         Collection<Review> res = getCollection(rs);

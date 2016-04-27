@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static pt.isel.ls.executioncommands.AccessUtils.*;
 /**
  * linecommand nº14
  * <p>
@@ -26,14 +27,15 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
      */
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
-        String query = "select top (?) * from (\n" +
+        String query = "select top (?) *, " + setClumnRowCountString(null, " c desc") +  " from (\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
                 "group by R.MovieID) as ct\n" +
                 "inner join Movie as M\n" +
                 "on\n" +
                 "M.MovieId = ct.MovieID\n" +
                 "order by c desc";
-        PreparedStatement ps = connection.prepareStatement(query);
+        //PreparedStatement ps = connection.prepareStatement(query);
+        PreparedStatement ps = preparedStatementWithPaging(connection,query,command, " c desc");
         ps.setInt(1, command.getPath().getPathInt("n"));
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
