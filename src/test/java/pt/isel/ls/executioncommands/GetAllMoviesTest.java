@@ -6,6 +6,7 @@ import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.printers.HtmlGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -55,6 +56,14 @@ public class GetAllMoviesTest {
         command = new CommandGetter().getCommand(input);
         result = getAllMovies.execute(connection, command).toStringText();
         expected = getAllMoviesString();
+        assertEquals(expected, result);
+    }
+    @Test
+    public void checkResultsetFromMoviesHtml() throws SQLException {
+        input = new String[]{"GET", "/movies"};
+        command = new CommandGetter().getCommand(input);
+        result = getAllMovies.execute(connection, command).toStringHtml();
+        expected = getAllMoviesHtml();
         assertEquals(expected, result);
     }
     private String getAllMoviesString(){

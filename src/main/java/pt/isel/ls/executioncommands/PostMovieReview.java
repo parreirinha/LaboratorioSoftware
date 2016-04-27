@@ -1,7 +1,7 @@
 package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.printers.PrintPostMovieReview;
+import pt.isel.ls.printers.PrintPostMovieAndReview;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.*;
@@ -46,6 +46,6 @@ public class PostMovieReview implements CommandExecution {
         ps.executeUpdate();
         connection.commit();
 
-        return new PrintPostMovieReview(rid);
+        return new PrintPostMovieAndReview(rid, "Review ID is");
     }
 }

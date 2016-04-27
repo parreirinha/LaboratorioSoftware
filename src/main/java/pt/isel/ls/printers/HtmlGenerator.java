@@ -1,8 +1,11 @@
 package pt.isel.ls.printers;
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> acc48fc9bca8e49add145ddf017b4666629f9160
 import java.util.Collection;
 import java.util.function.Function;
 
