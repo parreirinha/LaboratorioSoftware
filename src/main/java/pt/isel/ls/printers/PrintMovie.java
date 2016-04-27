@@ -2,6 +2,7 @@ package pt.isel.ls.printers;
 
 import pt.isel.ls.model.Movie;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
@@ -14,13 +15,13 @@ public class PrintMovie implements Printable {
     private Collection<Movie> movieCollection;
     private final String[] head =
             {"Movie ID", "Name", "Release"};
-    private Function<Movie, String >[] function = new Function[3];
+    private ArrayList<Function<Movie, String >> function = new ArrayList<>();
 
     public PrintMovie(Collection<Movie> movies){
         movieCollection = movies;
-        function[0] = movie -> "" + movie.getMovieID();
-        function[1] = movie -> movie.getMovieName();
-        function[2] = movie -> ""+movie.getMovieRelease();
+        function.add(movie -> "" + movie.getMovieID());
+        function.add(movie -> movie.getMovieName());
+        function.add(movie -> ""+movie.getMovieRelease());
     }
 
     /**
@@ -33,9 +34,9 @@ public class PrintMovie implements Printable {
     public String toStringText() {
         String s = "";
         for (Movie m : movieCollection) {
-            s +=    head[0] + " = " + function[0].apply(m)+
-                    "\n\t"+ head[1] +" = " + function[1].apply(m)+
-                    "\t"+ head[2] +" = " + function[2].apply(m)+
+            s +=    head[0] + " = " + function.get(0).apply(m)+
+                    "\n\t"+ head[1] +" = " + function.get(1).apply(m)+
+                    "\t"+ head[2] +" = " + function.get(2).apply(m)+
                     "\n";
         }
         return (s == "") ? new PrintError("something went wrong!!\n").toStringText() : s;
@@ -51,7 +52,7 @@ public class PrintMovie implements Printable {
         return HtmlGenerator.htmlGenerate(movieCollection, head, function);
     }
 
-    /*
+/*
     private String getTable()
     {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
@@ -61,17 +62,17 @@ public class PrintMovie implements Printable {
             str += "\t"+getFullHtmlDescription(m)+"\n";
         }
         str += "</table>";
-        return String.format(Printable.super.getTemplate(), str);
+        return str;
     }
 
     private String getText()
     {
         Movie m = movieCollection.iterator().next();
-        String str = "<ul><li>"+head[0]+": "+function[0].apply(m)+"</li>\n" +
+        String str = "<ul><li>"+head[0]+": "+function.get(0).apply(m)+"</li>\n" +
                 "<ul>\n";
         for(int i = 1; i < head.length; ++i)
         {
-            str += "<li>"+head[i]+": "+function[i].apply(m)+"</li>\n";
+            str += "<li>"+head[i]+": "+function.get(i).apply(m)+"</li>\n";
         }
         str += "</ul>\n" +
                 "</ul>\n";
@@ -81,16 +82,19 @@ public class PrintMovie implements Printable {
     private String getFullHtmlDescription(Movie m)
     {
         String str = "<tr>\n";
-        for(int i = 0; i < function.length(); ++i)
-            str += ""\t\t<td>"+function[i].apply(m)+"</td>\n"";
+        for(int i = 0; i < function.size(); ++i)
+        {
+            str += "\t\t<td>"+function.get(i).apply(m)+"</td>\n";
+        }
+        return str + "</tr>\n";
     }
 
     private String getFullHtmlTitle()
     {
         String str = "<tr>\n";
-        for(int i = 0; i < head.length(); ++i)
-            str += "\t\t<td>head[i]</td>\n";
+        for(int i = 0; i < head.length; ++i)
+            str += "\t\t<td>"+head[i]+"</td>\n";
         return str + "</tr>\n";
     }
-    */
+*/
 }
