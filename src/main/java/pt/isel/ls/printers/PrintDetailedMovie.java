@@ -1,53 +1,50 @@
 package pt.isel.ls.printers;
 
 import java.util.function.Function;
+
 import pt.isel.ls.model.Movie;
 
 import java.util.Collection;
 
 /**
-*
-*                                               .
-*                                              / \
-*                                             /   \
-*                                            /  |  \
-*                                           /   |   \
-*                                          /    |    \
-*                                         /     |     \
-*                                        /      |      \
-*                                       /       |       \
-*                                      /        .        \
-*                                     /                   \
-*                                     ---------------------
-*
-*
-*
-*
-* Para o metodo toStringHtml() deixar de ser generico, basta trocar a ordem dos comentarios no metodo e,
-* Descomentar os metodos:
-*                       - getTable()
-*                       - getText()
-*                       - getFullHtmlDescription(Movie m)
-*                       -getFullHtmlTitle()
-*E também é necessario descomentar o metodo default getTemplate() da interface Printable
-*
- *
-*/
+ * .
+ * / \
+ * /   \
+ * /  |  \
+ * /   |   \
+ * /    |    \
+ * /     |     \
+ * /      |      \
+ * /       |       \
+ * /        .        \
+ * /                   \
+ * ---------------------
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * Para o metodo toStringHtml() deixar de ser generico, basta trocar a ordem dos comentarios no metodo e,
+ * Descomentar os metodos:
+ * - getTable()
+ * - getText()
+ * - getFullHtmlDescription(Movie m)
+ * -getFullHtmlTitle()
+ * E também é necessario descomentar o metodo default getTemplate() da interface Printable
+ */
 
-public class PrintDetailedMovie implements Printable
-{
+public class PrintDetailedMovie implements Printable {
 
 
     private Collection<Movie> movieCollection;
     private final String[] head =
-        {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
-    private Function<Movie, String >[] function = new Function[9];
+            {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
+    private Function<Movie, String>[] function = new Function[9];
 
-    public PrintDetailedMovie(Collection<Movie> movieCollection){
+    public PrintDetailedMovie(Collection<Movie> movieCollection) {
         this.movieCollection = movieCollection;
         function[0] = movie -> "" + movie.getMovieID();
         function[1] = movie -> movie.getMovieName();
-        function[2] = movie -> ""+movie.getMovieRelease();
+        function[2] = movie -> "" + movie.getMovieRelease();
         function[3] = movie -> "" + movie.getOneStar();
         function[4] = movie -> "" + movie.getTwoStar();
         function[5] = movie -> "" + movie.getThreeStar();
@@ -56,30 +53,31 @@ public class PrintDetailedMovie implements Printable
         function[8] = movie -> "" + movie.getAverage();
 
     }
+
     /**
      * String template to be returned:
      * "Movie ID = ##\n\tName = ##\tRelease = ##\n\t* = ##   ** = ##   *** = ##   **** = ##   ***** = ##\n\tAverage = ##\n"
+     *
      * @return
      */
     @Override
     public String toStringText() {
         String str = "";
-        for(Movie m : movieCollection)
-             str += head[0] + " = "+function[0].apply(m) +"\n"+
-                     head[1] + " = "+ function[1].apply(m) +
-                    "\t" + head[2] +" = "+ function[2].apply(m) +"\n"+
-                    "\t"+head[3]+" = " + function[3].apply(m) +
-                    "   "+head[4]+" = " + function[4].apply(m) +
-                    "   "+head[5]+" = " + function[5].apply(m) +
-                    "   "+head[6]+" = " + function[6].apply(m) +
-                    "   "+head[7]+" = " + function[7].apply(m) +
-                    "\n\t"+head[8]+" = "+ function[8].apply(m) +"\n";
+        for (Movie m : movieCollection)
+            str += head[0] + " = " + function[0].apply(m) + "\n" +
+                    "\t" + head[1] + " = " + function[1].apply(m) +
+                    "\t" + head[2] + " = " + function[2].apply(m) + "\n" +
+                    "\t" + head[3] + " = " + function[3].apply(m) +
+                    "   " + head[4] + " = " + function[4].apply(m) +
+                    "   " + head[5] + " = " + function[5].apply(m) +
+                    "   " + head[6] + " = " + function[6].apply(m) +
+                    "   " + head[7] + " = " + function[7].apply(m) +
+                    "\n\t" + head[8] + " = " + function[8].apply(m) + "\n";
         return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         /*
         if(movieCollection.size() == 1)
             return String.format(Printable.super.getTemplate(), getText());

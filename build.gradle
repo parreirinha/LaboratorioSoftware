@@ -6,3 +6,7 @@ dependencies {
     compile fileTree(dir: 'vendor/main', include: '*.jar')
     testCompile fileTree(dir: 'vendor/test', include: '*.jar')
 }
+
+compileJava {
+    options.compilerArgs<<"-Xlint:unchecked"
+}

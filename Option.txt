@@ -1,0 +1,82 @@
+
+Available Commands:
+
+ POST /movies  - creates a new movie, given the following parameters
+  title  - movie name.
+  releaseYear  - movie's release year.
+
+
+This command returns the movie unique identifier.
+
+
+ GET /movies  - returns a list with all movies.
+
+
+ GET /movies/{mid}  - returns the detailed information for the movie identified by  mid .
+
+
+ POST /movies/{mid}/ratings  - submits a new rating for the movie identified by  mid , given the following parameters
+  rating  - integer between 1 and 5.
+
+
+ GET /movies/{mid}/ratings  - returns the rating information for the movie identified by  mid . This rating information include:
+The rating average
+The number of votes for each rating value
+
+
+ POST /movies/{mid}/reviews  - creates a new review for the movie identified by  mid , given the following parameters
+  reviewerName  - the reviewer name 
+  reviewSummary  - the review summary
+  review  - the complete review
+  rating  - the review rating
+
+This command returns the review unique identifier.
+
+
+ GET /movies/{mid}/reviews  - returns all the reviews for the movie identified by  mid . The information for each review must not include the full review text.
+
+
+ GET /movies/{mid}/reviews/{rid}  - returns the full information for the review  rid  of the movie identified by  mid .
+
+
+ GET /tops/ratings/higher/average  - returns the detail for the movie with the higher average rating.
+
+
+ GET /tops/{n}/ratings/higher/average  - returns a list with the  n  movies with higher average ratings, sorted decreasingly.
+
+
+ GET /tops/ratings/lower/average  - returns the detail for the movie with the lower average rating.
+
+
+ GET /tops/{n}/ratings/lower/average  - returns a list with the  n  movies with the lower average ratings, sorted decreasingly.
+
+
+ GET /tops/reviews/higher/count  - returns the detail for the movie with most reviews.
+
+
+ GET /tops/{n}/reviews/higher/count  - returns a list with the  n  movies with higher review count.
+
+
+ POST /collections  - creates a new collection and returns its identifier, given the following parameters
+  name  - the tag unique name;
+  description  - the tag description;
+
+
+ GET /collections  - returns the list of collections, using the insertion order.
+
+
+ GET /collections/{cid}  - returns the details for the  cid  collection, namely all the movies in that collection.
+
+
+ POST /collections/{cid}/movies/  - adds a movie to the  cid  collection, given
+  mid  - the movie unique identifier.
+
+
+ DELETE /collections/{cid}/movies/{mid}  - removes the movie  mid  from the collections  cid .
+
+
+ OPTION /  - presents a list of available commands and their characteristics.
+
+
+ EXIT /  - ends the application.
+
