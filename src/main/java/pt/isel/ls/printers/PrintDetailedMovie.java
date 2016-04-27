@@ -46,7 +46,6 @@ public class PrintDetailedMovie implements Printable {
     public PrintDetailedMovie(Collection<Movie> movieCollection) {
         this.movieCollection = movieCollection;
         function.add(movie -> "" + movie.getMovieID());
-        function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> movie.getMovieName());
         function.add(movie -> ""+movie.getMovieRelease());
         function.add(movie -> "" + movie.getOneStar());
@@ -68,7 +67,7 @@ public class PrintDetailedMovie implements Printable {
         String str = "";
         for (Movie m : movieCollection)
              str += head[0] + " = "+function.get(0).apply(m) +"\n"+
-                     head[1] + " = "+ function.get(1).apply(m) +
+                    "\t"+head[1] + " = "+ function.get(1).apply(m) +
                     "\t" + head[2] +" = "+ function.get(2).apply(m) +"\n"+
                     "\t"+head[3]+" = " + function.get(3).apply(m) +
                     "   "+head[4]+" = " + function.get(4).apply(m) +

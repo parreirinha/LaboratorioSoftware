@@ -35,7 +35,7 @@ public class PrintGetCollectionsById implements Printable {
                 "\n"+head[2]+": " + movieCollection.getCollections().getDescription() +
                 "\n\nMovies in the collection:";
         for (Movie movie : movieCollection.getMovies()) {
-            s += "\n"+head[3]+": " + movie.getMovieID() + "\t"+head[4]+" " + movie.getMovieName();
+            s += "\n"+head[3]+": " + movie.getMovieID() + "\t"+head[4]+": " + movie.getMovieName();
         }
         return s+"\n";
     }

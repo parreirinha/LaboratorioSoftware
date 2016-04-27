@@ -39,7 +39,7 @@ public class PrintMovieRating implements Printable {
     public String toStringText() {
         String str = "";
         for(Movie m : movie)
-            str += head[0] + function.get(0).apply(m) +
+            str += head[0] + " " + function.get(0).apply(m) +
                     " "+head[1]+" "+ function.get(1).apply(m) + ".\n" +
                     "\t" +head[2]+" = " + function.get(2).apply(m) +
                     "   "+head[3]+" = " + function.get(3).apply(m) +
