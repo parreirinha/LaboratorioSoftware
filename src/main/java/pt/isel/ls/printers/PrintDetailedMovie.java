@@ -1,8 +1,6 @@
 package pt.isel.ls.printers;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.function.Function;
 
 import pt.isel.ls.model.Movie;

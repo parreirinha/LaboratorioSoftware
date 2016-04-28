@@ -1,6 +1,5 @@
 package pt.isel.ls.model;
 
-import java.sql.Date;
 
 /**
  * Created by fabio on 17-Apr-16.

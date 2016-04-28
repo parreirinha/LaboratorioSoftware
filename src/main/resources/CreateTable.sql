@@ -52,7 +52,6 @@ create table MovieCollection
 	foreign key (CID) references Collections (CollectionID),
 	foreign key (MovieID) references Movie(MovieID)
 );
-<<<<<<< HEAD
 
 /*
 select *
