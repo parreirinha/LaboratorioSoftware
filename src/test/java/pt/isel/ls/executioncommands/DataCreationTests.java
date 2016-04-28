@@ -118,7 +118,7 @@ public class DataCreationTests {
                         "\tFourStar integer default 0,\n" +
                         "\tFiveStar integer default 0,\n" +
                         "\t Average as convert(decimal(4,3),((OneStar + TwoStar*2 + TreeStar * 3 + FourStar * 4 + FiveStar * 5) / \n" +
-                        "    cast((OneStar + TwoStar + TreeStar + FourStar + FiveStar)AS DECIMAL (4,0)))), \n" +
+                        "cast((OneStar + TwoStar + TreeStar + FourStar + FiveStar)AS DECIMAL (4,0)))), \n" +
                         "\tunique(MovieName, MovieRelease),\n" +
                         "\tprimary key(MovieID)\n" +
                         ")";

@@ -22,10 +22,8 @@ public class GetTopRatingsLowerAverage implements CommandExecution {
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
-        String query = "select top 1 * from(\n" +
-                "select *, CONVERT(DECIMAL(4,3), ((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
-                "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
-                "order by R.Average";
+        String query = "select top 1 * from\n" +
+                "dbo.Movie as M order by M.Average";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);

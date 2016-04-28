@@ -67,7 +67,7 @@ public class GetTopNRatingsLowerAverageTest {
 
     }
 
-    //todo not set for parameter 3
+
     @Test
     public void pagingTest() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();

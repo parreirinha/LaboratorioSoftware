@@ -87,3 +87,18 @@ select * from MovieCollection;
 
 --drop table MovieCollection;
 --drop table Collections;
+
+
+
+-- exemplo da query q esta em falta
+select * 
+from(
+	select top (4) *,ROW_NUMBER() OVER (ORDER BY c desc) as Row_Count
+		from ( 
+			select R.MovieID, count(R.MovieID)as c 
+				from Review as R
+				group by R.MovieID) as ct
+				inner join Movie as M on M.MovieId = ct.MovieID
+				order by c desc
+				) as res
+where Row_Count BETWEEN 2 AND 3

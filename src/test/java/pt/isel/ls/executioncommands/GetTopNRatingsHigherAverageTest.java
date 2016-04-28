@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -60,5 +59,32 @@ public class GetTopNRatingsHigherAverageTest {
                 "\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n" +
                 "\tAverage = 4.097\n";
 
+    }
+
+
+
+    @Test
+    public void pagingTest() throws SQLException {
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=2&top=3"};
+        command = new CommandGetter().getCommand(input);
+        result = getTopsNRatingsHigherAverage.execute(connection, command).toStringText();
+        expected = setExpectedValueToSimplePagingTest();
+        assertEquals(expected, result);
+    }
+
+    private String setExpectedValueToSimplePagingTest(){
+        return "Movie ID = 1\n" +
+                "\tName = Fight Club\tRelease = 1999\n" +
+                "\t* = 20   ** = 10   *** = 15   **** = 50   ***** = 32\n" +
+                "\tAverage = 3.504\n" +
+                "Movie ID = 7\n" +
+                "\tName = The Silence of the Lambs\tRelease = 1991\n" +
+                "\t* = 2   ** = 30   *** = 11   **** = 40   ***** = 22\n" +
+                "\tAverage = 3.476\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven\tRelease = 1995\n" +
+                "\t* = 5   ** = 20   *** = 40   **** = 35   ***** = 22\n" +
+                "\tAverage = 3.402\n";
     }
 }

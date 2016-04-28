@@ -3,18 +3,16 @@ apply plugin: 'java'
 version = '1.0'
 
 dependencies {
+
     compile fileTree(dir: 'vendor/main', include: '*.jar')
     testCompile fileTree(dir: 'vendor/test', include: '*.jar')
 }
 
-<<<<<<< HEAD
-compileJava{
-
-    options.compilerArgs<<"-Xlint:unchecked"
-
-}
-=======
 compileJava {
     options.compilerArgs<<"-Xlint:unchecked"
+<<<<<<< HEAD
 }
->>>>>>> d98f81e0761bf53a38481cae722cb3ccbe3cc18a
+
+=======
+}
+>>>>>>> 226de75b760081bcfee54b2b54951f54114ecf5e

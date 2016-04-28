@@ -1,7 +1,10 @@
 package pt.isel.ls.printers;
 
 
+<<<<<<< HEAD
+=======
 import java.util.ArrayList;
+>>>>>>> 226de75b760081bcfee54b2b54951f54114ecf5e
 
 import java.util.Collection;
 import java.util.function.Function;

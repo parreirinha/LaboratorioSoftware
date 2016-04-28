@@ -40,7 +40,7 @@ public class GetCollections implements CommandExecution {
         if(res.toArray()[0] == "") {
             return new PrintMensage("There are no collections to be return");
         }
-        return new PrintGetCollections((Collection)res);
+        return new PrintGetCollections(res);
     }
 
     private Collection<Collections> getCollection(ResultSet rs) throws SQLException {

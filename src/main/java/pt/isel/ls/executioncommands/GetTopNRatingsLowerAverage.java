@@ -24,15 +24,21 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException {
         int n = command.getPath().getPathInt("n");
 
-        String query = "select top (?) *, " +setClumnRowCountString(null, " R.Average")+ " from(\n" +
-                "select *, CONVERT(DECIMAL(4,3), " +
-                    "((M1.OneStar + M1.TwoStar*2 + M1.TreeStar * 3 + M1.FourStar * 4 + M1.FiveStar * 5)\n" +
-                    "/ cast(((M1.OneStar + M1.TwoStar + M1.TreeStar + M1.FourStar + M1.FiveStar)) " +
-                    "AS DECIMAL (4,0)))) as Average from  dbo.Movie as M1)as R\n" +
-                "order by R.Average";
-        PreparedStatement ps = connection.prepareStatement(query);
-        //PreparedStatement ps = preparedStatementWithPaging(connection, query, command, " R.Average");
-        ps.setInt(1, n);
+        String query =
+                "select top (?) *," + setClumnRowCountString(command, "Average") +" from\n" +
+                "dbo.Movie as M order by M.Average";
+        PreparedStatement ps;
+
+        if (pagingVerification(command)){
+            int[]val = getSkipAndTopValuesToUseInPaging(command);
+            query = concatenateQuearyIfExistsPaging(query, command, "Average");
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, n, val[0], val[1]);
+        }else {
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, n);
+        }
+
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs, n);
         return new PrintDetailedMovie(res);

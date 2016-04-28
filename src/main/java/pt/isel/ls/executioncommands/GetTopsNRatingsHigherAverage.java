@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static pt.isel.ls.executioncommands.AccessUtils.*;
+
 /**
  * linecommand nº10
  * GET /tops/{n}/ratings/higher/average
@@ -21,12 +23,20 @@ public class GetTopsNRatingsHigherAverage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException {
         int n = command.getPath().getPathInt("n");
+        String query = "select top (?) *, "+ setClumnRowCountString(null, "Average desc") +
+                " from\n dbo.Movie as M order by M.Average desc";
+        PreparedStatement ps;
 
-        String query = "select top (?) * from(\n" +
-                "select * from  dbo.Movie)as R\n" +
-                "order by R.Average desc";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, n);
+        if (pagingVerification(command)){
+            int[]val = getSkipAndTopValuesToUseInPaging(command);
+            query = concatenateQuearyIfExistsPaging(query, command, "Average desc");
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, n, val[0], val[1]);
+        }else {
+            ps = connection.prepareStatement(query);
+            setValuesOnPreparedStatement(ps, n);
+        }
+
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs, n);
         return new PrintDetailedMovie(res);

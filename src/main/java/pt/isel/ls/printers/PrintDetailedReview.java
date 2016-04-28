@@ -2,6 +2,7 @@ package pt.isel.ls.printers;
 
 import pt.isel.ls.model.Review;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
@@ -13,16 +14,16 @@ public class PrintDetailedReview implements  Printable{
     Collection<Review> review;
     private final String[] head =
             {"Review ID", "Movie ID", "Reviewer Name", "Review Rating", "Summary Review", "Complete Review"};
-    private final Function<Review, String >[] function = new Function[6];
+    private final ArrayList<Function<Review, String >> function = new ArrayList<>();
 
     public PrintDetailedReview(Collection<Review> r){
         review = r;
-        function[0] = review -> "" + review.getReviewID();
-        function[1] = review -> "" + review.getMovieID();
-        function[2] = review -> review.getReviewName();
-        function[3] = review -> "" + review.getReviewRating();
-        function[4] = review -> review.getReviewSummary();
-        function[5] = review -> review.getCompleteReview();
+        function.add(review -> "" + review.getReviewID());
+        function.add(review -> "" + review.getMovieID());
+        function.add(review -> review.getReviewName());
+        function.add(review -> "" + review.getReviewRating());
+        function.add(review -> review.getReviewSummary());
+        function.add(review -> review.getCompleteReview());
     }
 
     /**
@@ -34,12 +35,12 @@ public class PrintDetailedReview implements  Printable{
     public String toStringText() {
         String str = "";
         for(Review r : review)
-            str += head[0] + " = " + function[0].apply(r) +
-                    "\n\t"+ head[1] +" = " + function[1].apply(r) +
-                    "\n\t"+ head[2] +" = " + function[2].apply(r) +
-                    "\t"+ head[3] +" = " + function[3].apply(r) +
-                    "\n\t"+ head[4] +" = " + function[4].apply(r) +
-                    "\n\t"+ head[5] +" = " + function[5].apply(r) +
+            str += head[0] + " = " + function.get(0).apply(r) +
+                    "\n\t"+ head[1] +" = " + function.get(1).apply(r) +
+                    "\n\t"+ head[2] +" = " + function.get(2).apply(r) +
+                    "\t"+ head[3] +" = " + function.get(3).apply(r) +
+                    "\n\t"+ head[4] +" = " + function.get(4).apply(r) +
+                    "\n\t"+ head[5] +" = " + function.get(5).apply(r) +
                     "\n";
         return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
     }
@@ -54,7 +55,7 @@ public class PrintDetailedReview implements  Printable{
         */
         return HtmlGenerator.htmlGenerate(review, head, function);
     }
-    /*
+/*
     private String getTable()
     {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
@@ -64,17 +65,17 @@ public class PrintDetailedReview implements  Printable{
             str += "\t"+getFullHtmlDescription(r)+"\n";
         }
         str += "</table>";
-        return String.format(Printable.super.getTemplate(), str);
+        return str;
     }
 
     private String getText()
     {
         Review r = review.iterator().next();
-        String str = "<ul><li>"+head[0]+": "+function[0].apply(r)+"</li>\n" +
+        String str = "<ul><li>"+head[0]+": "+function.get(0).apply(r)+"</li>\n" +
                 "<ul>\n";
         for(int i = 1; i < head.length; ++i)
         {
-            str += "<li>"+head[i]+": "+function[i].apply(r)+"</li>\n";
+            str += "<li>"+head[i]+": "+function.get(i).apply(r)+"</li>\n";
         }
         str += "</ul>\n" +
                 "</ul>\n";
@@ -84,18 +85,19 @@ public class PrintDetailedReview implements  Printable{
     private String getFullHtmlDescription(Review r)
     {
         String str = "<tr>\n";
-        for(int i = 0; i < function.length(); ++i)
-            str += ""\t\t<td>"+function[i].apply(r)+"</td>\n"";
+        for(int i = 0; i < function.size(); ++i)
+            str += "\t\t<td>"+function.get(i).apply(r)+"</td>\n";
+        return str + "</tr>\n";
     }
 
     private String getFullHtmlTitle()
     {
         String str = "<tr>\n";
-        for(int i = 0; i < head.length(); ++i)
-            str += "\t\t<td>head[i]</td>\n";
+        for(int i = 0; i < head.length; ++i)
+            str += "\t\t<td>"+head[i]+"</td>\n";
         return str + "</tr>\n";
     }
-    */
+*/
 }
 
 
