@@ -86,11 +86,12 @@ public class PrintGetCollectionsById implements Printable {
         {
             if(aux > 0)
             {
-                str += "<td></td>\n<td></td>\n<td></td>\n";
+                str += "<tr>\n<td></td>\n<td></td>\n<td></td>\n";
             }
-            str += "<td>"+movieCollection.getCollections().getCollectionID()+"</td>\n"+
-                    "<td>"+movieCollection.getCollections().getCollectionID()+"</td>\n";
+            str += "<td>"+m.getMovieID()+"</td>\n"+
+                    "<td>"+m.getMovieName()+"</td>\n";
             ++aux;
+            str += "</tr>\n";
         }
 
         return str + "</tr>\n";
