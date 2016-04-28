@@ -42,7 +42,7 @@ public class PrintDetailedReview implements  Printable{
                     "\n\t"+ head[4] +" = " + function.get(4).apply(r) +
                     "\n\t"+ head[5] +" = " + function.get(5).apply(r) +
                     "\n";
-        return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
+        return (str == "") ? new PrintError("There is no such review.\n").toStringText() : str;
     }
 
     @Override

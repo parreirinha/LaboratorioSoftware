@@ -4,7 +4,6 @@ package pt.isel.ls.executioncommands;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 import java.sql.Connection;
@@ -45,7 +44,11 @@ public class PostCollectionTest {
     public void insertAValidCollection() throws SQLException {
         input = new String[] {"POST", "/collections", "name=Rocky&description=movies about boxe"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Collection posted with success, the id of the new collection is 4";
         assertEquals(expected, result);
     }

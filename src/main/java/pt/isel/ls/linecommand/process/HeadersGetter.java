@@ -19,10 +19,11 @@ public class HeadersGetter {
         if(headersString!="")
         for (int i = 0; i < headers.length; ++i) {
             String[] pair = headers[i].split(":");
-            String key = pair[0];
-            String value = pair[1];
-
-            headersStrings.put(key, value);
+            if(pair.length==2) {
+                String key = pair[0];
+                String value = pair[1];
+                headersStrings.put(key, value);
+            }
         }
 
         return new Headers(headersStrings);

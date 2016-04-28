@@ -3,9 +3,9 @@ package pt.isel.ls.executioncommands;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -51,7 +51,11 @@ public class GetAllReviewsTest {
 
         input = new String[]{"GET", "/movies/1/reviews"};
         command = new CommandGetter().getCommand(input);
-        result = getAllReviews.execute(connection, command).toStringText();
+        try {
+            result = getAllReviews.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected ="Review ID = 1" +
                         "\n\tReviewer Name = Manel" +
                         "\tReview Rating = 5"+
@@ -72,7 +76,11 @@ public class GetAllReviewsTest {
     public void movieWithTwoReview() throws SQLException{
         input = new String[]{"GET", "/movies/2/reviews"};
         command = new CommandGetter().getCommand(input);
-        result = getAllReviews.execute(connection, command).toStringText();
+        try {
+            result = getAllReviews.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Review ID = 4" +
                 "\n\tReviewer Name = Jack" +
                 "\tReview Rating = 2"+
@@ -89,14 +97,18 @@ public class GetAllReviewsTest {
     public void movieWithoutReviews() throws SQLException{
         input = new String[]{"GET", "/movies/666/reviews"};
         command = new CommandGetter().getCommand(input);
-        result = getAllReviews.execute(connection, command).toStringText();
-        expected = "something went wrong!!\n";
+        try {
+            result = getAllReviews.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
+        expected = "There is no such review.\n";
         assertEquals(expected, result);
     }
 
 
     @Test
-    public void pagingTest() throws SQLException {
+    public void pagingTest() throws SQLException, ApplicationException {
 
 
         input = new String[]{"GET", "/movies/1/reviews", "skip=1&top=1"};

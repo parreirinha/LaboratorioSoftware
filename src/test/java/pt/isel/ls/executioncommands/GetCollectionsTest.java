@@ -1,10 +1,9 @@
 package pt.isel.ls.executioncommands;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -44,7 +43,11 @@ public class GetCollectionsTest  {
     public void getAllCollectionsTest() throws SQLException {
         input = new String[] {"GET", "/collections"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected =
             "\nCollection id = 1\nName = STARWARS\nDescription = serie de filmes da saga starwars" +
             "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000" +
@@ -54,7 +57,7 @@ public class GetCollectionsTest  {
     }
 
     @Test
-    public void simplePagingTest() throws SQLException {
+    public void simplePagingTest() throws SQLException, ApplicationException {
 
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/collections", "skip=1&top=2"};

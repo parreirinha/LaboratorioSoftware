@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.model.Movie;
@@ -12,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 /**
@@ -27,7 +27,7 @@ public class GetCollectionById implements CommandExecution {
     private Collections collections;
 
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
 
 
         int collectionId = command.getPath().getPathInt("cid");

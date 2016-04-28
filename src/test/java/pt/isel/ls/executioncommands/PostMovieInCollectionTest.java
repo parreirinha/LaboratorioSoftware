@@ -1,10 +1,8 @@
 package pt.isel.ls.executioncommands;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -45,7 +43,11 @@ public class PostMovieInCollectionTest {
     public void insertMovieInCollection() throws SQLException {
         input = new String[] {"POST", "/collections/1/movies/", "mid=1"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "The movie with id = 1 was added with sucess to the collection";
         assertEquals(expected, result);
     }

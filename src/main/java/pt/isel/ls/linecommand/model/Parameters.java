@@ -20,6 +20,8 @@ public class Parameters {
     }
 
     public int getParamInt(String key){
+        if(!paramStrings.containsKey(key))
+            return -1;
 
         if (paramStrings.containsKey(key)) {
             return Integer.parseInt(paramStrings.get(key));

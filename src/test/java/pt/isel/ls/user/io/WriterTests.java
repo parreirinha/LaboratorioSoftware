@@ -2,6 +2,7 @@ package pt.isel.ls.user.io;
 
 import org.junit.After;
 import org.junit.Test;
+import pt.isel.ls.exceptions.ApplicationException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ public class WriterTests {
     }
 
     @Test
-    public void shouldReturnSameWritenString() throws FileNotFoundException {
+    public void shouldReturnSameWritenString() throws FileNotFoundException, ApplicationException {
         new Writer().writeToFile(TestOneString, TestFileName);
         Scanner in = new Scanner(new FileReader(TestFileName));
         String res = in.nextLine();
@@ -35,7 +36,7 @@ public class WriterTests {
     }
 
     @Test
-    public void shouldReturnSameWritenStrings() throws FileNotFoundException {
+    public void shouldReturnSameWritenStrings() throws FileNotFoundException, ApplicationException {
         new Writer().writeToFile(TestMoreThanOneString, TestFileName);
         Scanner in = new Scanner(new FileReader(TestFileName));
         String res1 = in.nextLine();

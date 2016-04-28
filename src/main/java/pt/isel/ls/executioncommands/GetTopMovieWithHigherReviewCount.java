@@ -1,7 +1,7 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -24,7 +24,7 @@ public class GetTopMovieWithHigherReviewCount implements CommandExecution {
     private int[] stars = new int[5];
 
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         String query = "select top 1 * from (\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
                 "group by R.MovieID) as ct\n" +

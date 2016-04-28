@@ -3,9 +3,9 @@ package pt.isel.ls.executioncommands;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -44,7 +44,11 @@ public class GetTopNMoviesWithHigherReviewCountTest {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET","/tops/2/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
-        result = getTopNMoviesWithHigherReviewCount.execute(connection, command).toStringText();
+        try {
+            result = getTopNMoviesWithHigherReviewCount.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = getTop2MoviesWithHihgerReviewCountString();
         assertEquals(expected, result);
     }
@@ -57,7 +61,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
 
 
     @Test
-    public void pagingTest() throws SQLException {
+    public void pagingTest() throws SQLException, ApplicationException {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET","/tops/5/reviews/higher/count", "skip=2&top=2"};
         command = new CommandGetter().getCommand(input);

@@ -1,6 +1,5 @@
 package pt.isel.ls.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

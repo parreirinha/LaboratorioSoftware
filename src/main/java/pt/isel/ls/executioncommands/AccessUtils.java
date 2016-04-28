@@ -33,6 +33,7 @@ public class AccessUtils {
             if (vals[i] instanceof String)
                 ps.setString(i + 1, (String) vals[i]);
             else {
+                if(i!=-1)
                 ps.setInt(i + 1, (Integer) vals[i]);
             }
         }

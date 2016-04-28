@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -49,7 +48,11 @@ public class PostMovieRatingTest {
 
         input = new String[]{"POST", "/movies/2/ratings","rating=5"};
         command = new CommandGetter().getCommand(input);
-        result = postMovieRating.execute(connection, command).toStringText();
+        try {
+            result = postMovieRating.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Rating posted with sucess";
         assertEquals(expected, result);
 

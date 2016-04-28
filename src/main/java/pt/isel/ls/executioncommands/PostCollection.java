@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.*;
 
@@ -16,19 +17,22 @@ import java.sql.*;
 public class PostCollection implements CommandExecution {
 
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
 
         String collectionName = command.getParams().getParamString("name");
         String description = command.getParams().getParamString("description");
-        String query = "insert into Collections (Name, Description) " + "values(?,?)";
-        PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        AccessUtils.setValuesOnPreparedStatement(ps, collectionName, description);
-        ps.executeUpdate();
-        ResultSet rs = ps.getGeneratedKeys();
-        if(rs.next()){
-            int cid = rs.getInt(1);
-            return new PrintMensage("Collection posted with success, the id of the new collection is " +cid);
+        if(collectionName!=null && description!=null) {
+            String query = "insert into Collections (Name, Description) " + "values(?,?)";
+            PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            AccessUtils.setValuesOnPreparedStatement(ps, collectionName, description);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                int cid = rs.getInt(1);
+                return new PrintMensage("Collection posted with success, the id of the new collection is " + cid);
+            }
+            return new PrintMensage("Error inserting new Collection");
         }
-        return new PrintMensage("Error inserting new Collection");
+        return new PrintError("Error: Invalid parameter(s).");
     }
 }

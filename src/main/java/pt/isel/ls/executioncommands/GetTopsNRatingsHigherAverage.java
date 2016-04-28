@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.Printable;
@@ -21,7 +22,7 @@ import static pt.isel.ls.executioncommands.AccessUtils.*;
  */
 public class GetTopsNRatingsHigherAverage implements CommandExecution {
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         int n = command.getPath().getPathInt("n");
         String query = "select top (?) *, "+ setClumnRowCountString(null, "Average desc") +
                 " from\n dbo.Movie as M order by M.Average desc";

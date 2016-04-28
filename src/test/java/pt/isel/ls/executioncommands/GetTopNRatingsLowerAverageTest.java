@@ -3,9 +3,9 @@ package pt.isel.ls.executioncommands;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -43,7 +43,11 @@ public class GetTopNRatingsLowerAverageTest {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/tops/3/ratings/lower/average"};
         command = new CommandGetter().getCommand(input);
-        result = getTopsNRatingsLowerAverage.execute(connection, command).toStringText();
+        try {
+            result = getTopsNRatingsLowerAverage.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = getTopsNRatingsLowerAverageString();
         assertEquals(expected, result);
     }
@@ -69,7 +73,7 @@ public class GetTopNRatingsLowerAverageTest {
 
 
     @Test
-    public void pagingTest() throws SQLException {
+    public void pagingTest() throws SQLException, ApplicationException {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/tops/3/ratings/lower/average", "skip=1&top=1"};
         command = new CommandGetter().getCommand(input);

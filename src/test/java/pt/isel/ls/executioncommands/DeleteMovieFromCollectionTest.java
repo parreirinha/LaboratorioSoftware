@@ -1,10 +1,8 @@
 package pt.isel.ls.executioncommands;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -44,7 +42,11 @@ public class DeleteMovieFromCollectionTest {
     public void deleteTest() throws SQLException {
         input = new String[] {"DELETE", "/collections/1/movies/4"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Movie with id = " + 4 + " was deleted with sucess from collection";
         assertEquals(expected, result);
     }

@@ -6,7 +6,6 @@ import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -43,7 +42,11 @@ public class GetTopMovieWithHigherReviewCountTest {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET","/tops/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
-        result = getTopMovieWithHigherReviewCount.execute(connection, command).toStringText();
+        try {
+            result = getTopMovieWithHigherReviewCount.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = getTopMovieWithHihgerReviewCountString();
         assertEquals(expected, result);
     }

@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.printers.PrintGetCollections;
@@ -23,7 +24,7 @@ import static pt.isel.ls.executioncommands.AccessUtils.*;
  */
 public class GetCollections implements CommandExecution {
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
 
         String query = "select *, " + setClumnRowCountString(null, "CollectionID") +
                 " from Collections";

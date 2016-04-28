@@ -22,10 +22,11 @@ public class ParamGetter {
         if(paramString!="")
         for(int i = 0; i < params.length; ++i){
             String[] pair = params[i].split("=");
-            String key = pair[0];
-            String value = pair[1].replace('+', ' ');
-
-            paramStrings.put(key,value);
+            if(pair.length==2) {
+                String key = pair[0];
+                String value = pair[1].replace('+', ' ');
+                paramStrings.put(key,value);
+            }
         }
 
         return new Parameters(paramStrings);

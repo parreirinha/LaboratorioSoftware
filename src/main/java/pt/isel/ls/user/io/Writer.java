@@ -1,5 +1,7 @@
 package pt.isel.ls.user.io;
 
+import pt.isel.ls.exceptions.ApplicationException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,34 +13,34 @@ public class Writer {
 
     static private FileWriter fileWriter;
 
-    public void writeToFile(String out, String filename) {
+    public void writeToFile(String out, String filename) throws ApplicationException {
         createWriteFile(filename);
 
         try {
             fileWriter.write(out + '\r' + '\n');
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ApplicationException();
         }
 
         closeWriteFile();
     }
 
-    private void createWriteFile(String filename) {
+    private void createWriteFile(String filename) throws ApplicationException{
 
         try {
             fileWriter = new FileWriter(filename);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ApplicationException();
         }
     }
 
-    private void closeWriteFile() {
+    private void closeWriteFile() throws ApplicationException{
 
         try {
             fileWriter.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ApplicationException();
         }
     }
 

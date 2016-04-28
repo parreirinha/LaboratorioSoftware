@@ -9,7 +9,7 @@ import java.util.function.Function;
 /**
  * Created by Dani on 12-04-2016.
  */
-public class HtmlGenerator<T>
+public class HtmlGenerator
 {
     public final static String template = "<!DOCTYPE>\n" +
             "\t<html>\n" +
