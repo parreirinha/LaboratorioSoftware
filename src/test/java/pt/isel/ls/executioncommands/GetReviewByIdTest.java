@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -54,7 +53,11 @@ public class GetReviewByIdTest {
         //"Review ID = ##\n\tMovie ID = ##\n\tReviewer Name = ##\tReview Rating = ##\n\tSummary Review = ##\n\tComplete Review = ##\n"
         input = new String[]{"GET", "/movies/1/reviews/2"};
         command = new CommandGetter().getCommand(input);
-        result = getReviewById.execute(connection, command).toStringText();
+        try {
+            result = getReviewById.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Review ID = 2\n\tMovie ID = 1\n\tReviewer Name = Bad taste Reviwer\tReview Rating = 1" +
                 "\n\tSummary Review = Horrible\n\tComplete Review = This is the worst movie i have seen in my life\n";
         assertEquals(expected, result);
@@ -66,7 +69,11 @@ public class GetReviewByIdTest {
 
         input = new String[]{"GET", "/movies/2/reviews/4"};
         command = new CommandGetter().getCommand(input);
-        result = getReviewById.execute(connection, command).toStringText();
+        try {
+            result = getReviewById.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Review ID = 4\n\tMovie ID = 2\n\tReviewer Name = Jack\tReview Rating = 2" +
                 "\n\tSummary Review = Morgan Freeman is the best\n" +
                 "\tComplete Review = Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his modus operandi\n";

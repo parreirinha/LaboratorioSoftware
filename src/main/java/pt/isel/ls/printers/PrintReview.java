@@ -40,7 +40,7 @@ public class PrintReview implements Printable {
                     "\n\t"+head[3]+" = " + r.getReviewSummary() +
                     "\n";
         }
-        return (s == "") ? new PrintError("something went wrong!!\n").toStringText() : s;
+        return (s == "") ? new PrintError("There is no such review.\n").toStringText() : s;
     }
 
     @Override

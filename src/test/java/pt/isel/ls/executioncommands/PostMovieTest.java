@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -43,7 +42,11 @@ public class PostMovieTest {
 
         input = new String[]{"POST", "/movies", "title=Big Fish&releaseYear=2003"};
         command = new CommandGetter().getCommand(input);
-        result = postMovie.execute(connection, command).toStringText();
+        try {
+            result = postMovie.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "The ID of the new movie is: 8";
         assertEquals(expected, result);
     }

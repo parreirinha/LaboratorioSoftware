@@ -39,7 +39,7 @@ public class PrintMovie implements Printable {
                     "\t"+ head[2] +" = " + function.get(2).apply(m)+
                     "\n";
         }
-        return (s == "") ? new PrintError("something went wrong!!\n").toStringText() : s;
+        return (s == "") ? new PrintError("There is no such movie.\n").toStringText() : s;
     }
 
     @Override

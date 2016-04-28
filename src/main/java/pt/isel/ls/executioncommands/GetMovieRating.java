@@ -1,6 +1,7 @@
 package pt.isel.ls.executioncommands;
 
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovieRating;
 import pt.isel.ls.printers.Printable;
@@ -22,7 +23,7 @@ import java.util.Collection;
 public class GetMovieRating implements CommandExecution {
 
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
 
         int id = command.getPath().getPathInt("mid");
         String query = "select *, CONVERT(DECIMAL(4,3), " +

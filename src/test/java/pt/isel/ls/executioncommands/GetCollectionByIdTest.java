@@ -1,10 +1,8 @@
 package pt.isel.ls.executioncommands;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -45,7 +43,11 @@ public class GetCollectionByIdTest {
     public void collectionNumberTwoTest() throws SQLException {
         input = new String[] {"GET", "/collections/2"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected =
                 "Collection id: 2\n" +
                 "Collection name: Before 2000\n" +
@@ -66,7 +68,11 @@ public class GetCollectionByIdTest {
     public void collectionOneTwoTest() throws SQLException {
         input = new String[] {"GET", "/collections/1"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected =
                 "Collection id: 1\n" +
                 "Collection name: STARWARS\n" +

@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
@@ -21,7 +22,7 @@ public class GetAllMovies implements CommandExecution {
     private HashMap<String, String> sortDecoder;
 
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException
     {
         String query = "select *, "+ getClumnRowCountString(command) + ", " + getRatingColumnFormula() +
                 " from Movie\n";

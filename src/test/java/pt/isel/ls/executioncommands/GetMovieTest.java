@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
@@ -39,9 +39,13 @@ public class GetMovieTest {
 
         input = new String[]{"GET", "/movies/1"};
         command = new CommandGetter().getCommand(input);
-        result = getMovie.execute(connection,  command).toStringText();
+        try {
+            result = getMovie.execute(connection,  command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n\t* = 20   ** = 10   *** = 15" +
-                "   **** = 50   ***** = 32\n\tAverage = 0.0\n";
+                "   **** = 50   ***** = 32\n\tAverage = 3.504\n";
         assertEquals(expected, result);
     }
 
@@ -51,8 +55,12 @@ public class GetMovieTest {
 
         input = new String[]{"GET", "/movies/100"};
         command = new CommandGetter().getCommand(input);
-        result = getMovie.execute(connection, command).toStringText();
-        expected = "something went wrong!!\n";
+        try {
+            result = getMovie.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
+        expected = "There is no such movie.\n";
         assertEquals(expected, result);
 
 

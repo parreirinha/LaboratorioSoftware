@@ -1,12 +1,12 @@
 package pt.isel.ls.user.io;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.*;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.printers.Printable;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -17,7 +17,7 @@ public class Run {
     private Connection conn;
     Command command;
 
-    public void RunApp(String[] args) {
+    public void RunApp(String[] args) throws ApplicationException{
         try {
             command = new CommandGetter().getCommand(args);
             conn = new ConnectionFactory().getNewConnection();
@@ -29,29 +29,30 @@ public class Run {
 
         } catch (SQLException e) {
             tryRollback(conn);
-            e.printStackTrace();
+            throw new ApplicationException();
         } finally {
             tryClose(conn);
         }
     }
 
-    private void tryClose(Connection conn) {
+    private void tryClose(Connection conn) throws ApplicationException {
         try {
             if (conn != null) {
                 conn.close();
             }
         } catch (SQLException e) {
-            System.out.println("Error: Database Access Error.");
-            e.printStackTrace();
+            throw new ApplicationException();
         }
     }
 
-    private void tryRollback(Connection conn) {
+    private void tryRollback(Connection conn) throws ApplicationException {
         try {
             conn.rollback();
         } catch (SQLException e) {
-            System.out.println("Error: Database Access Error.");
-            e.printStackTrace();
+            throw new ApplicationException();
+        }
+        catch (NullPointerException e1) {
+            throw new ApplicationException();
         }
     }
 
@@ -64,7 +65,7 @@ public class Run {
         }
     }
 
-    private void identifyOutputType(Command command, String out) {
+    private void identifyOutputType(Command command, String out) throws ApplicationException {
         String filename = command.getHeaders().getHeadersString("file-name");
 
         if (filename == null) {

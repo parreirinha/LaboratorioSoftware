@@ -1,10 +1,8 @@
 package pt.isel.ls.executioncommands;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -44,7 +42,11 @@ public class GetCollectionsTest  {
     public void someTest() throws SQLException {
         input = new String[] {"POST", "/collections", "name=Rocky&description=movies about boxe"};
         command = new CommandGetter().getCommand(input);
-        result = exe.execute(connection, command).toStringText();
+        try {
+            result = exe.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected =
             "\nCollection id = 1\nName = STARWARS\nDescription = serie de filmes da saga starwars" +
             "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000" +

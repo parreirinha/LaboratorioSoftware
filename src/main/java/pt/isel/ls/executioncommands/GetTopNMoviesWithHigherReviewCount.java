@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
@@ -25,7 +26,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
      * @param command
      */
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         String query = "select top (?) * from (\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
                 "group by R.MovieID) as ct\n" +

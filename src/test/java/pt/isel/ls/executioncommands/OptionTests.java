@@ -97,6 +97,10 @@ public class OptionTests {
 
     @Test
     public void shouldTestOptionCommand() throws SQLException {
-        assertEquals(expectedString, ((PrintOption) new Option().execute(null, null)).toStringText());
+        try {
+            assertEquals(expectedString, ((PrintOption) new Option().execute(null, null)).toStringText());
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
     }
 }

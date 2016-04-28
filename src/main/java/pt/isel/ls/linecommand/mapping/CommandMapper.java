@@ -52,7 +52,7 @@ public class CommandMapper {
 
         if(!commmandMap.containsKey(commandProcessedString)){
             System.out.println("Error: Invalid Command.");
-            return null;
+            return commmandMap.get("EXIT");
         }
 
         return commmandMap.get(commandProcessedString);

@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -43,7 +42,11 @@ public class GetTopRatingsHigherAverageTest {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/tops/ratings/higher/average"};
         command = new CommandGetter().getCommand(input);
-        result = getTopRatingsHigherAverage.execute(connection, command).toStringText();
+        try {
+            result = getTopRatingsHigherAverage.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = getTopRatingsHigherAverageString();
         assertEquals(expected, result);
     }

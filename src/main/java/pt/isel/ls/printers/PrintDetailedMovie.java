@@ -75,7 +75,7 @@ public class PrintDetailedMovie implements Printable {
                     "   "+head[6]+" = " + function.get(6).apply(m) +
                     "   "+head[7]+" = " + function.get(7).apply(m) +
                     "\n\t"+head[8]+" = "+ function.get(8).apply(m) +"\n";
-        return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
+        return (str == "") ? new PrintError("There is no such movie.\n").toStringText() : str;
     }
 
     @Override

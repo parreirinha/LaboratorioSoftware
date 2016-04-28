@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
-import pt.isel.ls.database.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -52,7 +51,11 @@ public class GetMovieRatingTest {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies/6/ratings"};
         command = new CommandGetter().getCommand(input);
-        result = getMovieRating.execute(connection, command).toStringText();
+        try {
+            result = getMovieRating.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
         expected = "The average rating for the movie with the ID 6 is 4.097.\n\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n";
         assertEquals(expected, result);
     }

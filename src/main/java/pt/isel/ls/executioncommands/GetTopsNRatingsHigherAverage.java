@@ -1,5 +1,6 @@
 package pt.isel.ls.executioncommands;
 
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.Printable;
@@ -19,7 +20,7 @@ import java.util.Collection;
  */
 public class GetTopsNRatingsHigherAverage implements CommandExecution {
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException {
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         int n = command.getPath().getPathInt("n");
 
         String query = "select top (?) * from\n" +

@@ -46,7 +46,7 @@ public class PrintMovieRating implements Printable {
                     "   "+head[4]+" = " + function.get(4).apply(m) +
                     "   "+head[5]+" = " + function.get(5).apply(m) +
                     "   "+head[6]+" = " + function.get(6).apply(m) + "\n";
-        return (str == "") ? new PrintError("something went wrong!!\n").toStringText() : str;
+        return (str == "") ? new PrintError("There is no such movie.\n").toStringText() : str;
     }
 
     @Override
