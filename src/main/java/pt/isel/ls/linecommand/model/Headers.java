@@ -12,11 +12,11 @@ public class Headers {
         this.headersStrings = strings;
     }
 
-    public String getHeadersString(String key){
+    public String getHeadersString(String key) {
         return headersStrings.get(key);
     }
 
-    public int getHeadersInt(String key){
+    public int getHeadersInt(String key) {
 
         if (headersStrings.containsKey(key)) {
             return Integer.parseInt(headersStrings.get(key));

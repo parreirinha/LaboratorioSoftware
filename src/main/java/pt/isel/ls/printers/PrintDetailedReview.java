@@ -9,14 +9,15 @@ import java.util.function.Function;
 /**
  * Ler Comentario PrintDetailedMovie
  */
-public class PrintDetailedReview implements  Printable{
+public class PrintDetailedReview implements Printable {
 
     Collection<Review> review;
     private final String[] head =
             {"Review ID", "Movie ID", "Reviewer Name", "Review Rating", "Summary Review", "Complete Review"};
-    private final ArrayList<Function<Review, String >> function = new ArrayList<>();
+    private final ArrayList<Function<Review, String>> function = new ArrayList<>();
+    private final String NoReview = "There is no such review.\n";
 
-    public PrintDetailedReview(Collection<Review> r){
+    public PrintDetailedReview(Collection<Review> r) {
         review = r;
         function.add(review -> "" + review.getReviewID());
         function.add(review -> "" + review.getMovieID());
@@ -29,30 +30,33 @@ public class PrintDetailedReview implements  Printable{
     /**
      * String template to be returned:
      * "Review ID = ##\n\tMovie ID = ##\n\tReviewer Name = ##\tReview Rating = ##\n\tSummary Review = ##\n\tComplete Review = ##\n"
+     *
      * @return
      */
     @Override
     public String toStringText() {
         String str = "";
-        for(Review r : review)
+        for (Review r : review)
             str += head[0] + " = " + function.get(0).apply(r) +
-                    "\n\t"+ head[1] +" = " + function.get(1).apply(r) +
-                    "\n\t"+ head[2] +" = " + function.get(2).apply(r) +
-                    "\t"+ head[3] +" = " + function.get(3).apply(r) +
-                    "\n\t"+ head[4] +" = " + function.get(4).apply(r) +
-                    "\n\t"+ head[5] +" = " + function.get(5).apply(r) +
+                    "\n\t" + head[1] + " = " + function.get(1).apply(r) +
+                    "\n\t" + head[2] + " = " + function.get(2).apply(r) +
+                    "\t" + head[3] + " = " + function.get(3).apply(r) +
+                    "\n\t" + head[4] + " = " + function.get(4).apply(r) +
+                    "\n\t" + head[5] + " = " + function.get(5).apply(r) +
                     "\n";
-        return (str == "") ? new PrintError("There is no such review.\n").toStringText() : str;
+        return (str == "") ? new PrintError(NoReview).toStringText() : str;
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         /*
         if(movieCollection.size() == 1)
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
+        if (review.isEmpty())
+            return String.format(HtmlGenerator.template, NoReview);
+
         return HtmlGenerator.htmlGenerate(review, head, function);
     }
 /*

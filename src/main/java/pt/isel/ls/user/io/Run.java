@@ -17,7 +17,7 @@ public class Run {
     private Connection conn;
     Command command;
 
-    public void RunApp(String[] args) throws ApplicationException{
+    public void RunApp(String[] args) throws ApplicationException {
         try {
             command = new CommandGetter().getCommand(args);
             conn = new ConnectionFactory().getNewConnection();
@@ -50,8 +50,7 @@ public class Run {
             conn.rollback();
         } catch (SQLException e) {
             throw new ApplicationException();
-        }
-        catch (NullPointerException e1) {
+        } catch (NullPointerException e1) {
             throw new ApplicationException();
         }
     }

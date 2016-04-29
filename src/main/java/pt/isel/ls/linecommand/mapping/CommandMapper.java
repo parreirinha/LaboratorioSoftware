@@ -15,11 +15,11 @@ import java.util.HashMap;
 public class CommandMapper {
     private HashMap<String, CommandExecution> commmandMap;
 
-    public CommandMapper(){
+    public CommandMapper() {
         initMap();
     }
 
-    private void initMap(){
+    private void initMap() {
         commmandMap = new HashMap<String, CommandExecution>();
         commmandMap.put("POSTmovies", new PostMovie());
         commmandMap.put("GETmovies", new GetAllMovies());
@@ -30,7 +30,7 @@ public class CommandMapper {
         commmandMap.put("GETmoviesmidreviews", new GetAllReviews());
         commmandMap.put("GETmoviesmidreviewsrid", new GetReviewById());
         commmandMap.put("GETtopsratingshigheraverage", new GetTopRatingsHigherAverage());
-        commmandMap.put("GETtopsnratingshigheraverage",new GetTopsNRatingsHigherAverage());
+        commmandMap.put("GETtopsnratingshigheraverage", new GetTopsNRatingsHigherAverage());
         commmandMap.put("GETtopsratingsloweraverage", new GetTopRatingsLowerAverage());
         commmandMap.put("GETtopsnratingsloweraverage", new GetTopNRatingsLowerAverage());
         commmandMap.put("GETtopsreviewshighercount", new GetTopMovieWithHigherReviewCount());
@@ -46,11 +46,11 @@ public class CommandMapper {
     }
 
 
-    public CommandExecution getExecutionCommandInstance(Command command){
+    public CommandExecution getExecutionCommandInstance(Command command) {
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
 
-        if(!commmandMap.containsKey(commandProcessedString)){
+        if (!commmandMap.containsKey(commandProcessedString)) {
             System.out.println("Error: Invalid Command.");
             return commmandMap.get("EXIT");
         }

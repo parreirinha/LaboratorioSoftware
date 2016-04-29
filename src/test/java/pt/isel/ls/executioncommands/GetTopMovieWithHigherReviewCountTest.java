@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Dani on 08-04-2016.
+ * Class used to test GetTopMovieWithHigherReview.
  */
 public class GetTopMovieWithHigherReviewCountTest {
     private Connection connection;
@@ -40,7 +40,7 @@ public class GetTopMovieWithHigherReviewCountTest {
     @Test
     public void checkResultsetGetTopNMoviesWithHigherReviewCountQuery() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
-        input = new String[]{"GET","/tops/reviews/higher/count"};
+        input = new String[]{"GET", "/tops/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
         try {
             result = getTopMovieWithHigherReviewCount.execute(connection, command).toStringText();
@@ -53,7 +53,7 @@ public class GetTopMovieWithHigherReviewCountTest {
 
     private String getTopMovieWithHihgerReviewCountString() {
         return
-        "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n";
+                "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n";
 
     }
 }

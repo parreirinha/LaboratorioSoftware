@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 /**
- * Created by Dani on 26-04-2016.
+ * Class used to print all commands description (from a file)
  */
 public class PrintOption implements Printable {
     Scanner input;
@@ -16,9 +16,9 @@ public class PrintOption implements Printable {
 
     @Override
     public String toStringText() {
-        String s ="";
-        while(input.hasNextLine()){
-            s += input.nextLine()+"\n";
+        String s = "";
+        while (input.hasNextLine()) {
+            s += input.nextLine() + "\n";
         }
         input.close();
         return s;
@@ -29,7 +29,7 @@ public class PrintOption implements Printable {
         return toStringText();
     }
 
-    private Scanner tryOpenFile(Scanner in, String fileName){
+    private Scanner tryOpenFile(Scanner in, String fileName) {
         try {
             in = new Scanner(new FileReader(fileName));
         } catch (FileNotFoundException e) {

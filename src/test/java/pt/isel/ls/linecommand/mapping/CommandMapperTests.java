@@ -21,7 +21,7 @@ public class CommandMapperTests {
     private final String[] getMovieRating = {"GET", "/movies/123/ratings/"};
     private final String reviewFullParams = " reviewerName=Michael+Java&reviewSummary=This is a software test!&" +
             "review=Really, I mean it, it was a good movie but this is only a software test dude!&rating=5";
-    private final String[] postMovieReview = {"POST",  "/movies/123/reviews", reviewFullParams};
+    private final String[] postMovieReview = {"POST", "/movies/123/reviews", reviewFullParams};
     private final String[] getMovieReview = {"GET", "/movies/123/reviews/"};
     private final String[] getMovieReviewById = {"GET", "/movies/123/reviews/100/"};
     private final String[] getTopAverageHigherRating = {"GET", "/tops/ratings/higher/average/"};
@@ -29,7 +29,7 @@ public class CommandMapperTests {
     private final String[] getTopAverageLowerRating = {"GET", "/tops/ratings/lower/average/"};
     private final String[] getTopNAverageLowerRating = {"GET", "/tops/10/ratings/lower/average/"};
     private final String[] getTopReviewHigherCount = {"GET", "/tops/reviews/higher/count/"};
-    private final String[] getTopNReviewHigherCount = {"GET","/tops/10/reviews/higher/count/"};
+    private final String[] getTopNReviewHigherCount = {"GET", "/tops/10/reviews/higher/count/"};
     private final String[] postCollection = {"POST", "/collections/", "name=Star+Wars&description=All six star wars movies."};
     private final String[] getCollections = {"GET", "/collections/"};
     private final String[] getCollection = {"GET", "/collections/10"};
@@ -127,7 +127,7 @@ public class CommandMapperTests {
 
     @Test
     public void AddMovieToCollectionTest() {
-        assertTrue( map.getExecutionCommandInstance(new CommandGetter().getCommand(addMovieToCollection)) instanceof PostMovieInCollection);
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(addMovieToCollection)) instanceof PostMovieInCollection);
 
     }
 

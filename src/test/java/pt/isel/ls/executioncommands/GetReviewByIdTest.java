@@ -16,12 +16,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * * GET /movies/{mid}/reviews/{rid}
  * returns the full information for the review rid of the movie identified by mid.
- *
+ * <p>
  * "reviewid: ##\nmovie id: ##\nreviewer name: ##\nreview summary: ##\ncomplete review: ##\n"
- *
  */
 public class GetReviewByIdTest {
-
 
 
     private Connection connection;
@@ -38,6 +36,7 @@ public class GetReviewByIdTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -45,7 +44,6 @@ public class GetReviewByIdTest {
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
     }
-
 
 
     @Test

@@ -8,11 +8,11 @@ import java.sql.*;
 
 /**
  * phase 2 - Command 1
- *
+ * <p>
  * POST /collections
  * creates a new collection and returns its identifier, given the following parameters:
- *      name - the tag unique name;
- *      description - the tag description
+ * name - the tag unique name;
+ * description - the tag description
  */
 public class PostCollection implements CommandExecution {
 
@@ -21,7 +21,7 @@ public class PostCollection implements CommandExecution {
 
         String collectionName = command.getParams().getParamString("name");
         String description = command.getParams().getParamString("description");
-        if(collectionName!=null && description!=null) {
+        if (collectionName != null && description != null) {
             String query = "insert into Collections (Name, Description) " + "values(?,?)";
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             AccessUtils.setValuesOnPreparedStatement(ps, collectionName, description);
@@ -29,9 +29,9 @@ public class PostCollection implements CommandExecution {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int cid = rs.getInt(1);
-                return new PrintMensage("Collection posted with success, the id of the new collection is " + cid);
+                return new PrintMessage("Collection posted with success, the id of the new collection is " + cid);
             }
-            return new PrintMensage("Error inserting new Collection");
+            return new PrintMessage("Error inserting new Collection");
         }
         return new PrintError("Error: Invalid parameter(s).");
     }

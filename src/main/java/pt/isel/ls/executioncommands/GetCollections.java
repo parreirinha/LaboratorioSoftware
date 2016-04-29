@@ -4,7 +4,7 @@ import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.printers.PrintGetCollections;
-import pt.isel.ls.printers.PrintMensage;
+import pt.isel.ls.printers.PrintMessage;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.Connection;
@@ -18,7 +18,7 @@ import static pt.isel.ls.executioncommands.AccessUtils.*;
 
 /**
  * phase 2 - Command 2
- *
+ * <p>
  * GET /collections
  * returns the list of collections, using the insertion order.
  */
@@ -29,17 +29,18 @@ public class GetCollections implements CommandExecution {
         String query = "select *, " + setClumnRowCountString(null, "CollectionID") +
                 " from Collections";
         PreparedStatement ps;
-        if (pagingVerification(command)){
+        if (pagingVerification(command)) {
             query = concatenateQuearyIfExistsPaging(query, command, "CollectionID");
             ps = connection.prepareStatement(query);
-            int[]val = getSkipAndTopValuesToUseInPaging(command);
+            int[] val = getSkipAndTopValuesToUseInPaging(command);
             setValuesOnPreparedStatement(ps, val[0], val[1]);
+        } else {
+            ps = connection.prepareStatement(query);
         }
-        else{ps = connection.prepareStatement(query);}
         ResultSet rs = ps.executeQuery();
         Collection<Collections> res = getCollection(rs);
-        if(res.toArray()[0] == "") {
-            return new PrintMensage("There are no collections to be return");
+        if (res.toArray()[0] == "") {
+            return new PrintMessage("There are no collections to be return");
         }
         return new PrintGetCollections(res);
     }

@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class PathGetter {
     private String[] pathParts;
-    private String cleanPath="";
+    private String cleanPath = "";
     private HashMap<String, Integer> pathIntegers;
 
     private final String[][] PathTemplateContainer = {

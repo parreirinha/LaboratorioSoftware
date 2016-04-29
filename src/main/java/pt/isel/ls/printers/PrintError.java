@@ -4,15 +4,14 @@ package pt.isel.ls.printers;
  * @author Tede Morgado
  *         Created at 14/04/2016
  */
-public class PrintError implements Printable
-{
+public class PrintError implements Printable {
 
     private final String str;
 
-    public PrintError(String str)
-    {
+    public PrintError(String str) {
         this.str = str;
     }
+
     @Override
     public String toStringText() {
         return str;

@@ -12,10 +12,9 @@ import java.sql.*;
  * linecommand nº4
  * POST /movies/{mid}/ratings
  * submits a new rating for the movie identified by mid, given the following parameters:
- *  rating - integer between 1 and 5.
+ * rating - integer between 1 and 5.
  */
 public class PostMovieRating implements CommandExecution {
-
 
 
     @Override
@@ -23,7 +22,7 @@ public class PostMovieRating implements CommandExecution {
         int movieID = command.getPath().getPathInt("mid");
         int rating = command.getParams().getParamInt("rating");
 
-        if(movieID != -1 && rating != -1) {
+        if (movieID != -1 && rating != -1) {
             String ratingColumnName = AccessUtils.getColumnName(rating);
             String query = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?;";
             PreparedStatement ps = connection.prepareStatement(query);

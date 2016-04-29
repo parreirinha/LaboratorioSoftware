@@ -13,8 +13,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Tede Morgado
- *         Created at 04/04/2016
+ * Class used to test GetTopNMoviesWithHigherReviewCount
  */
 public class GetTopNMoviesWithHigherReviewCountTest {
     private Connection connection;
@@ -42,7 +41,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
     @Test
     public void checkResultsetGetTopNMoviesWithHigherReviewCountQuery() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
-        input = new String[]{"GET","/tops/2/reviews/higher/count"};
+        input = new String[]{"GET", "/tops/2/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);
         try {
             result = getTopNMoviesWithHigherReviewCount.execute(connection, command).toStringText();
@@ -59,11 +58,10 @@ public class GetTopNMoviesWithHigherReviewCountTest {
     }
 
 
-
     @Test
     public void pagingTest() throws SQLException, ApplicationException {
         connection = new TestConnectionFactory().getNewConnection();
-        input = new String[]{"GET","/tops/5/reviews/higher/count", "skip=2&top=2"};
+        input = new String[]{"GET", "/tops/5/reviews/higher/count", "skip=2&top=2"};
         command = new CommandGetter().getCommand(input);
         result = getTopNMoviesWithHigherReviewCount.execute(connection, command).toStringText();
         expected = "Movie ID = 3\n" +

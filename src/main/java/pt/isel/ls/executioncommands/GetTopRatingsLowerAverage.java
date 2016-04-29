@@ -15,7 +15,7 @@ import java.util.Collection;
 
 /**
  * commmand nº11
- *
+ * <p>
  * GET /tops/ratings/lower/average
  * returns the detail for the movie with the lower average rating.
  */
@@ -33,8 +33,7 @@ public class GetTopRatingsLowerAverage implements CommandExecution {
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
         Collection<Movie> res = new ArrayList<Movie>();
-        while (rs.next())
-        {
+        while (rs.next()) {
             res.add(new Movie(
                     rs.getInt(1),
                     rs.getString(2),

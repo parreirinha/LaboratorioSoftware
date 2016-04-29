@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * Created by Dani on 12-04-2016.
  */
-public class Exit implements CommandExecution{
+public class Exit implements CommandExecution {
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {

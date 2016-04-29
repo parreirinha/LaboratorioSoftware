@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * Created by Dani on 12-04-2016.
  */
-public class Option implements CommandExecution{
+public class Option implements CommandExecution {
 
     private final String filename = "src/main/resources/texts/Option.txt";
 

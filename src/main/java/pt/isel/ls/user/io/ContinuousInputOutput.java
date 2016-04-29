@@ -15,7 +15,7 @@ public class ContinuousInputOutput {
         run = new Run();
         input = new Scanner(System.in);
 
-        while(input.hasNextLine()){
+        while (input.hasNextLine()) {
             run.RunApp(input.nextLine().split(" "));
         }
     }

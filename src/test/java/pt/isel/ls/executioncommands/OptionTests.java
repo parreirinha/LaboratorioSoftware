@@ -9,7 +9,7 @@ import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Dani on 26-04-2016.
+ * Class used to test Option command.
  */
 public class OptionTests {
     private final String expectedString = "\n" +

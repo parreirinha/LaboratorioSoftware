@@ -28,12 +28,12 @@ public class GetAllReviews implements CommandExecution {
         int movieId = command.getPath().getPathInt("mid");
         String query = "select *, " + setClumnRowCountString(command, null) + " from Review where MovieID = ?";
         PreparedStatement ps;
-        if (pagingVerification(command)){
-            int[]val = getSkipAndTopValuesToUseInPaging(command);
+        if (pagingVerification(command)) {
+            int[] val = getSkipAndTopValuesToUseInPaging(command);
             query = concatenateQuearyIfExistsPaging(query, command, "MovieID");
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, movieId, val[0], val[1]);
-        }else {
+        } else {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, movieId);
         }
@@ -44,8 +44,7 @@ public class GetAllReviews implements CommandExecution {
 
     private Collection<Review> getCollection(ResultSet rs) throws SQLException {
         Collection<Review> res = new ArrayList<Review>();
-        while (rs.next())
-        {
+        while (rs.next()) {
             res.add(new Review(
                     rs.getInt(1),
                     rs.getInt(2),

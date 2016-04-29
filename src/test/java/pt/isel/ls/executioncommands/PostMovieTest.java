@@ -1,4 +1,5 @@
 package pt.isel.ls.executioncommands;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +31,7 @@ public class PostMovieTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -38,7 +40,7 @@ public class PostMovieTest {
     }
 
     @Test
-    public void  postNewMovie() throws SQLException {
+    public void postNewMovie() throws SQLException {
 
         input = new String[]{"POST", "/movies", "title=Big Fish&releaseYear=2003"};
         command = new CommandGetter().getCommand(input);

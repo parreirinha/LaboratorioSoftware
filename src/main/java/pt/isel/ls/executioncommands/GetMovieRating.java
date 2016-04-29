@@ -17,7 +17,7 @@ import java.util.Collection;
  * returns the rating information for the movie identified by mid. This rating information include:
  * The rating average
  * The number of votes for each rating value
- *
+ * <p>
  * returns a movie object only with the ratings
  */
 public class GetMovieRating implements CommandExecution {
@@ -36,8 +36,7 @@ public class GetMovieRating implements CommandExecution {
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
         Collection<Movie> res = new ArrayList<Movie>();
-        while (rs.next())
-        {
+        while (rs.next()) {
             res.add(new Movie(
                     rs.getInt(1),
                     AccessUtils.returnArrayStarsGivenAResultSet(rs),

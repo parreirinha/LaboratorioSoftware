@@ -5,6 +5,7 @@ import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,14 +23,13 @@ public class GetAllMovies implements CommandExecution {
     private HashMap<String, String> sortDecoder;
 
     @Override
-    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException
-    {
-        String query = "select *, "+ setClumnRowCountString(command, null) +
+    public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
+        String query = "select *, " + setClumnRowCountString(command, null) +
                 " from Movie\n";
         query = concatenateQuearyIfExistsPaging(query, command, null);
         PreparedStatement ps = connection.prepareStatement(query);
-        if (pagingVerification(command)){
-            int[]val = getSkipAndTopValuesToUseInPaging(command);
+        if (pagingVerification(command)) {
+            int[] val = getSkipAndTopValuesToUseInPaging(command);
             setValuesOnPreparedStatement(ps, val[0], val[1]);
         }
         ResultSet rs = ps.executeQuery();
@@ -44,7 +44,6 @@ public class GetAllMovies implements CommandExecution {
         }
         return res;
     }
-
 
 
 }

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * POST /collections/{cid}/movies/
  * adds a movie to the cid collection, given
- *  mid - the movie unique identifier.
+ * mid - the movie unique identifier.
  */
 public class PostMovieInCollectionTest {
 
@@ -41,7 +41,7 @@ public class PostMovieInCollectionTest {
 
     @Test
     public void insertMovieInCollection() throws SQLException {
-        input = new String[] {"POST", "/collections/1/movies/", "mid=1"};
+        input = new String[]{"POST", "/collections/1/movies/", "mid=1"};
         command = new CommandGetter().getCommand(input);
         try {
             result = exe.execute(connection, command).toStringText();

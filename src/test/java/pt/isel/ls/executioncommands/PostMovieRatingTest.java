@@ -12,9 +12,9 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- *  * POST /movies/{mid}/ratings
+ * * POST /movies/{mid}/ratings
  * submits a new rating for the movie identified by mid, given the following parameters:
- *  rating - integer between 1 and 5.
+ * rating - integer between 1 and 5.
  */
 public class PostMovieRatingTest {
 
@@ -32,6 +32,7 @@ public class PostMovieRatingTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionAndDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -41,19 +42,17 @@ public class PostMovieRatingTest {
     }
 
 
-
-
     @Test
     public void postRateMovieSevenWithFiveStars() throws SQLException {
 
-        input = new String[]{"POST", "/movies/2/ratings","rating=5"};
+        input = new String[]{"POST", "/movies/2/ratings", "rating=5"};
         command = new CommandGetter().getCommand(input);
         try {
             result = postMovieRating.execute(connection, command).toStringText();
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected = "Rating posted with sucess";
+        expected = "Rating posted with success";
         assertEquals(expected, result);
 
     }

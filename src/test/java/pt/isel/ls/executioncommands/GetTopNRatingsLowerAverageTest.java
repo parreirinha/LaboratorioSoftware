@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Dani on 08-04-2016.
+ * Class used to test GetTopNRatingsLowerAverage.
  */
 public class GetTopNRatingsLowerAverageTest {
     private Connection connection;

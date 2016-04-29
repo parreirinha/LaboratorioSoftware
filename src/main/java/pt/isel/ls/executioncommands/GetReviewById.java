@@ -16,7 +16,6 @@ import java.util.Collection;
  * linecommand nº8
  * GET /movies/{mid}/reviews/{rid}
  * returns the full information for the review rid of the movie identified by mid.
- *
  */
 public class GetReviewById implements CommandExecution {
 
@@ -28,7 +27,7 @@ public class GetReviewById implements CommandExecution {
         int reviewId = command.getPath().getPathInt("rid");
         String query = "select * from Review where MovieID = ? and ReviewID = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        AccessUtils.setValuesOnPreparedStatement(preparedStatement,movieId,reviewId);
+        AccessUtils.setValuesOnPreparedStatement(preparedStatement, movieId, reviewId);
         ResultSet rs = preparedStatement.executeQuery();
         Collection<Review> res = getCollection(rs);
         return new PrintDetailedReview(res);
@@ -36,8 +35,7 @@ public class GetReviewById implements CommandExecution {
 
     private Collection<Review> getCollection(ResultSet rs) throws SQLException {
         Collection<Review> res = new ArrayList<Review>();
-        while (rs.next())
-        {
+        while (rs.next()) {
             res.add(new Review(
                     rs.getInt(1),
                     rs.getInt(2),

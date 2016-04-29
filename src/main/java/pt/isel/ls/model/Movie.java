@@ -12,11 +12,11 @@ public class Movie {
     private int oneStar, twoStar, treeStar, fourStar, fiveStar;
     private float average;
 
-    public Movie(int id, String name){
+    public Movie(int id, String name) {
         movieID = id;
         movieName = name;
     }
-    
+
     public Movie(int id, String movieName, int release, int[] stars) {
         this.movieID = id;
         this.movieName = movieName;
@@ -78,8 +78,7 @@ public class Movie {
         return treeStar;
     }
 
-    public int getFourStar()
-    {
+    public int getFourStar() {
         return fourStar;
     }
 
@@ -87,8 +86,7 @@ public class Movie {
         return movieName;
     }
 
-    public int getFiveStar()
-    {
+    public int getFiveStar() {
         return fiveStar;
     }
 

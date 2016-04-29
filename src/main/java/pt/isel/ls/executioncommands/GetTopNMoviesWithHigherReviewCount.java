@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static pt.isel.ls.executioncommands.AccessUtils.*;
+
 /**
  * linecommand nº14
  * <p>
@@ -46,16 +47,13 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
                 "order by M.MovieID";
 
 
-
-
-
         PreparedStatement ps;
-        if (pagingVerification(command)){
-            int[]val = getSkipAndTopValuesToUseInPaging(command);
+        if (pagingVerification(command)) {
+            int[] val = getSkipAndTopValuesToUseInPaging(command);
             query = concatenateQuearyIfExistsPaging(query, command, " c desc");
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, command.getPath().getPathInt("n"), val[0], val[1]);
-        }else {
+        } else {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, command.getPath().getPathInt("n"));
         }

@@ -3,11 +3,11 @@ package pt.isel.ls.printers;
 /**
  * Created by fabio on 17-Apr-16.
  */
-public class PrintMensage implements Printable {
+public class PrintMessage implements Printable {
 
     String str;
 
-    public PrintMensage(String msg){
+    public PrintMessage(String msg) {
         str = msg;
     }
 

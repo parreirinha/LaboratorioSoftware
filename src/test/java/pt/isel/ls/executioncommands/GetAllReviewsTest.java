@@ -32,6 +32,7 @@ public class GetAllReviewsTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -41,8 +42,9 @@ public class GetAllReviewsTest {
     }
 
     /**
-     *  new Review(1,1,"Manel","Magnificent","An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more...",5),
-     new Review(2,1,"Bad taste Reviwer","Horrible","This is the worst movie i have seen in my life",1),
+     * new Review(1,1,"Manel","Magnificent","An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more...",5),
+     * new Review(2,1,"Bad taste Reviwer","Horrible","This is the worst movie i have seen in my life",1),
+     *
      * @throws SQLException
      */
     @Test
@@ -56,24 +58,24 @@ public class GetAllReviewsTest {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected ="Review ID = 1" +
-                        "\n\tReviewer Name = Manel" +
-                        "\tReview Rating = 5"+
-                        "\n\tSummary Review = Magnificent\n" +
-                        "Review ID = 2" +
-                        "\n\tReviewer Name = Bad taste Reviwer" +
-                        "\tReview Rating = 1"+
-                        "\n\tSummary Review = Horrible\n" +
-                        "Review ID = 8" +
-                        "\n\tReviewer Name = Ze" +
-                        "\tReview Rating = 5"+
-                        "\n\tSummary Review = Film of the year\n";
+        expected = "Review ID = 1" +
+                "\n\tReviewer Name = Manel" +
+                "\tReview Rating = 5" +
+                "\n\tSummary Review = Magnificent\n" +
+                "Review ID = 2" +
+                "\n\tReviewer Name = Bad taste Reviwer" +
+                "\tReview Rating = 1" +
+                "\n\tSummary Review = Horrible\n" +
+                "Review ID = 8" +
+                "\n\tReviewer Name = Ze" +
+                "\tReview Rating = 5" +
+                "\n\tSummary Review = Film of the year\n";
 
         assertEquals(expected, result);
     }
 
     @Test
-    public void movieWithTwoReview() throws SQLException{
+    public void movieWithTwoReview() throws SQLException {
         input = new String[]{"GET", "/movies/2/reviews"};
         command = new CommandGetter().getCommand(input);
         try {
@@ -83,18 +85,18 @@ public class GetAllReviewsTest {
         }
         expected = "Review ID = 4" +
                 "\n\tReviewer Name = Jack" +
-                "\tReview Rating = 2"+
+                "\tReview Rating = 2" +
                 "\n\tSummary Review = Morgan Freeman is the best\n" +
                 "Review ID = 7" +
                 "\n\tReviewer Name = Ze" +
-                "\tReview Rating = 5"+
+                "\tReview Rating = 5" +
                 "\n\tSummary Review = Film of the year candidate\n";
 
         assertEquals(expected, result);
     }
 
     @Test
-    public void movieWithoutReviews() throws SQLException{
+    public void movieWithoutReviews() throws SQLException {
         input = new String[]{"GET", "/movies/666/reviews"};
         command = new CommandGetter().getCommand(input);
         try {
@@ -116,9 +118,9 @@ public class GetAllReviewsTest {
         result = getAllReviews.execute(connection, command).toStringText();
         expected =
                 "Review ID = 2" +
-                "\n\tReviewer Name = Bad taste Reviwer" +
-                "\tReview Rating = 1"+
-                "\n\tSummary Review = Horrible\n";
+                        "\n\tReviewer Name = Bad taste Reviwer" +
+                        "\tReview Rating = 1" +
+                        "\n\tSummary Review = Horrible\n";
 
         assertEquals(expected, result);
     }

@@ -24,16 +24,16 @@ public class GetTopsNRatingsHigherAverage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         int n = command.getPath().getPathInt("n");
-        String query = "select top (?) *, "+ setClumnRowCountString(null, "Average desc") +
+        String query = "select top (?) *, " + setClumnRowCountString(null, "Average desc") +
                 " from\n dbo.Movie as M order by M.Average desc";
         PreparedStatement ps;
 
-        if (pagingVerification(command)){
-            int[]val = getSkipAndTopValuesToUseInPaging(command);
+        if (pagingVerification(command)) {
+            int[] val = getSkipAndTopValuesToUseInPaging(command);
             query = concatenateQuearyIfExistsPaging(query, command, "Average desc");
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, n, val[0], val[1]);
-        }else {
+        } else {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, n);
         }
