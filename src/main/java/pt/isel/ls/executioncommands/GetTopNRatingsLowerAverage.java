@@ -24,12 +24,10 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         int n = command.getPath().getPathInt("n");
-
         String query =
-                "select top (?) *," + setClumnRowCountString(command, "Average") +" from\n" +
-                "dbo.Movie as M order by M.Average";
+                "select top (?) *," + setClumnRowCountString(command, "Average") +
+                " from\n dbo.Movie as M order by M.Average";
         PreparedStatement ps;
-
         if (pagingVerification(command)){
             int[]val = getSkipAndTopValuesToUseInPaging(command);
             query = concatenateQuearyIfExistsPaging(query, command, "Average");
@@ -39,7 +37,6 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, n);
         }
-
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs, n);
         return new PrintDetailedMovie(res);

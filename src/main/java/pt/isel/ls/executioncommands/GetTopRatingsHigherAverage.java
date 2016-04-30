@@ -21,8 +21,7 @@ import java.util.Collection;
 public class GetTopRatingsHigherAverage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
-        String query = "select top 1 * from\n" +
-                "dbo.Movie as M order by M.Average desc";
+        String query = "select top 1 * from\n dbo.Movie as M order by M.Average desc";
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);

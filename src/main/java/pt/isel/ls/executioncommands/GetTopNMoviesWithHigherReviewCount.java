@@ -29,26 +29,12 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
-      /*  String query = "select top (?) *, " + setClumnRowCountString(null, " c desc") +  " from (\n" +
-                "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
-                "group by R.MovieID) as ct\n" +
-                "inner join Movie as M\n" +
-                "on\n" +
-                "M.MovieId = ct.MovieID\n" +
-                "order by c desc";
-        */
 
         String query = "select top (?) m.*, t.C, " + setClumnRowCountString(command, "c desc") +
                 " from Movie as M\ninner join(\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
-                "group by R.MovieID)as T\n" +
-                "on M.MovieID = T.MovieID\n" +
+                "group by R.MovieID)as T\n on M.MovieID = T.MovieID\n" +
                 "order by M.MovieID";
-
-
-
-
-
         PreparedStatement ps;
         if (pagingVerification(command)){
             int[]val = getSkipAndTopValuesToUseInPaging(command);
@@ -59,9 +45,6 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, command.getPath().getPathInt("n"));
         }
-
-
-        //ps.setInt(1, command.getPath().getPathInt("n"));
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         return new PrintMovie(res);

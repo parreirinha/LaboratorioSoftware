@@ -3,6 +3,7 @@ package pt.isel.ls.executioncommands;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -196,9 +197,41 @@ public class GetAllMoviesTest {
             "\tName = The Matrix\tRelease = 1999\n" +
             "Movie ID = 7\n" +
             "\tName = The Silence of the Lambs\tRelease = 1991\n";}
-/*
+
     @Test
-    public void sortByRating() throws SQLException {
+    public void sortByTitleDesc() throws SQLException {
+
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/movies", "sortBy=titleDesc"};
+        command = new CommandGetter().getCommand(input);
+        try {
+            result = getAllMovies.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
+        expected = getStringToSortByTitleDesc();
+        assertEquals(expected, result);
+    }
+
+    private String getStringToSortByTitleDesc(){
+        return "Movie ID = 7\n" +
+                "\tName = The Silence of the Lambs\tRelease = 1991\n" +
+                "Movie ID = 3\n" +
+                "\tName = The Matrix\tRelease = 1999\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven\tRelease = 1995\n" +
+                "Movie ID = 5\n" +
+                "\tName = Pulp Fiction\tRelease = 1994\n" +
+                "Movie ID = 4\n" +
+                "\tName = Inception\tRelease = 2010\n" +
+                "Movie ID = 1\n" +
+                "\tName = Fight Club\tRelease = 1999\n" +
+                "Movie ID = 6\n" +
+                "\tName = American History X\tRelease = 1998\n";
+    }
+
+    @Test
+    public void sortByRating() throws SQLException, ApplicationException {
 
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies", "sortBy=rating"};
@@ -207,7 +240,7 @@ public class GetAllMoviesTest {
         expected = getStringToSortByRating();
         assertEquals(expected, result);
     }
-    */
+
     private String getStringToSortByRating(){
         return "Movie ID = 3\n" +
                 "\tName = The Matrix\tRelease = 1999\n" +
@@ -224,9 +257,36 @@ public class GetAllMoviesTest {
                 "Movie ID = 4\n" +
                 "\tName = Inception\tRelease = 2010\n";}
 
-/*
     @Test
-    public void simplePagingTest() throws SQLException {
+    public void sortByRatingDesc() throws SQLException, ApplicationException {
+
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/movies", "sortBy=ratingDesc"};
+        command = new CommandGetter().getCommand(input);
+        result = getAllMovies.execute(connection, command).toStringText();
+        expected = getStringToSortByRatingDesc();
+        assertEquals(expected, result);
+    }
+
+    private String getStringToSortByRatingDesc(){
+        return "Movie ID = 4\n" +
+                "\tName = Inception\tRelease = 2010\n" +
+                "Movie ID = 6\n" +
+                "\tName = American History X\tRelease = 1998\n" +
+                "Movie ID = 1\n" +
+                "\tName = Fight Club\tRelease = 1999\n" +
+                "Movie ID = 7\n" +
+                "\tName = The Silence of the Lambs\tRelease = 1991\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven\tRelease = 1995\n" +
+                "Movie ID = 5\n" +
+                "\tName = Pulp Fiction\tRelease = 1994\n" +
+                "Movie ID = 3\n" +
+                "\tName = The Matrix\tRelease = 1999\n";
+    }
+
+    @Test
+    public void simplePagingTest() throws SQLException, ApplicationException {
 
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/movies", "skip=2&top=3"};
@@ -235,7 +295,7 @@ public class GetAllMoviesTest {
         expected = getStringToSimplePagingTest();
         assertEquals(expected, result);
     }
-    */
+
     private String getStringToSimplePagingTest(){
         return  "Movie ID = 3\n" +
                 "\tName = The Matrix\tRelease = 1999\n" +
@@ -244,4 +304,56 @@ public class GetAllMoviesTest {
                 "Movie ID = 5\n" +
                 "\tName = Pulp Fiction\tRelease = 1994\n";
     }
+
+    @Test
+    public void sortByAddedDataData() throws SQLException {
+
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/movies", "sortBy=addedData"};
+        command = new CommandGetter().getCommand(input);
+        try {
+            result = getAllMovies.execute(connection, command).toStringText();
+        } catch (pt.isel.ls.exceptions.ApplicationException e) {
+            e.printStackTrace();
+        }
+        expected = getStringToSortByAddedDataDesc();
+        assertEquals(expected, result);
+    }
+    private String getStringToSortByAddedDataDesc(){
+        return "Movie ID = 1\n" +
+                "\tName = Fight Club\tRelease = 1999\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven\tRelease = 1995\n" +
+                "Movie ID = 3\n" +
+                "\tName = The Matrix\tRelease = 1999\n" +
+                "Movie ID = 4\n" +
+                "\tName = Inception\tRelease = 2010\n" +
+                "Movie ID = 5\n" +
+                "\tName = Pulp Fiction\tRelease = 1994\n" +
+                "Movie ID = 6\n" +
+                "\tName = American History X\tRelease = 1998\n" +
+                "Movie ID = 7\n" +
+                "\tName = The Silence of the Lambs\tRelease = 1991\n";
+    }
+
+    @Test
+    public void sortByTitleAndPaging() throws SQLException, ApplicationException {
+
+        connection = new TestConnectionFactory().getNewConnection();
+        input = new String[]{"GET", "/movies", "skip=2&top=3&sortBy=title"};
+        command = new CommandGetter().getCommand(input);
+        result = getAllMovies.execute(connection, command).toStringText();
+        expected = getStringToSortByTitleWithPaging();
+        assertEquals(expected, result);
+    }
+
+    private String getStringToSortByTitleWithPaging(){
+        return "Movie ID = 4\n" +
+                "\tName = Inception\tRelease = 2010\n" +
+                "Movie ID = 5\n" +
+                "\tName = Pulp Fiction\tRelease = 1994\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven\tRelease = 1995\n";
+    }
+
 }

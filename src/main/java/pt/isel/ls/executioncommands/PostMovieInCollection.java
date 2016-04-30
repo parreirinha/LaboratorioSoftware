@@ -25,7 +25,6 @@ public class PostMovieInCollection implements CommandExecution {
         int mid = command.getParams().getParamInt("mid");
 
         if (cid != -1 && mid != -1) {
-
             String query = "insert into MovieCollection (CID, MovieID) values(?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             AccessUtils.setValuesOnPreparedStatement(ps, cid, mid);

@@ -91,7 +91,7 @@ public class AccessUtils {
         sortDecoder.put("year", "order by MovieRelease ASC");
         sortDecoder.put("yearDesc", "order by MovieRelease DESC");
         sortDecoder.put("title", "order by MovieName ASC");
-        sortDecoder.put("titleDesc","order by MovieName DEC");
+        sortDecoder.put("titleDesc","order by MovieName DESC");
         sortDecoder.put("rating", "order by Average ASC");
         sortDecoder.put("ratingDesc", "order by Average DESC");
     }
