@@ -7,10 +7,10 @@ import pt.isel.ls.printers.Printable;
  */
 public class Printer {
 
-    public void printResult(String out ){
+    public void printResult(String out) {
 
-        if(out != null)
-        System.out.println(out);
+        if (out != null)
+            System.out.println(out);
         else
             System.out.println("Error: Couldn't print result.");
     }

@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * GET /movies/{mid}/ratings
  * "The average rating for the movie with the ID ## is ##.\n\t* = ##   ** = ##   *** = ##   **** = ##   ***** = ##\n"
- *
  */
 public class GetMovieRatingTest {
 
@@ -28,12 +27,12 @@ public class GetMovieRatingTest {
     private DataCreationTests dataTests = new DataCreationTests();
 
 
-
     @After
     public void undoChangesAndCloseConnection() throws SQLException {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -41,8 +40,6 @@ public class GetMovieRatingTest {
         dataTests.insertMoviesToTest();
         dataTests.insertReviewsInMovies();
     }
-
-
 
 
     @Test

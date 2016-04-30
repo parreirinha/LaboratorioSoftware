@@ -33,8 +33,8 @@ public class AccessUtils {
             if (vals[i] instanceof String)
                 ps.setString(i + 1, (String) vals[i]);
             else {
-                if(i!=-1)
-                ps.setInt(i + 1, (Integer) vals[i]);
+                if (i != -1)
+                    ps.setInt(i + 1, (Integer) vals[i]);
             }
         }
     }
@@ -56,8 +56,8 @@ public class AccessUtils {
         PreparedStatement ps;
         if (pagingVerification(command)) {
             String pagingQuery =
-                "select * from ( " + query + " ) as res \n " +
-                "where RowNumber BETWEEN ? AND ? " + setOrderByClause(command, orderBy );
+                    "select * from ( " + query + " ) as res \n " +
+                            "where RowNumber BETWEEN ? AND ? " + setOrderByClause(command, orderBy);
             return pagingQuery;
         }
         return query;
@@ -68,7 +68,6 @@ public class AccessUtils {
         Integer i2 = command.getParams().getParamInt("top");
         return (i1 < 0) || (i2 < 0) ? false : true;
     }
-
 
 
     protected static String setOrderByClause(Command command, String orderBy) {
@@ -84,9 +83,9 @@ public class AccessUtils {
 
     private static HashMap<String, String> sortDecoder;
 
-    private static void initSortDecoderHashMap(){
+    private static void initSortDecoderHashMap() {
         sortDecoder = new HashMap<String, String>();
-        sortDecoder.put("addedData","order by MovieID ASC" );
+        sortDecoder.put("addedData", "order by MovieID ASC");
         sortDecoder.put("addedDataDesc", "order by MovieID DESC");
         sortDecoder.put("year", "order by MovieRelease ASC");
         sortDecoder.put("yearDesc", "order by MovieRelease DESC");
@@ -96,14 +95,14 @@ public class AccessUtils {
         sortDecoder.put("ratingDesc", "order by Average DESC");
     }
 
-    protected static String setClumnRowCountString(Command command, String orderBy){
-        return "ROW_NUMBER() OVER (" +setOrderByClause(command, orderBy )+ ") AS RowNumber";
+    protected static String setClumnRowCountString(Command command, String orderBy) {
+        return "ROW_NUMBER() OVER (" + setOrderByClause(command, orderBy) + ") AS RowNumber";
     }
 
-    protected static int[] getSkipAndTopValuesToUseInPaging(Command command){
+    protected static int[] getSkipAndTopValuesToUseInPaging(Command command) {
         int skip = command.getParams().getParamInt("skip") + 1;
         int top = skip + command.getParams().getParamInt("top") - 1;
-        int[] val= {skip, top};
+        int[] val = {skip, top};
         return val;
     }
 

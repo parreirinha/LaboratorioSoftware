@@ -1,4 +1,5 @@
 package pt.isel.ls.executioncommands;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +8,7 @@ import pt.isel.ls.linecommand.process.CommandGetter;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import static org.junit.Assert.assertEquals;
 
 public class GetMovieTest {
@@ -26,6 +28,7 @@ public class GetMovieTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -35,12 +38,12 @@ public class GetMovieTest {
 
 
     @Test
-    public void  existingMoviesTest() throws SQLException {
+    public void existingMoviesTest() throws SQLException {
 
         input = new String[]{"GET", "/movies/1"};
         command = new CommandGetter().getCommand(input);
         try {
-            result = getMovie.execute(connection,  command).toStringText();
+            result = getMovie.execute(connection, command).toStringText();
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }

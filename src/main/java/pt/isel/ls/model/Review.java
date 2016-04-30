@@ -3,16 +3,14 @@ package pt.isel.ls.model;
 /**
  * Class whose instances are used to represent a model of a movie review.
  */
-public class Review
-{
+public class Review {
     private int movieID;
     private int reviewRating;
     private int reviewID;
     private String reviewName, reviewSummary, completeReview;
 
 
-
-    public Review(int reviewID, int movieID, String reviewName, String reviewSummary, String completeReview, int reviewRating){
+    public Review(int reviewID, int movieID, String reviewName, String reviewSummary, String completeReview, int reviewRating) {
 
         this.reviewID = reviewID;
         this.movieID = movieID;
@@ -21,7 +19,6 @@ public class Review
         this.completeReview = completeReview;
         this.reviewRating = reviewRating;
     }
-
 
 
     public int getMovieID() {

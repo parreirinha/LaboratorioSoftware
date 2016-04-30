@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Dani on 08-04-2016.
+ * Class used to test GetTopNRatingsHigherAverage.
  */
 public class GetTopNRatingsHigherAverageTest {
     private Connection connection;
@@ -67,7 +67,6 @@ public class GetTopNRatingsHigherAverageTest {
     }
 
 
-
     @Test
     public void pagingTest() throws SQLException, ApplicationException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -78,7 +77,7 @@ public class GetTopNRatingsHigherAverageTest {
         assertEquals(expected, result);
     }
 
-    private String setExpectedValueToSimplePagingTest(){
+    private String setExpectedValueToSimplePagingTest() {
         return "Movie ID = 1\n" +
                 "\tName = Fight Club\tRelease = 1999\n" +
                 "\t* = 20   ** = 10   *** = 15   **** = 50   ***** = 32\n" +

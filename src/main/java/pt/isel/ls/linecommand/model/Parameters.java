@@ -14,13 +14,13 @@ public class Parameters {
         this.paramStrings = strings;
     }
 
-    public String getParamString(String key){
+    public String getParamString(String key) {
 
         return paramStrings.get(key);
     }
 
-    public int getParamInt(String key){
-        if(!paramStrings.containsKey(key))
+    public int getParamInt(String key) {
+        if (!paramStrings.containsKey(key))
             return -1;
 
         if (paramStrings.containsKey(key)) {

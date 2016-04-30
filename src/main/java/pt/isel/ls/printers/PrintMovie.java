@@ -15,13 +15,15 @@ public class PrintMovie implements Printable {
     private Collection<Movie> movieCollection;
     private final String[] head =
             {"Movie ID", "Name", "Release"};
-    private ArrayList<Function<Movie, String >> function = new ArrayList<>();
+    private ArrayList<Function<Movie, String>> function = new ArrayList<>();
+    private final String NoMovie = "There is no such movie.\n";
 
-    public PrintMovie(Collection<Movie> movies){
+
+    public PrintMovie(Collection<Movie> movies) {
         movieCollection = movies;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> movie.getMovieName());
-        function.add(movie -> ""+movie.getMovieRelease());
+        function.add(movie -> "" + movie.getMovieRelease());
     }
 
     /**
@@ -34,12 +36,12 @@ public class PrintMovie implements Printable {
     public String toStringText() {
         String s = "";
         for (Movie m : movieCollection) {
-            s +=    head[0] + " = " + function.get(0).apply(m)+
-                    "\n\t"+ head[1] +" = " + function.get(1).apply(m)+
-                    "\t"+ head[2] +" = " + function.get(2).apply(m)+
+            s += head[0] + " = " + function.get(0).apply(m) +
+                    "\n\t" + head[1] + " = " + function.get(1).apply(m) +
+                    "\t" + head[2] + " = " + function.get(2).apply(m) +
                     "\n";
         }
-        return (s == "") ? new PrintError("There is no such movie.\n").toStringText() : s;
+        return (s == "") ? new PrintError(NoMovie).toStringText() : s;
     }
 
     @Override
@@ -49,6 +51,9 @@ public class PrintMovie implements Printable {
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
+        if (movieCollection.isEmpty())
+            return String.format(HtmlGenerator.template, NoMovie);
+
         return HtmlGenerator.htmlGenerate(movieCollection, head, function);
     }
 

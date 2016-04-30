@@ -12,7 +12,7 @@ import java.sql.SQLException;
 /**
  * Created by Dani on 13-04-2016.
  */
-public class InteractiveMode implements CommandExecution{
+public class InteractiveMode implements CommandExecution {
     private Run run;
 
     public InteractiveMode() {

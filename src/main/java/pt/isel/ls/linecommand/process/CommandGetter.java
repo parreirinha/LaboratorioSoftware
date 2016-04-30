@@ -48,7 +48,7 @@ public class CommandGetter {
     }
 
     private boolean hasHeaders(String arg) {
-        String[]aux = arg.split(Pattern.quote("|"));
+        String[] aux = arg.split(Pattern.quote("|"));
         return aux[0].contains(":") && !aux[0].contains("=");
     }
 

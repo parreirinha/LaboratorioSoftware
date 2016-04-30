@@ -22,7 +22,7 @@ public class WriterTests {
     private final String TestFileName = "testfile";
 
     @After
-    public void cleanFile(){
+    public void cleanFile() {
         new File(TestFileName).delete();
     }
 

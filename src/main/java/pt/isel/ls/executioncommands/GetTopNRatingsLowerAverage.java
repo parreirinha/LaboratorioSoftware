@@ -12,11 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import static pt.isel.ls.executioncommands.AccessUtils.*;
 
 /**
  * linecommand nº12
- *
+ * <p>
  * GET /tops/{n}/ratings/lower/average
  * returns a list with the n movies with the lower average ratings, sorted decreasingly
  */
@@ -28,12 +29,12 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
                 "select top (?) *," + setClumnRowCountString(command, "Average") +
                 " from\n dbo.Movie as M order by M.Average";
         PreparedStatement ps;
-        if (pagingVerification(command)){
-            int[]val = getSkipAndTopValuesToUseInPaging(command);
+        if (pagingVerification(command)) {
+            int[] val = getSkipAndTopValuesToUseInPaging(command);
             query = concatenateQuearyIfExistsPaging(query, command, "Average");
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, n, val[0], val[1]);
-        }else {
+        } else {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, n);
         }

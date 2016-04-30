@@ -11,7 +11,7 @@ public class MovieCollection {
     private Collections collections;
 
 
-    public MovieCollection(ArrayList<Movie> movies, Collections collections){
+    public MovieCollection(ArrayList<Movie> movies, Collections collections) {
 
         this.movies = movies;
         this.collections = collections;

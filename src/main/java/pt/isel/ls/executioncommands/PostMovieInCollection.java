@@ -3,7 +3,7 @@ package pt.isel.ls.executioncommands;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintError;
-import pt.isel.ls.printers.PrintMensage;
+import pt.isel.ls.printers.PrintMessage;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.Connection;
@@ -12,10 +12,10 @@ import java.sql.SQLException;
 
 /**
  * phase 2 - Command 4
- *
+ * <p>
  * POST /collections/{cid}/movies/
  * adds a movie to the cid collection, given
- *  mid - the movie unique identifier.
+ * mid - the movie unique identifier.
  */
 public class PostMovieInCollection implements CommandExecution {
     @Override
@@ -30,8 +30,8 @@ public class PostMovieInCollection implements CommandExecution {
             AccessUtils.setValuesOnPreparedStatement(ps, cid, mid);
             int res = ps.executeUpdate();
             if (res > 0)
-                return new PrintMensage("The movie with id = " + mid + " was added with sucess to the collection");
-            return new PrintMensage("Could't post the movie in the especified collection");
+                return new PrintMessage("The movie with id = " + mid + " was added with sucess to the collection");
+            return new PrintMessage("Could't post the movie in the especified collection");
         }
         return new PrintError("Error: Invalid parameter(s).");
     }

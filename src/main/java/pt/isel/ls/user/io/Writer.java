@@ -26,7 +26,7 @@ public class Writer {
         closeWriteFile();
     }
 
-    private void createWriteFile(String filename) throws ApplicationException{
+    private void createWriteFile(String filename) throws ApplicationException {
 
         try {
             fileWriter = new FileWriter(filename);
@@ -35,7 +35,7 @@ public class Writer {
         }
     }
 
-    private void closeWriteFile() throws ApplicationException{
+    private void closeWriteFile() throws ApplicationException {
 
         try {
             fileWriter.close();

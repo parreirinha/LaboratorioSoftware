@@ -30,8 +30,7 @@ public class GetTopRatingsHigherAverage implements CommandExecution {
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
         Collection<Movie> res = new ArrayList<Movie>();
-        while (rs.next())
-        {
+        while (rs.next()) {
             res.add(new Movie(
                     rs.getInt(1),
                     rs.getString(2),

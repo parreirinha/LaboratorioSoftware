@@ -15,14 +15,13 @@ import java.util.function.Supplier;
  * \nCollection creation date: #
  * \n\nMovies in the collection:
  * \nMovie id: #\nMovie name: #
- *
  */
 public class PrintGetCollectionsById implements Printable {
 
     private MovieCollection movieCollection;
     String[] head = {"Collection id", "Collection name", "Collection description", "Movie id", "Movie name"};
 
-    public  PrintGetCollectionsById(MovieCollection movieCollection){
+    public PrintGetCollectionsById(MovieCollection movieCollection) {
         this.movieCollection = movieCollection;
     }
 
@@ -31,43 +30,40 @@ public class PrintGetCollectionsById implements Printable {
     public String toStringText() {
         String s =
                 head[0] + ": " + movieCollection.getCollections().getCollectionID() +
-                "\n"+ head[1] + ": " + movieCollection.getCollections().getName() +
-                "\n"+head[2]+": " + movieCollection.getCollections().getDescription() +
-                "\n\nMovies in the collection:";
+                        "\n" + head[1] + ": " + movieCollection.getCollections().getName() +
+                        "\n" + head[2] + ": " + movieCollection.getCollections().getDescription() +
+                        "\n\nMovies in the collection:";
         for (Movie movie : movieCollection.getMovies()) {
-            s += "\n"+head[3]+": " + movie.getMovieID() + "\t"+head[4]+": " + movie.getMovieName();
+            s += "\n" + head[3] + ": " + movie.getMovieID() + "\t" + head[4] + ": " + movie.getMovieName();
         }
-        return s+"\n";
+        return s + "\n";
     }
 
     @Override
-    public String toStringHtml()
-    {
-        if(movieCollection.getMovies().size() == 1)
+    public String toStringHtml() {
+        if (movieCollection.getMovies().size() == 1)
             return String.format(HtmlGenerator.template, getText());
         return String.format(HtmlGenerator.template, getTable());
     }
 
-    private String getTable()
-    {
+    private String getTable() {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
-                "\t"+getFullHtmlTitle()+"\n";
-        str += "\t"+getFullHtmlDescription()+"\n";
+                "\t" + getFullHtmlTitle() + "\n";
+        str += "\t" + getFullHtmlDescription() + "\n";
         str += "</table>";
         return str;
     }
 
-    private String getText()
-    {
-        String str = "<ul><li>"+head[0]+": "+movieCollection.getCollections().getCollectionID()+"</li>\n" +
+    private String getText() {
+        String str = "<ul><li>" + head[0] + ": " + movieCollection.getCollections().getCollectionID() + "</li>\n" +
                 "<ul>\n";
-        str += "<li>"+ head[1] + ": " + movieCollection.getCollections().getName()+"</li>\n";
-        str += "<li>"+head[2]+": " + movieCollection.getCollections().getDescription() +"</li>\n"+
+        str += "<li>" + head[1] + ": " + movieCollection.getCollections().getName() + "</li>\n";
+        str += "<li>" + head[2] + ": " + movieCollection.getCollections().getDescription() + "</li>\n" +
                 "<li>Movies in the collection:</li>" +
                 "<ul>\n";
         for (Movie movie : movieCollection.getMovies()) {
-            str += "<li>"+head[3]+": " + movie.getMovieID() +
-                    "\t"+head[4]+": " + movie.getMovieName()+"</li>\n";
+            str += "<li>" + head[3] + ": " + movie.getMovieID() +
+                    "\t" + head[4] + ": " + movie.getMovieName() + "</li>\n";
         }
         str += "</ul>";
         str += "</ul>\n" +
@@ -75,21 +71,18 @@ public class PrintGetCollectionsById implements Printable {
         return str;
     }
 
-    private String getFullHtmlDescription()
-    {
+    private String getFullHtmlDescription() {
         String str = "<tr>\n" +
-                "<td>"+movieCollection.getCollections().getCollectionID()+"</td>\n"+
-                "<td>"+movieCollection.getCollections().getName()+"</td>\n"+
-                "<td>"+movieCollection.getCollections().getDescription()+"</td>\n";
+                "<td>" + movieCollection.getCollections().getCollectionID() + "</td>\n" +
+                "<td>" + movieCollection.getCollections().getName() + "</td>\n" +
+                "<td>" + movieCollection.getCollections().getDescription() + "</td>\n";
         int aux = 0;
-        for(Movie m : movieCollection.getMovies())
-        {
-            if(aux > 0)
-            {
+        for (Movie m : movieCollection.getMovies()) {
+            if (aux > 0) {
                 str += "<tr>\n<td></td>\n<td></td>\n<td></td>\n";
             }
-            str += "<td>"+m.getMovieID()+"</td>\n"+
-                    "<td>"+m.getMovieName()+"</td>\n";
+            str += "<td>" + m.getMovieID() + "</td>\n" +
+                    "<td>" + m.getMovieName() + "</td>\n";
             ++aux;
             str += "</tr>\n";
         }
@@ -97,11 +90,10 @@ public class PrintGetCollectionsById implements Printable {
         return str + "</tr>\n";
     }
 
-    private String getFullHtmlTitle()
-    {
+    private String getFullHtmlTitle() {
         String str = "<tr>\n";
-        for(int i = 0; i < head.length; ++i)
-            str += "\t\t<td>"+head[i]+"</td>\n";
+        for (int i = 0; i < head.length; ++i)
+            str += "\t\t<td>" + head[i] + "</td>\n";
         return str + "</tr>\n";
     }
 

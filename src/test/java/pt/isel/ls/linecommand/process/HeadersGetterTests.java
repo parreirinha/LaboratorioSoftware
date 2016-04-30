@@ -14,22 +14,22 @@ public class HeadersGetterTests {
     private final String FileNameHeader = "file-name:newfilename";
 
     @Test
-    public  void filenameHeadersTest(){
-        assertEquals("newfilename" ,new HeadersGetter().getHeaders(FileNameHeader).getHeadersString("file-name"));
+    public void filenameHeadersTest() {
+        assertEquals("newfilename", new HeadersGetter().getHeaders(FileNameHeader).getHeadersString("file-name"));
     }
 
     @Test
-    public  void noHeadersArgumentTest(){
+    public void noHeadersArgumentTest() {
         assertNull(new HeadersGetter().getHeaders(OneArgHeaders).getHeadersString(""));
     }
 
     @Test
-    public  void onlyOneHeadersArgumentTest(){
+    public void onlyOneHeadersArgumentTest() {
         assertEquals("text/html", new HeadersGetter().getHeaders(OneArgHeaders).getHeadersString("accept"));
     }
 
     @Test
-    public  void twoHeadersArgumentsTest(){
+    public void twoHeadersArgumentsTest() {
         assertEquals("text/plain", new HeadersGetter().getHeaders(TwoArgsHeaders).getHeadersString("accept"));
         assertEquals("en-gb", new HeadersGetter().getHeaders(TwoArgsHeaders).getHeadersString("accept-language"));
     }

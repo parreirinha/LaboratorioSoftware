@@ -12,10 +12,10 @@ import java.sql.*;
  * linecommand nº6
  * POST /movies/{mid}/reviews
  * creates a new review for the movie identified by mid, given the following parameters
- *      reviewerName - the reviewer name
- *      reviewSummary - the review summary
- *      review - the complete review
- *      rating - the review rating
+ * reviewerName - the reviewer name
+ * reviewSummary - the review summary
+ * review - the complete review
+ * rating - the review rating
  * This linecommand returns the review unique identifier.
  */
 public class PostMovieReview implements CommandExecution {
@@ -30,8 +30,8 @@ public class PostMovieReview implements CommandExecution {
         String review = command.getParams().getParamString("review");
         int rating = command.getParams().getParamInt("rating");
 
-        if(movieId!=-1 && reviwerName != null && reviewSummary != null &&
-                review != null && rating !=-1) {
+        if (movieId != -1 && reviwerName != null && reviewSummary != null &&
+                review != null && rating != -1) {
 
             String query = "insert into Review " +
                     "(MovieID, ReviewerName, ReviewSummary, ReviewComplete, ReviewRating)" +

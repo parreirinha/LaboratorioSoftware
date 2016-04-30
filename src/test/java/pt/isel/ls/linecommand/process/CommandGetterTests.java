@@ -60,7 +60,7 @@ public class CommandGetterTests {
     }
 
     @Test
-    public void getWithPathAndHeadersAndParamatersTest(){
+    public void getWithPathAndHeadersAndParamatersTest() {
         Command c = new CommandGetter().getCommand(GetWithPathAndHeadersAndParamaters);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("movies", c.getPath().getPathString());
@@ -70,7 +70,7 @@ public class CommandGetterTests {
     }
 
     @Test
-    public void getWithPathAndHeadersAndNoParamatersTest(){
+    public void getWithPathAndHeadersAndNoParamatersTest() {
         Command c = new CommandGetter().getCommand(GetWithPathAndHeaders);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("movies", c.getPath().getPathString());
@@ -78,7 +78,7 @@ public class CommandGetterTests {
     }
 
     @Test
-    public void getWithMethodAndPathAndParamsTest(){
+    public void getWithMethodAndPathAndParamsTest() {
         Command c = new CommandGetter().getCommand(GetWithMethodAndPathAndParams);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("movies", c.getPath().getPathString());
@@ -86,7 +86,7 @@ public class CommandGetterTests {
     }
 
     @Test
-    public void getCollectionWithPathTest(){
+    public void getCollectionWithPathTest() {
         Command c = new CommandGetter().getCommand(GetCollectionWithPath);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("collectionscid", c.getPath().getPathString());
@@ -94,7 +94,7 @@ public class CommandGetterTests {
     }
 
     @Test
-    public void postCollectionWithPathAndParamsTest(){
+    public void postCollectionWithPathAndParamsTest() {
         Command c = new CommandGetter().getCommand(PostCollectionWithPathAndParams);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("collectionscidmovies", c.getPath().getPathString());
@@ -103,7 +103,7 @@ public class CommandGetterTests {
     }
 
     @Test
-    public void deleteCollectionsWithPathTest(){
+    public void deleteCollectionsWithPathTest() {
         Command c = new CommandGetter().getCommand(DeleteCollectionsWithPath);
         assertEquals("DELETE", c.getMethod().getMethod());
         assertEquals("collectionscidmoviesmid", c.getPath().getPathString());

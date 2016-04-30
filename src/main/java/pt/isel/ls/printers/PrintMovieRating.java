@@ -15,9 +15,10 @@ public class PrintMovieRating implements Printable {
     private final String[] head =
             {"The average rating for the movie with the ID",
                     "is", "*", "**", "***", "****", "*****"};
-    private ArrayList<Function<Movie, String >> function = new ArrayList<>();
+    private ArrayList<Function<Movie, String>> function = new ArrayList<>();
+    private final String NoMovie = "There is no such movie.\n";
 
-    public PrintMovieRating(Collection<Movie> m){
+    public PrintMovieRating(Collection<Movie> m) {
 
         movie = m;
         function.add(movie -> "" + movie.getMovieID());
@@ -33,20 +34,21 @@ public class PrintMovieRating implements Printable {
     /**
      * for tests template of string. #->replace by values
      * "The average rating for the movie with the ID ## is ##.\n\t* = ##   ** = ##   *** = ##   **** = ##   ***** = ##\n"
+     *
      * @return
      */
     @Override
     public String toStringText() {
         String str = "";
-        for(Movie m : movie)
+        for (Movie m : movie)
             str += head[0] + " " + function.get(0).apply(m) +
-                    " "+head[1]+" "+ function.get(1).apply(m) + ".\n" +
-                    "\t" +head[2]+" = " + function.get(2).apply(m) +
-                    "   "+head[3]+" = " + function.get(3).apply(m) +
-                    "   "+head[4]+" = " + function.get(4).apply(m) +
-                    "   "+head[5]+" = " + function.get(5).apply(m) +
-                    "   "+head[6]+" = " + function.get(6).apply(m) + "\n";
-        return (str == "") ? new PrintError("There is no such movie.\n").toStringText() : str;
+                    " " + head[1] + " " + function.get(1).apply(m) + ".\n" +
+                    "\t" + head[2] + " = " + function.get(2).apply(m) +
+                    "   " + head[3] + " = " + function.get(3).apply(m) +
+                    "   " + head[4] + " = " + function.get(4).apply(m) +
+                    "   " + head[5] + " = " + function.get(5).apply(m) +
+                    "   " + head[6] + " = " + function.get(6).apply(m) + "\n";
+        return (str == "") ? new PrintError(NoMovie).toStringText() : str;
     }
 
     @Override
@@ -57,6 +59,9 @@ public class PrintMovieRating implements Printable {
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
+        if (movie.isEmpty())
+            return String.format(HtmlGenerator.template, NoMovie);
+
         return HtmlGenerator.htmlGenerate(movie, head, function);
     }
 

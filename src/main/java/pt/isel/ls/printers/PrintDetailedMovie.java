@@ -39,13 +39,14 @@ public class PrintDetailedMovie implements Printable {
     private Collection<Movie> movieCollection;
     private final String[] head =
             {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
-    private ArrayList<Function<Movie, String >> function = new ArrayList<>();
+    private ArrayList<Function<Movie, String>> function = new ArrayList<>();
+    private final String NoMovie = "There is no such movie.\n";
 
     public PrintDetailedMovie(Collection<Movie> movieCollection) {
         this.movieCollection = movieCollection;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> movie.getMovieName());
-        function.add(movie -> ""+movie.getMovieRelease());
+        function.add(movie -> "" + movie.getMovieRelease());
         function.add(movie -> "" + movie.getOneStar());
         function.add(movie -> "" + movie.getTwoStar());
         function.add(movie -> "" + movie.getThreeStar());
@@ -64,26 +65,29 @@ public class PrintDetailedMovie implements Printable {
     public String toStringText() {
         String str = "";
         for (Movie m : movieCollection)
-             str += head[0] + " = "+function.get(0).apply(m) +"\n"+
-                    "\t"+head[1] + " = "+ function.get(1).apply(m) +
-                    "\t" + head[2] +" = "+ function.get(2).apply(m) +"\n"+
-                    "\t"+head[3]+" = " + function.get(3).apply(m) +
-                    "   "+head[4]+" = " + function.get(4).apply(m) +
-                    "   "+head[5]+" = " + function.get(5).apply(m) +
-                    "   "+head[6]+" = " + function.get(6).apply(m) +
-                    "   "+head[7]+" = " + function.get(7).apply(m) +
-                    "\n\t"+head[8]+" = "+ function.get(8).apply(m) +"\n";
-        return (str == "") ? new PrintError("There is no such movie.\n").toStringText() : str;
+            str += head[0] + " = " + function.get(0).apply(m) + "\n" +
+                    "\t" + head[1] + " = " + function.get(1).apply(m) +
+                    "\t" + head[2] + " = " + function.get(2).apply(m) + "\n" +
+                    "\t" + head[3] + " = " + function.get(3).apply(m) +
+                    "   " + head[4] + " = " + function.get(4).apply(m) +
+                    "   " + head[5] + " = " + function.get(5).apply(m) +
+                    "   " + head[6] + " = " + function.get(6).apply(m) +
+                    "   " + head[7] + " = " + function.get(7).apply(m) +
+                    "\n\t" + head[8] + " = " + function.get(8).apply(m) + "\n";
+        return (str == "") ? new PrintError(NoMovie).toStringText() : str;
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         /*
         if(movieCollection.size() == 1)
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
+
+        if (movieCollection.isEmpty())
+            return String.format(HtmlGenerator.template, NoMovie);
+
         return HtmlGenerator.htmlGenerate(movieCollection, head, function);
     }
 

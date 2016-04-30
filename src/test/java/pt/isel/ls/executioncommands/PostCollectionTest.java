@@ -6,16 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
- *
  * POST /collections
  * creates a new collection and returns its identifier, given the following parameters:
- *      name - the tag unique name;
- *      description - the tag description
+ * name - the tag unique name;
+ * description - the tag description
  */
 public class PostCollectionTest {
 
@@ -42,7 +43,7 @@ public class PostCollectionTest {
 
     @Test
     public void insertAValidCollection() throws SQLException {
-        input = new String[] {"POST", "/collections", "name=Rocky&description=movies about boxe"};
+        input = new String[]{"POST", "/collections", "name=Rocky&description=movies about boxe"};
         command = new CommandGetter().getCommand(input);
         try {
             result = exe.execute(connection, command).toStringText();

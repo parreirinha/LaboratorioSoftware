@@ -41,7 +41,7 @@ public class GetCollectionByIdTest {
 
     @Test
     public void collectionNumberTwoTest() throws SQLException {
-        input = new String[] {"GET", "/collections/2"};
+        input = new String[]{"GET", "/collections/2"};
         command = new CommandGetter().getCommand(input);
         try {
             result = exe.execute(connection, command).toStringText();
@@ -50,23 +50,23 @@ public class GetCollectionByIdTest {
         }
         expected =
                 "Collection id: 2\n" +
-                "Collection name: Before 2000\n" +
-                "Collection description: movies before 2000\n" +
-                "\n" +
-                "Movies in the collection:\n" +
-                "Movie id: 1\tMovie name: Fight Club\n" +
-                "Movie id: 2\tMovie name: Seven\n" +
-                "Movie id: 3\tMovie name: The Matrix\n" +
-                "Movie id: 5\tMovie name: Pulp Fiction\n" +
-                "Movie id: 6\tMovie name: American History X\n" +
-                "Movie id: 7\tMovie name: The Silence of the Lambs" +
-                "\n";
+                        "Collection name: Before 2000\n" +
+                        "Collection description: movies before 2000\n" +
+                        "\n" +
+                        "Movies in the collection:\n" +
+                        "Movie id: 1\tMovie name: Fight Club\n" +
+                        "Movie id: 2\tMovie name: Seven\n" +
+                        "Movie id: 3\tMovie name: The Matrix\n" +
+                        "Movie id: 5\tMovie name: Pulp Fiction\n" +
+                        "Movie id: 6\tMovie name: American History X\n" +
+                        "Movie id: 7\tMovie name: The Silence of the Lambs" +
+                        "\n";
         assertEquals(expected, result);
     }
 
     @Test
     public void collectionOneTwoTest() throws SQLException {
-        input = new String[] {"GET", "/collections/1"};
+        input = new String[]{"GET", "/collections/1"};
         command = new CommandGetter().getCommand(input);
         try {
             result = exe.execute(connection, command).toStringText();
@@ -75,12 +75,12 @@ public class GetCollectionByIdTest {
         }
         expected =
                 "Collection id: 1\n" +
-                "Collection name: STARWARS\n" +
-                "Collection description: serie de filmes da saga starwars\n" +
-                "\n" +
-                "Movies in the collection:\n" +
-                "Movie id: 4\tMovie name: Inception" +
-                "\n";
+                        "Collection name: STARWARS\n" +
+                        "Collection description: serie de filmes da saga starwars\n" +
+                        "\n" +
+                        "Movies in the collection:\n" +
+                        "Movie id: 4\tMovie name: Inception" +
+                        "\n";
 
         assertEquals(expected, result);
     }

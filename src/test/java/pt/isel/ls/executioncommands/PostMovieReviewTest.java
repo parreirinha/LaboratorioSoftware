@@ -14,14 +14,14 @@ import static org.junit.Assert.assertEquals;
 /**
  * POST /movies/{mid}/reviews
  * creates a new review for the movie identified by mid, given the following parameters
- *      reviewerName - the reviewer name
- *      reviewSummary - the review summary
- *      review - the complete review
- *      rating - the review rating
- *
- *      expected results:
- *      "something went wrong!!\n"
- *      "review id: " + id;
+ * reviewerName - the reviewer name
+ * reviewSummary - the review summary
+ * review - the complete review
+ * rating - the review rating
+ * <p>
+ * expected results:
+ * "something went wrong!!\n"
+ * "review id: " + id;
  */
 public class PostMovieReviewTest {
 
@@ -40,6 +40,7 @@ public class PostMovieReviewTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -64,8 +65,6 @@ public class PostMovieReviewTest {
 
 
     }
-
-
 
 
 }

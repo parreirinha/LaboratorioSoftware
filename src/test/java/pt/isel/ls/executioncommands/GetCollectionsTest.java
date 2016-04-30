@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  * GET /collections
  * returns the list of collections, using the insertion order.
  */
-public class GetCollectionsTest  {
+public class GetCollectionsTest {
 
     private Connection connection;
     private Command command;
@@ -41,7 +41,7 @@ public class GetCollectionsTest  {
 
     @Test
     public void getAllCollectionsTest() throws SQLException {
-        input = new String[] {"GET", "/collections"};
+        input = new String[]{"GET", "/collections"};
         command = new CommandGetter().getCommand(input);
         try {
             result = exe.execute(connection, command).toStringText();
@@ -49,10 +49,10 @@ public class GetCollectionsTest  {
             e.printStackTrace();
         }
         expected =
-            "\nCollection id = 1\nName = STARWARS\nDescription = serie de filmes da saga starwars" +
-            "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000" +
-            "\nCollection id = 3\nName = movies after 2000\nDescription = movies from this century" +
-            "\n";
+                "\nCollection id = 1\nName = STARWARS\nDescription = serie de filmes da saga starwars" +
+                        "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000" +
+                        "\nCollection id = 3\nName = movies after 2000\nDescription = movies from this century" +
+                        "\n";
         assertEquals(expected, result);
     }
 
@@ -65,7 +65,7 @@ public class GetCollectionsTest  {
         result = exe.execute(connection, command).toStringText();
         expected =
                 "\nCollection id = 2\nName = Before 2000\nDescription = movies before 2000\n" +
-                "Collection id = 3\nName = movies after 2000\nDescription = movies from this century\n";
+                        "Collection id = 3\nName = movies after 2000\nDescription = movies from this century\n";
         assertEquals(expected, result);
     }
 

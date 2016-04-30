@@ -40,7 +40,7 @@ public class DeleteMovieFromCollectionTest {
 
     @Test
     public void deleteTest() throws SQLException {
-        input = new String[] {"DELETE", "/collections/1/movies/4"};
+        input = new String[]{"DELETE", "/collections/1/movies/4"};
         command = new CommandGetter().getCommand(input);
         try {
             result = exe.execute(connection, command).toStringText();
