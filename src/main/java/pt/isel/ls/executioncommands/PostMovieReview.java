@@ -45,10 +45,10 @@ public class PostMovieReview implements CommandExecution {
             connection.commit();
 
             //increment of the star given in the review
-            String query2 = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
             String star = AccessUtils.getColumnName(rating);
+            String query2 = "update Movie set "+ star +" = "+ star + " + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
             ps = connection.prepareStatement(query2);
-            AccessUtils.setValuesOnPreparedStatement(ps, star, star, movieId);
+            AccessUtils.setValuesOnPreparedStatement(ps, movieId);
             ps.executeUpdate();
             connection.commit();
 
