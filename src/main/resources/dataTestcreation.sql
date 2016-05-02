@@ -9,6 +9,8 @@ insert into Movie (MovieName, MovieRelease, OneStar, TwoStar, TreeStar, FourStar
 	select 'American History X', 1998, 1, 5, 20, 100, 50  union all 
 	select 'The Silence of the Lambs', 1991, 2, 30, 11, 40,22;
 
+	insert into Movie (MovieName, MovieRelease) values ('movie 1', 2000)
+
 insert into Review (MovieID,ReviewerName, ReviewSummary,ReviewComplete,ReviewRating)
         select 1, 'Manel', 'Magnificent', 'An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more...',5 union all
         select 1, 'Bad taste Reviwer', 'Horrible', 'This is the worst movie i have seen in my life',1 union all

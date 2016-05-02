@@ -24,7 +24,7 @@ public class PostMovieRating implements CommandExecution {
 
         if (movieID != -1 && rating != -1) {
             String ratingColumnName = AccessUtils.getColumnName(rating);
-            String query = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?;";
+            String query = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             AccessUtils.setValuesOnPreparedStatement(ps, ratingColumnName, ratingColumnName, movieID);
             ps.executeUpdate();

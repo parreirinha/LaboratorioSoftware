@@ -21,6 +21,10 @@ create table Movie
 	FourStar integer default 0,
 	FiveStar integer default 0,
 	
+	Average as convert(decimal(4,3),((OneStar + TwoStar*2 + TreeStar * 3 + FourStar * 4 + FiveStar * 5) / 
+                        cast(nullif((OneStar + TwoStar + TreeStar + FourStar + FiveStar),0) AS DECIMAL (4,0)))),
+                        
+
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )

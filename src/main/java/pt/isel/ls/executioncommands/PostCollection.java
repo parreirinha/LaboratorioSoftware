@@ -27,6 +27,7 @@ public class PostCollection implements CommandExecution {
             AccessUtils.setValuesOnPreparedStatement(ps, collectionName, description);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
+            connection.commit();
             if (rs.next()) {
                 int cid = rs.getInt(1);
                 return new PrintMessage("Collection posted with success, the id of the new collection is " + cid);

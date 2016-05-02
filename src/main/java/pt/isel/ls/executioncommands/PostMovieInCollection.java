@@ -29,9 +29,11 @@ public class PostMovieInCollection implements CommandExecution {
             PreparedStatement ps = connection.prepareStatement(query);
             AccessUtils.setValuesOnPreparedStatement(ps, cid, mid);
             int res = ps.executeUpdate();
-            if (res > 0)
+            connection.commit();
+            if (res > 0) {
                 return new PrintMessage("The movie with id = " + mid + " was added with sucess to the collection");
-            return new PrintMessage("Could't post the movie in the especified collection");
+            }
+                return new PrintMessage("Could't post the movie in the especified collection");
         }
         return new PrintError("Error: Invalid parameter(s).");
     }

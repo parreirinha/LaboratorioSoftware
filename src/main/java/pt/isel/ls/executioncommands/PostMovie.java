@@ -33,6 +33,7 @@ public class PostMovie implements CommandExecution {
         ResultSet rs = ps.getGeneratedKeys();
         rs.next();
         int id = rs.getInt(1);
+        connection.commit();
         return new PrintPostMovieAndReview(id, "The ID of the new movie is");
         }
         return new PrintError("Error: Invalid parameter(s).");
