@@ -314,7 +314,7 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
-                "There is no collecion.\n" +
+                "There are no movies in collection.\n" +
                 "\n" +
                 "\t\t</body>\n" +
                 "\t</html>";
