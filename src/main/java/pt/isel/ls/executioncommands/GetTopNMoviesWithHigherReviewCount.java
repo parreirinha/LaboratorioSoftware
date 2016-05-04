@@ -33,7 +33,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
 
         String query = "select top (?) m.*, t.C, " + setClumnRowCountString(command, "c desc") +
-                " from Movie as M\ninner join(\n" +
+                " from Movie as M\nleft join(\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
                 "group by R.MovieID)as T\n on M.MovieID = T.MovieID\n" +
                 "order by M.MovieID";

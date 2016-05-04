@@ -29,7 +29,7 @@ public class GetTopMovieWithHigherReviewCount implements CommandExecution {
         String query = "select top 1 * from (\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
                 "group by R.MovieID) as ct\n" +
-                "inner join Movie as M\n" +
+                "left join Movie as M\n" +
                 "on\n" +
                 "M.MovieId = ct.MovieID\n" +
                 "order by c desc ";
