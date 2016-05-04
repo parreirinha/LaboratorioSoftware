@@ -32,7 +32,7 @@ public class PathGetter {
     };
 
     public Path getPath(String path) {
-        if (!path.equals("")) {
+        if (!path.equals("") && !path.equals("/")) {
             pathParts = path.split("/");
             pathParts = cleanFirstPositionOfStringArray(pathParts);
 
