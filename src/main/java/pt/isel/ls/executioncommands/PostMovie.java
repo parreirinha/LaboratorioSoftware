@@ -36,6 +36,12 @@ public class PostMovie implements CommandExecution {
         connection.commit();
         return new PrintPostMovieAndReview(id, "The ID of the new movie is");
         }
-        return new PrintError("Error: Invalid parameter(s).");
+        String errorString="";
+        if(movieName == null)
+            errorString += "Error: Invalid movie name.\n";
+        if(movieRelease == -1)
+            errorString += "Error: Invalid movie release year.\n";
+
+        return new PrintError(errorString);
     }
 }

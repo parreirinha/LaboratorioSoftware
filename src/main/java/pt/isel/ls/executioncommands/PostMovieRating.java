@@ -31,7 +31,13 @@ public class PostMovieRating implements CommandExecution {
             connection.commit();
             return new PrintPostMovieRating();
         }
-        return new PrintError("Error: Invalid parameter(s).");
+        String errorString="";
+        if(movieID == -1)
+            errorString += "Error: Invalid movie id.\n";
+        if(rating <1 || rating >5)
+            errorString += "Error: Invalid rating. Rating must be between 1 and 5.\n";
+
+        return new PrintError(errorString);
     }
 
 }

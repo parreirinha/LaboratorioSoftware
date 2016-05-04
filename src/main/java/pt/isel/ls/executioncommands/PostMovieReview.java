@@ -31,7 +31,7 @@ public class PostMovieReview implements CommandExecution {
         int rating = command.getParams().getParamInt("rating");
 
         if (movieId != -1 && reviwerName != null && reviewSummary != null &&
-                review != null && rating != -1) {
+                review != null && rating != -1 && rating >=1 && rating <=5) {
 
             String query = "insert into Review " +
                     "(MovieID, ReviewerName, ReviewSummary, ReviewComplete, ReviewRating)" +
@@ -55,6 +55,18 @@ public class PostMovieReview implements CommandExecution {
             return new PrintPostMovieAndReview(rid, "Review ID is");
 
         }
-        return new PrintError("Error: Invalid parameter(s).");
+        String errorString="";
+        if(movieId == -1)
+            errorString += "Error: Invalid movie id.\n";
+        if(reviwerName == null)
+            errorString += "Error: Invalid reviewer name.\n";
+        if(reviewSummary == null)
+            errorString += "Error: Invalid review summary.\n";
+        if(review == null)
+            errorString += "Error: Invalid review.\n";
+        if(rating <1 || rating >5)
+            errorString += "Error: Invalid rating. Rating must be between 1 and 5.\n";
+
+        return new PrintError(errorString);
     }
 }

@@ -3,6 +3,7 @@ package pt.isel.ls.executioncommands;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
+import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -27,6 +28,9 @@ public class GetTopRatingsLowerAverage implements CommandExecution {
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
+        if (res.isEmpty())
+            return new PrintError("There are no movies.");
+
         return new PrintDetailedMovie(res);
     }
 

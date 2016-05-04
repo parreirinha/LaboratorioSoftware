@@ -34,6 +34,13 @@ public class PostCollection implements CommandExecution {
             }
             return new PrintMessage("Error inserting new Collection");
         }
-        return new PrintError("Error: Invalid parameter(s).");
+        String errorString="";
+        if(collectionName == null)
+            errorString += "Error: Invalid collection name.\n";
+        if(description == null)
+            errorString += "Error: Invalid collection description.\n";
+
+        return new PrintError(errorString);
+
     }
 }

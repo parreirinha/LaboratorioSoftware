@@ -4,6 +4,7 @@ package pt.isel.ls.executioncommands;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedReview;
+import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Review;
 
@@ -30,6 +31,9 @@ public class GetReviewById implements CommandExecution {
         AccessUtils.setValuesOnPreparedStatement(preparedStatement, movieId, reviewId);
         ResultSet rs = preparedStatement.executeQuery();
         Collection<Review> res = getCollection(rs);
+        if (res.isEmpty())
+            return new PrintError("There is no review with id = "+reviewId+" for movie with id = "+movieId+".");
+
         return new PrintDetailedReview(res);
     }
 

@@ -3,6 +3,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
+import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.PrintReview;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Review;
@@ -39,6 +40,9 @@ public class GetAllReviews implements CommandExecution {
         }
         ResultSet rs = ps.executeQuery();
         Collection<Review> res = getCollection(rs);
+        if (res.isEmpty())
+            return new PrintError("There are no reviews for movie with id = "+movieId+".");
+
         return new PrintReview(res);
     }
 
