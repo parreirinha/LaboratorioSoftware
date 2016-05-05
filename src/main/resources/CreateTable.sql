@@ -1,15 +1,11 @@
 use ls;
-
-
-
+--use ls_tests
 
 if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE MovieCollection
 if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE Collections
 if(OBJECT_ID('Review') IS NOT NULL) DROP TABLE Review
 if(OBJECT_ID('Movie') IS NOT NULL) DROP TABLE Movie
 
-
---use ls_tests
 create table Movie
 (
 	MovieID integer identity(1, 1),
@@ -20,11 +16,8 @@ create table Movie
 	TreeStar integer default 0,
 	FourStar integer default 0,
 	FiveStar integer default 0,
-	
 	Average as convert(decimal(4,3),((OneStar + TwoStar*2 + TreeStar * 3 + FourStar * 4 + FiveStar * 5) / 
                         cast(nullif((OneStar + TwoStar + TreeStar + FourStar + FiveStar),0) AS DECIMAL (4,0)))),
-                        
-
 	unique(MovieName, MovieRelease),
 	primary key(MovieID)
 )
@@ -56,6 +49,18 @@ create table MovieCollection
 	foreign key (CID) references Collections (CollectionID),
 	foreign key (MovieID) references Movie(MovieID)
 );
+--passo 14
+--update Movie set TreeStar=1 where MovieID=1
+--update Movie set FiveStar=3 where MovieID=1
+
+--passo16
+--update Movie set OneStar=1 where MovieID=2
+--update Movie set Fourstar=1 where MovieID=2
+
+--select * from Review;
+--select * from Movie;
+--select * from Collections;
+--select * from MovieCollection;
 
 /*
 select *
@@ -68,7 +73,7 @@ from(
 	) as res	
 where RowNumber BETWEEN 3 AND 6 */
 
-
+/*
 select * from(
 	select  MC.CID, MC.MovieID, C.Name, C.Description, M.MovieName, ROW_NUMBER() OVER (ORDER BY M.MovieID) AS RowNumber,
 	CONVERT(DECIMAL(4,3), ((M.OneStar + M.TwoStar*2 + M.TreeStar * 3 + M.FourStar * 4 + M.FiveStar * 5)/ 
@@ -80,20 +85,14 @@ from MovieCollection as MC
 ) as res
 where RowNumber BETWEEN 2 AND 5
 order by rating
-
-
-
---select * from Review;
---select * from Movie;
-select * from Collections;
-select * from MovieCollection;
+*/
 
 
 --drop table MovieCollection;
 --drop table Collections;
 
 
-
+/*
 -- exemplo da query q esta em falta
 select * 
 from(
@@ -106,3 +105,4 @@ from(
 				order by c desc
 				) as res
 where Row_Count BETWEEN 2 AND 3
+*/
