@@ -48,7 +48,7 @@ public class PostMovieInCollectionTest {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected = "The movie with id = 1 was added with sucess to the collection";
+        expected = "The movie with id = 1 was added with success to the collection";
         assertEquals(expected, result);
     }
 }

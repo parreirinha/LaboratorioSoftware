@@ -63,7 +63,7 @@ public class GetMovieTest {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected = "There is no such movie.\n";
+        expected = "There is no movie with id = 100.";
         assertEquals(expected, result);
 
 

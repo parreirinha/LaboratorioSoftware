@@ -83,7 +83,7 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
-                "There is no such movie.\n" +
+                "There is no movie with id = 10." +
                 "\n" +
                 "\t\t</body>\n" +
                 "\t</html>";
@@ -136,7 +136,7 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
-                "There is no such review.\n" +
+                "There is no review with id = 10 for movie with id = 1." +
                 "\n" +
                 "\t\t</body>\n" +
                 "\t</html>";
