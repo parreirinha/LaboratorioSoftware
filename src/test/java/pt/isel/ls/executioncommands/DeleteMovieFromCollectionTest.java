@@ -47,7 +47,7 @@ public class DeleteMovieFromCollectionTest {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected = "Movie with id = " + 4 + " was deleted with sucess from collection";
+        expected = "Movie with id = 4 was deleted with sucess from collection with id = 1";
         assertEquals(expected, result);
     }
 }

@@ -2,6 +2,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
+import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -34,6 +35,9 @@ public class GetAllMovies implements CommandExecution {
         }
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
+        if (res.isEmpty())
+            return new PrintError("There are no movies.");
+
         return new PrintMovie(res);
     }
 

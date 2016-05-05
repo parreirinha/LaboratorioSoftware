@@ -24,8 +24,9 @@ public class DeleteMovieFromCollection implements CommandExecution {
         PreparedStatement ps = connection.prepareStatement(query);
         AccessUtils.setValuesOnPreparedStatement(ps, cid, mid);
         int res = ps.executeUpdate();
+        connection.commit();
         if (res > 0)
-            return new PrintMessage("Movie with id = " + mid + " was deleted with sucess from collection");
+            return new PrintMessage("Movie with id = " + mid + " was deleted with sucess from collection with id = "+cid);
         return new PrintMessage("Movie has not deleted from collection");
     }
 }

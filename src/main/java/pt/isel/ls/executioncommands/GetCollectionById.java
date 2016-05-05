@@ -27,7 +27,7 @@ public class GetCollectionById implements CommandExecution {
 
     private ArrayList<Movie> movies = new ArrayList<Movie>();
     private Collections collections;
-    private final String NoCollection = "There is no collecion.\n";
+    private final String NoMoviesCollection = "There are no movies in collection.\n";
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
@@ -47,7 +47,7 @@ public class GetCollectionById implements CommandExecution {
         AccessUtils.setValuesOnPreparedStatement(ps, collectionId);
         ResultSet rs = ps.executeQuery();
         if (!rs.isBeforeFirst()) {
-            return new PrintError(NoCollection);
+            return new PrintError(NoMoviesCollection);
         }
         setParametersForObjectMovieCollectionFromResultSet(rs);
         MovieCollection movieCollection = new MovieCollection(movies, collections);

@@ -22,16 +22,22 @@ public class PostMovieRating implements CommandExecution {
         int movieID = command.getPath().getPathInt("mid");
         int rating = command.getParams().getParamInt("rating");
 
-        if (movieID != -1 && rating != -1) {
+        if (movieID != -1 && rating >=1 && rating <=5) {
             String ratingColumnName = AccessUtils.getColumnName(rating);
-            String query = "update Movie set ? = ? + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
+            String query = "update Movie set "+ ratingColumnName +" = "+ ratingColumnName + " + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
-            AccessUtils.setValuesOnPreparedStatement(ps, ratingColumnName, ratingColumnName, movieID);
+            AccessUtils.setValuesOnPreparedStatement(ps, movieID);
             ps.executeUpdate();
             connection.commit();
             return new PrintPostMovieRating();
         }
-        return new PrintError("Error: Invalid parameter(s).");
+        String errorString="";
+        if(movieID == -1)
+            errorString += "Error: Invalid movie id.\n";
+        if(rating <1 || rating >5)
+            errorString += "Error: Invalid rating. Rating must be between 1 and 5.\n";
+
+        return new PrintError(errorString);
     }
 
 }

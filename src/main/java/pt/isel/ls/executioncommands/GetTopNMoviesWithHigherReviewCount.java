@@ -2,6 +2,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
+import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
@@ -32,7 +33,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
 
         String query = "select top (?) m.*, t.C, " + setClumnRowCountString(command, "c desc") +
-                " from Movie as M\ninner join(\n" +
+                " from Movie as M\nleft join(\n" +
                 "select R.MovieID, count(R.MovieID)as c from dbo.Review as R\n" +
                 "group by R.MovieID)as T\n on M.MovieID = T.MovieID\n" +
                 "order by M.MovieID";
@@ -48,6 +49,9 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
         }
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
+        if (res.isEmpty())
+            return new PrintError("There are no movies.");
+
         return new PrintMovie(res);
     }
 

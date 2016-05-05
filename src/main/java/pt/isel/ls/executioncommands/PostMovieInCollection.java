@@ -31,10 +31,16 @@ public class PostMovieInCollection implements CommandExecution {
             int res = ps.executeUpdate();
             connection.commit();
             if (res > 0) {
-                return new PrintMessage("The movie with id = " + mid + " was added with sucess to the collection");
+                return new PrintMessage("The movie with id = " + mid + " was added with success to the collection");
             }
-                return new PrintMessage("Could't post the movie in the especified collection");
+                return new PrintMessage("Couldn't post the movie in the specified collection");
         }
-        return new PrintError("Error: Invalid parameter(s).");
+        String errorString="";
+        if(cid == -1)
+            errorString += "Error: Invalid collection id.\n";
+        if(mid == -1)
+            errorString += "Error: Invalid movie id.\n";
+
+        return new PrintError(errorString);
     }
 }
