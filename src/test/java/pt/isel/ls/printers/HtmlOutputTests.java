@@ -239,60 +239,58 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
-                "<table border=\"1\" style=\"width:100%\">\n" +
-                "\t<tr>\n" +
-                "\t\t<td>Collection id</td>\n" +
-                "\t\t<td>Collection name</td>\n" +
-                "\t\t<td>Collection description</td>\n" +
-                "\t\t<td>Movie id</td>\n" +
-                "\t\t<td>Movie name</td>\n" +
-                "</tr>\n" +
+                "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>Collection id</td>\n" +
+                "\t\t\t\t\t<td>Collection name</td>\n" +
+                "\t\t\t\t\t<td>Collection description</td>\n" +
+                "\t\t\t\t\t<td>Movie id</td>\n" +
+                "\t\t\t\t\t<td>Movie name</td>\n" +
+                "\t\t\t\t</tr>\n" +
                 "\n" +
-                "\t<tr>\n" +
-                "<td>2</td>\n" +
-                "<td>Before 2000</td>\n" +
-                "<td>movies before 2000</td>\n" +
-                "<td>1</td>\n" +
-                "<td>Fight Club</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td>2</td>\n" +
-                "<td>Seven</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td>3</td>\n" +
-                "<td>The Matrix</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td>5</td>\n" +
-                "<td>Pulp Fiction</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td>6</td>\n" +
-                "<td>American History X</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td></td>\n" +
-                "<td>7</td>\n" +
-                "<td>The Silence of the Lambs</td>\n" +
-                "</tr>\n" +
-                "</tr>\n" +
-                "\n" +
-                "</table>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>2</td>\n" +
+                "\t\t\t\t\t<td>Before 2000</td>\n" +
+                "\t\t\t\t\t<td>movies before 2000</td>\n" +
+                "\t\t\t\t\t<td>1</td>\n" +
+                "\t\t\t\t\t<td>Fight Club</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td>2</td>\n" +
+                "\t\t\t\t\t<td>Seven</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td>3</td>\n" +
+                "\t\t\t\t\t<td>The Matrix</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td>5</td>\n" +
+                "\t\t\t\t\t<td>Pulp Fiction</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td>6</td>\n" +
+                "\t\t\t\t\t<td>American History X</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td></td>\n" +
+                "\t\t\t\t\t<td>7</td>\n" +
+                "\t\t\t\t\t<td>The Silence of the Lambs</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t</body>\n" +
                 "\t</html>";
         assertEquals(Expected, Result);

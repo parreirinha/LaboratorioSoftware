@@ -20,32 +20,50 @@ public class PrintGetCollectionsById implements Printable {
 
     private MovieCollection movieCollection;
     String[] head = {"Collection id", "Collection name", "Collection description", "Movie id", "Movie name"};
-
+    ArrayList<Function<MovieCollection, String>> func = new ArrayList<>();
+    ArrayList<Function<Movie, String>> func1 = new ArrayList<>();
     public PrintGetCollectionsById(MovieCollection movieCollection) {
         this.movieCollection = movieCollection;
+        Function<MovieCollection, String> f = mc -> ""+mc.getCollections().getCollectionID();
+        func.add(f);
+        f = mc -> mc.getCollections().getName();
+        func.add(f);
+        f = mc -> mc.getCollections().getDescription();
+        func.add(f);
+        Function<Movie, String> f1 = m -> "" + m.getMovieID();
+        func1.add(f1);
+        f1 = m -> m.getMovieName();
+        func1.add(f1);
     }
 
 
     @Override
     public String toStringText() {
         String s =
-                head[0] + ": " + movieCollection.getCollections().getCollectionID() +
-                        "\n" + head[1] + ": " + movieCollection.getCollections().getName() +
-                        "\n" + head[2] + ": " + movieCollection.getCollections().getDescription() +
+                head[0] + ": " + func.get(0).apply(movieCollection) +
+                        "\n" + head[1] + ": " + func.get(1).apply(movieCollection) +
+                        "\n" + head[2] + ": " + func.get(2).apply(movieCollection) +
                         "\n\nMovies in the collection:";
         for (Movie movie : movieCollection.getMovies()) {
-            s += "\n" + head[3] + ": " + movie.getMovieID() + "\t" + head[4] + ": " + movie.getMovieName();
+            s += "\n" + head[3] + ": " + func1.get(0).apply(movie) + "\t" + head[4] + ": " + func1.get(1).apply(movie);
         }
         return s + "\n";
     }
 
     @Override
-    public String toStringHtml() {
+    public String toStringHtml()
+    {
+        Collection<MovieCollection> mc = new ArrayList<>();
+        mc.add(movieCollection);
+        return HtmlGenerator.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1);
+
+        /*
         if (movieCollection.getMovies().size() == 1)
             return String.format(HtmlGenerator.template, getText());
         return String.format(HtmlGenerator.template, getTable());
+        */
     }
-
+/*
     private String getTable() {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
                 "\t" + getFullHtmlTitle() + "\n";
@@ -80,7 +98,7 @@ public class PrintGetCollectionsById implements Printable {
         for (Movie m : movieCollection.getMovies()) {
             if (aux > 0) {
                 str += "<tr>\n<td></td>\n<td></td>\n<td></td>\n";
-            }
+        }
             str += "<td>" + m.getMovieID() + "</td>\n" +
                     "<td>" + m.getMovieName() + "</td>\n";
             ++aux;
@@ -96,6 +114,6 @@ public class PrintGetCollectionsById implements Printable {
             str += "\t\t<td>" + head[i] + "</td>\n";
         return str + "</tr>\n";
     }
-
+*/
 
 }
