@@ -43,6 +43,7 @@ public class CommandMapper {
         commmandMap.put("OPTION", new Option());
         commmandMap.put("EXIT", new Exit());
         commmandMap.put("", new InteractiveMode());
+        commmandMap.put("LISTEN", new Listen());
     }
 
 
