@@ -26,6 +26,7 @@ public class ExecutionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //prints for debug, should be deleted
         System.out.println("HERE "+req.getRequestURI());//gets path
         System.out.println(req.getQueryString());//gets headers(?) and parameters //TODO check how headers is placed in uri
 
@@ -46,7 +47,7 @@ public class ExecutionServlet extends HttpServlet {
 
         resp.setContentType(identifyOutputFormat(c,p));
 
-
-
-        out.println( p.toStringHtml()); }
+        out.println(
+                //TODO change to p.toHttpPage() when available
+                p.toStringHtml()); }
 }

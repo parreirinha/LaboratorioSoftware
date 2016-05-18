@@ -8,7 +8,7 @@ import org.eclipse.jetty.servlet.ServletHandler;
 public class HttpServer {
     private static final int LISTEN_PORT = 8080;
 
-    public static void main(String[] args) throws Exception {
+    public void initServer() throws Exception {
 
         Server server = new Server(LISTEN_PORT);
         ServletHandler handler = new ServletHandler();
