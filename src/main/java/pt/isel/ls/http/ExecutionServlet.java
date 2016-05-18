@@ -41,8 +41,6 @@ public class ExecutionServlet extends HttpServlet {
 
         resp.setContentType(identifyOutputFormat(c, p));
 
-        out.println(
-                //TODO change to p.toHttpPage() when available
-                p.toStringHtml());
+        out.println(p.toStringHtml());
     }
 }
