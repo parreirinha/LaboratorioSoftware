@@ -6,7 +6,7 @@ import org.eclipse.jetty.servlet.ServletHandler;
  * Created by Dani on 17-05-2016.
  */
 public class HttpServer {
-    private static final int LISTEN_PORT = 8090;
+    private static final int LISTEN_PORT = 8000;
 
     public static void main(String[] args) throws Exception {
 

@@ -30,7 +30,7 @@ public class CommandMapper {
         commmandMap.put("GETmoviesmidreviews", new GetAllReviews());
         commmandMap.put("GETmoviesmidreviewsrid", new GetReviewById());
         commmandMap.put("GETtopsratingshigheraverage", new GetTopRatingsHigherAverage());
-        commmandMap.put("GETtopsnratingshigheraverage", new GetTopsNRatingsHigherAverage());
+        commmandMap.put("GETtopsnratingshigheraverage", new GetTopNRatingsHigherAverage());
         commmandMap.put("GETtopsratingsloweraverage", new GetTopRatingsLowerAverage());
         commmandMap.put("GETtopsnratingsloweraverage", new GetTopNRatingsLowerAverage());
         commmandMap.put("GETtopsreviewshighercount", new GetTopMovieWithHigherReviewCount());

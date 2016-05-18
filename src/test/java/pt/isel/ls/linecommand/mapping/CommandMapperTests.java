@@ -88,7 +88,7 @@ public class CommandMapperTests {
 
     @Test
     public void GetTopNHigherAverageRatingTest() {
-        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNAverageHigherRating)) instanceof GetTopsNRatingsHigherAverage);
+        assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(getTopNAverageHigherRating)) instanceof GetTopNRatingsHigherAverage);
     }
 
     @Test

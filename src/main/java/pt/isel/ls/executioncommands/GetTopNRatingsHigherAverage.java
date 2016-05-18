@@ -21,7 +21,7 @@ import static pt.isel.ls.executioncommands.AccessUtils.*;
  * GET /tops/{n}/ratings/higher/average
  * returns a list with the n movies with higher average ratings, sorted decreasingly
  */
-public class GetTopsNRatingsHigherAverage implements CommandExecution {
+public class GetTopNRatingsHigherAverage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         int n = command.getPath().getPathInt("n");
