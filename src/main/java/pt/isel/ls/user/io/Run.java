@@ -27,6 +27,7 @@ public class Run {
                     .getExecutionCommandInstance(command)
                     .execute(conn, command)));
 
+
         } catch (SQLException e) {
             tryRollback(conn);
             throw new ApplicationException();
