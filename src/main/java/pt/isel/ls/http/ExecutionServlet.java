@@ -2,11 +2,8 @@ package pt.isel.ls.http;
 
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
-import pt.isel.ls.executioncommands.GetAllMovies;
-import pt.isel.ls.executioncommands.GetMovie;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.linecommand.process.CommandGetter;
 import pt.isel.ls.printers.Printable;
 
 import javax.servlet.ServletException;
@@ -26,28 +23,26 @@ public class ExecutionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //prints for debug, should be deleted
-        System.out.println("HERE "+req.getRequestURI());//gets path
-        System.out.println(req.getQueryString());//gets headers(?) and parameters //TODO check how headers is placed in uri
-
-
+        System.out.println(req.getRequestURI());
         PrintWriter out = resp.getWriter();
+        Command c;
 
-        Command c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
+        c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
 
         Printable p = null;
         try {
             p = new CommandMapper().getExecutionCommandInstance(c).execute(
-              new ConnectionFactory().getNewConnection(), c);
+                    new ConnectionFactory().getNewConnection(), c);
         } catch (SQLException e) {
             e.printStackTrace();//TODO tratar estas excepçoes
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
 
-        resp.setContentType(identifyOutputFormat(c,p));
+        resp.setContentType(identifyOutputFormat(c, p));
 
         out.println(
                 //TODO change to p.toHttpPage() when available
-                p.toStringHtml()); }
+                p.toStringHtml());
+    }
 }

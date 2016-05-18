@@ -27,6 +27,7 @@ public class Listen implements CommandExecution {
 
         try {
             server.initServer(port);
+
         } catch (Exception e) {
             throw new ApplicationException();
         }
