@@ -44,13 +44,13 @@ public class CommandMapper {
         commmandMap.put("EXIT", new Exit());
         commmandMap.put("", new InteractiveMode());
         commmandMap.put("LISTEN", new Listen());
+        commmandMap.put("GET", new HttpHomePage());
     }
 
 
     public CommandExecution getExecutionCommandInstance(Command command) {
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
-
         if (!commmandMap.containsKey(commandProcessedString)) {
             System.out.println("Error: Invalid Command.");
             return commmandMap.get("EXIT");

@@ -13,10 +13,9 @@ public class HeadersGetter {
     private HashMap<String, String> headersStrings = new HashMap<String, String>();
 
     public Headers getHeaders(String headersString) {
+        if (headersString != null && !headersString.equals("")) {
+            String[] headers = headersString.split(Pattern.quote("|"));
 
-        String[] headers = headersString.split(Pattern.quote("|"));
-
-        if (headersString != "")
             for (int i = 0; i < headers.length; ++i) {
                 String[] pair = headers[i].split(":");
                 if (pair.length == 2) {
@@ -25,7 +24,7 @@ public class HeadersGetter {
                     headersStrings.put(key, value);
                 }
             }
-
+        }
         return new Headers(headersStrings);
     }
 

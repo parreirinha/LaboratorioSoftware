@@ -16,10 +16,10 @@ public class ParamGetter {
     }
 
     public Parameters getParams(String paramString) {
+        if(paramString != null && !paramString.equals("")) {
 
-        String[] params = paramString.split("&");
+            String[] params = paramString.split("&");
 
-        if (paramString != "")
             for (int i = 0; i < params.length; ++i) {
                 String[] pair = params[i].split("=");
                 if (pair.length == 2) {
@@ -28,7 +28,7 @@ public class ParamGetter {
                     paramStrings.put(key, value);
                 }
             }
-
+        }
         return new Parameters(paramStrings);
     }
 
