@@ -23,7 +23,6 @@ public class ExecutionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println(req.getRequestURI());
         PrintWriter out = resp.getWriter();
         Command c;
 
@@ -34,13 +33,24 @@ public class ExecutionServlet extends HttpServlet {
             p = new CommandMapper().getExecutionCommandInstance(c).execute(
                     new ConnectionFactory().getNewConnection(), c);
         } catch (SQLException e) {
-            e.printStackTrace();//TODO tratar estas excepçoes
+            e.printStackTrace();//TODO tratar estas excepçoes e implementar lançamentod de erros http
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
 
-        resp.setContentType(identifyOutputFormat(c, p));
+        resp.setContentType(identifyContentType(c));
 
         out.println(p.toStringHtml());
+    }
+
+    private String identifyContentType(Command c){
+        String s = c.getHeaders().getHeadersString("accept");
+
+        if(s==null || s.equals("text/html")){
+            return "text/html";
+        }else{
+            return "text/plain";
+        }
+
     }
 }

@@ -8,11 +8,9 @@ import pt.isel.ls.linecommand.process.CommandGetter;
  */
 public class UriCommandGetter {
 
-    private String[] commandParts = new String[4];
+    private String[] commandParts;
 
     public Command getCommandFromUri(String methodName, String requestUri, String query) {
-        commandParts[0] = methodName;
-        commandParts[1] = requestUri;
 
         if(query!=null) {
             String[] queryParts = query.split("&");
@@ -26,20 +24,23 @@ public class UriCommandGetter {
             }
 
             if (queryParts[i].contains("=")) {
-                paramsString += queryParts[i];
+                paramsString += "&"+queryParts[i];
             }
         }
 
         if (!headersString.equals("")) {
+            commandParts = new String[4];
             commandParts[2] = headersString;
             if (!paramsString.equals("")) {
                 commandParts[3] = paramsString;
             }
-        }
-        if (!paramsString.equals("")) {
+        }else {
+            commandParts = new String[3];
             commandParts[2] = paramsString;
-
         }
+
+            commandParts[0] = methodName;
+            commandParts[1] = requestUri;
     }
         return new CommandGetter().getCommand(commandParts);
     }
