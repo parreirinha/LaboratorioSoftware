@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
@@ -13,6 +14,7 @@ import java.util.function.Function;
 
 public class PrintMovie implements Printable {
 
+    private final Command command;
     private Collection<Movie> movieCollection;
     private final String[] head =
             {"Movie ID", "Name", "Release"};
@@ -20,7 +22,8 @@ public class PrintMovie implements Printable {
     private final String NoMovie = "There is no such movie.\n";
 
 
-    public PrintMovie(Collection<Movie> movies) {
+    public PrintMovie(Collection<Movie> movies, Command command) {
+        this.command = command;
         movieCollection = movies;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> movie.getMovieName());
@@ -55,7 +58,7 @@ public class PrintMovie implements Printable {
         if (movieCollection.isEmpty())
             return String.format(HtmlPrinters.template, NoMovie);
         ArrayList<String > uri = new ArrayList<>();
-        movieCollection.forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()));
+        movieCollection.forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
         return HtmlPrinters.htmlGenerate(movieCollection, head, function, uri);
     }
 

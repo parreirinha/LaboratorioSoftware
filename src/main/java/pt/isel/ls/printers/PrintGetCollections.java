@@ -1,6 +1,7 @@
 package pt.isel.ls.printers;
 
 
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
@@ -14,11 +15,13 @@ import java.util.function.Function;
  */
 public class PrintGetCollections implements Printable {
 
+    private final Command command;
     Collection<Collections> col;
     ArrayList<Function<Collections, String>> functions = new ArrayList<>();
     String[] head = {"Collection id", "Name", "Description"};
 
-    public PrintGetCollections(Collection<Collections> c) {
+    public PrintGetCollections(Collection<Collections> c, Command command) {
+        this.command = command;
         col = c;
         functions.add(col -> "" + col.getCollectionID());
         functions.add(col -> col.getName());
@@ -44,7 +47,7 @@ public class PrintGetCollections implements Printable {
         return String.format(Printable.super.getTemplate(), getTable());
         */
         ArrayList<String> uri = new ArrayList<>();
-        col.forEach(x-> uri.add("http://localhost:8080/collections/"+x.getCollectionID()));
+        col.forEach(x-> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/collections/"+x.getCollectionID()));
         return HtmlPrinters.htmlGenerate(col, head, functions, uri);
     }
 

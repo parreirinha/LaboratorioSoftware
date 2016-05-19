@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Review;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
@@ -12,13 +13,15 @@ import java.util.function.Function;
  */
 public class PrintDetailedReview implements Printable {
 
+    private final Command command;
     Collection<Review> review;
     private final String[] head =
             {"Review ID", "Movie ID", "Reviewer Name", "Review Rating", "Summary Review", "Complete Review"};
     private final ArrayList<Function<Review, String>> function = new ArrayList<>();
     private final String NoReview = "There is no such review.\n";
 
-    public PrintDetailedReview(Collection<Review> r) {
+    public PrintDetailedReview(Collection<Review> r, Command command) {
+        this.command = command;
         review = r;
         function.add(review -> "" + review.getReviewID());
         function.add(review -> "" + review.getMovieID());
@@ -58,7 +61,7 @@ public class PrintDetailedReview implements Printable {
         if (review.isEmpty())
             return String.format(HtmlPrinters.template, NoReview);
         ArrayList<String> uri = new ArrayList<>();
-        review.forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()));
+        review.forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
         return HtmlPrinters.htmlGenerate(review, head, function, uri);
     }
 /*

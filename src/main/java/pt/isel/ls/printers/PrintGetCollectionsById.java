@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.model.MovieCollection;
 import pt.isel.ls.printers.html.HtmlPrinters;
@@ -18,11 +19,14 @@ import java.util.function.Function;
  */
 public class PrintGetCollectionsById implements Printable {
 
+    private final Command command;
     private MovieCollection movieCollection;
     String[] head = {"Collection id", "Collection name", "Collection description", "Movie id", "Movie name"};
     ArrayList<Function<MovieCollection, String>> func = new ArrayList<>();
     ArrayList<Function<Movie, String>> func1 = new ArrayList<>();
-    public PrintGetCollectionsById(MovieCollection movieCollection) {
+
+    public PrintGetCollectionsById(MovieCollection movieCollection, Command command) {
+        this.command = command;
         this.movieCollection = movieCollection;
         Function<MovieCollection, String> f = mc -> ""+mc.getCollections().getCollectionID();
         func.add(f);
@@ -56,7 +60,7 @@ public class PrintGetCollectionsById implements Printable {
         Collection<MovieCollection> mc = new ArrayList<>();
         mc.add(movieCollection);
         ArrayList<String> uri = new ArrayList<>();
-        movieCollection.getMovies().forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()));
+        movieCollection.getMovies().forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
         return HtmlPrinters.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri);
 
         /*

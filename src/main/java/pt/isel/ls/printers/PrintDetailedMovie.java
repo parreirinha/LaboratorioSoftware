@@ -3,6 +3,7 @@ package pt.isel.ls.printers;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
@@ -38,12 +39,14 @@ public class PrintDetailedMovie implements Printable {
 
 
     private Collection<Movie> movieCollection;
+    private Command command;
     private final String[] head =
             {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
     private ArrayList<Function<Movie, String>> function = new ArrayList<>();
     private final String NoMovie = "There is no such movie.\n";
 
-    public PrintDetailedMovie(Collection<Movie> movieCollection) {
+    public PrintDetailedMovie(Collection<Movie> movieCollection, Command command) {
+        this.command = command;
         this.movieCollection = movieCollection;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> movie.getMovieName());

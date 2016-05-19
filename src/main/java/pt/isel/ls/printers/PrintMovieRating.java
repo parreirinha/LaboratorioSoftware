@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
@@ -12,6 +13,7 @@ import java.util.function.Function;
  */
 public class PrintMovieRating implements Printable {
 
+    private final Command command;
     private Collection<Movie> movie;
     private final String[] head =
             {"The average rating for the movie with the ID",
@@ -19,8 +21,8 @@ public class PrintMovieRating implements Printable {
     private ArrayList<Function<Movie, String>> function = new ArrayList<>();
     private final String NoMovie = "There is no such movie.\n";
 
-    public PrintMovieRating(Collection<Movie> m) {
-
+    public PrintMovieRating(Collection<Movie> m, Command command) {
+        this.command = command;
         movie = m;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> "" + movie.getAverage());
@@ -63,7 +65,7 @@ public class PrintMovieRating implements Printable {
         if (movie.isEmpty())
             return String.format(HtmlPrinters.template, NoMovie);
         ArrayList<String> uri = new ArrayList<>();
-        movie.forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()));
+        movie.forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
         return HtmlPrinters.htmlGenerate(movie, head, function, uri);
     }
 
