@@ -14,9 +14,9 @@ public class PrintHomePageTest {
 
         String res = printHomePage.toStringHtml();
         String expected =
-                "<a href=http://localhost:8000/collections/?skip=0&top=5>Collections</a>\n" +
-                "<a href=http://localhost:8000/movies/?skip=0&top=5>Movies</a>\n" +
-                "<a href=http://localhost:8000/tops/ratings/?skip=0&top=5>Top Ratings</a>";
+                "<p><a href=http://localhost:8000/collections/?skip=0&top=5>Collections</a>\n" +
+                "</p><a href=http://localhost:8000/movies/?skip=0&top=5>Movies</a>\n" +
+                "<p><a href=http://localhost:8000/tops/ratings/?skip=0&top=5>Top Ratings</a></p>";
         assertEquals(expected, res);
     }
 }
