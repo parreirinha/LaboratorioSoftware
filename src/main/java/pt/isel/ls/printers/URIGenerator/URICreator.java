@@ -9,16 +9,19 @@ import pt.isel.ls.linecommand.model.Path;
  */
 public class URICreator {
 
-    private String URIInicialString = "<a href=http://localhost:";
-    private String URIFinalString = "</a>";
-    private String uri = "";
+    private static String URIInicialString = "<a href=http://localhost:";
+    private static String URIFinalString = "</a>";
 
 
 
-    public String getURI(String path, String para) {
+    public static String getURI(String path, String params, int port, String name) {
 
+        String uri = URIInicialString + port + path;
+        if (params != "" && params != null){
+            uri += "?" + params;
+        }
+        uri += "/>" + name + URIFinalString;
 
-
-        return null;
+        return uri;
     }
 }

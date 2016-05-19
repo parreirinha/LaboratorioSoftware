@@ -45,6 +45,7 @@ public class CommandMapper {
         commmandMap.put("", new InteractiveMode());
         commmandMap.put("LISTEN", new Listen());
         commmandMap.put("GET", new HttpHomePage());
+        commmandMap.put("GETtopsratings", new TopsRatings());
     }
 
 
