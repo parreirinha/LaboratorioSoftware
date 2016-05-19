@@ -2,9 +2,11 @@ package pt.isel.ls.printers;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.DataCreationTests;
+import pt.isel.ls.executioncommands.Listen;
 import pt.isel.ls.executioncommands.TestConnectionFactory;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
@@ -22,10 +24,14 @@ public class HtmlOutputTests {
     private Connection connection;
     private DataCreationTests dataTests = new DataCreationTests();
 
+ /*
+    TODO: chamar metodo getPort() para obter o valor do porto que é concatenado
+
     @Before
     public void beforeTest() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
         dataTests.initValuesInDBToTests();
+
     }
 
     @After
@@ -446,5 +452,5 @@ public class HtmlOutputTests {
                 "\t</html>";
         assertEquals(Expected, Result);
     }
-
+*/
 }
