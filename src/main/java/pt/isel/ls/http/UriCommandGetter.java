@@ -4,7 +4,10 @@ import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
 /**
- * Created by Dani on 18-05-2016.
+ * Class used to return an instance of {@code} Command from a given uri,
+ * i.e. the method name (only GET is supported), the getRequestUri and
+ * getQueryString methods from a given instance of
+ * {@code} javax.servlet.http.HttpServletRequest.
  */
 public class UriCommandGetter {
 

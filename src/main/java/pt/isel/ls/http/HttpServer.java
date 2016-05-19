@@ -4,7 +4,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
 
 /**
- * Created by Dani on 17-05-2016.
+ * Class used to initiate an HTTP server and configures its port and handler.
  */
 public class HttpServer {
 

@@ -16,7 +16,8 @@ import java.sql.SQLException;
 
 
 /**
- * Created by Dani on 17-05-2016.
+ * Class used to execute an HTTP GET request to the application and
+ * that returns the correspondent response.
  */
 public class ExecutionServlet extends HttpServlet {
     @Override

@@ -11,10 +11,6 @@ import java.util.regex.Pattern;
  */
 public class CommandGetter {
 
-    /*
-    * Class used to return a new Command instance from the String array
-    * linecommand passed as argument.
-    * * */
     public Command getCommand(String[] args) {
         String method = "", path = "", headers = "", params = "";
 
