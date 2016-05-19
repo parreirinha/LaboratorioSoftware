@@ -28,7 +28,8 @@ public class PathGetter {
             {"collections"},
             {"collections", "{cid}"},
             {"collections", "{cid}", "movies"},
-            {"collections", "{cid}", "movies", "{mid}"}
+            {"collections", "{cid}", "movies", "{mid}"},
+            {"tops","ratings"}
     };
 
     public Path getPath(String path) {

@@ -30,7 +30,7 @@ public class CommandMapper {
         commmandMap.put("GETmoviesmidreviews", new GetAllReviews());
         commmandMap.put("GETmoviesmidreviewsrid", new GetReviewById());
         commmandMap.put("GETtopsratingshigheraverage", new GetTopRatingsHigherAverage());
-        commmandMap.put("GETtopsnratingshigheraverage", new GetTopsNRatingsHigherAverage());
+        commmandMap.put("GETtopsnratingshigheraverage", new GetTopNRatingsHigherAverage());
         commmandMap.put("GETtopsratingsloweraverage", new GetTopRatingsLowerAverage());
         commmandMap.put("GETtopsnratingsloweraverage", new GetTopNRatingsLowerAverage());
         commmandMap.put("GETtopsreviewshighercount", new GetTopMovieWithHigherReviewCount());
@@ -44,13 +44,14 @@ public class CommandMapper {
         commmandMap.put("EXIT", new Exit());
         commmandMap.put("", new InteractiveMode());
         commmandMap.put("LISTEN", new Listen());
+        commmandMap.put("GET", new HttpHomePage());
+        commmandMap.put("GETtopsratings", new TopsRatings());
     }
 
 
     public CommandExecution getExecutionCommandInstance(Command command) {
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
-
         if (!commmandMap.containsKey(commandProcessedString)) {
             System.out.println("Error: Invalid Command.");
             return commmandMap.get("EXIT");

@@ -27,20 +27,12 @@ public class Listen implements CommandExecution {
 
         try {
             server.initServer(port);
+
         } catch (Exception e) {
-            tryCloseServer();
-            return new PrintMessage("Server Stopped");
+            throw new ApplicationException();
         }
 
         return new PrintMessage("Server started.");
     }
 
-    private void tryCloseServer() {
-        try {
-            if (server != null)
-                server.closeServer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -2,11 +2,8 @@ package pt.isel.ls.http;
 
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
-import pt.isel.ls.executioncommands.GetAllMovies;
-import pt.isel.ls.executioncommands.GetMovie;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.linecommand.process.CommandGetter;
 import pt.isel.ls.printers.Printable;
 
 import javax.servlet.ServletException;
@@ -19,35 +16,43 @@ import java.sql.SQLException;
 
 import static pt.isel.ls.user.io.Run.identifyOutputFormat;
 
+
 /**
- * Created by Dani on 17-05-2016.
+ * Class used to execute an HTTP GET request to the application and
+ * that returns the correspondent response.
  */
 public class ExecutionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //prints for debug, should be deleted
-        System.out.println("HERE "+req.getRequestURI());//gets path
-        System.out.println(req.getQueryString());//gets headers(?) and parameters //TODO check how headers is placed in uri
-
-
         PrintWriter out = resp.getWriter();
+        Command c;
 
-        Command c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
+        c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
 
         Printable p = null;
         try {
             p = new CommandMapper().getExecutionCommandInstance(c).execute(
-              new ConnectionFactory().getNewConnection(), c);
+                    new ConnectionFactory().getNewConnection(), c);
         } catch (SQLException e) {
-            e.printStackTrace();//TODO tratar estas excepçoes
+            e.printStackTrace();//TODO tratar estas excepçoes e implementar lançamentod de erros http
         } catch (ApplicationException e) {
             e.printStackTrace();
         }
 
-        resp.setContentType(identifyOutputFormat(c,p));
+        resp.setContentType(identifyContentType(c));
 
-        out.println(
-                //TODO change to p.toHttpPage() when available
-                p.toStringHtml()); }
+        out.println(identifyOutputFormat(c,p));
+    }
+
+    private String identifyContentType(Command c){
+        String s = c.getHeaders().getHeadersString("accept");
+
+        if(s==null || s.equals("text/html")){
+            return "text/html";
+        }else{
+            return "text/plain";
+        }
+
+    }
 }

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class GetTopNRatingsHigherAverageTest {
     private Connection connection;
-    private GetTopsNRatingsHigherAverage getTopsNRatingsHigherAverage = new GetTopsNRatingsHigherAverage();
+    private GetTopNRatingsHigherAverage getTopsNRatingsHigherAverage = new GetTopNRatingsHigherAverage();
     private Command command;
     private String[] input;
     private String expected;
