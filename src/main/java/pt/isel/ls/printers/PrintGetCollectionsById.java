@@ -2,11 +2,11 @@ package pt.isel.ls.printers;
 
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.model.MovieCollection;
+import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * "\nCollection id: #
@@ -55,12 +55,14 @@ public class PrintGetCollectionsById implements Printable {
     {
         Collection<MovieCollection> mc = new ArrayList<>();
         mc.add(movieCollection);
-        return HtmlGenerator.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1);
+        ArrayList<String> uri = new ArrayList<>();
+        movieCollection.getMovies().forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()));
+        return HtmlPrinters.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri);
 
         /*
         if (movieCollection.getMovies().size() == 1)
-            return String.format(HtmlGenerator.template, getText());
-        return String.format(HtmlGenerator.template, getTable());
+            return String.format(HtmlPrinters.template, getText());
+        return String.format(HtmlPrinters.template, getTable());
         */
     }
 /*

@@ -1,6 +1,7 @@
 package pt.isel.ls.printers;
 
 import pt.isel.ls.model.Movie;
+import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -60,9 +61,10 @@ public class PrintMovieRating implements Printable {
         return String.format(Printable.super.getTemplate(), getTable());
         */
         if (movie.isEmpty())
-            return String.format(HtmlGenerator.template, NoMovie);
-
-        return HtmlGenerator.htmlGenerate(movie, head, function);
+            return String.format(HtmlPrinters.template, NoMovie);
+        ArrayList<String> uri = new ArrayList<>();
+        movie.forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()));
+        return HtmlPrinters.htmlGenerate(movie, head, function, uri);
     }
 
 /*

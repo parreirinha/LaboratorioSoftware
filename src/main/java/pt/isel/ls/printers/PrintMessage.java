@@ -1,5 +1,7 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.printers.html.HtmlPrinters;
+
 /**
  * Created by fabio on 17-Apr-16.
  */
@@ -18,6 +20,6 @@ public class PrintMessage implements Printable {
 
     @Override
     public String toStringHtml() {
-        return String.format(HtmlGenerator.template, str);
+        return String.format(HtmlPrinters.template, str);
     }
 }

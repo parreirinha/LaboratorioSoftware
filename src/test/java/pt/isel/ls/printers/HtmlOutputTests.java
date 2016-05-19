@@ -108,7 +108,7 @@ public class HtmlOutputTests {
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Review ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
-                "\t\t\t\t\t<li>Movie ID: 1</li>\n" +
+                "\t\t\t\t\t<li>Movie ID: <a href=\"http://localhost:8080/movies/1\">1</a></li>\n" +
                 "\t\t\t\t\t<li>Reviewer Name: Manel</li>\n" +
                 "\t\t\t\t\t<li>Review Rating: 5</li>\n" +
                 "\t\t\t\t\t<li>Summary Review: Magnificent</li>\n" +
@@ -205,17 +205,17 @@ public class HtmlOutputTests {
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>1</td>\n" +
-                "\t\t\t\t\t<td>STARWARS</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/collections/1\">STARWARS</a></td>\n" +
                 "\t\t\t\t\t<td>serie de filmes da saga starwars</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>2</td>\n" +
-                "\t\t\t\t\t<td>Before 2000</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/collections/2\">Before 2000</a></td>\n" +
                 "\t\t\t\t\t<td>movies before 2000</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>3</td>\n" +
-                "\t\t\t\t\t<td>movies after 2000</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/collections/3\">movies after 2000</a></td>\n" +
                 "\t\t\t\t\t<td>movies from this century</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
@@ -253,42 +253,42 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td>Before 2000</td>\n" +
                 "\t\t\t\t\t<td>movies before 2000</td>\n" +
                 "\t\t\t\t\t<td>1</td>\n" +
-                "\t\t\t\t\t<td>Fight Club</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/1\">Fight Club</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td>2</td>\n" +
-                "\t\t\t\t\t<td>Seven</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/2\">Seven</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td>3</td>\n" +
-                "\t\t\t\t\t<td>The Matrix</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/3\">The Matrix</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td>5</td>\n" +
-                "\t\t\t\t\t<td>Pulp Fiction</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/5\">Pulp Fiction</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td>6</td>\n" +
-                "\t\t\t\t\t<td>American History X</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/6\">American History X</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td></td>\n" +
                 "\t\t\t\t\t<td>7</td>\n" +
-                "\t\t\t\t\t<td>The Silence of the Lambs</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/7\">The Silence of the Lambs</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t</body>\n" +
@@ -337,7 +337,7 @@ public class HtmlOutputTests {
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Movie ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
-                "\t\t\t\t\t<li>Name: Fight Club</li>\n" +
+                "\t\t\t\t\t<li>Name: <a href=\"http://localhost:8080/movies/1\">Fight Club</a></li>\n" +
                 "\t\t\t\t\t<li>Release: 1999</li>\n" +
                 "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n" +
@@ -365,7 +365,7 @@ public class HtmlOutputTests {
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>The average rating for the movie with the ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
-                "\t\t\t\t\t<li>is: 3.504</li>\n" +
+                "\t\t\t\t\t<li>is: <a href=\"http://localhost:8080/movies/1\">3.504</a></li>\n" +
                 "\t\t\t\t\t<li>*: 20</li>\n" +
                 "\t\t\t\t\t<li>**: 10</li>\n" +
                 "\t\t\t\t\t<li>***: 15</li>\n" +
@@ -425,19 +425,19 @@ public class HtmlOutputTests {
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>1</td>\n" +
-                "\t\t\t\t\t<td>Manel</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/1/reviews/1\">Manel</a></td>\n" +
                 "\t\t\t\t\t<td>5</td>\n" +
                 "\t\t\t\t\t<td>Magnificent</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>2</td>\n" +
-                "\t\t\t\t\t<td>Bad taste Reviwer</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/1/reviews/2\">Bad taste Reviwer</a></td>\n" +
                 "\t\t\t\t\t<td>1</td>\n" +
                 "\t\t\t\t\t<td>Horrible</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>8</td>\n" +
-                "\t\t\t\t\t<td>Ze</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8080/movies/1/reviews/8\">Ze</a></td>\n" +
                 "\t\t\t\t\t<td>5</td>\n" +
                 "\t\t\t\t\t<td>Film of the year</td>\n" +
                 "\t\t\t\t</tr>\n" +

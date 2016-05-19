@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.function.Function;
 
 import pt.isel.ls.model.Movie;
+import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.Collection;
 
@@ -86,9 +87,8 @@ public class PrintDetailedMovie implements Printable {
         */
 
         if (movieCollection.isEmpty())
-            return String.format(HtmlGenerator.template, NoMovie);
-
-        return HtmlGenerator.htmlGenerate(movieCollection, head, function);
+            return String.format(HtmlPrinters.template, NoMovie);
+        return HtmlPrinters.htmlGenerate(movieCollection, head, function, new ArrayList<>());
     }
 
 /*

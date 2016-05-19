@@ -1,6 +1,7 @@
 package pt.isel.ls.printers;
 
 import pt.isel.ls.model.Review;
+import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,9 +55,10 @@ public class PrintReview implements Printable {
         return String.format(Printable.super.getTemplate(), getTable());
         */
         if (reviews.isEmpty())
-            return String.format(HtmlGenerator.template, NoReview);
-
-        return HtmlGenerator.htmlGenerate(reviews, head, function);
+            return String.format(HtmlPrinters.template, NoReview);
+        ArrayList<String> uri = new ArrayList<>();
+        reviews.forEach(x -> uri.add("http://localhost:8080/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+        return HtmlPrinters.htmlGenerate(reviews, head, function, uri);
     }
 
     private String getTable() {

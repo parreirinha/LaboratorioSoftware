@@ -2,6 +2,7 @@ package pt.isel.ls.printers;
 
 
 import pt.isel.ls.model.Collections;
+import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,7 +43,9 @@ public class PrintGetCollections implements Printable {
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
-        return HtmlGenerator.htmlGenerate(col, head, functions);
+        ArrayList<String> uri = new ArrayList<>();
+        col.forEach(x-> uri.add("http://localhost:8080/collections/"+x.getCollectionID()));
+        return HtmlPrinters.htmlGenerate(col, head, functions, uri);
     }
 
 
