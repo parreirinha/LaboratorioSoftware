@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import static pt.isel.ls.user.io.Run.identifyOutputFormat;
+
 
 /**
  * Class used to execute an HTTP GET request to the application and
@@ -40,7 +42,7 @@ public class ExecutionServlet extends HttpServlet {
 
         resp.setContentType(identifyContentType(c));
 
-        out.println(p.toStringHtml());
+        out.println(identifyOutputFormat(c,p));
     }
 
     private String identifyContentType(Command c){
