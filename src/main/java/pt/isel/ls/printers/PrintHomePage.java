@@ -22,9 +22,9 @@ public class PrintHomePage implements Printable {
     @Override
     public String toStringHtml() {
 
-        colUri =    getURI("/collections", "skip=0&top=5", port, "Collections");
-        moviesUri = getURI("/movies", "skip=0&top=5", port, "Movies");
-        topsUri =   getURI("/tops/ratings","skip=0&top=5",port, "Top Ratings");
+        colUri =    getURI("/collections/", "skip=0&top=5", port, "Collections");
+        moviesUri = getURI("/movies/", "skip=0&top=5", port, "Movies");
+        topsUri =   getURI("/tops/ratings/","skip=0&top=5",port, "Top Ratings");
 
         return colUri + "\n" + moviesUri + "\n" + topsUri;
     }

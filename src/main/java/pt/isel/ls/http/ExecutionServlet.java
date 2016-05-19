@@ -2,6 +2,7 @@ package pt.isel.ls.http;
 
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
+import pt.isel.ls.executioncommands.HttpHomePage;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.Printable;
@@ -22,8 +23,17 @@ import static pt.isel.ls.user.io.Run.identifyOutputFormat;
  * that returns the correspondent response.
  */
 public class ExecutionServlet extends HttpServlet {
+
+    public static int getPort() {
+        return port;
+    }
+
+    private static int port;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        port = req.getLocalPort();
 
         PrintWriter out = resp.getWriter();
         Command c;
