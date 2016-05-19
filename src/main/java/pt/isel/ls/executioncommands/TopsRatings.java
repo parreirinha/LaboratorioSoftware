@@ -8,12 +8,14 @@ import pt.isel.ls.printers.Printable;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import static pt.isel.ls.http.ExecutionServlet.getPort;
+
 /**
  * Created by fabio on 19-May-16.
  */
 public class TopsRatings implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
-        return new PrintTopsRatings(command.getParams().getParamInt("port"));
+        return new PrintTopsRatings(getPort());
     }
 }

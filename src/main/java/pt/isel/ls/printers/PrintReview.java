@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
+import static pt.isel.ls.http.ExecutionServlet.getPort;
+
 /**
  * Class used to print the brief Review.
  */
@@ -60,7 +62,7 @@ public class PrintReview implements Printable {
         if (reviews.isEmpty())
             return String.format(HtmlPrinters.template, NoReview);
         ArrayList<String> uri = new ArrayList<>();
-        reviews.forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+        reviews.forEach(x -> uri.add("http://localhost:"+getPort()+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
         return HtmlPrinters.htmlGenerate(reviews, head, function, uri);
     }
 

@@ -20,7 +20,7 @@ public class URICreator {
         if (params != "" && params != null){
             uri += "?" + params;
         }
-        uri += "/>" + name + URIFinalString;
+        uri += ">" + name + URIFinalString;
 
         return uri;
     }

@@ -25,12 +25,12 @@ public class PrintTopsRatings implements Printable {
     @Override
     public String toStringHtml() {
 
-        topRatHigAvg = getURI("/top/n/ratings/higher/average", "skip=0&top=5", port, "Top higher average");  ;
-        topRatLowAvg = getURI("/top/n/ratings/lower/average", "skip=0&top=5", port, "Top lower average")  ;
-        topRevHigCount = getURI("/top/n/reviews/higher/count", "skip=0&top=5", port, "Top reviews higher count");
-        topRevLowCount = getURI("/top/n/reviews/lower/count", "skip=0&top=5", port, "Top reviews lower count");
-        movies = getURI("/movies", "skip=0&top=5", port, "Movies");
-        home = getURI("/", "", port, "HOME");   //todo verificar caminho home
+        topRatHigAvg = getURI("/top/n/ratings/higher/average/", "skip=0&top=5", port, "Top higher average");  ;
+        topRatLowAvg = getURI("/top/n/ratings/lower/average/", "skip=0&top=5", port, "Top lower average")  ;
+        topRevHigCount = getURI("/top/n/reviews/higher/count/", "skip=0&top=5", port, "Top reviews higher count");
+        topRevLowCount = getURI("/top/n/reviews/lower/count/", "skip=0&top=5", port, "Top reviews lower count");
+        movies = getURI("/movies/", "skip=0&top=5", port, "Movies");
+        home = getURI("", "", port, "HOME");
         return topRatHigAvg+"\n"+topRatLowAvg+"\n"+topRevHigCount+"\n"+topRevLowCount+"\n"+movies+"\n"+home;
     }
 }
