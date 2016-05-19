@@ -34,7 +34,7 @@ public class GetReviewById implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There is no review with id = "+reviewId+" for movie with id = "+movieId+".");
 
-        return new PrintDetailedReview(res);
+        return new PrintDetailedReview(res, command);
     }
 
     private Collection<Review> getCollection(ResultSet rs) throws SQLException {

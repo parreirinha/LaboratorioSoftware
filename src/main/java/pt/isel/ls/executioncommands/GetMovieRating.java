@@ -31,7 +31,7 @@ public class GetMovieRating implements CommandExecution {
         AccessUtils.setValuesOnPreparedStatement(ps, id);
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
-        return new PrintMovieRating(res);
+        return new PrintMovieRating(res, command);
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {

@@ -51,7 +51,7 @@ public class GetCollectionById implements CommandExecution {
         }
         setParametersForObjectMovieCollectionFromResultSet(rs);
         MovieCollection movieCollection = new MovieCollection(movies, collections);
-        return new PrintGetCollectionsById(movieCollection);
+        return new PrintGetCollectionsById(movieCollection, command);
     }
 
     private void setParametersForObjectMovieCollectionFromResultSet(ResultSet rs) throws SQLException {

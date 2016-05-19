@@ -1,4 +1,4 @@
-package pt.isel.ls.printers;
+package pt.isel.ls.printers.html;
 
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.function.Function;
 /**
  * Created by Dani on 12-04-2016.
  */
-public class HtmlGenerator {
+public class HtmlPrinters {
     public final static String template = "<!DOCTYPE>\n" +
             "\t<html>\n" +
             "\t\t<head>\n" +
@@ -27,16 +27,17 @@ public class HtmlGenerator {
             "\t</html>";
 
     public static <T, R> String htmlGenerate(Collection<T> col, Collection<R> col1, String[] head,
-                                             ArrayList<Function<T, String>> func, ArrayList<Function<R, String>> func1)
+                                             ArrayList<Function<T, String>> func, ArrayList<Function<R, String>> func1,
+                                             ArrayList<String> uri)
     {
         if (col1.size() == 1)
-            return String.format(template, getTextTwoCollections(col, col1, head, func, func1));
-        return String.format(template, getTableTwoCollections(col, col1, head, func, func1));
+            return String.format(template, getTextTwoCollections(col, col1, head, func, func1, uri));
+        return String.format(template, getTableTwoCollections(col, col1, head, func, func1, uri));
     }
 
     private static <T, R> String getTableTwoCollections(Collection<T> col, Collection<R> col1, String[] head,
                                                         ArrayList<Function<T, String>> func,
-                                                        ArrayList<Function<R, String>> func1)
+                                                        ArrayList<Function<R, String>> func1, ArrayList<String> uri)
     {
         T t = col.iterator().next();
         String str = "\t\t\t<table border=\"1\" style=\"width:100%\">\n"+getHead(head)+"\n" +
@@ -45,7 +46,7 @@ public class HtmlGenerator {
         {
             str+="\t\t\t\t\t<td>"+f.apply(t)+"</td>\n";
         }
-        int aux = 0;
+        int aux = 0, indexUri = 0;
         for(R r : col1)
         {
             if (aux > 0)
@@ -56,9 +57,22 @@ public class HtmlGenerator {
                     str += "\t\t\t\t\t<td></td>\n";
                 }
             }
+            int uriAux = 0;
             for(Function<R, String> f : func1)
             {
-                str += "\t\t\t\t\t<td>"+f.apply(r)+"</td>\n";
+                if(uriAux == 1)
+                {
+                    if(uri.size() <= indexUri)
+                        str += "\t\t\t\t\t<td>"+f.apply(r)+"</td>\n";
+                    else
+                        str += "\t\t\t\t\t<td><a href=\""+uri.get(indexUri)+"\">"+f.apply(r)+"</a></td>\n";
+                    ++indexUri;
+                }
+                else
+                {
+                    str += "\t\t\t\t\t<td>"+f.apply(r)+"</td>\n";
+                }
+                ++uriAux;
             }
             ++aux;
             str += "\t\t\t\t</tr>\n";
@@ -68,7 +82,7 @@ public class HtmlGenerator {
 
     private static <T, R> String getTextTwoCollections(Collection<T> col, Collection<R> col1, String[] head,
                                                        ArrayList<Function<T, String>> func,
-                                                       ArrayList<Function<R, String>> func1)
+                                                       ArrayList<Function<R, String>> func1, ArrayList<String> uri)
     {
         T t = col.iterator().next();
         String str = "\t\t\t<ul>\n";
@@ -89,31 +103,54 @@ public class HtmlGenerator {
         }
         str += "\t\t\t\t\t\t\t<ul>\n";
         R r = col1.iterator().next();
-        str += "\t\t\t\t\t\t\t\t<li>";
+        int aux1 = 0;
         for (Function<R, String> f : func1)
         {
-            str += head[aux]+": "+ f.apply(r)+"\t";
+            str += "\t\t\t\t\t\t\t\t<li>";
+            if(aux1 == 1)
+            {
+                if(uri.size() != 0)
+                    str += head[aux]+": <a href=\""+uri.get(0)+"\">"+ f.apply(r)+"</a>";
+                else
+                    str += head[aux]+": "+ f.apply(r)+"";
+            }
+
+            else
+                str += head[aux]+": "+ f.apply(r)+"";
+            ++aux1;
             ++aux;
+            str += "</li>\n";
         }
-        str += "<li>\n";
         str += "\t\t\t\t\t\t\t</ul>\n" +
                 "\t\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>";
         return str;
     }
 
-    public static <T> String htmlGenerate(Collection<T> col, String[] head, ArrayList<Function<T, String>> func) {
+    public static <T> String htmlGenerate(Collection<T> col, String[] head, ArrayList<Function<T, String>> func, ArrayList<String> uri) {
         if (col.size() == 1)
-            return String.format(template, getText(col, head, func));
-        return String.format(template, getTable(col, head, func));
+            return String.format(template, getText(col, head, func, uri));
+        return String.format(template, getTable(col, head, func, uri));
     }
 
-    private static <T> String getTable(Collection<T> col, String[] head, ArrayList<Function<T, String>> func) {
+    private static <T> String getTable(Collection<T> col, String[] head, ArrayList<Function<T, String>> func, ArrayList<String> uri) {
         String str = "\t\t\t<table border=\"1\" style=\"width:100%\">\n" + getHead(head);
+        int uriIndex = 0;
         for (T t : col) {
             str += "\t\t\t\t<tr>\n";
+            int aux = 0;
             for (Function<T, String> f : func) {
-                str += "\t\t\t\t\t<td>" + f.apply(t) + "</td>\n";
+                if(aux == 1)
+                {
+                    if(uri.size() <= uriIndex)
+                        str += "\t\t\t\t\t<td>" + f.apply(t) + "</td>\n";
+                    else
+                        str += "\t\t\t\t\t<td><a href=\""+uri.get(uriIndex)+"\">" + f.apply(t) + "</a></td>\n";
+                    ++uriIndex;
+                }
+                else
+                    str += "\t\t\t\t\t<td>" + f.apply(t) + "</td>\n";
+                ++aux;
             }
             str += "\t\t\t\t</tr>\n";
         }
@@ -121,13 +158,21 @@ public class HtmlGenerator {
         return str;
     }
 
-    private static <T> String getText(Collection<T> col, String[] head, ArrayList<Function<T, String>> func) {
+    private static <T> String getText(Collection<T> col, String[] head, ArrayList<Function<T, String>> func, ArrayList<String> uri) {
         T t = col.iterator().next();
         String str = "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>" + head[0] + ": " + func.get(0).apply(t) + "</li>\n" +
                 "\t\t\t\t<ul>\n";
         for (int i = 1; i < head.length; ++i) {
-            str += "\t\t\t\t\t<li>" + head[i] + ": " + func.get(i).apply(t) + "</li>\n";
+            if(i == 1)
+            {
+                if(uri.size() != 0)
+                    str += "\t\t\t\t\t<li>" + head[i] + ": <a href=\""+uri.get(0)+"\">" + func.get(i).apply(t) + "</a></li>\n";
+                else
+                    str += "\t\t\t\t\t<li>" + head[i] + ": " + func.get(i).apply(t) + "</li>\n";
+            }
+            else
+                str += "\t\t\t\t\t<li>" + head[i] + ": " + func.get(i).apply(t) + "</li>\n";
         }
         str += "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n";

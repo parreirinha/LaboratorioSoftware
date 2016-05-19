@@ -1,5 +1,7 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.printers.html.HtmlPrinters;
+
 /**
  * @author Tede Morgado
  *         Created at 14/04/2016
@@ -19,6 +21,6 @@ public class PrintError implements Printable {
 
     @Override
     public String toStringHtml() {
-        return String.format(HtmlGenerator.template, str);
+        return String.format(HtmlPrinters.template, str);
     }
 }

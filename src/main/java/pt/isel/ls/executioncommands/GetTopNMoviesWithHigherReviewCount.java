@@ -52,7 +52,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There are no movies.");
 
-        return new PrintMovie(res);
+        return new PrintMovie(res, command);
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {

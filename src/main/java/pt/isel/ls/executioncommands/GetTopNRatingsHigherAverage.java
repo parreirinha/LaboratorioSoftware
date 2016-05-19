@@ -44,7 +44,7 @@ public class GetTopNRatingsHigherAverage implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There are no movies.");
 
-        return new PrintDetailedMovie(res);
+        return new PrintDetailedMovie(res, command);
     }
 
     private Collection<Movie> getCollection(ResultSet rs, int aux) throws SQLException {
