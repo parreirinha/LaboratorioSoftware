@@ -18,7 +18,4 @@ public class HttpServer {
         server.start();
     }
 
-    public void closeServer() throws Exception {
-        server.stop();
-    }
 }

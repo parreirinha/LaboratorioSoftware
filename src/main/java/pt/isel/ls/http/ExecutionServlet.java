@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import static pt.isel.ls.user.io.Run.identifyOutputFormat;
 
 /**
  * Created by Dani on 17-05-2016.
