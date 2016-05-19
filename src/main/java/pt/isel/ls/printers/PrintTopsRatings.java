@@ -25,12 +25,18 @@ public class PrintTopsRatings implements Printable {
     @Override
     public String toStringHtml() {
 
-        topRatHigAvg = getURI("/top/n/ratings/higher/average/", "skip=0&top=5", port, "Top higher average");  ;
-        topRatLowAvg = getURI("/top/n/ratings/lower/average/", "skip=0&top=5", port, "Top lower average")  ;
-        topRevHigCount = getURI("/top/n/reviews/higher/count/", "skip=0&top=5", port, "Top reviews higher count");
-        topRevLowCount = getURI("/top/n/reviews/lower/count/", "skip=0&top=5", port, "Top reviews lower count");
+        topRatHigAvg = getURI("/tops/5/ratings/higher/average/", "skip=0&top=5", port, "Top ratings higher average");  ;
+        topRatLowAvg = getURI("/tops/5/ratings/lower/average/", "skip=0&top=5", port, "Top ratings lower average")  ;
+        topRevHigCount = getURI("/tops/5/reviews/higher/count/", "skip=0&top=5&sortby=ratingDesc", port, "Top reviews higher count");
+        topRevLowCount = getURI("/tops/5/reviews/higher/count/", "skip=0&top=5", port, "Top reviews lower count");//todo comando nao existe!! nao posso fazer sorting em tops
         movies = getURI("/movies/", "skip=0&top=5", port, "Movies");
         home = getURI("", "", port, "HOME");
-        return topRatHigAvg+"\n"+topRatLowAvg+"\n"+topRevHigCount+"\n"+topRevLowCount+"\n"+movies+"\n"+home;
+
+        return  "<p>"+home+"</p>" +
+                "<p>"+movies+"\n"+"</p>" +
+                "<p>"+topRatHigAvg+"\n"+ "</p>" +
+                "<p>"+topRatLowAvg+"\n" + "</p>" +
+                "<p>"+topRevHigCount+"\n"+"</p>" +
+                "<p>"+topRevLowCount+"\n"+"</p>";
     }
 }

@@ -26,6 +26,6 @@ public class PrintHomePage implements Printable {
         moviesUri = getURI("/movies/", "skip=0&top=5", port, "Movies");
         topsUri =   getURI("/tops/ratings/","skip=0&top=5",port, "Top Ratings");
 
-        return "<p>" + colUri + "\n" + moviesUri + "\n" + topsUri + "</p>";
+        return "<p>" + colUri + "\n"+ "</p>" + moviesUri + "\n" + "<p>" + topsUri + "</p>";
     }
 }
