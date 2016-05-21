@@ -19,7 +19,7 @@ public class PrintTopsRatingsTest {
                 "</p><p><a href=http://localhost:8080/tops/5/ratings/higher/average/?skip=0&top=5>Top ratings higher average</a>\n" +
                 "</p><p><a href=http://localhost:8080/tops/5/ratings/lower/average/?skip=0&top=5>Top ratings lower average</a>\n" +
                 "</p><p><a href=http://localhost:8080/tops/5/reviews/higher/count/?skip=0&top=5&sortby=ratingDesc>Top reviews higher count</a>\n" +
-                "</p><p><a href=http://localhost:8080/tops/5/reviews/higher/count/?skip=0&top=5>Top reviews lower count</a></p>";
+                "</p><p><a href=http://localhost:8080/tops/5/reviews/lower/count/?skip=0&top=5>Top reviews lower count</a></p>";
         String res = printTopsRatings.toStringHtml();
 
         assertEquals(expected, res);

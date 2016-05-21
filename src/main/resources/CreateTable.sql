@@ -71,7 +71,7 @@ from(
 			inner join Movie as M on M.MovieID = MC.MovieID
 		where CID = 2
 	) as res	
-where RowNumber BETWEEN 3 AND 6 */
+where RowNumber BETWEEN 1 AND 5 */
 
 /*
 select * from(
@@ -83,7 +83,7 @@ from MovieCollection as MC
 			inner join Movie as M on M.MovieID = MC.MovieID
 		where CID = 2
 ) as res
-where RowNumber BETWEEN 2 AND 5
+where RowNumber BETWEEN 1 AND 5
 order by rating
 */
 
@@ -106,3 +106,13 @@ from(
 				) as res
 where Row_Count BETWEEN 2 AND 3
 */
+
+
+
+select top (5) m.*, t.C, ROW_NUMBER() OVER (ORDER BY c desc)
+	from Movie as M 
+	left join(
+		select R.MovieID, count(R.MovieID)as c 
+		from dbo.Review as R
+		group by R.MovieID)as T on M.MovieID = T.MovieID
+	order by M.MovieID

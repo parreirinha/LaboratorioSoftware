@@ -1,6 +1,6 @@
 package pt.isel.ls.printers;
 
-import static pt.isel.ls.printers.URIGenerator.URICreator.getURI;
+import static pt.isel.ls.printers.URIGenerator.URIUtils.getURI;
 
 /**
  * Created by Dani on 18-05-2016.

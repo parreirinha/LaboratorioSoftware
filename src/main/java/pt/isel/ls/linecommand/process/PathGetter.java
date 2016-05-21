@@ -25,6 +25,7 @@ public class PathGetter {
             {"tops", "{n}", "ratings", "lower", "average"},
             {"tops", "reviews", "higher", "count"},
             {"tops", "{n}", "reviews", "higher", "count"},
+            {"tops", "{n}", "reviews", "lower", "count"},
             {"collections"},
             {"collections", "{cid}"},
             {"collections", "{cid}", "movies"},

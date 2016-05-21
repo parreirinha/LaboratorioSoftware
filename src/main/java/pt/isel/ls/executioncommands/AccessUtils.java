@@ -100,9 +100,9 @@ public class AccessUtils {
     }
 
     protected static int[] getSkipAndTopValuesToUseInPaging(Command command) {
-        int skip = command.getParams().getParamInt("skip") + 1;
-        int top = skip + command.getParams().getParamInt("top") - 1;
-        int[] val = {skip, top};
+        int minVal = command.getParams().getParamInt("skip") + 1;
+        int maxVal = minVal + command.getParams().getParamInt("top") - 1;
+        int[] val = {minVal, maxVal};
         return val;
     }
 
