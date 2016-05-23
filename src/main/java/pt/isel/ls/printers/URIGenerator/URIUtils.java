@@ -29,7 +29,9 @@ public class URIUtils {
         String res = "";
         int top = command.getParams().getParamInt("top");
         int skip = command.getParams().getParamInt("skip") + top;
-        res += "skip="+skip+"&top="+top;
+        if (top > 0 && skip >= 0) {
+            res += "skip=" + skip + "&top=" + top;
+        }
         if(command.getParams().getParamString("orderby") != null){
             res+="&orderby=" + command.getParams().getParamString("orderby");
         }
@@ -40,7 +42,7 @@ public class URIUtils {
         String res = "";
         int top = command.getParams().getParamInt("top");
         int skip = command.getParams().getParamInt("skip") - top;
-        if (skip < 0){
+        if (skip < 0 || top == -1){
             return null;
         }
         res += "skip=" + skip + "&top=" + top;
