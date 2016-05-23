@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.model.MovieCollection;
@@ -60,7 +61,7 @@ public class PrintGetCollectionsById implements Printable {
         Collection<MovieCollection> mc = new ArrayList<>();
         mc.add(movieCollection);
         ArrayList<String> uri = new ArrayList<>();
-        movieCollection.getMovies().forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
+        movieCollection.getMovies().forEach(x -> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/movies/"+x.getMovieID()));
         return HtmlPrinters.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri);
 
         /*

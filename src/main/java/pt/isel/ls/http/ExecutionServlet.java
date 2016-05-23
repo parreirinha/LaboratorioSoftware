@@ -28,7 +28,7 @@ public class ExecutionServlet extends HttpServlet {
         return port;
     }
 
-    private static int port;
+    private static int port = 8000;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

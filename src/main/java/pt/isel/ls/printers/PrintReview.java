@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Review;
 import pt.isel.ls.printers.html.HtmlPrinters;
@@ -62,10 +63,10 @@ public class PrintReview implements Printable {
         if (reviews.isEmpty())
             return String.format(HtmlPrinters.template, NoReview);
         ArrayList<String> uri = new ArrayList<>();
-        reviews.forEach(x -> uri.add("http://localhost:"+getPort()+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+        reviews.forEach(x -> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
         return HtmlPrinters.htmlGenerate(reviews, head, function, uri);
     }
-
+/*
     private String getTable() {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
                 "\t" + getFullHtmlTitle() + "\n";
@@ -100,7 +101,7 @@ public class PrintReview implements Printable {
         for (int i = 0; i < head.length; ++i)
             str += "\t\t<td>" + head[i] + "</td>\n";
         return str + "</tr>\n";
-    }
+    }*/
 
 
 }

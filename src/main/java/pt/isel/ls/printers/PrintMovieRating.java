@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.html.HtmlPrinters;
@@ -65,7 +66,7 @@ public class PrintMovieRating implements Printable {
         if (movie.isEmpty())
             return String.format(HtmlPrinters.template, NoMovie);
         ArrayList<String> uri = new ArrayList<>();
-        movie.forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
+        movie.forEach(x -> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/movies/"+x.getMovieID()));
         return HtmlPrinters.htmlGenerate(movie, head, function, uri);
     }
 

@@ -1,6 +1,7 @@
 package pt.isel.ls.printers;
 
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.printers.html.HtmlPrinters;
@@ -47,7 +48,7 @@ public class PrintGetCollections implements Printable {
         return String.format(Printable.super.getTemplate(), getTable());
         */
         ArrayList<String> uri = new ArrayList<>();
-        col.forEach(x-> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/collections/"+x.getCollectionID()));
+        col.forEach(x-> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/collections/"+x.getCollectionID()));
         return HtmlPrinters.htmlGenerate(col, head, functions, uri);
     }
 
