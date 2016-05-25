@@ -35,7 +35,13 @@ public class PrintReviewsCount implements Printable
     }
     @Override
     public String toStringText() {
-        return null;
+        String res = "";
+
+        for (Movie m :collection) {
+            res += "Movie ID = "+m.getMovieID()+"\n\tName = "+m.getMovieName()+"\tRelease = "+m.getMovieRelease()+"\n";
+        }
+
+        return res;
     }
 
     @Override

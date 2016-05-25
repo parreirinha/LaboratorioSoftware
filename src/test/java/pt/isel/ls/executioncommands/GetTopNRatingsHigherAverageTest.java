@@ -55,12 +55,12 @@ public class GetTopNRatingsHigherAverageTest {
     private String getTopsNRatingsHigherAverageString() {
         return "Movie ID = 4\n" +
                 "\tName = Inception" +
-                "\tRelease = 2010\n" +
+                "\n\tRelease = 2010\n" +
                 "\t* = 0   ** = 5   *** = 30   **** = 44   ***** = 60\n" +
                 "\tAverage = 4.144\n" +
                 "Movie ID = 6\n" +
                 "\tName = American History X" +
-                "\tRelease = 1998\n" +
+                "\n\tRelease = 1998\n" +
                 "\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n" +
                 "\tAverage = 4.097\n";
 
@@ -79,15 +79,15 @@ public class GetTopNRatingsHigherAverageTest {
 
     private String setExpectedValueToSimplePagingTest() {
         return "Movie ID = 1\n" +
-                "\tName = Fight Club\tRelease = 1999\n" +
+                "\tName = Fight Club\n\tRelease = 1999\n" +
                 "\t* = 20   ** = 10   *** = 15   **** = 50   ***** = 32\n" +
                 "\tAverage = 3.504\n" +
                 "Movie ID = 7\n" +
-                "\tName = The Silence of the Lambs\tRelease = 1991\n" +
+                "\tName = The Silence of the Lambs\n\tRelease = 1991\n" +
                 "\t* = 2   ** = 30   *** = 11   **** = 40   ***** = 22\n" +
                 "\tAverage = 3.476\n" +
                 "Movie ID = 2\n" +
-                "\tName = Seven\tRelease = 1995\n" +
+                "\tName = Seven\n\tRelease = 1995\n" +
                 "\t* = 5   ** = 20   *** = 40   **** = 35   ***** = 22\n" +
                 "\tAverage = 3.402\n";
     }

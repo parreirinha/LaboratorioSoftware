@@ -49,7 +49,19 @@ public class PrintRatingsAverge implements Printable {
 
     @Override
     public String toStringText() {
-        return null;
+        String res = "";
+        for (Movie m:collection) {
+            res += "Movie ID = " + m.getMovieID() +
+                    "\n\tName = " + m.getMovieName() +
+                    "\n\tRelease = " + m.getMovieRelease() +
+                    "\n\t* = " + m.getOneStar() +
+                    "   ** = " + m.getTwoStar() +
+                    "   *** = " + m.getThreeStar() +
+                    "   **** = " + m.getFourStar() +
+                    "   ***** = " + m.getFiveStar() +
+                    "\n\tAverage = " + m.getAverage() + "\n";
+        }
+        return res;
     }
 
     @Override

@@ -2,6 +2,7 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.linecommand.model.Command;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,7 +58,7 @@ public class AccessUtils {
         if (pagingVerification(command)) {
             String pagingQuery =
                     "select * from ( " + query + " ) as res \n " +
-                            "where RowNumber BETWEEN ? AND ? " + setOrderByClause(command, orderBy);
+                            setOrderByClause(command, orderBy) + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
             return pagingQuery;
         }
         return query;
@@ -100,8 +101,8 @@ public class AccessUtils {
     }
 
     protected static int[] getSkipAndTopValuesToUseInPaging(Command command) {
-        int minVal = command.getParams().getParamInt("skip") + 1;
-        int maxVal = minVal + command.getParams().getParamInt("top") - 1;
+        int minVal = command.getParams().getParamInt("skip") ;
+        int maxVal = command.getParams().getParamInt("top") ;
         int[] val = {minVal, maxVal};
         return val;
     }
