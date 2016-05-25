@@ -4,6 +4,7 @@ import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.PrintMovie;
+import pt.isel.ls.printers.PrintReviewsCount;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -48,7 +49,7 @@ public class GetTopNMoviesWithHigherReviewCount implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There are no movies.");
 
-        return new PrintMovie(res, command);
+        return new PrintReviewsCount(command, res, "/tops/5/reviews/higher/count/");
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {

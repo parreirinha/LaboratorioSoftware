@@ -4,6 +4,7 @@ import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintDetailedMovie;
 import pt.isel.ls.printers.PrintError;
+import pt.isel.ls.printers.PrintRatingsAverge;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.model.Movie;
 
@@ -44,7 +45,7 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There are no movies.");
 
-        return new PrintDetailedMovie(res, command);
+        return new PrintRatingsAverge(command, res, "/top/5/ratings/lower/average/");
     }
 
     private Collection<Movie> getCollection(ResultSet rs, int aux) throws SQLException {
