@@ -1,16 +1,26 @@
 package pt.isel.ls.printers;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import pt.isel.ls.database.connection.ConnectionFactory;
+import pt.isel.ls.exceptions.ApplicationException;
+import pt.isel.ls.executioncommands.GetAllCollectionsWithIDAux;
+import pt.isel.ls.executioncommands.GetAllReviewsAux;
 import pt.isel.ls.http.ExecutionServlet;
+import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.Collection;
+
 
 /**
  * .
@@ -95,37 +105,60 @@ public class PrintDetailedMovie implements Printable {
         if (movieCollection.isEmpty())
             return String.format(HtmlPrinters.template, NoMovie);
 
-        String html = HtmlPrinters.htmlGenerate(movieCollection, head, function, new ArrayList<>())+
-                "<br>\n<br>\n"+
-                getConnections()+
-                "<br>\n"+
-                getCollectionsWithMovie(movieCollection.iterator().next().getMovieID())+
-                "<br>\n"+
-                getAllReviews(movieCollection.iterator().next().getMovieID());
+        String html = null;
+        try {
+            html = HtmlPrinters.htmlGenerate(movieCollection, head, function, new ArrayList<>())+
+                    "<br>\n<br>\n"+
+                    getConnections()+
+                    "<br>\n";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+        }
 
         return String.format(HtmlPrinters.template, html);
     }
 
-    private String getConnections()
-    {
+    private String getConnections() throws SQLException, ApplicationException {
         int port = ExecutionServlet.getPort();
         String allMovies, rating, allReviews;
         allMovies = URIUtils.getURI("/movies/", "top="+command.getParams().getParamInt("top")+"&skip=0", port, "All Movies");
         rating = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, port, "Rating");
         allReviews = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
                 "top="+command.getParams().getParamInt("top")+"&skip=0", port, "All Reviews");
-        return allMovies+"\n<br>\n<br>\n"+
+        String html = allMovies+"\n<br>\n<br>\n"+
                 rating+"\n<br>\n<br>\n"+
-                allReviews;
+                allReviews+"\n<br>\n<br>\n";
+        String aux = getAllReviews();
+        if(!aux.equals(""))
+            html += aux +"\n<br>\n<br>\n";
+        aux = getCollectionsWithMovie();
+        if(!aux.equals(""))
+            html += aux +"\n<br>\n<br>\n";
+        return html;
     }
 
-    private String getCollectionsWithMovie(int movieID)
+    private String getCollectionsWithMovie()
     {
+        try {
+            return new GetAllReviewsAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+        }
         return "";
     }
 
-    private String getAllReviews(int movieID)
-    {
+    private String getAllReviews() {
+        try {
+            return new GetAllCollectionsWithIDAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+        }
         return "";
     }
 /*
