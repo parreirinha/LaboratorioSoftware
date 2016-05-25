@@ -128,9 +128,8 @@ public class PrintDetailedMovie implements Printable {
         allReviews = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
                 "top="+command.getParams().getParamInt("top")+"&skip=0", port, "All Reviews");
         String html = allMovies+"\n<br>\n<br>\n"+
-                rating+"\n<br>\n<br>\n"+
-                allReviews+"\n<br>\n<br>\n";
-        String aux = getAllReviews();
+                rating+"\n<br>\n<br>\n";
+        String aux = getAllReviews(allReviews);
         if(!aux.equals(""))
             html += aux +"\n<br>\n<br>\n";
         aux = getCollectionsWithMovie();
@@ -142,7 +141,7 @@ public class PrintDetailedMovie implements Printable {
     private String getCollectionsWithMovie()
     {
         try {
-            return new GetAllReviewsAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+            return new GetAllCollectionsWithIDAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ApplicationException e) {
@@ -151,9 +150,10 @@ public class PrintDetailedMovie implements Printable {
         return "";
     }
 
-    private String getAllReviews() {
+    private String getAllReviews(String allReviews) {
         try {
-            return new GetAllCollectionsWithIDAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+            String res = new GetAllReviewsAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+            return (res == "") ? res : allReviews+"\n<br>\n<br>\n"+res;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ApplicationException e) {
