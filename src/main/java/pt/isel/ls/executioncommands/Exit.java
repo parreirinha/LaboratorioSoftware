@@ -17,7 +17,7 @@ public class Exit implements CommandExecution {
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         System.out.println("Exiting...");
         System.exit(0);
-        return new PrintExit();//nao chega aqui...
+        return new PrintExit();
 
     }
 }
