@@ -1,6 +1,8 @@
 package pt.isel.ls.user.io;
 
 import pt.isel.ls.exceptions.ApplicationException;
+import pt.isel.ls.executioncommands.CommandExecution;
+import pt.isel.ls.executioncommands.InteractiveMode;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.*;
@@ -23,10 +25,14 @@ public class Run {
             conn = new ConnectionFactory().getNewConnection();
             conn.setAutoCommit(false);
 
-            identifyOutputType(command, identifyOutputFormat(command, new CommandMapper()
-                    .getExecutionCommandInstance(command)
-                    .execute(conn, command)));
+            CommandExecution ce = new CommandMapper().getExecutionCommandInstance(command);
 
+            if(ce == null){
+                new InteractiveMode().execute(null, null);
+            }else{
+                identifyOutputType(command, identifyOutputFormat(command, ce
+                        .execute(conn, command)));
+            }
 
         } catch (SQLException e) {
             tryRollback(conn);

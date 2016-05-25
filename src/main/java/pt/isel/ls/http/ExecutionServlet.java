@@ -2,6 +2,8 @@ package pt.isel.ls.http;
 
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
+import pt.isel.ls.executioncommands.CommandExecution;
+import pt.isel.ls.executioncommands.Exit;
 import pt.isel.ls.executioncommands.HttpHomePage;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
@@ -37,37 +39,42 @@ public class ExecutionServlet extends HttpServlet {
         port = req.getLocalPort();
 
         PrintWriter out = resp.getWriter();
-        Command c;
+        Command c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
 
-        c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
+        CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
 
-        Printable p = null;
-        try {
-            p = new CommandMapper().getExecutionCommandInstance(c).execute(
-                    new ConnectionFactory().getNewConnection(), c);
+        if (ce == null) {
+            resp.sendError(400);
+        } else {
 
-            if(p instanceof PrintError){
+            Printable p = null;
+            try {
+                p = ce.execute(
+                        new ConnectionFactory().getNewConnection(), c);
+
+                if (p instanceof PrintError) {
+                    resp.sendError(400);
+                }
+
+                resp.setStatus(200);
+            } catch (SQLException e) {
+                resp.setStatus(500);
+            } catch (ApplicationException e) {
                 resp.sendError(400);
             }
 
-            resp.setStatus(200);
-        } catch (SQLException e) {
-            resp.setStatus(500);
-        } catch (ApplicationException e) {
-            resp.sendError(400);
+            resp.setContentType(identifyContentType(c));
+
+            out.println(identifyOutputFormat(c, p));
         }
-
-        resp.setContentType(identifyContentType(c));
-
-        out.println(identifyOutputFormat(c,p));
     }
 
-    private String identifyContentType(Command c){
+    private String identifyContentType(Command c) {
         String s = c.getHeaders().getHeadersString("accept");
 
-        if(s==null || s.equals("text/html")){
+        if (s == null || s.equals("text/html")) {
             return "text/html";
-        }else{
+        } else {
             return "text/plain";
         }
 
