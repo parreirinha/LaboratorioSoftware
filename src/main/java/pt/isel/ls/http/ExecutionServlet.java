@@ -5,6 +5,7 @@ import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.HttpHomePage;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
+import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.Printable;
 
 import javax.servlet.ServletException;
@@ -44,10 +45,16 @@ public class ExecutionServlet extends HttpServlet {
         try {
             p = new CommandMapper().getExecutionCommandInstance(c).execute(
                     new ConnectionFactory().getNewConnection(), c);
+
+            if(p instanceof PrintError){
+                resp.sendError(400);
+            }
+
+            resp.setStatus(200);
         } catch (SQLException e) {
-            e.printStackTrace();//TODO tratar estas excepçoes e implementar lançamentod de erros http
+            resp.setStatus(500);
         } catch (ApplicationException e) {
-            e.printStackTrace();
+            resp.sendError(400);
         }
 
         resp.setContentType(identifyContentType(c));
