@@ -31,8 +31,8 @@ public class HtmlPrinters {
                                              ArrayList<String> uri)
     {
         if (col1.size() == 1)
-            return String.format(template, getTextTwoCollections(col, col1, head, func, func1, uri));
-        return String.format(template, getTableTwoCollections(col, col1, head, func, func1, uri));
+            return getTextTwoCollections(col, col1, head, func, func1, uri);
+        return getTableTwoCollections(col, col1, head, func, func1, uri);
     }
 
     private static <T, R> String getTableTwoCollections(Collection<T> col, Collection<R> col1, String[] head,
@@ -129,8 +129,8 @@ public class HtmlPrinters {
 
     public static <T> String htmlGenerate(Collection<T> col, String[] head, ArrayList<Function<T, String>> func, ArrayList<String> uri) {
         if (col.size() == 1)
-            return String.format(template, getText(col, head, func, uri));
-        return String.format(template, getTable(col, head, func, uri));
+            return getText(col, head, func, uri);
+        return getTable(col, head, func, uri);
     }
 
     private static <T> String getTable(Collection<T> col, String[] head, ArrayList<Function<T, String>> func, ArrayList<String> uri) {

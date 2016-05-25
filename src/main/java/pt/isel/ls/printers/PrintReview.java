@@ -1,7 +1,9 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Review;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
@@ -61,11 +63,44 @@ public class PrintReview implements Printable {
         */
         if (reviews.isEmpty())
             return String.format(HtmlPrinters.template, NoReview);
+
+        String path, returnToMovies;
+        int port =  ExecutionServlet.getPort();
+
         ArrayList<String> uri = new ArrayList<>();
-        reviews.forEach(x -> uri.add("http://localhost:"+getPort()+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
-        return HtmlPrinters.htmlGenerate(reviews, head, function, uri);
+        reviews.forEach(x -> uri.add("http://localhost:"+
+                ExecutionServlet.getPort()+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+
+        path = "/movies/"+reviews.iterator().next().getMovieID();
+        returnToMovies = URIUtils.getURI(path, null, port, "Movie");
+
+        String html =  HtmlPrinters.htmlGenerate(reviews, head, function, uri)+
+                "<br>\n"+
+                getConnections(returnToMovies);
+
+        return String.format(HtmlPrinters.template, html);
     }
 
+    private String getConnections(String returnToMovies)
+    {
+        String prevPage = URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
+                nextPage = URIUtils.getNextSkipAndTopValuesFromCommand(command),
+                html = "";
+        if(prevPage != null)
+            html += "<p>"+URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                    prevPage,
+                    ExecutionServlet.getPort(),
+                    "Previous") +
+                    "<p>";
+        html += "<p>\t\t\t\t"+URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                nextPage,
+                ExecutionServlet.getPort(),
+                "Next") +
+                "</p><br>\n"+
+                returnToMovies + "<br>\n";
+        return html;
+    }
+/*
     private String getTable() {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
                 "\t" + getFullHtmlTitle() + "\n";
@@ -100,7 +135,7 @@ public class PrintReview implements Printable {
         for (int i = 0; i < head.length; ++i)
             str += "\t\t<td>" + head[i] + "</td>\n";
         return str + "</tr>\n";
-    }
+    }*/
 
 
 }

@@ -1,8 +1,10 @@
 package pt.isel.ls.printers;
 
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
@@ -47,11 +49,36 @@ public class PrintGetCollections implements Printable {
         return String.format(Printable.super.getTemplate(), getTable());
         */
         ArrayList<String> uri = new ArrayList<>();
-        col.forEach(x-> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/collections/"+x.getCollectionID()));
-        return HtmlPrinters.htmlGenerate(col, head, functions, uri);
+        col.forEach(x-> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/collections/"+x.getCollectionID()));
+
+        String html = HtmlPrinters.htmlGenerate(col, head, functions, uri)+
+                "<br>\n<br>\n"+
+                getConnections()+"<br>\n";
+
+        return String.format(HtmlPrinters.template, html);
     }
 
+    private String getConnections()
+    {
+        String prevPage = URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
+                nextPage = URIUtils.getNextSkipAndTopValuesFromCommand(command);
+        String html = "";
+        if(prevPage != null)
+            html += "<p>"+URIUtils.getURI("/collections/",
+                    prevPage,
+                    ExecutionServlet.getPort(),
+                    "Previous") +
+                    "<p>";
+        html += "<p>\t\t\t\t"+URIUtils.getURI("/collections/",
+                nextPage,
+                ExecutionServlet.getPort(),
+                "Next") +
+                "</p><br>\n"+
+                URIUtils.getURI("/", null, ExecutionServlet.getPort(), "Home Page");
+        return html;
+    }
 
+/*
     private String getTable() {
         String str = "<table border=\"1\" style=\"width:100%\">\n" +
                 "\t" + getFullHtmlTitle() + "\n";
@@ -88,5 +115,5 @@ public class PrintGetCollections implements Printable {
         return str + "</tr>\n";
     }
 
-
+*/
 }

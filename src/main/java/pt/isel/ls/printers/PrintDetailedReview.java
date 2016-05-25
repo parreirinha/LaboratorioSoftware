@@ -1,7 +1,9 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Review;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
@@ -58,11 +60,28 @@ public class PrintDetailedReview implements Printable {
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
+
         if (review.isEmpty())
             return String.format(HtmlPrinters.template, NoReview);
         ArrayList<String> uri = new ArrayList<>();
-        review.forEach(x -> uri.add("http://localhost:"+command.getParams().getParamInt("port")+"/movies/"+x.getMovieID()));
-        return HtmlPrinters.htmlGenerate(review, head, function, uri);
+        int port =  ExecutionServlet.getPort();
+        review.forEach(x -> uri.add("http://localhost:"+port+"/movies/"+x.getMovieID()));
+
+
+
+        String html = HtmlPrinters.htmlGenerate(review, head, function, uri) +
+                "\n<br>\n<br>\n"+
+                getConnections(port) + "<br>\n";
+
+        return String.format(HtmlPrinters.template, html);
+    }
+
+    private String getConnections(int port)
+    {
+        String path, parameters;
+        path = "/movies/"+review.iterator().next().getMovieID()+"/reviews";
+        parameters = "top="+command.getParams().getParamInt("top")+"&skip=0";
+        return URIUtils.getURI(path, parameters, port, "All Reviews");
     }
 /*
     private String getTable()

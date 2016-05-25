@@ -1,10 +1,13 @@
 package pt.isel.ls.printers;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.Collection;
@@ -91,9 +94,40 @@ public class PrintDetailedMovie implements Printable {
 
         if (movieCollection.isEmpty())
             return String.format(HtmlPrinters.template, NoMovie);
-        return HtmlPrinters.htmlGenerate(movieCollection, head, function, new ArrayList<>());
+
+        String html = HtmlPrinters.htmlGenerate(movieCollection, head, function, new ArrayList<>())+
+                "<br>\n<br>\n"+
+                getConnections()+
+                "<br>\n"+
+                getCollectionsWithMovie(movieCollection.iterator().next().getMovieID())+
+                "<br>\n"+
+                getAllReviews(movieCollection.iterator().next().getMovieID());
+
+        return String.format(HtmlPrinters.template, html);
     }
 
+    private String getConnections()
+    {
+        int port = ExecutionServlet.getPort();
+        String allMovies, rating, allReviews;
+        allMovies = URIUtils.getURI("/movies", null, port, "All Movies");
+        rating = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, port, "Rating");
+        allReviews = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews",
+                "top=5&skip=0", port, "All Reviews");
+        return allMovies+"\n<br>\n<br>\n"+
+                rating+"\n<br>\n<br>\n"+
+                allReviews;
+    }
+
+    private String getCollectionsWithMovie(int movieID)
+    {
+        return "";
+    }
+
+    private String getAllReviews(int movieID)
+    {
+        return "";
+    }
 /*
     private String getTable()
     {
