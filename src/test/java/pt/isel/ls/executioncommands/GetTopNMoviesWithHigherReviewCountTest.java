@@ -22,6 +22,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
     private String[] input;
     private String expected;
     private String result;
+
     private DataCreationTests dataTests = new DataCreationTests();
 
     @After

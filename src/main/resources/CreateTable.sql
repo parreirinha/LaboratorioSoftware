@@ -96,7 +96,7 @@ order by rating
 -- exemplo da query q esta em falta
 select * 
 from(
-	select top (4) *,ROW_NUMBER() OVER (ORDER BY c desc) as Row_Count
+	select top (5) *,ROW_NUMBER() OVER (ORDER BY c desc) as Row_Count
 		from ( 
 			select R.MovieID, count(R.MovieID)as c 
 				from Review as R
