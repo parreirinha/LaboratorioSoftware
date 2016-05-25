@@ -60,20 +60,28 @@ public class PrintDetailedReview implements Printable {
             return String.format(Printable.super.getTemplate(), getText());
         return String.format(Printable.super.getTemplate(), getTable());
         */
-        String path = "", parameters = "", returnToReviews = "";
-        int port =  ExecutionServlet.getPort();
+
         if (review.isEmpty())
             return String.format(HtmlPrinters.template, NoReview);
         ArrayList<String> uri = new ArrayList<>();
+        int port =  ExecutionServlet.getPort();
         review.forEach(x -> uri.add("http://localhost:"+port+"/movies/"+x.getMovieID()));
 
+
+
+        String html = HtmlPrinters.htmlGenerate(review, head, function, uri) +
+                "\n<br>\n<br>\n"+
+                getConnections(port) + "<br>\n";
+
+        return String.format(HtmlPrinters.template, html);
+    }
+
+    private String getConnections(int port)
+    {
+        String path, parameters;
         path = "/movies/"+review.iterator().next().getMovieID()+"/reviews";
         parameters = "top="+command.getParams().getParamInt("top")+"&skip=0";
-        returnToReviews = URIUtils.getURI(path, parameters, port, "All Reviews");
-        String html = HtmlPrinters.htmlGenerate(review, head, function, uri);
-        html += "\n\n"+
-                returnToReviews + "\n";
-        return String.format(HtmlPrinters.template, html);
+        return URIUtils.getURI(path, parameters, port, "All Reviews");
     }
 /*
     private String getTable()

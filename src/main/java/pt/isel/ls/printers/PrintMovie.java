@@ -4,6 +4,7 @@ import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.http.HttpServer;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
@@ -61,7 +62,36 @@ public class PrintMovie implements Printable {
             return String.format(HtmlPrinters.template, NoMovie);
         ArrayList<String > uri = new ArrayList<>();
         movieCollection.forEach(x -> uri.add("http://localhost:"+ExecutionServlet.getPort()+"/movies/"+x.getMovieID()));
-        return HtmlPrinters.htmlGenerate(movieCollection, head, function, uri);
+
+        String html = HtmlPrinters.htmlGenerate(movieCollection, head, function, uri)+
+                "<br>\n"+
+                getConnections()+
+                "<br>\n";
+
+
+        return String.format(HtmlPrinters.template, html);
+    }
+
+    private String getConnections()
+    {
+        String prevPage = URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
+                nextPage = URIUtils.getNextSkipAndTopValuesFromCommand(command),
+                html = "";
+        if(prevPage != null)
+            html += "<p>"+ URIUtils.getURI("/movies/",
+                    prevPage,
+                    ExecutionServlet.getPort(),
+                    "Previous") +
+                    "<p>";
+        html += "<p>\t\t\t\t"+URIUtils.getURI("/movies/",
+                nextPage,
+                ExecutionServlet.getPort(),
+                "Next") +
+                "</p><br>\n"+
+                URIUtils.getURI("/tops/ratings", null, ExecutionServlet.getPort(), "Tops Ratings")+
+                "<br>\n" +
+                URIUtils.getURI("/", null, ExecutionServlet.getPort(), "Home Page");
+        return html;
     }
 
 /*

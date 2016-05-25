@@ -4,6 +4,7 @@ import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.model.MovieCollection;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlPrinters;
 
 import java.util.ArrayList;
@@ -62,7 +63,13 @@ public class PrintGetCollectionsById implements Printable {
         mc.add(movieCollection);
         ArrayList<String> uri = new ArrayList<>();
         movieCollection.getMovies().forEach(x -> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/movies/"+x.getMovieID()));
-        return HtmlPrinters.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri);
+
+        String html = HtmlPrinters.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri) +
+                "<br>\n<br>\n"+
+                URIUtils.getURI("/collections", "top=5&skip=0", ExecutionServlet.getPort(), "All Collections")+
+                "<br>\n";
+
+        return html;
 
         /*
         if (movieCollection.getMovies().size() == 1)
