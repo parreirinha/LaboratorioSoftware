@@ -30,10 +30,12 @@ public class PathGetter {
             {"collections", "{cid}"},
             {"collections", "{cid}", "movies"},
             {"collections", "{cid}", "movies", "{mid}"},
-            {"tops","ratings"}
+            {"tops","ratings"},
+            {""}
     };
 
     public Path getPath(String path) {
+        boolean match=false;
         if (!path.equals("") && !path.equals("/")) {
             pathParts = path.split("/");
             pathParts = cleanFirstPositionOfStringArray(pathParts);
@@ -42,10 +44,14 @@ public class PathGetter {
                 if (pathTemplateComparator(pathParts, PathTemplateContainer[i])) {
                     cleanPath = getStringFromPathTemplate(PathTemplateContainer[i]);
                     pathIntegers = putIdsInPathMap(pathParts, PathTemplateContainer[i]);
+                    match=true;
                     break;
                 }
             }
+            if(!match)
+                cleanPath = "wrong";
         }
+
         return new Path(cleanPath, pathIntegers);
     }
 
@@ -105,6 +111,7 @@ public class PathGetter {
     }
 
     private boolean isPathVariable(String s) {
+        if(s.length()==0) return false;
         return s.charAt(0) == '{' && s.charAt(s.length() - 1) == '}';
     }
 
