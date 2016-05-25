@@ -66,7 +66,7 @@ public class PrintGetCollectionsById implements Printable {
 
         String html = HtmlPrinters.htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri) +
                 "<br>\n<br>\n"+
-                URIUtils.getURI("/collections", "top=5&skip=0", ExecutionServlet.getPort(), "All Collections")+
+                URIUtils.getURI("/collections", "top="+command.getParams().getParamInt("top")+"&skip=0", ExecutionServlet.getPort(), "All Collections")+
                 "<br>\n";
 
         return html;

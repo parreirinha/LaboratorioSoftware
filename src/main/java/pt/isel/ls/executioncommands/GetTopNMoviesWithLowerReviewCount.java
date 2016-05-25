@@ -5,6 +5,7 @@ import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.PrintError;
 import pt.isel.ls.printers.PrintMovie;
+import pt.isel.ls.printers.PrintReviewsCount;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.Connection;
@@ -45,7 +46,7 @@ public class GetTopNMoviesWithLowerReviewCount implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There are no movies to show.");
 
-        return new PrintMovie(res, command);
+        return new PrintReviewsCount(command, res, "/tops/5/reviews/lower/count/");
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {

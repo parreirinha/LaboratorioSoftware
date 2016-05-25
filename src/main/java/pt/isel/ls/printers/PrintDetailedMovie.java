@@ -110,10 +110,10 @@ public class PrintDetailedMovie implements Printable {
     {
         int port = ExecutionServlet.getPort();
         String allMovies, rating, allReviews;
-        allMovies = URIUtils.getURI("/movies", null, port, "All Movies");
+        allMovies = URIUtils.getURI("/movies/", "top="+command.getParams().getParamInt("top")+"&skip=0", port, "All Movies");
         rating = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, port, "Rating");
-        allReviews = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews",
-                "top=5&skip=0", port, "All Reviews");
+        allReviews = URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
+                "top="+command.getParams().getParamInt("top")+"&skip=0", port, "All Reviews");
         return allMovies+"\n<br>\n<br>\n"+
                 rating+"\n<br>\n<br>\n"+
                 allReviews;
