@@ -56,7 +56,7 @@ public class GetMovieRatingTest {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected = "The average rating for the movie with the ID 6 is 4.097.\n\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n";
+        expected = "The average rating for the movie is  4.097 Movie ID  6.\n\t* = 1   ** = 5   *** = 20   **** = 100   ***** = 50\n";
         assertEquals(expected, result);
     }
 
