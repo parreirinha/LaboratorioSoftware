@@ -90,7 +90,9 @@ public class PrintMovie implements Printable {
                 "</p><br>\n"+
                 URIUtils.getURI("/tops/ratings", null, ExecutionServlet.getPort(), "Tops Ratings")+
                 "<br>\n" +
-                URIUtils.getURI("/", null, ExecutionServlet.getPort(), "Home Page");
+                URIUtils.getURI("/", null, ExecutionServlet.getPort(), "Home Page")+
+                "<br>\n";// +
+                //URIUtils.getURI("/tops/ratings/", "skip=0&top=5", ExecutionServlet.getPort(), "Tops Ratings")+"<br>";
         return html;
     }
 
