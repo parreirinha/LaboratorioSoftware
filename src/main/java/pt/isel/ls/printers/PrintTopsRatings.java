@@ -28,7 +28,7 @@ public class PrintTopsRatings implements Printable {
         topRatHigAvg = getURI("/tops/5/ratings/higher/average/", "skip=0&top=5", port, "Top ratings higher average");  ;
         topRatLowAvg = getURI("/tops/5/ratings/lower/average/", "skip=0&top=5", port, "Top ratings lower average")  ;
         topRevHigCount = getURI("/tops/5/reviews/higher/count/", "skip=0&top=5", port, "Top reviews higher count");
-        topRevLowCount = getURI("/tops/5/reviews/lower/count/", "skip=0&top=5", port, "Top reviews lower count");//todo comando nao existe!! nao posso fazer sorting em tops PS: está repetido o de cima
+        topRevLowCount = getURI("/tops/5/reviews/lower/count/", "skip=0&top=5", port, "Top reviews lower count");
         movies = getURI("/movies/", "skip=0&top=5", port, "Movies");
         home = getURI("", "", port, "HOME");
 

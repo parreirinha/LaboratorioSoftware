@@ -28,7 +28,7 @@ public class AccessUtils {
      * @throws SQLException
      */
     protected static void setValuesOnPreparedStatement(PreparedStatement ps, Object... vals) throws SQLException {
-        //TODO só suporta strings e int tornar mais abrangente! mas abrangente em quê?!
+
         int i = 0;
         for (; i < vals.length; i++) {
             if (vals[i] instanceof String)

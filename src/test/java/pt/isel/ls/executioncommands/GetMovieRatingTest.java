@@ -18,9 +18,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class GetMovieRatingTest {
 
-    //TODO
-
-
     private Connection connection;
     private GetMovieRating getMovieRating = new GetMovieRating();
     private Command command;

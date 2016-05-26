@@ -23,7 +23,7 @@ import static pt.isel.ls.executioncommands.AccessUtils.setValuesOnPreparedStatem
  */
 public class GetTopNMoviesWithLowerReviewCount implements CommandExecution {
 
-    //todo
+
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
         String query = "select top (?) m.*, t.C, " + setClumnRowCountString(command, "C") +

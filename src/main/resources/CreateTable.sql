@@ -108,11 +108,12 @@ where Row_Count BETWEEN 2 AND 3
 */
 
 
-
-select top (5) m.*, t.C, ROW_NUMBER() OVER (ORDER BY c desc)
-	from Movie as M 
-	left join(
-		select R.MovieID, count(R.MovieID)as c 
-		from dbo.Review as R
-		group by R.MovieID)as T on M.MovieID = T.MovieID
-	order by M.MovieID
+select * from(
+	select top (5) m.*, t.C
+		from Movie as M 
+		left join(
+			select R.MovieID, count(R.MovieID)as c 
+			from dbo.Review as R
+			group by R.MovieID)as T on M.MovieID = T.MovieID
+		order by c ) as z
+		order by c OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY
