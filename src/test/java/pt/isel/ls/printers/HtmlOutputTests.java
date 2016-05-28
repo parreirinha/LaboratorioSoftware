@@ -41,7 +41,7 @@ public class HtmlOutputTests {
 
     @Test
     public void printDetailedMovieTest() throws SQLException, ApplicationException {
-        /*String[] lineCommand = {"GET", "/movies/1"};
+        String[] lineCommand = {"GET", "/movies/1"};
         Command c = new CommandGetter().getCommand(lineCommand);
         String Result = new CommandMapper().getExecutionCommandInstance(c).execute(connection, c).toStringHtml();
         final String Expected = "<!DOCTYPE>\n" +
@@ -114,7 +114,7 @@ public class HtmlOutputTests {
                 "\n" +
                 "\t\t</body>\n" +
                 "\t</html>";
-        assertEquals(Expected, Result);*/
+        assertEquals(Expected, Result);
     }
 
     @Test

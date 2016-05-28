@@ -1,5 +1,5 @@
 use ls;
---use ls_tests
+--use lsTests
 
 if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE MovieCollection
 if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE Collections
