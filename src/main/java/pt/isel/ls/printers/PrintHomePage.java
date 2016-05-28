@@ -3,7 +3,7 @@ package pt.isel.ls.printers;
 import static pt.isel.ls.printers.URIGenerator.URIUtils.getURI;
 
 /**
- * Created by Dani on 18-05-2016.
+ * Class used to visualize the application home page.
  */
 public class PrintHomePage implements Printable {
 

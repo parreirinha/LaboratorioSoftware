@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static pt.isel.ls.http.ExecutionServlet.getPort;
 
 /**
- * Created by Dani on 18-05-2016.
+ * Class used as the internal command that shows the application homepage.
  */
 public class HttpHomePage implements CommandExecution {
     @Override

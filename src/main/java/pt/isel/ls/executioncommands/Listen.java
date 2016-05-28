@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by Dani on 13-05-2016.
+ * Class used to represent the LISTEN command, that initiates de http server.
  */
 public class Listen implements CommandExecution {
 
