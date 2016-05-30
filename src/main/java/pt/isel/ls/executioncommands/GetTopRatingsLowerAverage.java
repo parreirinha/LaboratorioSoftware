@@ -31,7 +31,7 @@ public class GetTopRatingsLowerAverage implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There are no movies.");
 
-        return new PrintDetailedMovie(res, command);
+        return new PrintDetailedMovie(res, command, connection);
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {

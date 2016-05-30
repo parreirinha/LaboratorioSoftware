@@ -97,6 +97,12 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td>1</td>\n" +
                 "\t\t\t\t\t<td>Bad taste Reviwer</td>\n" +
                 "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>8</td>\n" +
+                "\t\t\t\t\t<td><a href=\"http://localhost:8000/movies/1/reviews/8\">Ze</a></td>\n" +
+                "\t\t\t\t\t<td>5</td>\n" +
+                "\t\t\t\t\t<td>Ze</td>\n" +
+                "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "<br>\n" +
                 "<br>\n" +
