@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -cp vendor\main\sqljdbc4.jar;vendor\main\javax.servlet-3.0.0.v201112011016.jar;vendor\main\jetty-all-9.0.2.v20130417.jar;build\classes\main pt.isel.ls.user.io.Console
