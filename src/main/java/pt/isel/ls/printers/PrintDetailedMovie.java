@@ -57,10 +57,12 @@ public class PrintDetailedMovie implements Printable {
             {"Movie ID", "Name", "Release", "*", "**", "***", "****", "*****", "Average"};
     private ArrayList<Function<Movie, String>> function = new ArrayList<>();
     private final String NoMovie = "There is no such movie.\n";
+    private Connection con;
 
-    public PrintDetailedMovie(Collection<Movie> movieCollection, Command command) {
+    public PrintDetailedMovie(Collection<Movie> movieCollection, Command command, Connection connection) {
         this.command = command;
         this.movieCollection = movieCollection;
+        this.con = connection;
         function.add(movie -> "" + movie.getMovieID());
         function.add(movie -> movie.getMovieName());
         function.add(movie -> "" + movie.getMovieRelease());
@@ -141,7 +143,7 @@ public class PrintDetailedMovie implements Printable {
     private String getCollectionsWithMovie()
     {
         try {
-            return new GetAllCollectionsWithIDAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+            return new GetAllCollectionsWithIDAux().execute(con, command).toStringHtml();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ApplicationException e) {
@@ -152,7 +154,7 @@ public class PrintDetailedMovie implements Printable {
 
     private String getAllReviews(String allReviews) {
         try {
-            String res = new GetAllReviewsAux().execute(new ConnectionFactory().getNewConnection(), command).toStringHtml();
+            String res = new GetAllReviewsAux().execute(con, command).toStringHtml();
             return (res == "") ? res : allReviews+"\n<br>\n<br>\n"+res;
         } catch (SQLException e) {
             e.printStackTrace();
