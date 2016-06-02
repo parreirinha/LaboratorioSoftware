@@ -1,4 +1,4 @@
-use ls;
+--use ls;
 --use lsTests
 
 if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE MovieCollection
@@ -107,7 +107,7 @@ from(
 where Row_Count BETWEEN 2 AND 3
 */
 
-
+/*
 select * from(
 	select top (5) m.*, t.C
 		from Movie as M 
@@ -117,3 +117,4 @@ select * from(
 			group by R.MovieID)as T on M.MovieID = T.MovieID
 		order by c ) as z
 		order by c OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY
+		*/
