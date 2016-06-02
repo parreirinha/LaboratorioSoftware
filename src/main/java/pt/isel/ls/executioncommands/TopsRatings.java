@@ -16,6 +16,6 @@ import static pt.isel.ls.http.ExecutionServlet.getPort;
 public class TopsRatings implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
-        return new PrintTopsRatings(getPort());
+        return new PrintTopsRatings();
     }
 }

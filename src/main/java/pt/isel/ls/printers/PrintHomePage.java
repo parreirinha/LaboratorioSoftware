@@ -1,5 +1,6 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.printers.html.HtmlGenerator;
 import static pt.isel.ls.printers.URIGenerator.URIUtils.getURI;
 
 /**
@@ -7,12 +8,7 @@ import static pt.isel.ls.printers.URIGenerator.URIUtils.getURI;
  */
 public class PrintHomePage implements Printable {
 
-    private int port;
-    private String colUri;
-    private String moviesUri;
-    private String topsUri;
-
-    public PrintHomePage(int port){this.port = port;}
+    public PrintHomePage(){}
 
     @Override
     public String toStringText() {
@@ -20,12 +16,14 @@ public class PrintHomePage implements Printable {
     }
 
     @Override
-    public String toStringHtml() {
+    public String toStringHtml()
+    {
+        HtmlGenerator htmlString = new HtmlGenerator();
+        htmlString
+                .addLink(getURI("/collections/", "skip=0&top=5", "Collections"))
+                .addLink(getURI("/movies/", "skip=0&top=5", "Movies"))
+                .addLink(getURI("/tops/ratings/","skip=0&top=5", "Top Ratings"));
+        return String.format(htmlString.getTemplate(), htmlString.toString());
 
-        colUri =    getURI("/collections/", "skip=0&top=5", port, "Collections");
-        moviesUri = getURI("/movies/", "skip=0&top=5", port, "Movies");
-        topsUri =   getURI("/tops/ratings/","skip=0&top=5",port, "Top Ratings");
-
-        return "<p>" + colUri + "\n"+ "</p>" + moviesUri + "\n" + "<p>" + topsUri + "</p>";
     }
 }

@@ -9,14 +9,14 @@ import pt.isel.ls.linecommand.model.Path;
  */
 public class URIUtils {
 
-    private static String URIInicialString = "<a href=http://localhost:";
+    private static String URIInicialString = "<a href=";
     private static String URIFinalString = "</a>";
 
 
 
-    public static String getURI(String path, String params, int port, String name) {
+    public static String getURI(String path, String params, String name) {
 
-        String uri = URIInicialString + port + path;
+        String uri = URIInicialString + path;
         if (params != "" && params != null){
             uri += "?" + params;
         }

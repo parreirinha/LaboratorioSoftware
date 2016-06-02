@@ -1,9 +1,6 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.model.Collections;
-import pt.isel.ls.model.Review;
-import pt.isel.ls.printers.html.HtmlPrinters;
-
+import pt.isel.ls.printers.html.HtmlGenerator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
@@ -17,7 +14,9 @@ public class PrintBody implements Printable
     private final String body;
     public <T> PrintBody(Collection<T> res, String[] head, ArrayList<Function<T, String>> function, ArrayList<String> uri)
     {
-        this.body = HtmlPrinters.htmlGenerate(res, head, function, uri);
+        this.body = new HtmlGenerator()
+                .htmlGenerate(res, head, function, uri)
+                .toString();
     }
     public PrintBody()
     {

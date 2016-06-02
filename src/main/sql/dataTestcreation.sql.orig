@@ -1,5 +1,9 @@
-	use lsTests;
+<<<<<<< HEAD
+	--use lsTests;
+=======
+use lsTests;
 --use ls
+>>>>>>> 4cf3909d1be64f60b5396144495f9ad4c6f51db1
 
 insert into Movie (MovieName, MovieRelease, OneStar, TwoStar, TreeStar, FourStar, FiveStar) 
 	select 'Fight Club', 1999, 20, 10, 15, 50, 32 union all 

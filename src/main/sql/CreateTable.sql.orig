@@ -1,5 +1,9 @@
 --use ls;
+<<<<<<< HEAD
+--use lsTests
+=======
 use lsTests
+>>>>>>> 4cf3909d1be64f60b5396144495f9ad4c6f51db1
 
 if(OBJECT_ID('MovieCollection') IS NOT NULL) DROP TABLE MovieCollection
 if(OBJECT_ID('Collections') IS NOT NULL) DROP TABLE Collections
