@@ -34,7 +34,7 @@ public class GetMovie implements CommandExecution {
         if (res.isEmpty())
             return new PrintError("There is no movie with id = "+id+".");
 
-        return new PrintDetailedMovie(res, command);
+        return new PrintDetailedMovie(res, command, connection);
     }
 
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
