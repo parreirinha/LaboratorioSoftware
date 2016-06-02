@@ -1,16 +1,13 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Review;
 import pt.isel.ls.printers.URIGenerator.URIUtils;
-import pt.isel.ls.printers.html.HtmlPrinters;
+import pt.isel.ls.printers.html.HtmlGenerator;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
-
-import static pt.isel.ls.http.ExecutionServlet.getPort;
 
 /**
  * Class used to print the brief Review.
@@ -54,88 +51,33 @@ public class PrintReview implements Printable {
     }
 
     @Override
-    public String toStringHtml() {
-
-        /*
-        if(movieCollection.size() == 1)
-            return String.format(Printable.super.getTemplate(), getText());
-        return String.format(Printable.super.getTemplate(), getTable());
-        */
+    public String toStringHtml()
+    {
+        HtmlGenerator htmlString = new HtmlGenerator();
         if (reviews.isEmpty())
-            return String.format(HtmlPrinters.template, NoReview);
-
-        String path, returnToMovies;
-        int port =  ExecutionServlet.getPort();
+            return String.format(htmlString.getTemplate(), htmlString.addString(NoReview));
 
         ArrayList<String> uri = new ArrayList<>();
-        reviews.forEach(x -> uri.add("http://localhost:"+
-                ExecutionServlet.getPort()+"/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+        reviews.forEach(x -> uri.add("/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
 
-        path = "/movies/"+reviews.iterator().next().getMovieID();
-        returnToMovies = URIUtils.getURI(path, null, port, "Movie");
-
-        String html =  HtmlPrinters.htmlGenerate(reviews, head, function, uri)+
-                "<br>\n"+
-                getConnections(returnToMovies);
-
-        return String.format(HtmlPrinters.template, html);
+        htmlString
+                .htmlGenerate(reviews, head, function, uri)
+                .addBrTag()
+                .addBrTag()
+                .createPagging(
+                        URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                                URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
+                                "Previous"),
+                        URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                                URIUtils.getNextSkipAndTopValuesFromCommand(command),
+                                "Next"))
+                .addBrTag()
+                .addLink(URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID(), null, "Movie"))
+                .addLink(URIUtils.getURI("/", null, "Home"))
+                .addBrTag()
+                .addBrTag()
+                .postNewReview(reviews.iterator().next().getMovieID());
+        return String.format(htmlString.getTemplate(), htmlString.toString());
     }
-
-    private String getConnections(String returnToMovies)
-    {
-        String prevPage = URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
-                nextPage = URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                html = "";
-        if(prevPage != null)
-            html += "<p>"+URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                    prevPage,
-                    ExecutionServlet.getPort(),
-                    "Previous") +
-                    "<p>";
-        html += "<p>\t\t\t\t"+URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                nextPage,
-                ExecutionServlet.getPort(),
-                "Next") +
-                "</p><br>\n"+
-                returnToMovies + "<br>\n";
-        return html;
-    }
-/*
-    private String getTable() {
-        String str = "<table border=\"1\" style=\"width:100%\">\n" +
-                "\t" + getFullHtmlTitle() + "\n";
-        for (Review r : reviews) {
-            str += "\t" + getFullHtmlDescription(r) + "\n";
-        }
-        str += "</table>";
-        return str;
-    }
-
-    private String getText() {
-        Review r = reviews.iterator().next();
-        String str = "<ul><li>" + head[0] + ": " + function.get(0).apply(r) + "</li>\n" +
-                "<ul>\n";
-        for (int i = 1; i < head.length; ++i) {
-            str += "<li>" + head[i] + ": " + function.get(i).apply(r) + "</li>\n";
-        }
-        str += "</ul>\n" +
-                "</ul>\n";
-        return str;
-    }
-
-    private String getFullHtmlDescription(Review r) {
-        String str = "<tr>\n";
-        for (int i = 0; i < function.size(); ++i)
-            str += "\t\t<td>" + function.get(i).apply(r) + "</td>\n";
-        return str + "</tr>\n";
-    }
-
-    private String getFullHtmlTitle() {
-        String str = "<tr>\n";
-        for (int i = 0; i < head.length; ++i)
-            str += "\t\t<td>" + head[i] + "</td>\n";
-        return str + "</tr>\n";
-    }*/
-
 
 }

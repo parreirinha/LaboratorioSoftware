@@ -1,14 +1,12 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.URIGenerator.URIUtils;
-import pt.isel.ls.printers.html.HtmlPrinters;
+import pt.isel.ls.printers.html.HtmlGenerator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -45,19 +43,18 @@ public class PrintReviewsCount implements Printable
     }
 
     @Override
-    public String toStringHtml() {
+    public String toStringHtml()
+    {
+        HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> uri = new ArrayList<>();
-        collection.forEach(x -> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/movies/"+x.getMovieID()));
-        String html = HtmlPrinters.htmlGenerate(collection, head, functions, uri)+
-                "<br>\n<br>\n"+
-                getConnections();
-        return String.format(HtmlPrinters.template, html);
+        collection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        htmlString
+                .htmlGenerate(collection, head, functions, uri)
+                .addBrTag()
+                .addBrTag()
+                .addLink(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"))
+                .addLink(URIUtils.getURI("/", null, "Home"));
+        return String.format(htmlString.getTemplate(), htmlString.toString());
     }
 
-    private String getConnections()
-    {
-        String html = URIUtils.getURI("/tops/ratings", null, ExecutionServlet.getPort(), "Tops Ratings")+
-                "<br>";
-        return html;
-    }
 }

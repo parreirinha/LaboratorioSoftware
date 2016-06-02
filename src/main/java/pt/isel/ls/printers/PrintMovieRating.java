@@ -1,9 +1,9 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
-import pt.isel.ls.printers.html.HtmlPrinters;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
+import pt.isel.ls.printers.html.HtmlGenerator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,61 +56,22 @@ public class PrintMovieRating implements Printable {
     }
 
     @Override
-    public String toStringHtml() {
-
-        /*
-        if(movieCollection.size() == 1)
-            return String.format(Printable.super.getTemplate(), getText());
-        return String.format(Printable.super.getTemplate(), getTable());
-        */
+    public String toStringHtml()
+    {
+        HtmlGenerator htmlString = new HtmlGenerator();
         if (movie.isEmpty())
-            return String.format(HtmlPrinters.template, NoMovie);
+            return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie).toString());
+
         ArrayList<String> uri = new ArrayList<>();
-        movie.forEach(x -> uri.add("http://localhost:"+ ExecutionServlet.getPort()+"/movies/"+x.getMovieID()));
-        return HtmlPrinters.htmlGenerate(movie, head, function, uri);
+        movie.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        htmlString
+                .htmlGenerate(movie, head, function, uri)
+                .addBrTag()
+                .addBrTag()
+                .addLink(URIUtils.getURI("/", null, "Home"))
+                .addBrTag()
+                .addBrTag()
+                .postRatingMovie(movie.iterator().next().getMovieID());
+        return String.format(htmlString.getTemplate(), htmlString.toString());
     }
-
-/*
-    private String getTable()
-    {
-        String str = "<table border=\"1\" style=\"width:100%\">\n" +
-                "\t"+getFullHtmlTitle()+"\n";
-        for(Movie m : movie)
-        {
-            str += "\t"+getFullHtmlDescription(m)+"\n";
-        }
-        str += "</table>";
-        return str;
-    }
-
-    private String getText()
-    {
-        Movie m = movie.iterator().next();
-        String str = "<ul><li>"+head[0]+": "+function.get(0).apply(m)+"</li>\n" +
-                "<ul>\n";
-        for(int i = 1; i < head.length; ++i)
-        {
-            str += "<li>"+head[i]+": "+function.get(i).apply(m)+"</li>\n";
-        }
-        str += "</ul>\n" +
-                "</ul>\n";
-        return str;
-    }
-
-    private String getFullHtmlDescription(Movie m)
-    {
-        String str = "<tr>\n";
-        for(int i = 0; i < function.size(); ++i)
-            str += "\t\t<td>"+function.get(i).apply(m)+"</td>\n";
-        return str + "</tr>\n";
-    }
-
-    private String getFullHtmlTitle()
-    {
-        String str = "<tr>\n";
-        for(int i = 0; i < head.length; ++i)
-            str += "\t\t<td>"+head[i]+"</td>\n";
-        return str + "</tr>\n";
-    }
-*/
 }
