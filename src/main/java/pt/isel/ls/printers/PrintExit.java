@@ -1,6 +1,6 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.printers.html.HtmlPrinters;
+import pt.isel.ls.printers.html.HtmlGenerator;
 
 /**
  * Class used to print a exit message.
@@ -14,7 +14,8 @@ public class PrintExit implements Printable {
     }
 
     @Override
-    public String toStringHtml() {
-        return String.format(HtmlPrinters.template, Exit);
+    public String toStringHtml()
+    {
+        return String.format(new HtmlGenerator().getTemplate(), Exit);
     }
 }

@@ -16,6 +16,6 @@ import static pt.isel.ls.http.ExecutionServlet.getPort;
 public class HttpHomePage implements CommandExecution {
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
-        return new PrintHomePage(getPort());
+        return new PrintHomePage();
     }
 }

@@ -1,5 +1,7 @@
 package pt.isel.ls.http;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.CommandExecution;
@@ -33,10 +35,14 @@ public class ExecutionServlet extends HttpServlet {
 
     private static int port = 8000;
 
+    private static final Logger _logger = LoggerFactory.getLogger(ExecutionServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         port = req.getLocalPort();
+        _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
+
         PrintWriter out = resp.getWriter();
         Command c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
         CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
@@ -76,4 +82,46 @@ public class ExecutionServlet extends HttpServlet {
         }
 
     }
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        port = req.getLocalPort();
+
+        _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
+
+        PrintWriter out = resp.getWriter();
+        Command c = new UriCommandGetter().getCommandFromUri("POST", req.getRequestURI(), req.getQueryString());
+
+        CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
+
+        if (ce == null) {
+            resp.sendError(400);
+        } else {
+
+            Printable p = null;
+            try {
+                p = ce.execute(
+                        new ConnectionFactory().getNewConnection(), c);
+
+                if (p instanceof PrintError) {
+                    resp.sendError(400);
+                }
+
+                resp.setStatus(200);
+            } catch (SQLException e) {
+                resp.setStatus(500);
+            } catch (ApplicationException e) {
+                resp.sendError(400);
+            }
+
+            c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
+
+            resp.setContentType(identifyContentType(c));
+
+            out.println(identifyOutputFormat(c, p));
+        }
+    }
+
 }

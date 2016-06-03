@@ -1,5 +1,7 @@
 package pt.isel.ls.printers;
 
+import pt.isel.ls.printers.html.HtmlGenerator;
+
 import static pt.isel.ls.printers.URIGenerator.URIUtils.getURI;
 
 /**
@@ -7,15 +9,7 @@ import static pt.isel.ls.printers.URIGenerator.URIUtils.getURI;
  */
 public class PrintTopsRatings implements Printable {
 
-    private String topRatHigAvg;
-    private String topRatLowAvg;
-    private String topRevHigCount;
-    private String topRevLowCount;
-    private String movies;
-    private String home;
-    private int port;
-
-    public PrintTopsRatings(int port){this.port=port;}
+    public PrintTopsRatings(){}
 
     @Override
     public String toStringText() {
@@ -23,20 +17,15 @@ public class PrintTopsRatings implements Printable {
     }
 
     @Override
-    public String toStringHtml() {
-
-        topRatHigAvg = getURI("/tops/5/ratings/higher/average/", "skip=0&top=5", port, "Top ratings higher average");  ;
-        topRatLowAvg = getURI("/tops/5/ratings/lower/average/", "skip=0&top=5", port, "Top ratings lower average")  ;
-        topRevHigCount = getURI("/tops/5/reviews/higher/count/", "skip=0&top=5", port, "Top reviews higher count");
-        topRevLowCount = getURI("/tops/5/reviews/lower/count/", "skip=0&top=5", port, "Top reviews lower count");
-        movies = getURI("/movies/", "skip=0&top=5", port, "Movies");
-        home = getURI("", "", port, "HOME");
-
-        return  "<p>"+home+"</p>" +
-                "<p>"+movies+"\n"+"</p>" +
-                "<p>"+topRatHigAvg+"\n"+ "</p>" +
-                "<p>"+topRatLowAvg+"\n" + "</p>" +
-                "<p>"+topRevHigCount+"\n"+"</p>" +
-                "<p>"+topRevLowCount+"</p>";
+    public String toStringHtml()
+    {
+        HtmlGenerator htmlString = new HtmlGenerator()
+                .addLink(getURI("/", "", "HOME"))
+                .addLink(getURI("/movies/", "skip=0&top=5", "Movies"))
+                .addLink(getURI("/tops/5/ratings/lower/average/", "skip=0&top=5", "Top ratings lower average"))
+                .addLink(getURI("/tops/5/ratings/higher/average/", "skip=0&top=5", "Top ratings higher average"))
+                .addLink(getURI("/tops/5/reviews/lower/count/", "skip=0&top=5", "Top reviews lower count"))
+                .addLink(getURI("/tops/5/reviews/higher/count/", "skip=0&top=5", "Top reviews higher count"));
+        return  String.format(htmlString.getTemplate(), htmlString.toString());
     }
 }

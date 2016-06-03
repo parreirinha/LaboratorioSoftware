@@ -1,6 +1,6 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.printers.html.HtmlPrinters;
+import pt.isel.ls.printers.html.HtmlGenerator;
 
 /**
  * Created by fabio on 07-Apr-16.
@@ -15,6 +15,7 @@ public class PrintPostMovieRating implements Printable {
 
     @Override
     public String toStringHtml() {
-        return String.format(HtmlPrinters.template, Success);
+        HtmlGenerator htmlGenerator = new HtmlGenerator();
+        return String.format(htmlGenerator.getTemplate(), htmlGenerator.addString(Success).toString());
     }
 }

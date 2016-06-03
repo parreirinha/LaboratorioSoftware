@@ -1,6 +1,7 @@
 package pt.isel.ls.printers;
 
-import pt.isel.ls.printers.html.HtmlPrinters;
+
+import pt.isel.ls.printers.html.HtmlGenerator;
 
 /**
  * Class used to print the return of POST Movie and POST Review commands.
@@ -21,15 +22,14 @@ public class PrintPostMovieAndReview implements Printable {
     @Override
     public String toStringText() {
         return (id == 0) ? new PrintError(PostError).toStringText() : string + ": " + id;
-        // return (id == 0) ? new PrintError("something went wrong!!\n").toStringText() : "The ID of the new movie is: " +
-        //      "" + id;
     }
 
     @Override
     public String toStringHtml() {
+        HtmlGenerator htmlGenerator = new HtmlGenerator();
         if (id == 0)
-            return String.format(HtmlPrinters.template, PostError);
+            return String.format(htmlGenerator.getTemplate(), htmlGenerator.addString(PostError));
 
-        return String.format(HtmlPrinters.template, string + ": " + id);
+        return String.format(htmlGenerator.getTemplate(), htmlGenerator.addString(string + ": " + id));
     }
 }

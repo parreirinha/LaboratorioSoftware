@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PrintHomePageTest {
 
-    PrintHomePage printHomePage = new PrintHomePage(8000);
+    PrintHomePage printHomePage = new PrintHomePage();
 
 
     @Test
@@ -14,9 +14,25 @@ public class PrintHomePageTest {
 
         String res = printHomePage.toStringHtml();
         String expected =
-                "<p><a href=http://localhost:8000/collections/?skip=0&top=5>Collections</a>\n" +
-                "</p><a href=http://localhost:8000/movies/?skip=0&top=5>Movies</a>\n" +
-                "<p><a href=http://localhost:8000/tops/ratings/?skip=0&top=5>Top Ratings</a></p>";
+                "<!DOCTYPE>\n" +
+                        "\t<html>\n" +
+                        "\t\t<head>\n" +
+                        "\t\t\t<meta\n" +
+                        "\t\t\t\thttp-equiv=\"Content-Type\"\n" +
+                        "\t\t\t\tcontent=\"text/html; charset=utf-8\"\n" +
+                        "\t\t\t/>\n" +
+                        "\t\t</head>\n" +
+                        "\n" +
+                        "\t\t<body>\n" +
+                        "\t\t\t<a href=/collections/?skip=0&top=5>Collections</a>\n" +
+                        "\t\t\t<br>\n" +
+                        "\t\t\t<a href=/movies/?skip=0&top=5>Movies</a>\n" +
+                        "\t\t\t<br>\n" +
+                        "\t\t\t<a href=/tops/ratings/?skip=0&top=5>Top Ratings</a>\n" +
+                        "\t\t\t<br>\n" +
+                        "\n" +
+                        "\t\t</body>\n" +
+                        "\t</html>";
         assertEquals(expected, res);
     }
 }

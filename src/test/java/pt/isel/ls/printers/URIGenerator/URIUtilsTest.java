@@ -9,7 +9,7 @@ import static pt.isel.ls.printers.URIGenerator.URIUtils.*;
 
 
 public class URIUtilsTest {
-
+/*
     @Test
     public void getURITest(){
 
@@ -76,5 +76,5 @@ public class URIUtilsTest {
         String expected = "skip=34&top=4&orderby=releaseYear";
         assertEquals(expected, curr);
     }
-
+*/
 }
