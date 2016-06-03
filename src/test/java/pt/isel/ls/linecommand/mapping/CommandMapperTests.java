@@ -35,8 +35,8 @@ public class CommandMapperTests {
     private final String[] getCollection = {"GET", "/collections/10"};
     private final String[] addMovieToCollection = {"POST", "/collections/10/movies", "mid=123"};
     private final String[] deleteMovieFromCollection = {"DELETE", "/collections/10/movies/123"};
-    private final String[] Option = {"OPTION"};
-    private final String[] Exit = {"EXIT"};
+    private final String[] Option = {"OPTION", "/"};
+    private final String[] Exit = {"EXIT", "/"};
     private final String[] InteractiveMode = {""};
 
     CommandMapper map = new CommandMapper();

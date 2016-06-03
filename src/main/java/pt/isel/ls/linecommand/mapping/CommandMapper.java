@@ -41,8 +41,8 @@ public class CommandMapper {
         commmandMap.put("GET/collections/{cid}", new GetCollectionById());
         commmandMap.put("POST/collections/{cid}/movies", new PostMovieInCollection());
         commmandMap.put("DELETE/collections/{cid}/movies/{mid}", new DeleteMovieFromCollection());
-        commmandMap.put("OPTION", new Option());
-        commmandMap.put("EXIT", new Exit());
+        commmandMap.put("OPTION/", new Option());
+        commmandMap.put("EXIT/", new Exit());
         commmandMap.put("", new InteractiveMode());
         commmandMap.put("LISTEN/", new Listen());
         commmandMap.put("GET", new HttpHomePage());
@@ -54,7 +54,6 @@ public class CommandMapper {
     public CommandExecution getExecutionCommandInstance(Command command) {
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
-        System.out.println(commandProcessedString);
         if (!commmandMap.containsKey(commandProcessedString)) {
             System.out.println("Error: Invalid Command.");
             return null;
