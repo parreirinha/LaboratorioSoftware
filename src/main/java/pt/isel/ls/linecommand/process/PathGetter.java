@@ -31,16 +31,16 @@ public class PathGetter {
                 String[] template = PathTemplateContainer[i];
                 if (pathTemplateComparator(pathParts, template)) {
                     pathIntegers = putIdsInPathMap(pathParts, template);
-                    path = concatPathTemplate(template);
+                    this.path = concatPathTemplate(template);
                     match = true;
                     break;
                 }
             }
             if (!match)
-                path = "wrong";
+                this.path = "wrong";
         }
 
-        return new Path(path, pathIntegers);
+        return new Path(this.path, pathIntegers);
     }
 
     private String concatPathTemplate(String[] template) {
