@@ -1,58 +1,56 @@
 package pt.isel.ls.linecommand.process;
 
+import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Path;
 
 import java.util.HashMap;
 
+
 /**
- * Class responsible to create a new Path instance from the
- * path string given in the command line.
+ * Created by Dani on 02-06-2016.
  */
 public class PathGetter {
-    private String[] pathParts;
-    private String cleanPath = "";
     private HashMap<String, Integer> pathIntegers;
+    private String[][] PathTemplateContainer;
+    private String path;
+    private String[] pathParts;
 
-    private final String[][] PathTemplateContainer = {
-            {"movies", "{mid}"},
-            {"movies"},
-            {"movies", "{mid}", "ratings"},
-            {"movies", "{mid}", "reviews"},
-            {"movies", "{mid}", "reviews", "{rid}"},
-            {"tops", "ratings", "higher", "average"},
-            {"tops", "{n}", "ratings", "higher", "average"},
-            {"tops", "ratings", "lower", "average"},
-            {"tops", "{n}", "ratings", "lower", "average"},
-            {"tops", "reviews", "higher", "count"},
-            {"tops", "{n}", "reviews", "higher", "count"},
-            {"tops", "{n}", "reviews", "lower", "count"},
-            {"collections"},
-            {"collections", "{cid}"},
-            {"collections", "{cid}", "movies"},
-            {"collections", "{cid}", "movies", "{mid}"},
-            {"tops","ratings"},
-            {""}
-    };
+    public PathGetter() {
+        PathTemplateContainer = getPathTemplatesFromCommandMapper();
+    }
+
 
     public Path getPath(String path) {
-        boolean match=false;
+        this.path = path;
+        boolean match = false;
         if (!path.equals("") && !path.equals("/")) {
             pathParts = path.split("/");
             pathParts = cleanFirstPositionOfStringArray(pathParts);
 
             for (int i = 0; i < PathTemplateContainer.length; ++i) {
-                if (pathTemplateComparator(pathParts, PathTemplateContainer[i])) {
-                    cleanPath = getStringFromPathTemplate(PathTemplateContainer[i]);
-                    pathIntegers = putIdsInPathMap(pathParts, PathTemplateContainer[i]);
-                    match=true;
+                String[] template = PathTemplateContainer[i];
+                if (pathTemplateComparator(pathParts, template)) {
+                    pathIntegers = putIdsInPathMap(pathParts, template);
+                    path = concatPathTemplate(template);
+                    match = true;
                     break;
                 }
             }
-            if(!match)
-                cleanPath = "wrong";
+            if (!match)
+                path = "wrong";
         }
 
-        return new Path(cleanPath, pathIntegers);
+        return new Path(path, pathIntegers);
+    }
+
+    private String concatPathTemplate(String[] template) {
+        String templateString ="";
+
+        for (int i = 0; i < template.length; i++) {
+            templateString += "/"+template[i];
+        }
+
+        return templateString;
     }
 
     private HashMap<String, Integer> putIdsInPathMap(String[] pathParts, String[] template) {
@@ -66,6 +64,27 @@ public class PathGetter {
         return map;
     }
 
+    private String[][] getPathTemplatesFromCommandMapper() {
+        String[][] paths = new CommandMapper()
+                .getCommmandMapKeys()
+                .stream()
+                .distinct()
+                .map(s -> {
+                    return getPathTemplateParts(s);
+                })
+                .toArray(String[][]::new);
+
+        return paths;
+    }
+
+    private String[] getPathTemplateParts(String pathString) {
+        if (!pathString.equals("") && !pathString.equals("/")) {
+            return cleanFirstPositionOfStringArray(pathString.split("/"));
+        }
+        String[] out = {pathString};
+        return out;
+    }
+
     private String[] cleanFirstPositionOfStringArray(String[] pathParts) {
         String[] aux = new String[pathParts.length - 1];
         for (int i = 0; i < aux.length; ++i) {
@@ -74,25 +93,6 @@ public class PathGetter {
         return aux;
     }
 
-    private String getStringFromPathTemplate(String[] strings) {
-        String s = "";
-        for (int i = 0; i < strings.length; ++i) {
-            if (isPathVariable(strings[i])) {
-                s += cleanPathPart(strings[i]);
-            } else {
-                s += strings[i];
-            }
-        }
-        return s;
-    }
-
-    private String cleanPathPart(String string) {
-        String s = "";
-        for (int i = 1; i < string.length() - 1; ++i) {
-            s += string.charAt(i);
-        }
-        return s;
-    }
 
     private boolean pathTemplateComparator(String[] path, String[] template) {
         int size = path.length;
@@ -111,8 +111,15 @@ public class PathGetter {
     }
 
     private boolean isPathVariable(String s) {
-        if(s.length()==0) return false;
+        if (s.length() == 0) return false;
         return s.charAt(0) == '{' && s.charAt(s.length() - 1) == '}';
     }
 
+    private String cleanPathPart(String string) {
+        String s = "";
+        for (int i = 1; i < string.length() - 1; ++i) {
+            s += string.charAt(i);
+        }
+        return s;
+    }
 }

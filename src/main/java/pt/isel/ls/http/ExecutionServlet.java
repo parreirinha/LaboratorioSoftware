@@ -37,16 +37,13 @@ public class ExecutionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         port = req.getLocalPort();
-
         PrintWriter out = resp.getWriter();
         Command c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
-
         CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
 
         if (ce == null) {
             resp.sendError(400);
         } else {
-
             Printable p = null;
             try {
                 p = ce.execute(

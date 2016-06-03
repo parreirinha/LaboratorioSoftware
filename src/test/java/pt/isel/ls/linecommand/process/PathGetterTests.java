@@ -38,7 +38,7 @@ public class PathGetterTests {
     @Test
     public void collectionsAndCidAndMoviesAndMidPathTest() {
         Path p = new PathGetter().getPath(CollectionsAndCidPathAndMoviesAndMidPath);
-        assertEquals("collectionscidmoviesmid", p.getPathString());
+        assertEquals("/collections/{cid}/movies/{mid}", p.getPathString());
         assertEquals(10, p.getPathInt("cid"));
         assertEquals(123, p.getPathInt("mid"));
     }
@@ -46,31 +46,31 @@ public class PathGetterTests {
     @Test
     public void collectionsAndCidAndMoviesPathTest() {
         Path p = new PathGetter().getPath(CollectionsAndCidPathAndMoviesPath);
-        assertEquals("collectionscidmovies", p.getPathString());
+        assertEquals("/collections/{cid}/movies", p.getPathString());
         assertEquals(10, p.getPathInt("cid"));
     }
 
     @Test
     public void collectionsAndCidPathTest() {
         Path p = new PathGetter().getPath(CollectionsAndCidPath);
-        assertEquals("collectionscid", p.getPathString());
+        assertEquals("/collections/{cid}", p.getPathString());
         assertEquals(10, p.getPathInt("cid"));
     }
 
     @Test
     public void onlyCollectionsStringPathTest() {
-        assertEquals("collections", new PathGetter().getPath(OnlyCollectionsPath).getPathString());
+        assertEquals("/collections", new PathGetter().getPath(OnlyCollectionsPath).getPathString());
     }
 
     @Test
     public void onlyMoviesStringPathTest() {
-        assertEquals("movies", new PathGetter().getPath(onlyMoviesPath).getPathString());
+        assertEquals("/movies", new PathGetter().getPath(onlyMoviesPath).getPathString());
     }
 
 
     @Test
     public void moviesAndMidStringPathTest() {
-        assertEquals("moviesmid", new PathGetter().getPath(moviesAndMidPath).getPathString());
+        assertEquals("/movies/{mid}", new PathGetter().getPath(moviesAndMidPath).getPathString());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class PathGetterTests {
 
     @Test
     public void moviesAndMidAndRatingsStringPathTest() {
-        assertEquals("moviesmidratings", new PathGetter().getPath(moviesAndMidAndRatingsPath).getPathString());
+        assertEquals("/movies/{mid}/ratings", new PathGetter().getPath(moviesAndMidAndRatingsPath).getPathString());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class PathGetterTests {
 
     @Test
     public void moviesAndMidAndReviewsStringPathTest() {
-        assertEquals("moviesmidreviews", new PathGetter().getPath(moviesAndMidAndReviewsPath).getPathString());
+        assertEquals("/movies/{mid}/reviews", new PathGetter().getPath(moviesAndMidAndReviewsPath).getPathString());
     }
 
     @Test
@@ -100,7 +100,7 @@ public class PathGetterTests {
 
     @Test
     public void moviesAndMidAndReviewsAndRidStringPathTest() {
-        assertEquals("moviesmidreviewsrid", new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathString());
+        assertEquals("/movies/{mid}/reviews/{rid}", new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathString());
     }
 
     @Test
@@ -115,13 +115,13 @@ public class PathGetterTests {
 
     @Test
     public void topsRatingsHigherAverageStringPathTest() {
-        assertEquals("topsratingshigheraverage", new PathGetter().getPath(topsRatingsHigherAveragePath).getPathString());
+        assertEquals("/tops/ratings/higher/average", new PathGetter().getPath(topsRatingsHigherAveragePath).getPathString());
 
     }
 
     @Test
     public void topsNRatingsHigherAverageStringPathTest() {
-        assertEquals("topsnratingshigheraverage", new PathGetter().getPath(topsNRatingsHigherAveragePath).getPathString());
+        assertEquals("/tops/{n}/ratings/higher/average", new PathGetter().getPath(topsNRatingsHigherAveragePath).getPathString());
 
     }
 
@@ -133,12 +133,12 @@ public class PathGetterTests {
 
     @Test
     public void topsRatingsLowerAverageStringPathTest() {
-        assertEquals("topsratingsloweraverage", new PathGetter().getPath(topsRatingsLowerAveragePath).getPathString());
+        assertEquals("/tops/ratings/lower/average", new PathGetter().getPath(topsRatingsLowerAveragePath).getPathString());
     }
 
     @Test
     public void topsNRatingsLowerAverageStringPathTest() {
-        assertEquals("topsnratingsloweraverage", new PathGetter().getPath(topsNRatingsLowerAveragePath).getPathString());
+        assertEquals("/tops/{n}/ratings/lower/average", new PathGetter().getPath(topsNRatingsLowerAveragePath).getPathString());
     }
 
     @Test
@@ -148,12 +148,12 @@ public class PathGetterTests {
 
     @Test
     public void topsReviewsHigherCountStringPathTest() {
-        assertEquals("topsreviewshighercount", new PathGetter().getPath(topsReviewsHigherCountPath).getPathString());
+        assertEquals("/tops/reviews/higher/count", new PathGetter().getPath(topsReviewsHigherCountPath).getPathString());
     }
 
     @Test
     public void topsNReviewsHigherCountStringPathTest() {
-        assertEquals("topsnreviewshighercount", new PathGetter().getPath(topsNReviewsHigherCountPath).getPathString());
+        assertEquals("/tops/{n}/reviews/higher/count", new PathGetter().getPath(topsNReviewsHigherCountPath).getPathString());
     }
 
     @Test
