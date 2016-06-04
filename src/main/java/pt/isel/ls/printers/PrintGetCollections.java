@@ -45,10 +45,11 @@ public class PrintGetCollections implements Printable {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> uri = new ArrayList<>();
         col.forEach(x-> uri.add("/collections/"+x.getCollectionID()));
-
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home Page"));
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(col, head, functions, uri)
-                .addBrTag()
                 .addBrTag()
                 .createPagging(
                         URIUtils.getURI("/collections/",
@@ -57,11 +58,6 @@ public class PrintGetCollections implements Printable {
                         URIUtils.getURI("/collections/",
                                 URIUtils.getNextSkipAndTopValuesFromCommand(command),
                                 "Next"))
-                .addBrTag()
-                .addBrTag()
-                .addLink(URIUtils.getURI("/", null, "Home Page"))
-                .addBrTag()
-                .addBrTag()
                 .postNewCollectionForm();
 
         return String.format(htmlString.getTemplate(), htmlString.toString());

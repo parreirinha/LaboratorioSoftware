@@ -59,22 +59,33 @@ public class PrintReview implements Printable {
 
         ArrayList<String> uri = new ArrayList<>();
         reviews.forEach(x -> uri.add("/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
-
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home"));
+        menu.add(URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID(), null, "Movie"));
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(reviews, head, function, uri)
-                .addBrTag()
-                .addBrTag()
-                .createPagging(
-                        URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                                URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
-                                "Previous"),
-                        URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                                URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                "Next"))
-                .addBrTag()
-                .addLink(URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID(), null, "Movie"))
-                .addLink(URIUtils.getURI("/", null, "Home"))
-                .addBrTag()
+                .addBrTag();
+
+        String prev = URIUtils.getPreviusSkipAndTopValuesFromCommand(command);
+        if(prev != null)
+                htmlString
+                        .createPagging(
+                            URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                                    prev,
+                                    "Previous"),
+                            URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                                    URIUtils.getNextSkipAndTopValuesFromCommand(command),
+                                    "Next"))
+                        .addBrTag();
+        else
+            htmlString
+                    .createPagging(null,
+                            URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
+                                    URIUtils.getNextSkipAndTopValuesFromCommand(command),
+                                    "Next"))
+                    .addBrTag();
+        htmlString
                 .addBrTag()
                 .postNewReview(reviews.iterator().next().getMovieID());
         return String.format(htmlString.getTemplate(), htmlString.toString());

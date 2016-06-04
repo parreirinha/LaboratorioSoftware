@@ -52,12 +52,17 @@ public class PrintMovie implements Printable {
             return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie).toString());
         ArrayList<String > uri = new ArrayList<>();
         movieCollection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
-
-
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home Page"));
+        menu.add(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"));
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, uri)
-                .addBrTag()
-                .createPagging(
+                .addBrTag();
+        String prev = URIUtils.getPreviusSkipAndTopValuesFromCommand(command);
+        if(prev != null)
+            htmlString
+                    .createPagging(
                         URIUtils.getURI("/movies/",
                                 URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
                                 "Previous"),
@@ -65,10 +70,17 @@ public class PrintMovie implements Printable {
                                 URIUtils.getNextSkipAndTopValuesFromCommand(command),
                                 "Next")
                         )
-                .addBrTag()
-                .addLink(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"))
-                .addLink(URIUtils.getURI("/", null, "Home Page"))
-                .addBrTag()
+                .addBrTag();
+        else
+            htmlString
+                    .createPagging(
+                            null,
+                            URIUtils.getURI("/movies/",
+                                    URIUtils.getNextSkipAndTopValuesFromCommand(command),
+                                    "Next")
+                    )
+                    .addBrTag();
+        htmlString
                 .addBrTag()
                 .postNewMovie();
 

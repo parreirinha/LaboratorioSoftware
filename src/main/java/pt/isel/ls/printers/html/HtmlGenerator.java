@@ -31,6 +31,16 @@ public class HtmlGenerator
 
     public HtmlGenerator() {}
 
+    public HtmlGenerator createMenu(ArrayList<String> values)
+    {
+        html += startTab + "<table border=\"0\"  style=\"width:100%\">\n"+
+                startTab + "\t<tr>\n";
+        values.forEach(x -> html += startTab + "\t\t<td align=\"center\"><h3>"+ x + "</h3></td>\n");
+        html += startTab + "\t</tr>\n" +
+                startTab + "</table>\n";
+        return this;
+    }
+
     public HtmlGenerator postNewCollectionForm()
     {
         html += startTab + "Post Collection<br>"+

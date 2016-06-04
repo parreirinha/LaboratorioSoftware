@@ -48,12 +48,12 @@ public class PrintReviewsCount implements Printable
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> uri = new ArrayList<>();
         collection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home"));
+        menu.add(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"));
         htmlString
-                .htmlGenerate(collection, head, functions, uri)
-                .addBrTag()
-                .addBrTag()
-                .addLink(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"))
-                .addLink(URIUtils.getURI("/", null, "Home"));
+                .createMenu(menu)
+                .htmlGenerate(collection, head, functions, uri);
         return String.format(htmlString.getTemplate(), htmlString.toString());
     }
 

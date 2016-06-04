@@ -13,7 +13,7 @@ import java.util.function.Function;
  * @author Tede Morgado
  *         Created at 25/05/2016
  */
-public class PrintRatingsAverge implements Printable {
+public class PrintRatingsAverage implements Printable {
 
     private final Collection<Movie> collection;
     private final Command command;
@@ -21,29 +21,20 @@ public class PrintRatingsAverge implements Printable {
     private final String link;
     private ArrayList<Function<Movie, String>> function = new ArrayList<>();
 
-    public PrintRatingsAverge(Command command, Collection<Movie> collection, String link)
+    public PrintRatingsAverage(Command command, Collection<Movie> collection, String link)
     {
         this.command = command;
         this.collection = collection;
         this.link = link;
-        Function<Movie, String> f = x -> ""+x.getMovieID();
-        function.add(f);
-        f = x -> x.getMovieName();
-        function.add(f);
-        f = x -> ""+x.getMovieRelease();
-        function.add(f);
-        f = x -> ""+x.getOneStar();
-        function.add(f);
-        f = x -> ""+x.getTwoStar();
-        function.add(f);
-        f = x -> ""+x.getThreeStar();
-        function.add(f);
-        f = x -> ""+x.getFourStar();
-        function.add(f);
-        f = x -> ""+x.getFiveStar();
-        function.add(f);
-        f = x -> ""+x.getAverage();
-        function.add(f);
+        function.add(x -> ""+x.getMovieID());
+        function.add(x -> x.getMovieName());
+        function.add(x -> ""+x.getMovieRelease());
+        function.add(x -> ""+x.getOneStar());
+        function.add(x -> ""+x.getTwoStar());
+        function.add(x -> ""+x.getThreeStar());
+        function.add(x -> ""+x.getFourStar());
+        function.add(x -> ""+x.getFiveStar());
+        function.add(x -> ""+x.getAverage());
     }
 
     @Override
@@ -69,12 +60,13 @@ public class PrintRatingsAverge implements Printable {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> uri = new ArrayList<>();
         collection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home"));
+        menu.add(URIUtils.getURI("/tops/ratings/", null, "Tops Ratings"));
+
         htmlString
-                .htmlGenerate(collection, head, function, uri)
-                .addBrTag()
-                .addBrTag()
-                .addLink(URIUtils.getURI("/", null, "Home"))
-                .addLink(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"));
+                .createMenu(menu)
+                .htmlGenerate(collection, head, function, uri);
         return String.format(htmlString.getTemplate(), htmlString.toString());
     }
 
