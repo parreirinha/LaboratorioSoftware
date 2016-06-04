@@ -65,27 +65,7 @@ public class PrintReview implements Printable {
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(reviews, head, function, uri)
-                .addBrTag();
-
-        String prev = URIUtils.getPreviusSkipAndTopValuesFromCommand(command);
-        if(prev != null)
-                htmlString
-                        .createPagging(
-                            URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                                    prev,
-                                    "Previous"),
-                            URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                                    URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                    "Next"))
-                        .addBrTag();
-        else
-            htmlString
-                    .createPagging(null,
-                            URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID()+"/reviews/",
-                                    URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                    "Next"))
-                    .addBrTag();
-        htmlString
+                .createPagging(command, "/movies/"+reviews.iterator().next().getMovieID()+"/reviews/")
                 .addBrTag()
                 .postNewReview(reviews.iterator().next().getMovieID());
         return String.format(htmlString.getTemplate(), htmlString.toString());

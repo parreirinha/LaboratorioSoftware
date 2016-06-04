@@ -58,29 +58,7 @@ public class PrintMovie implements Printable {
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, uri)
-                .addBrTag();
-        String prev = URIUtils.getPreviusSkipAndTopValuesFromCommand(command);
-        if(prev != null)
-            htmlString
-                    .createPagging(
-                        URIUtils.getURI("/movies/",
-                                URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
-                                "Previous"),
-                        URIUtils.getURI("/movies/",
-                                URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                "Next")
-                        )
-                .addBrTag();
-        else
-            htmlString
-                    .createPagging(
-                            null,
-                            URIUtils.getURI("/movies/",
-                                    URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                    "Next")
-                    )
-                    .addBrTag();
-        htmlString
+                .createPagging(command, "/movies/")
                 .addBrTag()
                 .postNewMovie();
 

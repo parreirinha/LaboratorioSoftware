@@ -50,14 +50,7 @@ public class PrintGetCollections implements Printable {
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(col, head, functions, uri)
-                .addBrTag()
-                .createPagging(
-                        URIUtils.getURI("/collections/",
-                                URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
-                                "Previous"),
-                        URIUtils.getURI("/collections/",
-                                URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                "Next"))
+                .createPagging(command, "/collections/")
                 .postNewCollectionForm();
 
         return String.format(htmlString.getTemplate(), htmlString.toString());
