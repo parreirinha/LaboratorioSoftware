@@ -66,6 +66,7 @@ public class HtmlGenerator
                 startTab + "<br>\n" +
                 startTab + "<form method=\"POST\" action=\"/collections/"+id+"/?\">\n" +
                 startTab + "\tID:<input name=\"mid\" type=\"number\">\n" +
+                startTab + "\t<input type=\"submit\" value=\"Submit\">\n" +
                 startTab + "</form>\n" +
                 startTab + "<br>\n" +
                 startTab + "<br>\n";
@@ -104,6 +105,7 @@ public class HtmlGenerator
                 startTab + "\t<input type=\"radio\" name=\"rating\" value=\"4\"> 4\n" +
                 startTab + "\t<br>\n"+
                 startTab + "\t<input type=\"radio\" name=\"rating\" value=\"5\"> 5\n" +
+                startTab + "\t<input type=\"submit\" value=\"Submit\">\n" +
                 startTab + "\t<br>\n"+
                 startTab + "</form>\n" +
                 startTab + "<br>\n" +

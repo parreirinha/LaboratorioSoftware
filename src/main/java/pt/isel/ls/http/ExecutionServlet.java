@@ -122,19 +122,14 @@ public class ExecutionServlet extends HttpServlet {
                 if (p instanceof PrintError) {
                     resp.sendError(400);
                 }
-
-                resp.setStatus(200);
+                resp.setStatus(301);
+                resp.setHeader("Location", c.getLocation());
             } catch (SQLException e) {
                 resp.setStatus(500);
             } catch (ApplicationException e) {
                 resp.sendError(400);
             }
-
-            //c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
-            //resp.setStatus(300);
-            //resp.setHeader("Location:", c.getLocation());
             resp.setContentType(identifyContentType(c));
-
             out.println(identifyOutputFormat(c, p));
         }
     }
