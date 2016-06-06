@@ -76,7 +76,7 @@ public class HtmlGenerator
     {
         html += startTab + "Post Movie\n" +
                 startTab + "<br>\n"+
-                startTab + "<form method=\"POST\" action=\"/movies\">\n" +
+                startTab + "<form method=\"POST\" action=\"/movies?\">\n" +
                 startTab + "\tName:<input name=\"title\" type=\"text\">\n" +
                 startTab + "\t<br>\n" +
                 startTab + "\tYear:<input name=\"releaseYear\" type=\"number\">\n" +

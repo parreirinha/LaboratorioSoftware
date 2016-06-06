@@ -57,9 +57,9 @@ public class HtmlOutputTests {
                 "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/?top=-1&skip=0>All Movies</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/?top=null&skip=0>All Movies</a></h3></td>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/ratings>Rating</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews/?top=-1&skip=0>All Reviews</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews/?top=null&skip=0>All Reviews</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
@@ -165,7 +165,7 @@ public class HtmlOutputTests {
                 "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews?top=-1&skip=0>All Reviews</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews?top=null&skip=0>All Reviews</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
@@ -329,7 +329,7 @@ public class HtmlOutputTests {
                 "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/collections?top=-1&skip=0>All Collections</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/collections?top=null&skip=0>All Collections</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +

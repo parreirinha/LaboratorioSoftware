@@ -67,6 +67,8 @@ public class AccessUtils {
     protected static boolean pagingVerification(Command command) {
         Integer i1 = command.getParams().getParamInt("skip");
         Integer i2 = command.getParams().getParamInt("top");
+        if(i1==null || i2==null)
+            return false;
         return (i1 < 0) || (i2 < 0) ? false : true;
     }
 

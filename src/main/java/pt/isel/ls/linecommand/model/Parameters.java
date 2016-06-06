@@ -19,6 +19,10 @@ public class Parameters {
     }
 
     public Integer getParamInt(String key) {
-            return Integer.parseInt(paramStrings.get(key));
+        String s = paramStrings.get(key);
+        if(s==null)
+            return null;
+
+            return Integer.parseInt(s);
     }
 }
