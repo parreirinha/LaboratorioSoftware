@@ -14,57 +14,57 @@ import java.util.HashMap;
  */
 public class CommandMapper {
 
-    private HashMap<String, CommandExecution> commmandMap;
+    private HashMap<String, CommandExecution> commandMap;
 
     public CommandMapper() {
         initMap();
     }
 
     private void initMap() {
-        commmandMap = new HashMap<String, CommandExecution>();
-        commmandMap.put("POST/movies", new PostMovie());
-        commmandMap.put("GET/movies", new GetAllMovies());
-        commmandMap.put("GET/movies/{mid}", new GetMovie());
-        commmandMap.put("POST/movies/{mid}/ratings", new PostMovieRating());
-        commmandMap.put("GET/movies/{mid}/ratings", new GetMovieRating());
-        commmandMap.put("POST/movies/{mid}/reviews", new PostMovieReview());
-        commmandMap.put("GET/movies/{mid}/reviews", new GetAllReviews());
-        commmandMap.put("GET/movies/{mid}/reviews/{rid}", new GetReviewById());
-        commmandMap.put("GET/tops/ratings/higher/average", new GetTopRatingsHigherAverage());
-        commmandMap.put("GET/tops/{n}/ratings/higher/average", new GetTopNRatingsHigherAverage());
-        commmandMap.put("GET/tops/ratings/lower/average", new GetTopRatingsLowerAverage());
-        commmandMap.put("GET/tops/{n}/ratings/lower/average", new GetTopNRatingsLowerAverage());
-        commmandMap.put("GET/tops/reviews/higher/count", new GetTopMovieWithHigherReviewCount());
-        commmandMap.put("GET/tops/{n}/reviews/higher/count", new GetTopNMoviesWithHigherReviewCount());
-        commmandMap.put("POST/collections", new PostCollection());
-        commmandMap.put("GET/collections", new GetCollections());
-        commmandMap.put("GET/collections/{cid}", new GetCollectionById());
-        commmandMap.put("POST/collections/{cid}/movies", new PostMovieInCollection());
-        commmandMap.put("DELETE/collections/{cid}/movies/{mid}", new DeleteMovieFromCollection());
-        commmandMap.put("OPTION/", new Option());
-        commmandMap.put("EXIT/", new Exit());
-        commmandMap.put("", new InteractiveMode());
-        commmandMap.put("LISTEN/", new Listen());
-        commmandMap.put("GET/", new HttpHomePage());
-        commmandMap.put("GET/tops/ratings", new TopsRatings());
-        commmandMap.put("GET/tops/{n}/reviews/lower/count", new GetTopNMoviesWithLowerReviewCount());
+        commandMap = new HashMap<String, CommandExecution>();
+        commandMap.put("POST/movies", new PostMovie());
+        commandMap.put("GET/movies", new GetAllMovies());
+        commandMap.put("GET/movies/{mid}", new GetMovie());
+        commandMap.put("POST/movies/{mid}/ratings", new PostMovieRating());
+        commandMap.put("GET/movies/{mid}/ratings", new GetMovieRating());
+        commandMap.put("POST/movies/{mid}/reviews", new PostMovieReview());
+        commandMap.put("GET/movies/{mid}/reviews", new GetAllReviews());
+        commandMap.put("GET/movies/{mid}/reviews/{rid}", new GetReviewById());
+        commandMap.put("GET/tops/ratings/higher/average", new GetTopRatingsHigherAverage());
+        commandMap.put("GET/tops/{n}/ratings/higher/average", new GetTopNRatingsHigherAverage());
+        commandMap.put("GET/tops/ratings/lower/average", new GetTopRatingsLowerAverage());
+        commandMap.put("GET/tops/{n}/ratings/lower/average", new GetTopNRatingsLowerAverage());
+        commandMap.put("GET/tops/reviews/higher/count", new GetTopMovieWithHigherReviewCount());
+        commandMap.put("GET/tops/{n}/reviews/higher/count", new GetTopNMoviesWithHigherReviewCount());
+        commandMap.put("POST/collections", new PostCollection());
+        commandMap.put("GET/collections", new GetCollections());
+        commandMap.put("GET/collections/{cid}", new GetCollectionById());
+        commandMap.put("POST/collections/{cid}/movies", new PostMovieInCollection());
+        commandMap.put("DELETE/collections/{cid}/movies/{mid}", new DeleteMovieFromCollection());
+        commandMap.put("OPTION/", new Option());
+        commandMap.put("EXIT/", new Exit());
+        commandMap.put("", new InteractiveMode());
+        commandMap.put("LISTEN/", new Listen());
+        commandMap.put("GET/", new HttpHomePage());
+        commandMap.put("GET/tops/ratings", new TopsRatings());
+        commandMap.put("GET/tops/{n}/reviews/lower/count", new GetTopNMoviesWithLowerReviewCount());
     }
 
 
     public CommandExecution getExecutionCommandInstance(Command command) {
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
-        if (!commmandMap.containsKey(commandProcessedString)) {
+        if (!commandMap.containsKey(commandProcessedString)) {
             System.out.println("Error: Invalid Command.");
             return null;
         }
 
-        return commmandMap.get(commandProcessedString);
+        return commandMap.get(commandProcessedString);
     }
 
-    public ArrayList<String> getCommmandMapKeys() {
+    public ArrayList<String> getCommandMapKeys() {
         ArrayList<String> keys = new ArrayList<>();
-        commmandMap.forEach((s, ce) -> {
+        commandMap.forEach((s, ce) -> {
             keys.add(removeMethodName(s));
         });
 

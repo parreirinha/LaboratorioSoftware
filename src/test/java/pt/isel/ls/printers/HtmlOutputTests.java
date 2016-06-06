@@ -54,6 +54,14 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/?top=-1&skip=0>All Movies</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/ratings>Rating</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews/?top=-1&skip=0>All Reviews</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Movie ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
@@ -67,15 +75,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<li>Average: 3.504</li>\n" +
                 "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/movies/?top=-1&skip=0>All Movies</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/movies/1/ratings>Rating</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/movies/1/reviews/?top=-1&skip=0>All Reviews</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home Page</a>\n" +
+                "\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
@@ -106,6 +106,8 @@ public class HtmlOutputTests {
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<br>\n" +
+                "\n" +
+                "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Collection id: 2</li>\n" +
@@ -114,6 +116,8 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<li>Description: movies before 2000</li>\n" +
                 "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n" +
+                "\n" +
+                "\t\t\t<br>\n" +
                 "\n" +
                 "\t\t\t<br>\n" +
                 "\n" +
@@ -158,6 +162,12 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews?top=-1&skip=0>All Reviews</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Review ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
@@ -168,11 +178,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<li>Complete Review: An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soap maker, forming an underground fight club that evolves into something much, much more... </li>\n" +
                 "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/movies/1/reviews?top=-1&skip=0>All Reviews</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home Page</a>\n" +
+                "\n" +
                 "\t\t\t<br>\n" +
                 "\n" +
                 "\t\t</body>\n" +
@@ -255,6 +261,11 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>Collection id</td>\n" +
@@ -276,24 +287,17 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td><a href=\"/collections/3\">movies after 2000</a></td>\n" +
                 "\t\t\t\t\t<td>movies from this century</td>\n" +
                 "\t\t\t\t</tr>\n" +
-                "\t\t\t</table>\t\t\t<br>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<table border=\"0\" style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"left\">\n" +
-                "\t\t\t\t\t\t<a href=/collections/>Previous</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
                 "\t\t\t\t\t\t<a href=/collections/>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home Page</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
                 "\t\t\tPost Collection<br>\t\t\t<form method=\"POST\" action=\"/collections?\">\n" +
                 "\t\t\t\tName:<input name=\"name\" type=\"text\">\n" +
                 "\t\t\t\t<br>\n" +
@@ -322,6 +326,12 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/collections?top=-1&skip=0>All Collections</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>Collection id</td>\n" +
@@ -373,12 +383,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td>7</td>\n" +
                 "\t\t\t\t\t<td><a href=\"/movies/7\">The Silence of the Lambs</a></td>\n" +
                 "\t\t\t\t</tr>\n" +
-                "\t\t\t</table>\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/collections?top=-1&skip=0>All Collections</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home Page</a>\n" +
-                "\t\t\t<br>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\tPost Movie into Collection\n" +
@@ -432,6 +437,12 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/tops/ratings>Tops Ratings</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Movie ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
@@ -439,23 +450,17 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<li>Release: 1999</li>\n" +
                 "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n" +
+                "\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<table border=\"0\" style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"left\">\n" +
-                "\t\t\t\t\t\t<a href=/movies/>Previous</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
                 "\t\t\t\t\t\t<a href=/movies/>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/tops/ratings>Tops Ratings</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home Page</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\tPost Movie\n" +
                 "\t\t\t<br>\n" +
@@ -488,6 +493,11 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>The average rating for the movie is : 3.504</li>\n" +
                 "\t\t\t\t<ul>\n" +
@@ -499,10 +509,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<li>*****: 32</li>\n" +
                 "\t\t\t\t</ul>\n" +
                 "\t\t\t</ul>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home</a>\n" +
-                "\t\t\t<br>\n" +
+                "\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\tPost Rating\n" +
@@ -568,6 +575,12 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1>Movie</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td>Review ID</td>\n" +
@@ -593,24 +606,17 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td>5</td>\n" +
                 "\t\t\t\t\t<td>Film of the year</td>\n" +
                 "\t\t\t\t</tr>\n" +
-                "\t\t\t</table>\t\t\t<br>\n" +
+                "\t\t\t</table>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<table border=\"0\" style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"left\">\n" +
-                "\t\t\t\t\t\t<a href=/movies/1/reviews/>Previous</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
                 "\t\t\t\t\t\t<a href=/movies/1/reviews/>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/movies/1>Movie</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<a href=/>Home</a>\n" +
-                "\t\t\t<br>\n" +
-                "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\tPost Review\n" +
                 "\t\t\t<br>\n" +
