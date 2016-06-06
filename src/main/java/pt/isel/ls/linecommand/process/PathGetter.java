@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 
 /**
- * Created by Dani on 02-06-2016.
+ * Class used to process the line command path string and generate an instance of Path.
  */
 public class PathGetter {
     private HashMap<String, Integer> pathIntegers;
@@ -44,10 +44,10 @@ public class PathGetter {
     }
 
     private String concatPathTemplate(String[] template) {
-        String templateString ="";
+        String templateString = "";
 
         for (int i = 0; i < template.length; i++) {
-            templateString += "/"+template[i];
+            templateString += "/" + template[i];
         }
 
         return templateString;
@@ -66,7 +66,7 @@ public class PathGetter {
 
     private String[][] getPathTemplatesFromCommandMapper() {
         String[][] paths = new CommandMapper()
-                .getCommmandMapKeys()
+                .getCommandMapKeys()
                 .stream()
                 .distinct()
                 .map(s -> {
