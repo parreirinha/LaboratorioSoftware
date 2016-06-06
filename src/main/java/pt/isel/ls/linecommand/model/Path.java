@@ -20,12 +20,8 @@ public class Path {
         return pathString;
     }
 
-    public int getPathInt(String key) {
-
-        if (pathIntegers.containsKey(key)) {
+    public Integer getPathInt(String key) {
             return pathIntegers.get(key);
-        }
-        return -1;
     }
 
 }

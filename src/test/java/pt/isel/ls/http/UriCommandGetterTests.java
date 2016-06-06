@@ -143,8 +143,8 @@ public class UriCommandGetterTests {
                 getMoviePath, acceptTextPlainHeader+"&"+skipAndTopParams);
 
         assertEquals("text/plain", c.getHeaders().getHeadersString("accept"));
-        assertEquals(2, c.getParams().getParamInt("skip"));
-        assertEquals(4, c.getParams().getParamInt("top"));
+        assertEquals(2, c.getParams().getParamInt("skip").intValue());
+        assertEquals(4, c.getParams().getParamInt("top").intValue());
     }
 
 }

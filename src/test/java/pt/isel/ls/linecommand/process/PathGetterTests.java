@@ -39,22 +39,22 @@ public class PathGetterTests {
     public void collectionsAndCidAndMoviesAndMidPathTest() {
         Path p = new PathGetter().getPath(CollectionsAndCidPathAndMoviesAndMidPath);
         assertEquals("/collections/{cid}/movies/{mid}", p.getPathString());
-        assertEquals(10, p.getPathInt("cid"));
-        assertEquals(123, p.getPathInt("mid"));
+        assertEquals(10, p.getPathInt("cid").intValue());
+        assertEquals(123, p.getPathInt("mid").intValue());
     }
 
     @Test
     public void collectionsAndCidAndMoviesPathTest() {
         Path p = new PathGetter().getPath(CollectionsAndCidPathAndMoviesPath);
         assertEquals("/collections/{cid}/movies", p.getPathString());
-        assertEquals(10, p.getPathInt("cid"));
+        assertEquals(10, p.getPathInt("cid").intValue());
     }
 
     @Test
     public void collectionsAndCidPathTest() {
         Path p = new PathGetter().getPath(CollectionsAndCidPath);
         assertEquals("/collections/{cid}", p.getPathString());
-        assertEquals(10, p.getPathInt("cid"));
+        assertEquals(10, p.getPathInt("cid").intValue());
     }
 
     @Test
@@ -105,12 +105,12 @@ public class PathGetterTests {
 
     @Test
     public void moviesAndMidAndReviewsAndRidMidsPathTest() {
-        assertEquals(123, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathInt("mid"));
+        assertEquals(123, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathInt("mid").intValue());
     }
 
     @Test
     public void moviesAndMidAndReviewsAndRidRidsPathTest() {
-        assertEquals(100, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathInt("rid"));
+        assertEquals(100, new PathGetter().getPath(moviesAndMidAndReviewsAndRidPath).getPathInt("rid").intValue());
     }
 
     @Test

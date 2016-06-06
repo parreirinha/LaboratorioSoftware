@@ -65,8 +65,8 @@ public class CommandGetterTests {
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("/movies", c.getPath().getPathString());
         assertEquals("text/html", c.getHeaders().getHeadersString("accept"));
-        assertEquals(6, c.getParams().getParamInt("skip"));
-        assertEquals(3, c.getParams().getParamInt("top"));
+        assertEquals(6, c.getParams().getParamInt("skip").intValue());
+        assertEquals(3, c.getParams().getParamInt("top").intValue());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class CommandGetterTests {
         Command c = new CommandGetter().getCommand(GetCollectionWithPath);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("/collections/{cid}", c.getPath().getPathString());
-        assertEquals(50, c.getPath().getPathInt("cid"));
+        assertEquals(50, c.getPath().getPathInt("cid").intValue());
     }
 
     @Test
@@ -98,8 +98,8 @@ public class CommandGetterTests {
         Command c = new CommandGetter().getCommand(PostCollectionWithPathAndParams);
         assertEquals("GET", c.getMethod().getMethod());
         assertEquals("/collections/{cid}/movies", c.getPath().getPathString());
-        assertEquals(50, c.getPath().getPathInt("cid"));
-        assertEquals(123, c.getParams().getParamInt("mid"));
+        assertEquals(50, c.getPath().getPathInt("cid").intValue());
+        assertEquals(123, c.getParams().getParamInt("mid").intValue());
     }
 
     @Test
@@ -107,9 +107,9 @@ public class CommandGetterTests {
         Command c = new CommandGetter().getCommand(DeleteCollectionsWithPath);
         assertEquals("DELETE", c.getMethod().getMethod());
         assertEquals("/collections/{cid}/movies/{mid}", c.getPath().getPathString());
-        assertEquals(50, c.getPath().getPathInt("cid"));
-        assertEquals(123, c.getPath().getPathInt("mid"));
-        assertEquals(50, c.getPath().getPathInt("cid"));
+        assertEquals(50, c.getPath().getPathInt("cid").intValue());
+        assertEquals(123, c.getPath().getPathInt("mid").intValue());
+        assertEquals(50, c.getPath().getPathInt("cid").intValue());
 
     }
 }

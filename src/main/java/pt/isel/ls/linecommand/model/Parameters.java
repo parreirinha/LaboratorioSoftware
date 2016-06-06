@@ -15,17 +15,10 @@ public class Parameters {
     }
 
     public String getParamString(String key) {
-
         return paramStrings.get(key);
     }
 
-    public int getParamInt(String key) {
-        if (!paramStrings.containsKey(key))
-            return -1;
-
-        if (paramStrings.containsKey(key)) {
+    public Integer getParamInt(String key) {
             return Integer.parseInt(paramStrings.get(key));
-        }
-        return -1;
     }
 }
