@@ -62,17 +62,15 @@ public class PrintGetCollectionsById implements Printable {
         mc.add(movieCollection);
         ArrayList<String> uri = new ArrayList<>();
         movieCollection.getMovies().forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home Page"));
+        menu.add(URIUtils.getURI("/collections",
+                "top="+command.getParams().getParamInt("top")+"&skip=0",
+                "All Collections"));
         HtmlGenerator htmlString = new HtmlGenerator();
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri)
-                .addBrTag()
-                .addBrTag()
-                .addLink(
-                        URIUtils.getURI("/collections",
-                                "top="+command.getParams().getParamInt("top")+"&skip=0",
-                                "All Collections"))
-                .addLink(URIUtils.getURI("/", null, "Home Page"))
-                .addBrTag()
                 .addBrTag()
                 .postMovieIntoCollection(movieCollection.getCollections().getCollectionID());
         return String.format(htmlString.getTemplate(), htmlString.toString());

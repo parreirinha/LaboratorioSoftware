@@ -61,15 +61,13 @@ public class PrintDetailedReview implements Printable
                                 .toString());
         ArrayList<String> uri = new ArrayList<>();
         review.forEach(x -> uri.add("/movies/"+x.getMovieID()));
-
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home Page"));
+        menu.add(URIUtils.getURI("/movies/"+review.iterator().next().getMovieID()+"/reviews",
+                "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews"));
         htmlString
-                .htmlGenerate(review, head, function, uri)
-                .addBrTag()
-                .addBrTag()
-                .addLink(
-                        URIUtils.getURI("/movies/"+review.iterator().next().getMovieID()+"/reviews",
-                                "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews"))
-                .addLink(URIUtils.getURI("/", null, "Home Page"));
+                .createMenu(menu)
+                .htmlGenerate(review, head, function, uri);
 
         return String.format(htmlString.getTemplate(), htmlString.toString());
     }

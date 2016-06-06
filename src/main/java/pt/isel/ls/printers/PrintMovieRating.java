@@ -64,12 +64,11 @@ public class PrintMovieRating implements Printable {
 
         ArrayList<String> uri = new ArrayList<>();
         movie.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home"));
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(movie, head, function, uri)
-                .addBrTag()
-                .addBrTag()
-                .addLink(URIUtils.getURI("/", null, "Home"))
-                .addBrTag()
                 .addBrTag()
                 .postRatingMovie(movie.iterator().next().getMovieID());
         return String.format(htmlString.getTemplate(), htmlString.toString());

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.function.Function;
-import pt.isel.ls.database.connection.ConnectionFactory;
+
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.GetAllCollectionsWithIDAux;
 import pt.isel.ls.executioncommands.GetAllReviewsAux;
@@ -71,19 +71,17 @@ public class PrintDetailedMovie implements Printable
                                 htmlString
                                         .addString(NoMovie)
                                         .toString());
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home Page"));
+        menu.add(URIUtils.getURI("/movies/", "top="+command.getParams().getParamInt("top")+"&skip=0", "All Movies"));
+        menu.add(URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, "Rating"));
+        menu.add(URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
+                "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews"));
+
 
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, new ArrayList<>())
-                .addBrTag()
-                .addBrTag()
-                .addLink(
-                        URIUtils.getURI("/movies/", "top="+command.getParams().getParamInt("top")+"&skip=0", "All Movies"))
-                .addLink(
-                        URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, "Rating"))
-                .addLink(
-                        URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
-                            "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews"))
-                .addLink(URIUtils.getURI("/", null, "Home Page"))
                 .addBrTag()
                 .addBrTag()
                 .addString(

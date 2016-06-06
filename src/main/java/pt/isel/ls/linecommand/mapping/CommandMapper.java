@@ -45,7 +45,7 @@ public class CommandMapper {
         commmandMap.put("EXIT/", new Exit());
         commmandMap.put("", new InteractiveMode());
         commmandMap.put("LISTEN/", new Listen());
-        commmandMap.put("GET", new HttpHomePage());
+        commmandMap.put("GET/", new HttpHomePage());
         commmandMap.put("GET/tops/ratings", new TopsRatings());
         commmandMap.put("GET/tops/{n}/reviews/lower/count", new GetTopNMoviesWithLowerReviewCount());
     }

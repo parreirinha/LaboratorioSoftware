@@ -52,23 +52,13 @@ public class PrintMovie implements Printable {
             return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie).toString());
         ArrayList<String > uri = new ArrayList<>();
         movieCollection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
-
-
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home Page"));
+        menu.add(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"));
         htmlString
+                .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, uri)
-                .addBrTag()
-                .createPagging(
-                        URIUtils.getURI("/movies/",
-                                URIUtils.getPreviusSkipAndTopValuesFromCommand(command),
-                                "Previous"),
-                        URIUtils.getURI("/movies/",
-                                URIUtils.getNextSkipAndTopValuesFromCommand(command),
-                                "Next")
-                        )
-                .addBrTag()
-                .addLink(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"))
-                .addLink(URIUtils.getURI("/", null, "Home Page"))
-                .addBrTag()
+                .createPagging(command, "/movies/")
                 .addBrTag()
                 .postNewMovie();
 

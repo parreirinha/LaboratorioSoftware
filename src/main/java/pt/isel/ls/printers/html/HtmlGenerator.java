@@ -1,5 +1,8 @@
 package pt.isel.ls.printers.html;
 
+import pt.isel.ls.linecommand.model.Command;
+import pt.isel.ls.printers.URIGenerator.URIUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
@@ -30,6 +33,16 @@ public class HtmlGenerator
     private String html = "";
 
     public HtmlGenerator() {}
+
+    public HtmlGenerator createMenu(ArrayList<String> values)
+    {
+        html += startTab + "<table border=\"0\"  style=\"width:100%\">\n"+
+                startTab + "\t<tr>\n";
+        values.forEach(x -> html += startTab + "\t\t<td align=\"center\"><h3>"+ x + "</h3></td>\n");
+        html += startTab + "\t</tr>\n" +
+                startTab + "</table>\n";
+        return this;
+    }
 
     public HtmlGenerator postNewCollectionForm()
     {
@@ -129,17 +142,24 @@ public class HtmlGenerator
         return this;
     }
 
-    public HtmlGenerator createPagging(String prev, String next)
+    public HtmlGenerator createPagging(Command command, String path)
     {
+        String prevParams = URIUtils.getPreviusSkipAndTopValuesFromCommand(command);
+        String nextParams = URIUtils.getNextSkipAndTopValuesFromCommand(command);
+
         html += startTab + "<table border=\"0\" style=\"width:100%\">\n"+
                 startTab + "\t<tr>\n" +
                 startTab + "\t\t<td align=\"left\">\n";
-        if(prev != null)
-            html += startTab + "\t\t\t" + prev + "\n";
+        if(prevParams != null)
+            html += startTab + "\t\t\t" + URIUtils.getURI(path,
+                    prevParams,
+                    "Previous") + "\n";
         html += startTab + "\t\t</td>\n" +
                 startTab + "\t\t<td align=\"right\">\n";
-        if(next != null)
-            html += startTab + "\t\t\t" + next + "\n";
+        if(nextParams != null)
+            html += startTab + "\t\t\t" +URIUtils.getURI(path,
+                    nextParams,
+                    "Next") + "\n";
         html += startTab + "\t\t</td>\n" +
                 startTab + "\t</tr>\n" +
                 startTab + "</table>\n";
@@ -175,10 +195,11 @@ public class HtmlGenerator
     {
         if (col1.size() == 1)
         {
-            html += getTextTwoCollections(col, col1, head, func, func1, uri);
+            html += getTextTwoCollections(col, col1, head, func, func1, uri) + "\n"+
+                    startTab+"<br>\n";
             return this;
         }
-        html += getTableTwoCollections(col, col1, head, func, func1, uri);
+        html += getTableTwoCollections(col, col1, head, func, func1, uri) + "\n" + startTab+"<br>\n";
         return this;
     }
 
@@ -189,10 +210,10 @@ public class HtmlGenerator
     {
         if (col.size() == 1)
         {
-            html += getText(col, head, func, uri);
+            html += getText(col, head, func, uri) + "\n" + startTab+"<br>\n";
             return this;
         }
-        html += getTable(col, head, func, uri);
+        html += getTable(col, head, func, uri) + "\n" + startTab+"<br>\n";
         return this;
     }
 
