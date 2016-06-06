@@ -51,7 +51,7 @@ public class PostMovieReview implements CommandExecution {
             AccessUtils.setValuesOnPreparedStatement(ps, movieId);
             ps.executeUpdate();
             connection.commit();
-
+            command.setLocation("/movies/"+movieId+"/reviews/"+rid+"/");
             return new PrintPostMovieAndReview(rid, "Review ID is");
 
         }

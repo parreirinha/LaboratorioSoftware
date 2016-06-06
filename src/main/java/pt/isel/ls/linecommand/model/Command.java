@@ -10,6 +10,7 @@ public class Command {
     private Path path;
     private Headers headers;
     private Parameters params;
+    private String location;
 
     public Command(Method method, Path path, Headers headers, Parameters params) {
         this.method = method;
@@ -33,6 +34,16 @@ public class Command {
 
     public Parameters getParams() {
         return params;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+    public void setLocation(String location)
+    {
+        this.location = location;
     }
 
 

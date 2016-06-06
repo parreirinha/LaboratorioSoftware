@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static pt.isel.ls.user.io.Run.identifyOutputFormat;
 
@@ -92,7 +94,19 @@ public class ExecutionServlet extends HttpServlet {
         _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
 
         PrintWriter out = resp.getWriter();
-        Command c = new UriCommandGetter().getCommandFromUri("POST", req.getRequestURI(), req.getQueryString());
+        Map<String, String> map = getMap(req);
+        String str = "";
+        for(int i = 0; i < post.length; ++i)
+        {
+            if(map.containsKey(post[i])) {
+                if(!str.equals(""))
+                    str += "&";
+                str += post[i] + "=" + map.get(post[i]);
+            }
+        }
+
+
+        Command c = new UriCommandGetter().getCommandFromUri("POST", req.getRequestURI(), str);
 
         CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
 
@@ -116,12 +130,25 @@ public class ExecutionServlet extends HttpServlet {
                 resp.sendError(400);
             }
 
-            c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
-
+            //c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
+            //resp.setStatus(300);
+            //resp.setHeader("Location:", c.getLocation());
             resp.setContentType(identifyContentType(c));
 
             out.println(identifyOutputFormat(c, p));
         }
+    }
+
+    private String[] post = {"name", "description", "mid", "title", "releaseYear", "rating", "reviewerName", "reviewSummary", "review"};
+    private Map<String, String> getMap(HttpServletRequest req) {
+        Map<String, String> map = new HashMap<>();
+        for(int i = 0; i < post.length; ++i)
+        {
+            String value = req.getParameter(post[i]);
+            if(value != null)
+                map.put(post[i], value);
+        }
+        return map;
     }
 
 }

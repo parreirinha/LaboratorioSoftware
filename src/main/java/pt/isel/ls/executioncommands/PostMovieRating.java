@@ -29,6 +29,7 @@ public class PostMovieRating implements CommandExecution {
             AccessUtils.setValuesOnPreparedStatement(ps, movieID);
             ps.executeUpdate();
             connection.commit();
+            command.setLocation("/movies/"+movieID+"/ratings/");
             return new PrintPostMovieRating();
         }
         String errorString="";
