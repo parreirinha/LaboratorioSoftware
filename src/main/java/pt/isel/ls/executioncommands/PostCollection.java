@@ -30,6 +30,7 @@ public class PostCollection implements CommandExecution {
             connection.commit();
             if (rs.next()) {
                 int cid = rs.getInt(1);
+                command.setLocation("/collections/");
                 return new PrintMessage("Collection posted with success, the id of the new collection is " + cid);
             }
             return new PrintMessage("Error inserting new Collection");

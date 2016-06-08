@@ -25,16 +25,18 @@ public class PostMovie implements CommandExecution {
         String movieName = command.getParams().getParamString("title");
         int movieRelease = command.getParams().getParamInt("releaseYear");
 
-        if(movieName != null && movieRelease != -1){
-        String query = "insert into Movie (movieName, movieRelease) " + "values(?,?)";
-        PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        AccessUtils.setValuesOnPreparedStatement(ps, movieName, movieRelease);
-        ps.executeUpdate();
-        ResultSet rs = ps.getGeneratedKeys();
-        rs.next();
-        int id = rs.getInt(1);
-        connection.commit();
-        return new PrintPostMovieAndReview(id, "The ID of the new movie is");
+        if(movieName != null && movieRelease != -1)
+        {
+            String query = "insert into Movie (movieName, movieRelease) " + "values(?,?)";
+            PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            AccessUtils.setValuesOnPreparedStatement(ps, movieName, movieRelease);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int id = rs.getInt(1);
+            connection.commit();
+            command.setLocation("/movies/"+id+"/");
+            return new PrintPostMovieAndReview(id, "The ID of the new movie is");
         }
         String errorString="";
         if(movieName == null)
