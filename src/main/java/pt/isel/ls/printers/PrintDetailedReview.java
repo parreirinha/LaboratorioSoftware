@@ -53,6 +53,9 @@ public class PrintDetailedReview implements Printable
     @Override
     public String toStringHtml()
     {
+        Integer  top = null;
+        if(command.getParams().getParamInt("top") == null)
+            top = 5;
         HtmlGenerator htmlString = new HtmlGenerator();
         if (review.isEmpty())
             return String.format(htmlString.getTemplate(),
@@ -64,7 +67,7 @@ public class PrintDetailedReview implements Printable
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
         menu.add(URIUtils.getURI("/movies/"+review.iterator().next().getMovieID()+"/reviews",
-                "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews"));
+                "top="+top.intValue()+"&skip=0", "All Reviews"));
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(review, head, function, uri);

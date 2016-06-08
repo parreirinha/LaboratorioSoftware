@@ -25,4 +25,9 @@ public class Parameters {
 
             return Integer.parseInt(s);
     }
+
+    public void setParamInt(String name, int value)
+    {
+        paramStrings.put(name, Integer.toString(value));
+    }
 }

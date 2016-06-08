@@ -55,13 +55,13 @@ public class AccessUtils {
             throws SQLException {
 
         PreparedStatement ps;
-        if (pagingVerification(command)) {
+        //if (pagingVerification(command)) {
             String pagingQuery =
                     "select * from ( " + query + " ) as res \n " +
                             setOrderByClause(command, orderBy) + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
             return pagingQuery;
-        }
-        return query;
+        //}
+        //return query;
     }
 
     protected static boolean pagingVerification(Command command) {
@@ -103,9 +103,19 @@ public class AccessUtils {
     }
 
     protected static int[] getSkipAndTopValuesToUseInPaging(Command command) {
-        int minVal = command.getParams().getParamInt("skip") ;
-        int maxVal = command.getParams().getParamInt("top") ;
-        int[] val = {minVal, maxVal};
+        Integer minVal = command.getParams().getParamInt("skip") ;
+        Integer maxVal = command.getParams().getParamInt("top") ;
+        if(minVal == null)
+        {
+            command.getParams().setParamInt("skip", 0);
+            minVal = 0;
+        }
+        if(maxVal == null)
+        {
+            command.getParams().setParamInt("top", 5);
+            maxVal = 5;
+        }
+        int[] val = {minVal.intValue(), maxVal.intValue()};
         return val;
     }
 

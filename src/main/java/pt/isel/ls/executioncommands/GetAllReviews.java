@@ -29,15 +29,15 @@ public class GetAllReviews implements CommandExecution {
         int movieId = command.getPath().getPathInt("mid");
         String query = "select *, " + setClumnRowCountString(command, null) + " from Review where MovieID = ?";
         PreparedStatement ps;
-        if (pagingVerification(command)) {
+        //if (pagingVerification(command)) {
             int[] val = getSkipAndTopValuesToUseInPaging(command);
             query = concatenateQuearyIfExistsPaging(query, command, "MovieID");
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, movieId, val[0], val[1]);
-        } else {
+        /*} else {
             ps = connection.prepareStatement(query);
             setValuesOnPreparedStatement(ps, movieId);
-        }
+        }*/
         ResultSet rs = ps.executeQuery();
         Collection<Review> res = getCollection(rs);
         if (res.isEmpty())

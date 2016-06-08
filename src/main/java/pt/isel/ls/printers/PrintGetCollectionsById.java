@@ -53,11 +53,14 @@ public class PrintGetCollectionsById implements Printable {
     @Override
     public String toStringHtml()
     {
+        Integer  top = null;
+        if(command.getParams().getParamInt("top") == null)
+            top = 5;
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
         menu.add(URIUtils.getURI("/collections",
-                "top="+command.getParams().getParamInt("top")+"&skip=0",
+                "top="+top.intValue()+"&skip=0",
                 "All Collections"));
 
         if(movieCollection.getMovies() == null)
