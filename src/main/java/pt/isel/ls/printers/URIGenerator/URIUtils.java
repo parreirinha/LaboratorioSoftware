@@ -50,7 +50,7 @@ public class URIUtils {
             return null;
         }
         skip -= top;
-        if (skip <= 0 || top <= 0)
+        if (skip < 0 || top <= 0)
             return null;
 
         res += "skip=" + skip + "&top=" + top + getOrderBy(command);
