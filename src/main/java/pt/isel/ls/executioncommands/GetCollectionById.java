@@ -47,7 +47,8 @@ public class GetCollectionById implements CommandExecution {
         AccessUtils.setValuesOnPreparedStatement(ps, collectionId);
         ResultSet rs = ps.executeQuery();
         if (!rs.isBeforeFirst()) {
-            return new PrintError(NoMoviesCollection);
+            MovieCollection mc = new MovieCollection(null, new Collections(collectionId, null, null));
+            return new PrintGetCollectionsById(mc, command);
         }
         setParametersForObjectMovieCollectionFromResultSet(rs);
         MovieCollection movieCollection = new MovieCollection(movies, collections);

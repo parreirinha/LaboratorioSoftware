@@ -64,7 +64,7 @@ public class HtmlGenerator
     {
         html += startTab + "Post Movie into Collection\n" +
                 startTab + "<br>\n" +
-                startTab + "<form method=\"POST\" action=\"/collections/"+id+"/?\">\n" +
+                startTab + "<form method=\"POST\" action=\"/collections/"+id+"/movies?\">\n" +
                 startTab + "\tID:<input name=\"mid\" type=\"number\">\n" +
                 startTab + "\t<input type=\"submit\" value=\"Submit\">\n" +
                 startTab + "</form>\n" +

@@ -29,16 +29,11 @@ public class PrintGetCollectionsById implements Printable {
     public PrintGetCollectionsById(MovieCollection movieCollection, Command command) {
         this.command = command;
         this.movieCollection = movieCollection;
-        Function<MovieCollection, String> f = mc -> ""+mc.getCollections().getCollectionID();
-        func.add(f);
-        f = mc -> mc.getCollections().getName();
-        func.add(f);
-        f = mc -> mc.getCollections().getDescription();
-        func.add(f);
-        Function<Movie, String> f1 = m -> "" + m.getMovieID();
-        func1.add(f1);
-        f1 = m -> m.getMovieName();
-        func1.add(f1);
+        func.add(mc -> ""+mc.getCollections().getCollectionID());
+        func.add(mc -> mc.getCollections().getName());
+        func.add(mc -> mc.getCollections().getDescription());
+        func1.add(m -> "" + m.getMovieID());
+        func1.add(m -> m.getMovieName());
     }
 
 
@@ -58,16 +53,27 @@ public class PrintGetCollectionsById implements Printable {
     @Override
     public String toStringHtml()
     {
-        Collection<MovieCollection> mc = new ArrayList<>();
-        mc.add(movieCollection);
-        ArrayList<String> uri = new ArrayList<>();
-        movieCollection.getMovies().forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
         menu.add(URIUtils.getURI("/collections",
                 "top="+command.getParams().getParamInt("top")+"&skip=0",
                 "All Collections"));
-        HtmlGenerator htmlString = new HtmlGenerator();
+
+        if(movieCollection.getMovies() == null)
+        {
+            htmlString
+                    .createMenu(menu)
+                    .addString("No Movies in the collection")
+                    .addBrTag()
+                    .postMovieIntoCollection(movieCollection.getCollections().getCollectionID());
+            return String.format(htmlString.getTemplate(), htmlString.toString());
+        }
+        Collection<MovieCollection> mc = new ArrayList<>();
+        mc.add(movieCollection);
+        ArrayList<String> uri = new ArrayList<>();
+        movieCollection.getMovies().forEach(x -> uri.add("/movies/"+x.getMovieID()));
+
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri)
