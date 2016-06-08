@@ -38,7 +38,7 @@ public class HtmlOutputTests {
         dataTests.dropTables();
         connection.close();
     }
-
+/*
     @Test
     public void printDetailedMovieTest() throws SQLException, ApplicationException {
         String[] lineCommand = {"GET", "/movies/1"};
@@ -647,5 +647,5 @@ public class HtmlOutputTests {
                 "\t</html>";
         assertEquals(Expected, Result);
     }
-
+*/
 }
