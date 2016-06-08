@@ -39,14 +39,28 @@ public class ExecutionServlet extends HttpServlet {
 
     private static final Logger _logger = LoggerFactory.getLogger(ExecutionServlet.class);
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    protected void doMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         port = req.getLocalPort();
         _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
 
         PrintWriter out = resp.getWriter();
-        Command c = new UriCommandGetter().getCommandFromUri("GET", req.getRequestURI(), req.getQueryString());
+        String str = "";
+        if (req.getMethod().equals("POST")){
+            Map<String, String> map = getMap(req);
+            for(int i = 0; i < post.length; ++i)
+            {
+                if(map.containsKey(post[i])) {
+                    if(!str.equals(""))
+                        str += "&";
+                    str += post[i] + "=" + map.get(post[i]);
+                }
+            }
+        }
+
+        Command c = new UriCommandGetter().getCommandFromUri(req.getMethod(), req.getRequestURI(),
+                                                    req.getMethod().equals("GET") ? req.getQueryString() : str);
         CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
 
         if (ce == null) {
@@ -60,8 +74,13 @@ public class ExecutionServlet extends HttpServlet {
                 if (p instanceof PrintError) {
                     resp.sendError(400);
                 }
-
-                resp.setStatus(200);
+                if (req.getMethod().equals("POST")){
+                    resp.setStatus(301);
+                    resp.setHeader("Location", c.getLocation());
+                }
+                else{
+                    resp.setStatus(200);
+                }
             } catch (SQLException e) {
                 resp.setStatus(500);
             } catch (ApplicationException e) {
@@ -85,53 +104,14 @@ public class ExecutionServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doMethod(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        port = req.getLocalPort();
-
-        _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
-
-        PrintWriter out = resp.getWriter();
-        Map<String, String> map = getMap(req);
-        String str = "";
-        for(int i = 0; i < post.length; ++i)
-        {
-            if(map.containsKey(post[i])) {
-                if(!str.equals(""))
-                    str += "&";
-                str += post[i] + "=" + map.get(post[i]);
-            }
-        }
-
-
-        Command c = new UriCommandGetter().getCommandFromUri("POST", req.getRequestURI(), str);
-
-        CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
-
-        if (ce == null) {
-            resp.sendError(400);
-        } else {
-
-            Printable p = null;
-            try {
-                p = ce.execute(
-                        new ConnectionFactory().getNewConnection(), c);
-
-                if (p instanceof PrintError) {
-                    resp.sendError(400);
-                }
-                resp.setStatus(301);
-                resp.setHeader("Location", c.getLocation());
-            } catch (SQLException e) {
-                resp.setStatus(500);
-            } catch (ApplicationException e) {
-                resp.sendError(400);
-            }
-            resp.setContentType(identifyContentType(c));
-            out.println(identifyOutputFormat(c, p));
-        }
+        doMethod(req, resp);
     }
 
     private String[] post = {"name", "description", "mid", "title", "releaseYear", "rating", "reviewerName", "reviewSummary", "review"};

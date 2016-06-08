@@ -24,7 +24,7 @@ public class HtmlOutputTests {
     private Connection connection;
     private DataCreationTests dataTests = new DataCreationTests();
 
-
+/*
 
     @Before
     public void beforeTest() throws SQLException {
@@ -648,4 +648,5 @@ public class HtmlOutputTests {
         assertEquals(Expected, Result);
     }
 */
+
 }
