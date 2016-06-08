@@ -35,7 +35,11 @@ public class URIUtils {
 
         skip += top;
 
-        if(command.getParams().getParamString("orderby") != null){
+        if (top > 0 && skip >= 0)
+            res += "skip=" + skip + "&top=" + top;
+
+
+            if(command.getParams().getParamString("orderby") != null){
             res+="&orderby=" + command.getParams().getParamString("orderby");
         }
         return res;
