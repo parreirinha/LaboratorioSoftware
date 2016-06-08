@@ -72,11 +72,14 @@ public class PrintDetailedMovie implements Printable
                                         .addString(NoMovie)
                                         .toString());
         ArrayList<String> menu = new ArrayList<>();
+        Integer  top = null;
+        if(command.getParams().getParamInt("top") == null)
+            top = 5;
         menu.add(URIUtils.getURI("/", null, "Home Page"));
-        menu.add(URIUtils.getURI("/movies/", "top="+command.getParams().getParamInt("top")+"&skip=0", "All Movies"));
+        menu.add(URIUtils.getURI("/movies/", "top="+top.intValue()+"&skip=0", "All Movies"));
         menu.add(URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, "Rating"));
         menu.add(URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
-                "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews"));
+                "top="+top.intValue()+"&skip=0", "All Reviews"));
 
 
         htmlString
@@ -87,7 +90,7 @@ public class PrintDetailedMovie implements Printable
                 .addString(
                         getAllReviews(
                                 URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
-                                    "top="+command.getParams().getParamInt("top")+"&skip=0", "All Reviews")))
+                                    "top="+top.intValue()+"&skip=0", "All Reviews")))
                 .addBrTag()
                 .addString(
                         getCollectionsWithMovie());
