@@ -4,6 +4,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pt.isel.ls.http.ExecutionServlet;
 import static java.lang.System.getenv;
 /**
@@ -13,8 +15,11 @@ import static java.lang.System.getenv;
 public class AppServer
 {
     private static Server server = null;
+    private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
     public static void main(String[] args) throws Exception {
-        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+
+        Server server = new Server(Integer.valueOf(getenv("PORT")));
+        _logger.info("      LOG PORT = {}   ", Integer.valueOf(getenv("PORT")));
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
