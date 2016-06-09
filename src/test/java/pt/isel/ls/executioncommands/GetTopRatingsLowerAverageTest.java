@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * Class used to test GetTopRatingsLowerAverage.
  */
 public class GetTopRatingsLowerAverageTest {
-    private Connection connection;
+  /*  private Connection connection;
     private GetTopRatingsLowerAverage getTopRatingsLowerAverage = new GetTopRatingsLowerAverage();
     private Command command;
     private String[] input;
@@ -57,5 +57,5 @@ public class GetTopRatingsLowerAverageTest {
                 "\tRelease = 1999\n" +
                 "\t* = 33   ** = 14   *** = 70   **** = 15   ***** = 1\n" +
                 "\tAverage = 2.526\n";
-    }
+    }*/
 }
