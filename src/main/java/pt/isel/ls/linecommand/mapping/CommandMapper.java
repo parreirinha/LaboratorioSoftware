@@ -55,7 +55,7 @@ public class CommandMapper {
 
         String commandProcessedString = command.getMethod().getMethod() + command.getPath().getPathString();
         if (!commandMap.containsKey(commandProcessedString)) {
-            System.out.println("Error: Invalid Command.");
+            //System.out.println("Error: Invalid Command.");
             return null;
         }
 

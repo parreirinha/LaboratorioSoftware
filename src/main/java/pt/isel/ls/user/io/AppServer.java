@@ -14,6 +14,7 @@ import static java.lang.System.getenv;
  */
 public class AppServer
 {
+    /*
     private static Server server = null;
     private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
     public static void main(String[] args) throws Exception {
@@ -25,5 +26,5 @@ public class AppServer
         server.setHandler(context);
         server.start();
         server.join();
-    }
+    }*/
 }
