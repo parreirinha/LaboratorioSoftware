@@ -20,14 +20,22 @@ public class AppServer
 
         //System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
         _logger.info("------------------------PORT = '{}'-----------------------", System.getenv("PORT"));
-        String portDef = System.getenv("PORT");
+        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        //context.addServlet(new ServletHolder(new TimeServlet()),"/*");
+        context.addServlet(new ServletHolder(new ExecutionServlet()),"/*");
+        server.start();
+        server.join();
+        /*String portDef = System.getenv("PORT");
         int port = portDef != null ? Integer.valueOf(portDef) : 8080;
     	Server server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
         handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/");
         server.start();
-        server.join();
+        server.join();*/
 
     }
 }
