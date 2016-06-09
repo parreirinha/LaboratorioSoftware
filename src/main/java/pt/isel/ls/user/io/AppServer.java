@@ -18,14 +18,14 @@ public class AppServer
     public static void main(String[] args) throws Exception {
 
 
-        System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
+        //System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
         _logger.info("------------------------PORT = '{}'-----------------------", System.getenv("PORT"));
         String portDef = System.getenv("PORT");
-        int port = portDef != null ? Integer.valueOf(portDef) : 8000;
+        int port = portDef != null ? Integer.valueOf(portDef) : 8080;
     	Server server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
-        handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/*");
+        handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/");
         server.start();
         server.join();
 
