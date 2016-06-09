@@ -1,7 +1,9 @@
 package pt.isel.ls.user.io;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 import pt.isel.ls.http.ExecutionServlet;
 import static java.lang.System.getenv;
 /**
@@ -12,10 +14,11 @@ public class AppServer
 {
     private static Server server = null;
     public static void main(String[] args) throws Exception {
-        server = new Server(Integer.parseInt(getenv("PORT")));
-        ServletHandler handler = new ServletHandler();
-        server.setHandler(handler);
-        handler.addServletWithMapping(ExecutionServlet.class, "/*");
+        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
         server.start();
+        server.join();
     }
 }
