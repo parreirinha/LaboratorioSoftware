@@ -12,6 +12,6 @@ compileJava {
     options.compilerArgs<<"-Xlint:unchecked"
 }
 
-mainClassName = "pt.isel.ls.http.ExecutionServletApp"
+mainClassName = "pt.isel.ls.user.io.AppServer"
 
 task stage(dependsOn: ['clean', 'installApp'])
