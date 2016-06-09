@@ -27,9 +27,10 @@ public class ConnectionFactory {
     }
 
     public Connection getNewConnection() throws SQLServerException {
+        _logger.info("------------------------dbpassword = '{}'-----------------------", LS_DB_PW);
         _logger.info("------------------------dbuser = '{}'-----------------------", LS_DB_USER);
         _logger.info("------------------------dbserver = '{}'-----------------------", LS_DB_SERVER);
-        _logger.info("------------------------dbpassword = '{}'-----------------------", LS_DB_PW);
+
         initValues();
         _logger.info("------------------------'{}'-----------------------", conn.toString());
         return conn.getConnection();
