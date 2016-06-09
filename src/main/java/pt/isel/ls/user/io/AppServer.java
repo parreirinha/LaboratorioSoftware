@@ -14,17 +14,19 @@ import static java.lang.System.getenv;
  */
 public class AppServer
 {
-    /*
-    private static Server server = null;
-    private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
+
     public static void main(String[] args) throws Exception {
 
-        _logger.info("      LOG PORT = {}   ", Integer.valueOf(getenv("PORT")));
-        Server server = new Server(Integer.valueOf(getenv("PORT")));
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
-        server.setHandler(context);
+        System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
+
+        String portDef = System.getenv("PORT");
+        int port = portDef != null ? Integer.valueOf(portDef) : 8000;
+    	Server server = new Server(port);
+        ServletHandler handler = new ServletHandler();
+        server.setHandler(handler);
+        handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/*");
         server.start();
         server.join();
-    }*/
+
+    }
 }
