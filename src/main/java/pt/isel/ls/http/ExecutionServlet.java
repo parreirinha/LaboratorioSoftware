@@ -88,8 +88,8 @@ public class ExecutionServlet extends HttpServlet {
             }
 
             resp.setContentType(identifyContentType(c));
-
             out.println(identifyOutputFormat(c, p));
+            out.close();
         }
     }
 
