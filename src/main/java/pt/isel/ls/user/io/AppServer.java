@@ -14,11 +14,12 @@ import static java.lang.System.getenv;
  */
 public class AppServer
 {
-
+    private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
     public static void main(String[] args) throws Exception {
 
-        System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
 
+        System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
+        _logger.info("------------------------PORT = '{}'-----------------------", System.getenv("PORT"));
         String portDef = System.getenv("PORT");
         int port = portDef != null ? Integer.valueOf(portDef) : 8000;
     	Server server = new Server(port);
