@@ -18,21 +18,20 @@ public class AppServer
 {
     private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
     public static void main(String[] args) throws Exception {
-        _logger.info("------------------------PORT = '{}'-----------------------", System.getenv("PORT"));
+
 
         System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
 
         String portDef = System.getenv("PORT");
         int port = portDef != null ? Integer.valueOf(portDef) : 8080;
-        HttpServer server = new HttpServer();
-        server.initServer(port);
-        /*
+        _logger.info("------------------------PORT = '{}'-----------------------", port);
         Server server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
-        handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/*");
+        _logger.info("------------------------      PASSOU      -----------------------");
+        handler.addServletWithMapping(new ServletHolder(ExecutionServlet.class), "/*");
         server.start();
+        _logger.info("------------------------      Start      -----------------------");
         server.join();
-*/
     }
 }

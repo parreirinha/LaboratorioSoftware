@@ -11,7 +11,6 @@ public class HttpServer {
     private Server server;
 
     public void initServer(int port) throws Exception {
-
         server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
