@@ -7,6 +7,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.isel.ls.http.ExecutionServlet;
+import pt.isel.ls.http.HttpServer;
+
 import static java.lang.System.getenv;
 /**
  * @author Tede Morgado
@@ -22,12 +24,15 @@ public class AppServer
 
         String portDef = System.getenv("PORT");
         int port = portDef != null ? Integer.valueOf(portDef) : 8080;
+        HttpServer server = new HttpServer();
+        server.initServer(port);
+        /*
         Server server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
         handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/*");
         server.start();
         server.join();
-
+*/
     }
 }
