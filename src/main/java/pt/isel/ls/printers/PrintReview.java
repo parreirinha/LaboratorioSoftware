@@ -54,14 +54,23 @@ public class PrintReview implements Printable {
     public String toStringHtml()
     {
         HtmlGenerator htmlString = new HtmlGenerator();
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add(URIUtils.getURI("/", null, "Home"));
+        menu.add(URIUtils.getURI("/movies/"+command.getPath().getPathInt("mid"), null, "Movie"));
         if (reviews.isEmpty())
-            return String.format(htmlString.getTemplate(), htmlString.addString(NoReview));
+        {
+            htmlString
+                    .createMenu(menu)
+                    .addString(NoReview)
+                    .addBrTag()
+                    .postNewReview(command.getPath().getPathInt("mid"));
+            return String.format(htmlString.getTemplate(), htmlString.toString());
+        }
+        menu.add(URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID(), null, "Movie"));
 
         ArrayList<String> uri = new ArrayList<>();
         reviews.forEach(x -> uri.add("/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
-        ArrayList<String> menu = new ArrayList<>();
-        menu.add(URIUtils.getURI("/", null, "Home"));
-        menu.add(URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID(), null, "Movie"));
+
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(reviews, head, function, uri)

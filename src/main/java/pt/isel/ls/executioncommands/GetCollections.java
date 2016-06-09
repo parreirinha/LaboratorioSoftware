@@ -39,9 +39,6 @@ public class GetCollections implements CommandExecution {
         }*/
         ResultSet rs = ps.executeQuery();
         Collection<Collections> res = getCollection(rs);
-        if (res.toArray()[0] == "") {
-            return new PrintMessage("There are no collections.");
-        }
         return new PrintGetCollections(res, command);
     }
 

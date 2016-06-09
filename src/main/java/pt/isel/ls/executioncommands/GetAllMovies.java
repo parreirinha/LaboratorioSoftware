@@ -36,7 +36,7 @@ public class GetAllMovies implements CommandExecution {
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         if (res.isEmpty())
-            return new PrintError("There are no movies.");
+            return new PrintMovie(res, command);
 
         return new PrintMovie(res, command);
     }

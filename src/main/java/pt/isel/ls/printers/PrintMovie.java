@@ -48,13 +48,15 @@ public class PrintMovie implements Printable {
     public String toStringHtml()
     {
         HtmlGenerator htmlString = new HtmlGenerator();
-        if (movieCollection.isEmpty())
-            return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie).toString());
-        ArrayList<String > uri = new ArrayList<>();
-        movieCollection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
         menu.add(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"));
+        if (movieCollection.isEmpty())
+            return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie)
+                                                                        .postNewMovie()
+                                                                        .toString());
+        ArrayList<String > uri = new ArrayList<>();
+        movieCollection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, uri)

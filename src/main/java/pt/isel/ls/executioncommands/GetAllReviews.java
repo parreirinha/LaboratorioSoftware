@@ -40,9 +40,6 @@ public class GetAllReviews implements CommandExecution {
         }*/
         ResultSet rs = ps.executeQuery();
         Collection<Review> res = getCollection(rs);
-        if (res.isEmpty())
-            return new PrintError("There are no reviews for movie with id = "+movieId+".");
-
         return new PrintReview(res, command);
     }
 
