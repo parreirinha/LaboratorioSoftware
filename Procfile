@@ -1,2 +1,2 @@
 
-web: ./build/install/1516-2-common/bin/1516-2-common
+web: ./build/install/1516-2-LI41N-G5/bin/1516-2-LI41N-G5

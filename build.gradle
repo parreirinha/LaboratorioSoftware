@@ -1,5 +1,5 @@
 apply plugin: 'java'
-
+apply plugin: 'application'
 version = '1.0'
 
 dependencies {
@@ -11,3 +11,7 @@ dependencies {
 compileJava {
     options.compilerArgs<<"-Xlint:unchecked"
 }
+
+mainClassName = "pt.isel.ls.user.io.AppServer"
+
+task stage(dependsOn: ['clean', 'installApp'])
