@@ -17,7 +17,9 @@ public class AppServer
     private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
     public static void main(String[] args) throws Exception {
         _logger.info("------------------------PORT = '{}'-----------------------", System.getenv("PORT"));
-        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+        String portAux = System.getenv("PORT");
+        int port = portAux != null ? Integer.parseInt(portAux) : 8080;
+        Server server = new Server(port);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
