@@ -4,19 +4,20 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
 
 /**
- * Class used to initiate an HTTP server and configures its port and handler.
+ * @author Tede Morgado
+ *         Created at 09/06/2016
  */
-public class HttpServer {
+public class ExecutionServletApp
+{
+    private static Server server;
 
-    private Server server;
-
-    public void initServer(int port) throws Exception {
-
+    public static void main(String[] args) throws Exception {
+        String portDef = System.getenv("PORT");
+        int port = portDef != null ? Integer.valueOf(portDef) : 8080;
         server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
         handler.addServletWithMapping(ExecutionServlet.class, "/*");
         server.start();
     }
-
 }
