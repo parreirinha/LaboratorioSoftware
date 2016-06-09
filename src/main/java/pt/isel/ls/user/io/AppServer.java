@@ -18,8 +18,8 @@ public class AppServer
     private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
     public static void main(String[] args) throws Exception {
 
-        Server server = new Server(Integer.valueOf(getenv("PORT")));
         _logger.info("      LOG PORT = {}   ", Integer.valueOf(getenv("PORT")));
+        Server server = new Server(Integer.valueOf(getenv("PORT")));
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
