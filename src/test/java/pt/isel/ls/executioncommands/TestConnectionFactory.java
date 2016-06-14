@@ -12,7 +12,7 @@ import static java.lang.System.getenv;
  */
 public class TestConnectionFactory {
 
-
+/*
     private SQLServerDataSource conn = new SQLServerDataSource();
     private final String LS_DB_USER = getenv("LS_DB_USER");
     private final String LS_DB_SERVER = "lsTests";
@@ -28,5 +28,5 @@ public class TestConnectionFactory {
         initValues();
         return conn.getConnection();
     }
-
+*/
 }

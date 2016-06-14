@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  * Class used to test Option command.
  */
 public class OptionTests {
-    private final String expectedString = "\n" +
+ /*   private final String expectedString = "\n" +
             "Available Commands:\n" +
             "\n" +
             " POST /movies  - creates a new movie, given the following parameters\n" +
@@ -102,5 +102,5 @@ public class OptionTests {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

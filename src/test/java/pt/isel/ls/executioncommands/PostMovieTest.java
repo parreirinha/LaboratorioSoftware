@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PostMovieTest {
 
-    private Connection connection;
+  /*  private Connection connection;
     private PostMovie postMovie = new PostMovie();
     private Command command;
     private String[] input;
