@@ -88,7 +88,13 @@ public class ExecutionServlet extends HttpServlet {
             }
 
             resp.setContentType(identifyContentType(c));
-            out.println(identifyOutputFormat(c, p));
+            //out.println(identifyOutputFormat(c, p));
+            String format = c.getHeaders().getHeadersString("accept");
+            if (format != null && format.equals("text/plain")) {
+                out.println(p.toStringText());
+            } else {
+                out.println(p.toStringHtml());
+            }
             out.close();
         }
     }
