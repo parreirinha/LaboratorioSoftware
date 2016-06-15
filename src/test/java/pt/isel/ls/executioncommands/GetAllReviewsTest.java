@@ -104,7 +104,7 @@ public class GetAllReviewsTest {
         } catch (pt.isel.ls.exceptions.ApplicationException e) {
             e.printStackTrace();
         }
-        expected = "There are no reviews for movie with id = 666.";
+        expected = "There is no such review.\n";
         assertEquals(expected, result);
     }
 

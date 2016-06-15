@@ -75,9 +75,8 @@ public class GetAllMoviesTest {
             "Movie ID = 2\n\tName = Seven\tRelease = 1995\n" +
             "Movie ID = 3\n\tName = The Matrix\tRelease = 1999\n" +
             "Movie ID = 4\n\tName = Inception\tRelease = 2010\n" +
-            "Movie ID = 5\n\tName = Pulp Fiction\tRelease = 1994\n" +
-            "Movie ID = 6\n\tName = American History X\tRelease = 1998\n" +
-            "Movie ID = 7\n\tName = The Silence of the Lambs\tRelease = 1991\n";           //"movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
+            "Movie ID = 5\n\tName = Pulp Fiction\tRelease = 1994\n";
+        //"movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
     }
 
     @Test
@@ -99,9 +98,7 @@ public class GetAllMoviesTest {
                 "Movie ID = 1\n" + "\tName = Fight Club\tRelease = 1999\n" +
                 "Movie ID = 3\n" + "\tName = The Matrix\tRelease = 1999\n" +
                 "Movie ID = 6\n" + "\tName = American History X\tRelease = 1998\n" +
-                "Movie ID = 2\n" + "\tName = Seven\tRelease = 1995\n" +
-                "Movie ID = 5\n" + "\tName = Pulp Fiction\tRelease = 1994\n" +
-                "Movie ID = 7\n" + "\tName = The Silence of the Lambs\tRelease = 1991\n";
+                "Movie ID = 2\n" + "\tName = Seven\tRelease = 1995\n";
     }
 
     @Test
@@ -128,11 +125,7 @@ public class GetAllMoviesTest {
                 "Movie ID = 6\n" +
                 "\tName = American History X\tRelease = 1998\n" +
                 "Movie ID = 3\n" +
-                "\tName = The Matrix\tRelease = 1999\n" +
-                "Movie ID = 1\n" +
-                "\tName = Fight Club\tRelease = 1999\n" +
-                "Movie ID = 4\n" +
-                "\tName = Inception\tRelease = 2010\n";
+                "\tName = The Matrix\tRelease = 1999\n";
     }
 
 
@@ -160,11 +153,7 @@ public class GetAllMoviesTest {
                 "Movie ID = 4\n" +
                 "\tName = Inception\tRelease = 2010\n" +
                 "Movie ID = 3\n" +
-                "\tName = The Matrix\tRelease = 1999\n" +
-                "Movie ID = 2\n" +
-                "\tName = Seven\tRelease = 1995\n" +
-                "Movie ID = 1\n" +
-                "\tName = Fight Club\tRelease = 1999\n";
+                "\tName = The Matrix\tRelease = 1999\n";
     }
 
 
@@ -192,11 +181,8 @@ public class GetAllMoviesTest {
             "Movie ID = 5\n" +
             "\tName = Pulp Fiction\tRelease = 1994\n" +
             "Movie ID = 2\n" +
-            "\tName = Seven\tRelease = 1995\n" +
-            "Movie ID = 3\n" +
-            "\tName = The Matrix\tRelease = 1999\n" +
-            "Movie ID = 7\n" +
-            "\tName = The Silence of the Lambs\tRelease = 1991\n";}
+            "\tName = Seven\tRelease = 1995\n";
+    }
 
     @Test
     public void sortByTitleDesc() throws SQLException {
@@ -223,11 +209,7 @@ public class GetAllMoviesTest {
                 "Movie ID = 5\n" +
                 "\tName = Pulp Fiction\tRelease = 1994\n" +
                 "Movie ID = 4\n" +
-                "\tName = Inception\tRelease = 2010\n" +
-                "Movie ID = 1\n" +
-                "\tName = Fight Club\tRelease = 1999\n" +
-                "Movie ID = 6\n" +
-                "\tName = American History X\tRelease = 1998\n";
+                "\tName = Inception\tRelease = 2010\n";
     }
 
     @Test
@@ -251,11 +233,8 @@ public class GetAllMoviesTest {
                 "Movie ID = 7\n" +
                 "\tName = The Silence of the Lambs\tRelease = 1991\n" +
                 "Movie ID = 1\n" +
-                "\tName = Fight Club\tRelease = 1999\n" +
-                "Movie ID = 6\n" +
-                "\tName = American History X\tRelease = 1998\n" +
-                "Movie ID = 4\n" +
-                "\tName = Inception\tRelease = 2010\n";}
+                "\tName = Fight Club\tRelease = 1999\n";
+    }
 
     @Test
     public void sortByRatingDesc() throws SQLException, ApplicationException {
@@ -278,11 +257,7 @@ public class GetAllMoviesTest {
                 "Movie ID = 7\n" +
                 "\tName = The Silence of the Lambs\tRelease = 1991\n" +
                 "Movie ID = 2\n" +
-                "\tName = Seven\tRelease = 1995\n" +
-                "Movie ID = 5\n" +
-                "\tName = Pulp Fiction\tRelease = 1994\n" +
-                "Movie ID = 3\n" +
-                "\tName = The Matrix\tRelease = 1999\n";
+                "\tName = Seven\tRelease = 1995\n";
     }
 
     @Test
@@ -329,11 +304,7 @@ public class GetAllMoviesTest {
                 "Movie ID = 4\n" +
                 "\tName = Inception\tRelease = 2010\n" +
                 "Movie ID = 5\n" +
-                "\tName = Pulp Fiction\tRelease = 1994\n" +
-                "Movie ID = 6\n" +
-                "\tName = American History X\tRelease = 1998\n" +
-                "Movie ID = 7\n" +
-                "\tName = The Silence of the Lambs\tRelease = 1991\n";
+                "\tName = Pulp Fiction\tRelease = 1994\n";
     }
 
     @Test
