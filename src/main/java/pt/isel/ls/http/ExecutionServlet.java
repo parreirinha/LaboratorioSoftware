@@ -84,10 +84,10 @@ public class ExecutionServlet extends HttpServlet {
                 out.println(identifyOutputFormat(c, p));
                 out.close();
             } catch (SQLException e) {
-                _logger.info("Error '{}'", e);
+                _logger.info("Error '{}'", e.toString());
                 resp.setStatus(500);
             } catch (ApplicationException e) {
-                _logger.info("Error '{}'", e);
+                _logger.info("Error '{}'", e.toString());
                 resp.sendError(400);
             }
 
