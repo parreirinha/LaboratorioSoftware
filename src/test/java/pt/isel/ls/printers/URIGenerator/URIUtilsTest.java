@@ -9,20 +9,20 @@ import static pt.isel.ls.printers.URIGenerator.URIUtils.*;
 
 
 public class URIUtilsTest {
-/*
+
     @Test
     public void getURITest(){
 
-        String uri = getURI("/collections", "skip=0&top=5", 8080, "Collections");
-        String expected = "<a href=http://localhost:8080/collections?skip=0&top=5>Collections</a>";
+        String uri = getURI("/collections", "skip=0&top=5", "Collections");
+        String expected = "<a href=/collections?skip=0&top=5>Collections</a>";
         assertEquals(expected, uri);
 
-        uri = getURI("/movies", "skip=0&top=5", 8080, "Movies");
-        expected = "<a href=http://localhost:8080/movies?skip=0&top=5>Movies</a>";
+        uri = getURI("/movies", "skip=0&top=5", "Movies");
+        expected = "<a href=/movies?skip=0&top=5>Movies</a>";
         assertEquals(expected, uri);
 
-        uri = getURI("/tops/ratings","skip=5&top=5",8080, "Top Ratings");
-        expected = "<a href=http://localhost:8080/tops/ratings?skip=5&top=5>Top Ratings</a>";
+        uri = getURI("/tops/ratings","skip=5&top=5", "Top Ratings");
+        expected = "<a href=/tops/ratings?skip=5&top=5>Top Ratings</a>";
         assertEquals(expected, uri);
     }
 
@@ -76,5 +76,5 @@ public class URIUtilsTest {
         String expected = "skip=34&top=4&orderby=releaseYear";
         assertEquals(expected, curr);
     }
-*/
+
 }
