@@ -17,13 +17,15 @@ public class ConnectionFactory {
 
     private SQLServerDataSource conn;
     private final String LS_DB_USER = getenv("dbuser");
-    private final String LS_DB_SERVER = getenv("dbserver");
+    private final String LS_DB_NAME = getenv("dbname");
     private final String LS_DB_PW = getenv("dbpassword");
+    private final String LS_DB_SERVER = getenv("dbserver");
     private static final Logger _logger = LoggerFactory.getLogger(ConnectionFactory.class);
 
     private void initValues() {
         conn = new SQLServerDataSource();
-        conn.setDatabaseName(LS_DB_SERVER);
+        conn.setServerName(LS_DB_SERVER);
+        conn.setDatabaseName(LS_DB_NAME);
         conn.setUser(LS_DB_USER);
         conn.setPassword(LS_DB_PW);
     }
