@@ -41,7 +41,6 @@ public class ExecutionServlet extends HttpServlet {
     private static final Logger _logger = LoggerFactory.getLogger(ExecutionServlet.class);
 
 
-    @NotNull
     protected void doMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         port = req.getLocalPort();
