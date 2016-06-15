@@ -25,7 +25,6 @@ public class ConnectionFactory {
         conn.setPassword(LS_DB_PW);
         conn.setUser(LS_DB_USER);
         conn.setServerName(LS_DB_SERVER);
-
     }
 
     public Connection getNewConnection() throws SQLServerException {
