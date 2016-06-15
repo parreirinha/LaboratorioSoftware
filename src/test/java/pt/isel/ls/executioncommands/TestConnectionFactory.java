@@ -14,9 +14,9 @@ public class TestConnectionFactory {
 
 
     private SQLServerDataSource conn = new SQLServerDataSource();
-    private final String LS_DB_USER = getenv("dbuser");
-    private final String LS_DB_SERVER = "lsTests";
-    private final String LS_DB_PW = getenv("dbpassword");
+    private final String LS_DB_USER = "eoscrdcjsavogkyh";
+    private final String LS_DB_SERVER = "2154d7d2-a4e0-4536-9175-a6260133d4e8.sqlserver.sequelizer.com";
+    private final String LS_DB_PW = "GF4YDkDwevbQySzBRS2Tp4iTs5WPJ2sGy84FM228dvasgx68JwZEGmcLwiEGvXUk";
 
     private void initValues() {
         conn.setPassword(LS_DB_PW);
