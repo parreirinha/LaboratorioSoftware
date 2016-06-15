@@ -2,6 +2,8 @@ package pt.isel.ls.executioncommands;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 
@@ -13,15 +15,18 @@ import static java.lang.System.getenv;
 public class TestConnectionFactory {
 
 
-    private SQLServerDataSource conn = new SQLServerDataSource();
+    private SQLServerDataSource conn;
     private final String LS_DB_USER = getenv("dbuser1");
-    private final String LS_DB_SERVER = getenv("dbserver1");
+    private final String LS_DB_NAME = getenv("dbname1");
     private final String LS_DB_PW = getenv("dbpassword1");
+    private final String LS_DB_SERVER = getenv("dbserver1");
 
     private void initValues() {
-        conn.setPassword(LS_DB_PW);
+        conn = new SQLServerDataSource();
+        conn.setServerName(LS_DB_SERVER);
+        conn.setDatabaseName(LS_DB_NAME);
         conn.setUser(LS_DB_USER);
-        conn.setDatabaseName(LS_DB_SERVER);
+        conn.setPassword(LS_DB_PW);
     }
 
     public Connection getNewConnection() throws SQLServerException {
