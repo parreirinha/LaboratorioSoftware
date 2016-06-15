@@ -31,11 +31,11 @@ public class PostMovieReview implements CommandExecution {
         String review = command.getParams().getParamString("review");
         Integer rating = command.getParams().getParamInt("rating");
 
-        if (movieId > 1 && reviwerName != null && reviewSummary != null &&
+        if (movieId >= 1 && reviwerName != null && reviewSummary != null &&
                 review != null && rating >=1 && rating <=5) {
 
             int verification = existsMovie(connection, movieId);
-            if (verification > 0){
+            if (verification == 0){
                 String[] cmd = {""};
                 return new HttpHomePage().execute(connection, new CommandGetter().getCommand(cmd));
             }
