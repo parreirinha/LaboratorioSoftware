@@ -86,10 +86,10 @@ public class ExecutionServlet extends HttpServlet {
                 resp.sendError(400);
             }finally {
                 resp.setContentType(identifyContentType(c));
+                out = resp.getWriter();
                 out.println(identifyOutputFormat(c, p));
                 out.close();
             }
-
 
         }
     }
