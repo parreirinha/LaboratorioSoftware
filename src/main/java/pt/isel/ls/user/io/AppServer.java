@@ -24,14 +24,9 @@ public class AppServer
         Integer port = portDef != null ? Integer.valueOf(portDef) : 8080;
         _logger.info("------------------------PORT = '{}'-----------------------", port);
         Server server = new Server(port);
-        /*ServletHandler handler = new ServletHandler();
+        ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
         handler.addServletWithMapping(ExecutionServlet.class, "/*");
-        server.start();*/
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
-        server.setHandler(context);
-        context.addServlet(new ServletHolder(ExecutionServlet.class),"/*");
         server.start();
 
     }

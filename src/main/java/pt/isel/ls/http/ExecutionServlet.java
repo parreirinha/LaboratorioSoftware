@@ -1,5 +1,6 @@
 package pt.isel.ls.http;
 
+import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.isel.ls.database.connection.ConnectionFactory;
@@ -40,6 +41,7 @@ public class ExecutionServlet extends HttpServlet {
     private static final Logger _logger = LoggerFactory.getLogger(ExecutionServlet.class);
 
 
+    @NotNull
     protected void doMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         port = req.getLocalPort();
@@ -88,13 +90,8 @@ public class ExecutionServlet extends HttpServlet {
             }
 
             resp.setContentType(identifyContentType(c));
-            //out.println(identifyOutputFormat(c, p));
+            out.println(identifyOutputFormat(c, p));
             String format = c.getHeaders().getHeadersString("accept");
-            if (format != null && format.equals("text/plain")) {
-                out.println(p.toStringText());
-            } else {
-                out.println(p.toStringHtml());
-            }
             out.close();
         }
     }
