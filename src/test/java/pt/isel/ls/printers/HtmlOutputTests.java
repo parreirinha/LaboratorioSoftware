@@ -38,7 +38,7 @@ public class HtmlOutputTests {
         dataTests.dropTables();
         connection.close();
     }
-/*
+
     @Test
     public void printDetailedMovieTest() throws SQLException, ApplicationException {
         String[] lineCommand = {"GET", "/movies/1"};
@@ -57,9 +57,9 @@ public class HtmlOutputTests {
                 "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/?top=null&skip=0>All Movies</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/?top=5&skip=0>All Movies</a></h3></td>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/ratings>Rating</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews/?top=null&skip=0>All Reviews</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews/?top=5&skip=0>All Reviews</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
@@ -165,7 +165,7 @@ public class HtmlOutputTests {
                 "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews?top=null&skip=0>All Reviews</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/movies/1/reviews?top=5&skip=0>All Reviews</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<ul>\n" +
@@ -294,7 +294,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td align=\"left\">\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
-                "\t\t\t\t\t\t<a href=/collections/>Next</a>\n" +
+                "\t\t\t\t\t\t<a href=/collections/?skip=5&top=5>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
@@ -329,7 +329,7 @@ public class HtmlOutputTests {
                 "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
                 "\t\t\t\t<tr>\n" +
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
-                "\t\t\t\t\t<td align=\"center\"><h3><a href=/collections?top=null&skip=0>All Collections</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/collections?top=5&skip=0>All Collections</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
                 "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +
@@ -388,8 +388,9 @@ public class HtmlOutputTests {
                 "\t\t\t<br>\n" +
                 "\t\t\tPost Movie into Collection\n" +
                 "\t\t\t<br>\n" +
-                "\t\t\t<form method=\"POST\" action=\"/collections/2/?\">\n" +
+                "\t\t\t<form method=\"POST\" action=\"/collections/2/movies?\">\n" +
                 "\t\t\t\tID:<input name=\"mid\" type=\"number\">\n" +
+                "\t\t\t\t<input type=\"submit\" value=\"Submit\">\n" +
                 "\t\t\t</form>\n" +
                 "\t\t\t<br>\n" +
                 "\t\t\t<br>\n" +
@@ -415,7 +416,23 @@ public class HtmlOutputTests {
                 "\t\t</head>\n" +
                 "\n" +
                 "\t\t<body>\n" +
-                "There are no movies in collection.\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/collections?top=5&skip=0>All Collections</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
+                "\t\t\tNo Movies in the collection\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\tPost Movie into Collection\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\t<form method=\"POST\" action=\"/collections/10/movies?\">\n" +
+                "\t\t\t\tID:<input name=\"mid\" type=\"number\">\n" +
+                "\t\t\t\t<input type=\"submit\" value=\"Submit\">\n" +
+                "\t\t\t</form>\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\t<br>\n" +
                 "\n" +
                 "\t\t</body>\n" +
                 "\t</html>";
@@ -457,7 +474,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td align=\"left\">\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
-                "\t\t\t\t\t\t<a href=/movies/>Next</a>\n" +
+                "\t\t\t\t\t\t<a href=/movies/?skip=0&top=5>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
@@ -526,6 +543,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t<input type=\"radio\" name=\"rating\" value=\"4\"> 4\n" +
                 "\t\t\t\t<br>\n" +
                 "\t\t\t\t<input type=\"radio\" name=\"rating\" value=\"5\"> 5\n" +
+                "\t\t\t\t<input type=\"submit\" value=\"Submit\">\n" +
                 "\t\t\t\t<br>\n" +
                 "\t\t\t</form>\n" +
                 "\t\t\t<br>\n" +
@@ -613,7 +631,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td align=\"left\">\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
-                "\t\t\t\t\t\t<a href=/movies/1/reviews/>Next</a>\n" +
+                "\t\t\t\t\t\t<a href=/movies/1/reviews/?skip=5&top=5>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
@@ -647,6 +665,6 @@ public class HtmlOutputTests {
                 "\t</html>";
         assertEquals(Expected, Result);
     }
-*/
+
 
 }
