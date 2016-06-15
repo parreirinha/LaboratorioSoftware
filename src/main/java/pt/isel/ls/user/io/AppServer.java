@@ -26,7 +26,7 @@ public class AppServer
         Server server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
-        handler.addServletWithMapping(ExecutionServlet.class, "/");
+        handler.addServletWithMapping(ExecutionServlet.class, "/*");
         server.start();
 
     }
