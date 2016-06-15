@@ -75,7 +75,7 @@ public class ExecutionServlet extends HttpServlet {
                     resp.sendError(400);
                 }
                 if (req.getMethod().equals("POST")){
-                    resp.setStatus(301);
+                    resp.setStatus(303);
                     resp.setHeader("Location", c.getLocation());
                 }
                 else{

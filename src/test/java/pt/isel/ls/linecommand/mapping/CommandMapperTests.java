@@ -13,7 +13,7 @@ import static junit.framework.Assert.assertTrue;
  * Class used to test CommandMapper class methods.
  */
 public class CommandMapperTests {
-/*
+
     private final String[] postMovie = {"POST", "/movies/", "name=pulp+fiction&year=1994"};
     private final String[] getAllMovies = {"GET", "/movies/"};
     private final String[] getMovie = {"GET", "/movies/123/"};
@@ -159,5 +159,5 @@ public class CommandMapperTests {
     public void interactiveModeTest() {
         assertTrue(map.getExecutionCommandInstance(new CommandGetter().getCommand(InteractiveMode)) instanceof InteractiveMode);
 
-    }*/
+    }
 }

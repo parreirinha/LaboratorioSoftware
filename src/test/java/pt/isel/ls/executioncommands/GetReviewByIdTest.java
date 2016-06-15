@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  * "reviewid: ##\nmovie id: ##\nreviewer name: ##\nreview summary: ##\ncomplete review: ##\n"
  */
 public class GetReviewByIdTest {
-/*
+
 
     private Connection connection;
     private GetReviewById getReviewById = new GetReviewById();
@@ -76,5 +76,5 @@ public class GetReviewByIdTest {
                 "\n\tSummary Review = Morgan Freeman is the best\n" +
                 "\tComplete Review = Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his modus operandi\n";
         assertEquals(expected, result);
-    }*/
+    }
 }

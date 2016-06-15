@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  * "Review ID = #\n\tReviewer Name = ##\tReview Rating = ##\n\tSummary Review = ##\n"
  */
 public class GetAllReviewsTest {
-/*
+
     private Connection connection;
     private GetAllReviews getAllReviews = new GetAllReviews();
     private Command command;
@@ -47,7 +47,7 @@ public class GetAllReviewsTest {
      *
      * @throws SQLException
      */
-  /*  @Test
+    @Test
     public void movieWithThreeReviews() throws SQLException {
 
 
@@ -123,6 +123,6 @@ public class GetAllReviewsTest {
                         "\n\tSummary Review = Horrible\n";
 
         assertEquals(expected, result);
-    }*/
+    }
 
 }

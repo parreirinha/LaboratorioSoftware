@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertNull;
  * Class used to test CommandGetter getCommand method.
  */
 public class CommandGetterTests {
-/*
+
     private final String[] GetWithMethodAndPath = {"GET", "/movies/123"};
     private final String[] GetWithMethodAndPathAndParams = {"GET", "/movies", "sortBy=year"};
     private final String[] GetWithPathAndHeadersAndParamaters = {"GET", "/movies", "accept:text/html", "skip=6&top=3"};
@@ -111,6 +111,6 @@ public class CommandGetterTests {
         assertEquals(123, c.getPath().getPathInt("mid").intValue());
         assertEquals(50, c.getPath().getPathInt("cid").intValue());
 
-    }*/
+    }
 }
 

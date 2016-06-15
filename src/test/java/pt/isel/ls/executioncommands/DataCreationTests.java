@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * Class responsable to create data for all tests
  */
 public class DataCreationTests {
-/*
+
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
 
@@ -203,5 +203,5 @@ public class DataCreationTests {
         insertCollections();
         insertMovieCollection();
     }
-*/
+
 }

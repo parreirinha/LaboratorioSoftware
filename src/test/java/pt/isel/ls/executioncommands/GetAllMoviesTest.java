@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  * corresmos a segunda vez os testes os valores nao batem certo para o conjunto da FK com PK
  */
 public class GetAllMoviesTest {
-/*
+
     private Connection connection;
     private GetAllMovies getAllMovies = new GetAllMovies();
     private Command command;
@@ -46,7 +46,7 @@ public class GetAllMoviesTest {
      * "Movie ID = ##\n\tName = ##\tRelease = ##\n"
      * @throws SQLException
      */
-   /* @Test
+    @Test
     public void checkResultsetFromMoviesQueary() throws SQLException {
 
         connection = new TestConnectionFactory().getNewConnection();
@@ -60,23 +60,97 @@ public class GetAllMoviesTest {
         expected = getAllMoviesString();
         assertEquals(expected, result);
     }
-    /*
+
     @Test
-    public void checkResultsetFromMoviesHtml() throws SQLException {
+    public void checkResultsetFromMoviesHtml() throws SQLException, ApplicationException {
         input = new String[]{"GET", "/movies"};
         command = new CommandGetter().getCommand(input);
         result = getAllMovies.execute(connection, command).toStringHtml();
-        //expected = getAllMoviesHtml();
+        expected = getAllMoviesHtml();
         assertEquals(expected, result);
     }
-    */
-   /* private String getAllMoviesString(){
+
+    private String getAllMoviesHtml() {
+        return "<!DOCTYPE>\n" +
+                "\t<html>\n" +
+                "\t\t<head>\n" +
+                "\t\t\t<meta\n" +
+                "\t\t\t\thttp-equiv=\"Content-Type\"\n" +
+                "\t\t\t\tcontent=\"text/html; charset=utf-8\"\n" +
+                "\t\t\t/>\n" +
+                "\t\t</head>\n" +
+                "\n" +
+                "\t\t<body>\n" +
+                "\t\t\t<table border=\"0\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/>Home Page</a></h3></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><h3><a href=/tops/ratings>Tops Ratings</a></h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
+                "\t\t\t<table border=\"1\" style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>Movie ID</td>\n" +
+                "\t\t\t\t\t<td>Name</td>\n" +
+                "\t\t\t\t\t<td>Release</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>1</td>\n" +
+                "\t\t\t\t\t<td><a href=\"/movies/1\">Fight Club</a></td>\n" +
+                "\t\t\t\t\t<td>1999</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>2</td>\n" +
+                "\t\t\t\t\t<td><a href=\"/movies/2\">Seven</a></td>\n" +
+                "\t\t\t\t\t<td>1995</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>3</td>\n" +
+                "\t\t\t\t\t<td><a href=\"/movies/3\">The Matrix</a></td>\n" +
+                "\t\t\t\t\t<td>1999</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>4</td>\n" +
+                "\t\t\t\t\t<td><a href=\"/movies/4\">Inception</a></td>\n" +
+                "\t\t\t\t\t<td>2010</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td>5</td>\n" +
+                "\t\t\t\t\t<td><a href=\"/movies/5\">Pulp Fiction</a></td>\n" +
+                "\t\t\t\t\t<td>1994</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\t<table border=\"0\" style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"left\">\n" +
+                "\t\t\t\t\t</td>\n" +
+                "\t\t\t\t\t<td align=\"right\">\n" +
+                "\t\t\t\t\t\t<a href=/movies/?skip=5&top=5>Next</a>\n" +
+                "\t\t\t\t\t</td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\tPost Movie\n" +
+                "\t\t\t<br>\n" +
+                "\t\t\t<form method=\"POST\" action=\"/movies?\">\n" +
+                "\t\t\t\tName:<input name=\"title\" type=\"text\">\n" +
+                "\t\t\t\t<br>\n" +
+                "\t\t\t\tYear:<input name=\"releaseYear\" type=\"number\">\n" +
+                "\t\t\t\t<br>\n" +
+                "\t\t\t\t<input type=\"submit\" value=\"Submit\">\n" +
+                "\t\t\t</form>\t\t\t<br>\n" +
+                "\t\t\t<br>\n" +
+                "\n" +
+                "\t\t</body>\n" +
+                "\t</html>";
+    }
+
+    private String getAllMoviesString(){
         return "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n"+
             "Movie ID = 2\n\tName = Seven\tRelease = 1995\n" +
             "Movie ID = 3\n\tName = The Matrix\tRelease = 1999\n" +
             "Movie ID = 4\n\tName = Inception\tRelease = 2010\n" +
             "Movie ID = 5\n\tName = Pulp Fiction\tRelease = 1994\n";
-        //"movie id: 8\nmovie name: PostMovieTest\nrelease year: 2016\n" ;
     }
 
     @Test
@@ -326,5 +400,5 @@ public class GetAllMoviesTest {
                 "Movie ID = 2\n" +
                 "\tName = Seven\tRelease = 1995\n";
     }
-*/
+
 }

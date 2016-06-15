@@ -21,10 +21,10 @@ import static org.junit.Assert.assertEquals;
  * Class used to test Printer implementing classes method toStringHtml.
  */
 public class HtmlOutputTests {
-   /* private Connection connection;
+    private Connection connection;
     private DataCreationTests dataTests = new DataCreationTests();
 
-/*
+
 
     @Before
     public void beforeTest() throws SQLException {

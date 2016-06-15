@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  * Class used to test PathGetter class methods.
  */
 public class PathGetterTests {
-/*
+
     private final String onlyMoviesPath = "/movies";
     private final String moviesAndMidPath = "/movies/123";
     private final String moviesAndMidAndRatingsPath = "/movies/123/ratings";
@@ -159,6 +159,6 @@ public class PathGetterTests {
     @Test
     public void topsNReviewsHigherCountPathNTest() {
         assertEquals(10, (int) new PathGetter().getPath(topsNReviewsHigherCountPath).getPathInt("n"));
-    }*/
+    }
 
 }

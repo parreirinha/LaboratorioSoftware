@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  * returns the details for the cid collection, namely all the movies in that collection.
  */
 public class GetCollectionByIdTest {
-/*
+
 
     private Connection connection;
     private Command command;
@@ -84,5 +84,5 @@ public class GetCollectionByIdTest {
 
         assertEquals(expected, result);
     }
-*/
+
 }

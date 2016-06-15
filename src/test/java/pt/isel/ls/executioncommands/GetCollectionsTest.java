@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class GetCollectionsTest {
 
-    /*private Connection connection;
+    private Connection connection;
     private Command command;
     private String[] input;
     private String expected;
@@ -68,6 +68,6 @@ public class GetCollectionsTest {
                         "Collection id = 3\nName = movies after 2000\nDescription = movies from this century\n";
         assertEquals(expected, result);
     }
-*/
+
 
 }

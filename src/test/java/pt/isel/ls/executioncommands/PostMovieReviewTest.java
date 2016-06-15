@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
  * "review id: " + id;
  */
 public class PostMovieReviewTest {
-/*
+
     private Connection connection;
     private PostMovieReview postMovieReview = new PostMovieReview();
     private Command command;
@@ -65,6 +65,6 @@ public class PostMovieReviewTest {
 
 
     }
-*/
+
 
 }

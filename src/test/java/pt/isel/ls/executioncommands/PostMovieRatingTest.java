@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  * rating - integer between 1 and 5.
  */
 public class PostMovieRatingTest {
-/*
+
     private Connection connection;
     private PostMovieRating postMovieRating = new PostMovieRating();
     private Command command;
@@ -55,5 +55,5 @@ public class PostMovieRatingTest {
         expected = "Rating posted with success";
         assertEquals(expected, result);
 
-    }*/
+    }
 }

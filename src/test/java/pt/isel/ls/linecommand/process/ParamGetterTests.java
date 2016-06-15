@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
  * Class used to test ParamGetter getModelFromParams method.
  */
 public class ParamGetterTests {
-   /* private final String rating = "rating=5";
+    private final String rating = "rating=5";
     private final String movieNameAndYear = "title=pulp+fiction&releaseYear=1994";
     private final String reviewFullParams = "reviewerName=Michael+Java&reviewSummary=This is a software test!&" +
             "review=Really, I mean it, it was a good movie but this is only a software test dude!&rating=5";
@@ -70,6 +70,6 @@ public class ParamGetterTests {
     @Test
     public void reviewFullParamsRatingTest() {
         assertEquals(5, (int) new ParamGetter().getParams(reviewFullParams).getParamInt("rating"));
-    }*/
+    }
 
 }

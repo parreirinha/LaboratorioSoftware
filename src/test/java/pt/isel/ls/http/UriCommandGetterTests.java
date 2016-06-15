@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertTrue;
  * Class used to test UriCommandGetter method getCommandFromUri.
  */
 public class UriCommandGetterTests {
-/*
+
     private final String methodName = "GET";
 
     private final String getMoviesPath = "/movies/";
@@ -145,6 +145,6 @@ public class UriCommandGetterTests {
         assertEquals("text/plain", c.getHeaders().getHeadersString("accept"));
         assertEquals(2, c.getParams().getParamInt("skip").intValue());
         assertEquals(4, c.getParams().getParamInt("top").intValue());
-    }*/
+    }
 
 }

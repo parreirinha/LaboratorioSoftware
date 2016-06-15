@@ -12,11 +12,11 @@ import static java.lang.System.getenv;
  */
 public class TestConnectionFactory {
 
-/*
+
     private SQLServerDataSource conn = new SQLServerDataSource();
-    private final String LS_DB_USER = getenv("LS_DB_USER");
+    private final String LS_DB_USER = getenv("dbuser");
     private final String LS_DB_SERVER = "lsTests";
-    private final String LS_DB_PW = getenv("LS_DB_PW");
+    private final String LS_DB_PW = getenv("dbpassword");
 
     private void initValues() {
         conn.setPassword(LS_DB_PW);
@@ -28,5 +28,5 @@ public class TestConnectionFactory {
         initValues();
         return conn.getConnection();
     }
-*/
+
 }

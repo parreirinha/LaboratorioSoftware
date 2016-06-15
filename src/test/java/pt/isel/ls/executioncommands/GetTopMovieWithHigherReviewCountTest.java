@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * Class used to test GetTopMovieWithHigherReview.
  */
 public class GetTopMovieWithHigherReviewCountTest {
-  /*  private Connection connection;
+    private Connection connection;
     private GetTopMovieWithHigherReviewCount getTopMovieWithHigherReviewCount = new GetTopMovieWithHigherReviewCount();
     private Command command;
     private String[] input;
@@ -55,5 +55,5 @@ public class GetTopMovieWithHigherReviewCountTest {
         return
                 "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n";
 
-    }*/
+    }
 }

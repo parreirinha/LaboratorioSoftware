@@ -3,6 +3,7 @@ package pt.isel.ls.executioncommands;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.linecommand.process.CommandGetter;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PostMovieTest {
 
-  /*  private Connection connection;
+    private Connection connection;
     private PostMovie postMovie = new PostMovie();
     private Command command;
     private String[] input;
@@ -53,12 +54,12 @@ public class PostMovieTest {
         assertEquals(expected, result);
     }
 
-/*
+/*TODO
     @Test
-    public void  postInvalidMovie() throws SQLException {
+    public void  postInvalidMovie() throws SQLException, ApplicationException {
         input = new String[]{"POST", "/movies", "title=Fight Club&releaseYear=1999"};
-        linecommand = new CommandGetter().getCommand(input);
-        result = postMovie.execute(connection, linecommand.getPath(),linecommand.getHeaders()).toStringText();
+        command = new CommandGetter().getCommand(input);
+        result = postMovie.execute(connection, command).toStringText();
         expected =  "something went wrong!!\n";
         assertEquals(expected, result);
 

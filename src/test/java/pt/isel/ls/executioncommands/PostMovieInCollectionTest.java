@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PostMovieInCollectionTest {
 
-/*
+
     private Connection connection;
     private Command command;
     private String[] input;
@@ -50,5 +50,5 @@ public class PostMovieInCollectionTest {
         }
         expected = "The movie with id = 1 was added with success to the collection";
         assertEquals(expected, result);
-    }*/
+    }
 }
