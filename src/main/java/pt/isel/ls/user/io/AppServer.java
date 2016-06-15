@@ -31,7 +31,7 @@ public class AppServer
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
-        context.addServlet(new ServletHolder(new ExecutionServlet()),"/*");
+        context.addServlet(new ServletHolder(ExecutionServlet.class),"/*");
         server.start();
 
     }
