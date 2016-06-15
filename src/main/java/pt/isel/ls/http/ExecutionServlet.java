@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.CommandExecution;
-import pt.isel.ls.executioncommands.Exit;
-import pt.isel.ls.executioncommands.HttpHomePage;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintError;
@@ -45,7 +43,7 @@ public class ExecutionServlet extends HttpServlet {
         port = req.getLocalPort();
         _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
 
-        PrintWriter out = resp.getWriter();
+        PrintWriter out;
         String str = "";
         if (req.getMethod().equals("POST")){
             Map<String, String> map = getMap(req);
@@ -81,15 +79,18 @@ public class ExecutionServlet extends HttpServlet {
                 else{
                     resp.setStatus(200);
                 }
+
             } catch (SQLException e) {
                 resp.setStatus(500);
             } catch (ApplicationException e) {
                 resp.sendError(400);
             }
-
             resp.setContentType(identifyContentType(c));
+            out = resp.getWriter();
             out.println(identifyOutputFormat(c, p));
             out.close();
+
+
         }
     }
 

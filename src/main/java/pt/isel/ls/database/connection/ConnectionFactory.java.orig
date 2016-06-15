@@ -25,7 +25,10 @@ public class ConnectionFactory {
         conn.setPassword(LS_DB_PW);
         conn.setUser(LS_DB_USER);
         conn.setDatabaseName(LS_DB_SERVER);
+<<<<<<< HEAD
 
+=======
+>>>>>>> aa1513c721d1f483d96cba7d9d7ac16d2f672e0e
     }
 
     public Connection getNewConnection() throws SQLServerException {

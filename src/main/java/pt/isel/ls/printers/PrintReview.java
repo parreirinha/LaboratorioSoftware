@@ -56,9 +56,9 @@ public class PrintReview implements Printable {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home"));
-        menu.add(URIUtils.getURI("/movies/"+command.getPath().getPathInt("mid"), null, "Movie"));
         if (reviews.isEmpty())
         {
+            menu.add(URIUtils.getURI("/movies/"+command.getPath().getPathInt("mid"), null, "Movie"));
             htmlString
                     .createMenu(menu)
                     .addString(NoReview)
