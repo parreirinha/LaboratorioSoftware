@@ -20,7 +20,7 @@ public class AppServer
     public static void main(String[] args) throws Exception {
 
 
-        System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
+//        System.setProperty("org.slf4j.simpleLogger.levelInBrackets","true");
 
         String portDef = System.getenv("PORT");
         int port = portDef != null ? Integer.valueOf(portDef) : 8080;
