@@ -1,13 +1,10 @@
 package pt.isel.ls.http;
 
-import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.isel.ls.database.connection.ConnectionFactory;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.CommandExecution;
-import pt.isel.ls.executioncommands.Exit;
-import pt.isel.ls.executioncommands.HttpHomePage;
 import pt.isel.ls.linecommand.mapping.CommandMapper;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.printers.PrintError;
