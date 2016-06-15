@@ -25,7 +25,9 @@ public class ConnectionFactory {
         conn = new SQLServerDataSource();
         conn.setPassword(LS_DB_PW);
         conn.setUser(LS_DB_USER);
-        conn.setServerName(LS_DB_SERVER);
+        conn.setDatabaseName(LS_DB_SERVER);
+        conn.setServerName("DANI-PC");
+
     }
 
     public Connection getNewConnection() throws SQLServerException {

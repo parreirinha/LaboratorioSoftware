@@ -8,7 +8,7 @@ import java.sql.Connection;
 import static java.lang.System.getenv;
 
 /**
- * Created by Dani on 21-04-2016.
+ * Class used as a test SQL connection factory.
  */
 public class TestConnectionFactory {
 
