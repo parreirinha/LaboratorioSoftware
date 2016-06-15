@@ -50,8 +50,7 @@ public class GetAllCollectionsWithIDAux implements CommandExecution {
         function.add(col -> col.getName());
         function.add(col -> col.getDescription());
         ArrayList<String> uri = new ArrayList<>();
-        res.forEach(x -> uri.add("http://localhost:"+
-                ExecutionServlet.getPort()+"/collections/"+x.getCollectionID()+"/"));
+        res.forEach(x -> uri.add("/collections/"+x.getCollectionID()+"/"));
         return new PrintBody(res, head, function, uri);
     }
 }
