@@ -79,17 +79,17 @@ public class ExecutionServlet extends HttpServlet {
                 else{
                     resp.setStatus(200);
                 }
-
+                resp.setContentType(identifyContentType(c));
+                out = resp.getWriter();
+                out.println(identifyOutputFormat(c, p));
+                out.close();
             } catch (SQLException e) {
+                _logger.info("Error '{}'", e);
                 resp.setStatus(500);
             } catch (ApplicationException e) {
+                _logger.info("Error '{}'", e);
                 resp.sendError(400);
             }
-            resp.setContentType(identifyContentType(c));
-            out = resp.getWriter();
-            out.println(identifyOutputFormat(c, p));
-            out.close();
-
 
         }
     }
