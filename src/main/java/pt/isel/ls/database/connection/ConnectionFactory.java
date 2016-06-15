@@ -19,15 +19,15 @@ public class ConnectionFactory {
     private final String LS_DB_USER = getenv("dbuser");
     private final String LS_DB_SERVER = getenv("dbserver");
     private final String LS_DB_PW = getenv("dbpassword");
+    private final String LS_DATABASE = getenv("dbname");
     private static final Logger _logger = LoggerFactory.getLogger(ConnectionFactory.class);
 
     private void initValues() {
         conn = new SQLServerDataSource();
-        conn.setPassword(LS_DB_PW);
-        conn.setUser(LS_DB_USER);
-        conn.setDatabaseName(LS_DB_USER); //para usar no pc
+        conn.setDatabaseName(LS_DATABASE);
         conn.setServerName(LS_DB_SERVER);
-        //conn.setServerName(LS_DB_SERVER); //para usar no heroku
+        conn.setUser(LS_DB_USER);
+        conn.setPassword(LS_DB_PW);
     }
 
     public Connection getNewConnection() throws SQLServerException {
