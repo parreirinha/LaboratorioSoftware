@@ -1,5 +1,7 @@
 package pt.isel.ls.user.io;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.executioncommands.CommandExecution;
 import pt.isel.ls.executioncommands.InteractiveMode;
@@ -61,12 +63,13 @@ public class Run {
             throw new ApplicationException();
         }
     }
-
+    private static final Logger _logger = LoggerFactory.getLogger(Run.class);
     public static String identifyOutputFormat(Command command, Printable p) {
         String format = command.getHeaders().getHeadersString("accept");
         if (format != null && format.equals("text/plain")) {
             return p.toStringText();
         } else {
+            _logger.info("-------------------------'{}'----------------", p.toStringHtml());
             return p.toStringHtml();
         }
     }

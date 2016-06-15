@@ -15,13 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 import static pt.isel.ls.user.io.Run.identifyOutputFormat;
 
@@ -46,7 +43,7 @@ public class ExecutionServlet extends HttpServlet {
         port = req.getLocalPort();
         _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
 
-        PrintWriter out = resp.getWriter();
+        PrintWriter out;
         String str = "";
         if (req.getMethod().equals("POST")){
             Map<String, String> map = getMap(req);
