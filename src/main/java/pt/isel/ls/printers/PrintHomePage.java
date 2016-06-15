@@ -20,9 +20,9 @@ public class PrintHomePage implements Printable {
     {
         HtmlGenerator htmlString = new HtmlGenerator();
         htmlString
-                .addLink(getURI("/collections/", "skip=0&top=5", "Collections"))
-                .addLink(getURI("/movies/", "skip=0&top=5", "Movies"))
-                .addLink(getURI("/tops/ratings/","skip=0&top=5", "Top Ratings"));
+                .addLink(getURI("/collections", "skip=0&top=5", "Collections"))
+                .addLink(getURI("/movies", "skip=0&top=5", "Movies"))
+                .addLink(getURI("/tops/ratings","skip=0&top=5", "Top Ratings"));
         return String.format(htmlString.getTemplate(), htmlString.toString());
 
     }
