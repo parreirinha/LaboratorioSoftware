@@ -79,16 +79,16 @@ public class ExecutionServlet extends HttpServlet {
                 else{
                     resp.setStatus(200);
                 }
+                resp.setContentType(identifyContentType(c));
+                out.println(identifyOutputFormat(c, p));
+                out.close();
             } catch (SQLException e) {
                 resp.setStatus(500);
             } catch (ApplicationException e) {
                 resp.sendError(400);
             }
 
-            resp.setContentType(identifyContentType(c));
-            out.println(identifyOutputFormat(c, p));
-            String format = c.getHeaders().getHeadersString("accept");
-            out.close();
+
         }
     }
 
