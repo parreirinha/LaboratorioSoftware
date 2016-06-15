@@ -29,12 +29,11 @@ public class ConnectionFactory {
     }
 
     public Connection getNewConnection() throws SQLServerException {
-        _logger.info("------------------------dbpassword = '{}'-----------------------", LS_DB_PW);
-        _logger.info("------------------------dbuser = '{}'-----------------------", LS_DB_USER);
-        _logger.info("------------------------dbserver = '{}'-----------------------", LS_DB_SERVER);
+        _logger.info("------------------------dbpassword = '{}', " +
+                "dbuser = '{}', " +
+                "dbserver = '{}' -----------------------", LS_DB_PW, LS_DB_USER, LS_DB_SERVER);
 
         initValues();
-        _logger.info("------------------------'{}'-----------------------", conn.toString());
         return conn.getConnection();
     }
 
