@@ -28,7 +28,7 @@ public class GetTopNRatingsLowerAverage implements CommandExecution {
         int n = command.getPath().getPathInt("n");
         String query =
                 "select top (?) *," + setClumnRowCountString(command, "Average") +
-                " from\n dbo.Movie as M order by M.Average";
+                        " from\n dbo.Movie as M order by M.Average";
         PreparedStatement ps;
         if (pagingVerification(command)) {
             int[] val = getSkipAndTopValuesToUseInPaging(command);

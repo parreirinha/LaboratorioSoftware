@@ -11,7 +11,7 @@ import static pt.isel.ls.printers.URIGenerator.URIUtils.*;
 public class URIUtilsTest {
 
     @Test
-    public void getURITest(){
+    public void getURITest() {
 
         String uri = getURI("/collections", "skip=0&top=5", "Collections");
         String expected = "<a href=/collections?skip=0&top=5>Collections</a>";
@@ -21,14 +21,14 @@ public class URIUtilsTest {
         expected = "<a href=/movies?skip=0&top=5>Movies</a>";
         assertEquals(expected, uri);
 
-        uri = getURI("/tops/ratings","skip=5&top=5", "Top Ratings");
+        uri = getURI("/tops/ratings", "skip=5&top=5", "Top Ratings");
         expected = "<a href=/tops/ratings?skip=5&top=5>Top Ratings</a>";
         assertEquals(expected, uri);
     }
 
 
     @Test
-    public void getNextSkipAndTopValuesFromCommandTest(){
+    public void getNextSkipAndTopValuesFromCommandTest() {
 
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=0&top=5"};
         Command command = new CommandGetter().getCommand(input);
@@ -38,7 +38,7 @@ public class URIUtilsTest {
     }
 
     @Test
-    public void getNextSkipAndTopValuesFromCommandWithOrderByClauseTest(){
+    public void getNextSkipAndTopValuesFromCommandWithOrderByClauseTest() {
 
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=10&top=5&orderby=rating"};
         Command command = new CommandGetter().getCommand(input);
@@ -49,7 +49,7 @@ public class URIUtilsTest {
 
 
     @Test
-    public void getPreviusSkipAndTopValuesFromCommandTest(){
+    public void getPreviusSkipAndTopValuesFromCommandTest() {
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=15&top=5"};
         Command command = new CommandGetter().getCommand(input);
         String curr = getPreviusSkipAndTopValuesFromCommand(command);
@@ -58,8 +58,8 @@ public class URIUtilsTest {
     }
 
     @Test
-    public void getPreviusSkipAndTopValuesFromCommandWithNegativeSkipValueTest(){
-        
+    public void getPreviusSkipAndTopValuesFromCommandWithNegativeSkipValueTest() {
+
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=0&top=5&orderby=releaseYear"};
         Command command = new CommandGetter().getCommand(input);
         String curr = getPreviusSkipAndTopValuesFromCommand(command);
@@ -68,7 +68,7 @@ public class URIUtilsTest {
     }
 
     @Test
-    public void getPreviusSkipAndTopValuesFromCommandWithOrderByTest(){
+    public void getPreviusSkipAndTopValuesFromCommandWithOrderByTest() {
 
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=38&top=4&orderby=releaseYear"};
         Command command = new CommandGetter().getCommand(input);

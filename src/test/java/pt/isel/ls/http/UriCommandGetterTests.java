@@ -34,7 +34,7 @@ public class UriCommandGetterTests {
     private final String skipAndTopParams = "skip=2&top=4";
 
     @Test
-    public void shouldReturnGetMovie(){
+    public void shouldReturnGetMovie() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getMoviePath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -42,7 +42,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetMovies(){
+    public void shouldReturnGetMovies() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getMoviesPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -50,7 +50,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetMovieRating(){
+    public void shouldReturnGetMovieRating() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getMovieRatingPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -58,7 +58,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetMovieReview(){
+    public void shouldReturnGetMovieReview() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getMovieReviewPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -66,7 +66,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetMovieReviews(){
+    public void shouldReturnGetMovieReviews() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getMovieReviewsPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -74,7 +74,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetCollections(){
+    public void shouldReturnGetCollections() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getCollectionsPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -82,7 +82,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetCollection(){
+    public void shouldReturnGetCollection() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getCollectionPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -90,7 +90,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetTopRatingHA(){
+    public void shouldReturnGetTopRatingHA() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getTopRHAPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -98,7 +98,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetTopRatingNHA(){
+    public void shouldReturnGetTopRatingNHA() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getTopNRHAPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -106,7 +106,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetTopRatingLA(){
+    public void shouldReturnGetTopRatingLA() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getTopRLAPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -114,7 +114,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetTopRatingNLA(){
+    public void shouldReturnGetTopRatingNLA() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getTopNRLAPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -122,7 +122,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetTopReviewHC(){
+    public void shouldReturnGetTopReviewHC() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getTopRHCPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -130,7 +130,7 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnGetTopNReviewHC(){
+    public void shouldReturnGetTopNReviewHC() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
                 getTopNRHCPath, null);
         CommandExecution executor = new CommandMapper().getExecutionCommandInstance(c);
@@ -138,9 +138,9 @@ public class UriCommandGetterTests {
     }
 
     @Test
-    public void shouldReturnValidHeadersAndParams(){
+    public void shouldReturnValidHeadersAndParams() {
         Command c = new UriCommandGetter().getCommandFromUri(methodName,
-                getMoviePath, acceptTextPlainHeader+"&"+skipAndTopParams);
+                getMoviePath, acceptTextPlainHeader + "&" + skipAndTopParams);
 
         assertEquals("text/plain", c.getHeaders().getHeadersString("accept"));
         assertEquals(2, c.getParams().getParamInt("skip").intValue());

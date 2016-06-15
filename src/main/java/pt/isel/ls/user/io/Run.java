@@ -29,9 +29,9 @@ public class Run {
 
             CommandExecution ce = new CommandMapper().getExecutionCommandInstance(command);
 
-            if(ce == null){
+            if (ce == null) {
                 new InteractiveMode().execute(null, null);
-            }else{
+            } else {
                 identifyOutputType(command, identifyOutputFormat(command, ce
                         .execute(conn, command)));
             }
@@ -63,6 +63,7 @@ public class Run {
             throw new ApplicationException();
         }
     }
+
     public static String identifyOutputFormat(Command command, Printable p) {
         String format = command.getHeaders().getHeadersString("accept");
         if (format != null && format.equals("text/plain")) {

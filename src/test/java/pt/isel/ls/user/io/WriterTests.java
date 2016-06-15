@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Dani on 19-04-2016.
+ * Class used to test Writer.
  */
 public class WriterTests {
 

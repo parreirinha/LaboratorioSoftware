@@ -32,7 +32,7 @@ public class GetMovie implements CommandExecution {
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         if (res.isEmpty())
-            return new PrintError("There is no movie with id = "+id+".");
+            return new PrintError("There is no movie with id = " + id + ".");
 
         return new PrintDetailedMovie(res, command, connection);
     }

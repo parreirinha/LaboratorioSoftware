@@ -3,9 +3,7 @@ package pt.isel.ls.linecommand.model;
 import java.util.HashMap;
 
 /**
- * Class whose instances are used to represent the linecommand parameters,
- * i.e. an object with 2 Collection fields: one of String type
- * and other of Integer type.
+ * Class whose instances are used to represent the linecommand parameters.
  */
 public class Parameters {
     private HashMap<String, String> paramStrings;
@@ -20,14 +18,13 @@ public class Parameters {
 
     public Integer getParamInt(String key) {
         String s = paramStrings.get(key);
-        if(s==null)
+        if (s == null)
             return null;
 
-            return Integer.parseInt(s);
+        return Integer.parseInt(s);
     }
 
-    public void setParamInt(String name, int value)
-    {
+    public void setParamInt(String name, int value) {
         paramStrings.put(name, Integer.toString(value));
     }
 }

@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by Dani on 12-04-2016.
+ * Class used as the exit command.
  */
 public class Exit implements CommandExecution {
 

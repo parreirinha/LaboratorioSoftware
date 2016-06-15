@@ -10,7 +10,7 @@ public class PrintHomePageTest {
 
 
     @Test
-    public void printHomePageTest(){
+    public void printHomePageTest() {
 
         String res = printHomePage.toStringHtml();
         String expected =

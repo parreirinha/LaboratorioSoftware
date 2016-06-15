@@ -1,4 +1,5 @@
 package pt.isel.ls.printers;
+
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.URIGenerator.URIUtils;
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
+/*
+* class used to print a Movie.
+* */
 public class PrintMovie implements Printable {
 
     private final Command command;
@@ -45,18 +49,17 @@ public class PrintMovie implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
         menu.add(URIUtils.getURI("/tops/ratings", null, "Tops Ratings"));
         if (movieCollection.isEmpty())
             return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie)
-                                                                        .postNewMovie()
-                                                                        .toString());
-        ArrayList<String > uri = new ArrayList<>();
-        movieCollection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+                    .postNewMovie()
+                    .toString());
+        ArrayList<String> uri = new ArrayList<>();
+        movieCollection.forEach(x -> uri.add("/movies/" + x.getMovieID()));
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, uri)

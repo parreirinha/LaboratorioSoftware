@@ -3,9 +3,7 @@ package pt.isel.ls.linecommand.model;
 import java.util.HashMap;
 
 /**
- * Class whose instances are used to represent a linecommand path,
- * i.e. an object with 2 Collection fields: one of String type
- * and other of Integer type.
+ * Class whose instances are used to represent a linecommand path
  */
 public class Path {
     private String pathString;
@@ -21,7 +19,7 @@ public class Path {
     }
 
     public Integer getPathInt(String key) {
-            return pathIntegers.get(key);
+        return pathIntegers.get(key);
     }
 
 }

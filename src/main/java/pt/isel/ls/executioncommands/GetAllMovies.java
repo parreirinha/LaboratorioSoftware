@@ -29,10 +29,10 @@ public class GetAllMovies implements CommandExecution {
                 " from Movie\n";
         query = concatenateQuearyIfExistsPaging(query, command, null);
         PreparedStatement ps = connection.prepareStatement(query);
-        //if (pagingVerification(command)) {
-            int[] val = getSkipAndTopValuesToUseInPaging(command);
-            setValuesOnPreparedStatement(ps, val[0], val[1]);
-        //}
+
+        int[] val = getSkipAndTopValuesToUseInPaging(command);
+        setValuesOnPreparedStatement(ps, val[0], val[1]);
+
         ResultSet rs = ps.executeQuery();
         Collection<Movie> res = getCollection(rs);
         if (res.isEmpty())

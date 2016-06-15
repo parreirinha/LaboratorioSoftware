@@ -38,7 +38,7 @@ public class GetAllReviewsAux implements CommandExecution {
                     rs.getInt(6)
             ));
         }
-        if(res.isEmpty())
+        if (res.isEmpty())
             return new PrintBody();
         String[] head =
                 {"Review ID", "Reviewer Name", "Review Rating", "Summary Review"};
@@ -48,7 +48,7 @@ public class GetAllReviewsAux implements CommandExecution {
         function.add(review -> "" + review.getReviewRating());
         function.add(review -> review.getReviewSummary());
         ArrayList<String> uri = new ArrayList<>();
-        res.forEach(x -> uri.add("/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+        res.forEach(x -> uri.add("/movies/" + x.getMovieID() + "/reviews/" + x.getReviewID()));
         return new PrintBody(res, head, function, uri);
     }
 }

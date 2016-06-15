@@ -29,14 +29,12 @@ public class GetCollections implements CommandExecution {
         String query = "select *, " + setClumnRowCountString(null, "CollectionID") +
                 " from Collections";
         PreparedStatement ps;
-        //if (pagingVerification(command)) {
-            query = concatenateQuearyIfExistsPaging(query, command, "CollectionID");
-            ps = connection.prepareStatement(query);
-            int[] val = getSkipAndTopValuesToUseInPaging(command);
-            setValuesOnPreparedStatement(ps, val[0], val[1]);
-        /*} else {
-            ps = connection.prepareStatement(query);
-        }*/
+
+        query = concatenateQuearyIfExistsPaging(query, command, "CollectionID");
+        ps = connection.prepareStatement(query);
+        int[] val = getSkipAndTopValuesToUseInPaging(command);
+        setValuesOnPreparedStatement(ps, val[0], val[1]);
+
         ResultSet rs = ps.executeQuery();
         Collection<Collections> res = getCollection(rs);
         return new PrintGetCollections(res, command);

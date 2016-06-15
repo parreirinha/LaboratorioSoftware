@@ -25,7 +25,6 @@ public class HtmlOutputTests {
     private DataCreationTests dataTests = new DataCreationTests();
 
 
-
     @Before
     public void beforeTest() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();

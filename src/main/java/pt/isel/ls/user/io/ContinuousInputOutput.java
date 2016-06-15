@@ -5,7 +5,7 @@ import pt.isel.ls.exceptions.ApplicationException;
 import java.util.Scanner;
 
 /**
- * Created by Dani on 14-04-2016.
+ * Class used to continuously execute the application.
  */
 public class ContinuousInputOutput {
     private Run run;
