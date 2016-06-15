@@ -19,10 +19,10 @@ public class PostMovieRating implements CommandExecution {
 
     @Override
     public Printable execute(Connection connection, Command command) throws SQLException, ApplicationException {
-        int movieID = command.getPath().getPathInt("mid");
-        int rating = command.getParams().getParamInt("rating");
+        Integer movieID = command.getPath().getPathInt("mid");
+        Integer rating = command.getParams().getParamInt("rating");
 
-        if (movieID != -1 && rating >=1 && rating <=5) {
+        if (movieID > 1 && rating >= 1 && rating <= 5) {
             String ratingColumnName = AccessUtils.getColumnName(rating);
             String query = "update Movie set "+ ratingColumnName +" = "+ ratingColumnName + " + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
@@ -33,9 +33,9 @@ public class PostMovieRating implements CommandExecution {
             return new PrintPostMovieRating();
         }
         String errorString="";
-        if(movieID == -1)
+        if(movieID < 1)
             errorString += "Error: Invalid movie id.\n";
-        if(rating <1 || rating >5)
+        if(rating < 1 || rating > 5)
             errorString += "Error: Invalid rating. Rating must be between 1 and 5.\n";
 
         return new PrintError(errorString);

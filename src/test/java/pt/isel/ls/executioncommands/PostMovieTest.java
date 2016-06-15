@@ -54,16 +54,19 @@ public class PostMovieTest {
         assertEquals(expected, result);
     }
 
-/*TODO
+//TODO
     @Test
     public void  postInvalidMovie() throws SQLException, ApplicationException {
         input = new String[]{"POST", "/movies", "title=Fight Club&releaseYear=1999"};
         command = new CommandGetter().getCommand(input);
         result = postMovie.execute(connection, command).toStringText();
-        expected =  "something went wrong!!\n";
+        expected =  "Movie ID = 1\n" +
+                "\tName = Fight Club\tRelease = 1999\n" +
+                "\t* = 20   ** = 10   *** = 15   **** = 50   ***** = 32\n" +
+                "\tAverage = 3.504\n";
         assertEquals(expected, result);
 
     }
-*/
+
 
 }

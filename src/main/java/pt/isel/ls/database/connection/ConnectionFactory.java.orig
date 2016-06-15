@@ -24,10 +24,14 @@ public class ConnectionFactory {
 
     private void initValues() {
         conn = new SQLServerDataSource();
-        conn.setServerName(LS_DB_SERVER);
+        conn.setServerName("DESKTOP-3SRPAUC\\SQLEXPRESS");
         conn.setDatabaseName(LS_DB_NAME);
         conn.setUser(LS_DB_USER);
+<<<<<<< HEAD
         conn.setPassword(LS_DB_PW);
+=======
+        conn.setDatabaseName(LS_DB_SERVER);
+>>>>>>> e43b69a1636e15fc1180417b44d87cf4b8b3f62a
     }
 
     public Connection getNewConnection() throws SQLServerException {
