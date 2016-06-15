@@ -15,10 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import static pt.isel.ls.user.io.Run.identifyOutputFormat;
 
@@ -84,12 +87,12 @@ public class ExecutionServlet extends HttpServlet {
                 resp.setStatus(500);
             } catch (ApplicationException e) {
                 resp.sendError(400);
-            }finally {
-                resp.setContentType(identifyContentType(c));
-                out = resp.getWriter();
-                out.println(identifyOutputFormat(c, p));
-                out.close();
             }
+            resp.setContentType(identifyContentType(c));
+            out = resp.getWriter();
+            out.println(identifyOutputFormat(c, p));
+            out.close();
+
 
         }
     }
