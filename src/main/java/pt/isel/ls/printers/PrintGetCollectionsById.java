@@ -29,7 +29,7 @@ public class PrintGetCollectionsById implements Printable {
     public PrintGetCollectionsById(MovieCollection movieCollection, Command command) {
         this.command = command;
         this.movieCollection = movieCollection;
-        func.add(mc -> ""+mc.getCollections().getCollectionID());
+        func.add(mc -> "" + mc.getCollections().getCollectionID());
         func.add(mc -> mc.getCollections().getName());
         func.add(mc -> mc.getCollections().getDescription());
         func1.add(m -> "" + m.getMovieID());
@@ -51,20 +51,18 @@ public class PrintGetCollectionsById implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
-        Integer  top = null;
-        if(command.getParams().getParamInt("top") == null)
+    public String toStringHtml() {
+        Integer top = null;
+        if (command.getParams().getParamInt("top") == null)
             top = 5;
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
         menu.add(URIUtils.getURI("/collections",
-                "top="+top.intValue()+"&skip=0",
+                "top=" + top.intValue() + "&skip=0",
                 "All Collections"));
 
-        if(movieCollection.getMovies() == null)
-        {
+        if (movieCollection.getMovies() == null) {
             htmlString
                     .createMenu(menu)
                     .addString("No Movies in the collection")
@@ -75,11 +73,11 @@ public class PrintGetCollectionsById implements Printable {
         Collection<MovieCollection> mc = new ArrayList<>();
         mc.add(movieCollection);
         ArrayList<String> uri = new ArrayList<>();
-        movieCollection.getMovies().forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        movieCollection.getMovies().forEach(x -> uri.add("/movies/" + x.getMovieID()));
 
         htmlString
                 .createMenu(menu)
-                .htmlGenerate(mc, movieCollection.getMovies(),head, func, func1, uri)
+                .htmlGenerate(mc, movieCollection.getMovies(), head, func, func1, uri)
                 .addBrTag()
                 .postMovieIntoCollection(movieCollection.getCollections().getCollectionID());
         return String.format(htmlString.getTemplate(), htmlString.toString());

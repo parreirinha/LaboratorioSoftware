@@ -32,7 +32,7 @@ public class GetReviewById implements CommandExecution {
         ResultSet rs = preparedStatement.executeQuery();
         Collection<Review> res = getCollection(rs);
         if (res.isEmpty())
-            return new PrintError("There is no review with id = "+reviewId+" for movie with id = "+movieId+".");
+            return new PrintError("There is no review with id = " + reviewId + " for movie with id = " + movieId + ".");
 
         return new PrintDetailedReview(res, command);
     }

@@ -1,7 +1,7 @@
 package pt.isel.ls.linecommand.model;
 
 /**
- * Created by Dani on 19-03-2016.
+ * Class used to represent the method component.
  */
 public class Method {
     public String getMethod() {

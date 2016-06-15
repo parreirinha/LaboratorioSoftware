@@ -53,21 +53,17 @@ public class AccessUtils {
 
     protected static String concatenateQuearyIfExistsPaging(String query, Command command, String orderBy)
             throws SQLException {
+        String pagingQuery =
+                "select * from ( " + query + " ) as res \n " +
+                        setOrderByClause(command, orderBy) + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        return pagingQuery;
 
-        PreparedStatement ps;
-        //if (pagingVerification(command)) {
-            String pagingQuery =
-                    "select * from ( " + query + " ) as res \n " +
-                            setOrderByClause(command, orderBy) + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
-            return pagingQuery;
-        //}
-        //return query;
     }
 
     protected static boolean pagingVerification(Command command) {
         Integer i1 = command.getParams().getParamInt("skip");
         Integer i2 = command.getParams().getParamInt("top");
-        if(i1==null || i2==null)
+        if (i1 == null || i2 == null)
             return false;
         return (i1 < 0) || (i2 < 0) ? false : true;
     }
@@ -93,7 +89,7 @@ public class AccessUtils {
         sortDecoder.put("year", "order by MovieRelease ASC");
         sortDecoder.put("yearDesc", "order by MovieRelease DESC");
         sortDecoder.put("title", "order by MovieName ASC");
-        sortDecoder.put("titleDesc","order by MovieName DESC");
+        sortDecoder.put("titleDesc", "order by MovieName DESC");
         sortDecoder.put("rating", "order by Average ASC");
         sortDecoder.put("ratingDesc", "order by Average DESC");
     }
@@ -103,15 +99,13 @@ public class AccessUtils {
     }
 
     protected static int[] getSkipAndTopValuesToUseInPaging(Command command) {
-        Integer minVal = command.getParams().getParamInt("skip") ;
-        Integer maxVal = command.getParams().getParamInt("top") ;
-        if(minVal == null)
-        {
+        Integer minVal = command.getParams().getParamInt("skip");
+        Integer maxVal = command.getParams().getParamInt("top");
+        if (minVal == null) {
             command.getParams().setParamInt("skip", 0);
             minVal = 0;
         }
-        if(maxVal == null)
-        {
+        if (maxVal == null) {
             command.getParams().setParamInt("top", 5);
             maxVal = 5;
         }

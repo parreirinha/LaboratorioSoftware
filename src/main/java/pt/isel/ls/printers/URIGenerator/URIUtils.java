@@ -13,11 +13,10 @@ public class URIUtils {
     private static String URIFinalString = "</a>";
 
 
-
     public static String getURI(String path, String params, String name) {
 
         String uri = URIInicialString + path;
-        if (params != "" && params != null){
+        if (params != "" && params != null) {
             uri += "?" + params;
         }
         uri += ">" + name + URIFinalString;
@@ -25,28 +24,28 @@ public class URIUtils {
         return uri;
     }
 
-    public static String getNextSkipAndTopValuesFromCommand(Command command){
+    public static String getNextSkipAndTopValuesFromCommand(Command command) {
 
         Integer top = command.getParams().getParamInt("top");
         Integer skip = command.getParams().getParamInt("skip");
-        if (skip == null || top == null || skip < 0 || top <= 0){
+        if (skip == null || top == null || skip < 0 || top <= 0) {
             return "skip=0&top=5" + getOrderBy(command);
         }
         skip += top;
         return "skip=" + skip + "&top=" + top + getOrderBy(command);
     }
 
-    private static String getOrderBy(Command command){
-        if(command.getParams().getParamString("orderby") != null)
+    private static String getOrderBy(Command command) {
+        if (command.getParams().getParamString("orderby") != null)
             return "&orderby=" + command.getParams().getParamString("orderby");
         return "";
     }
 
-    public static String getPreviusSkipAndTopValuesFromCommand(Command command){
+    public static String getPreviusSkipAndTopValuesFromCommand(Command command) {
         String res = "";
         Integer top = command.getParams().getParamInt("top");
         Integer skip = command.getParams().getParamInt("skip");
-        if (skip == null || top == null){
+        if (skip == null || top == null) {
             return null;
         }
         skip -= top;

@@ -20,6 +20,7 @@ public class ConnectionFactory {
     private final String LS_DB_SERVER = getenv("dbserver");
     private final String LS_DB_PW = getenv("dbpassword");
     private static final Logger _logger = LoggerFactory.getLogger(ConnectionFactory.class);
+
     private void initValues() {
         conn = new SQLServerDataSource();
         conn.setPassword(LS_DB_PW);

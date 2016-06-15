@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
- * Created by Dani on 11-04-2016.
+ * Class used to process a headers string and generate the
+ * correspondent Headers instance.
  */
 public class HeadersGetter {
     private HashMap<String, String> headersStrings = new HashMap<String, String>();

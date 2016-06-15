@@ -12,10 +12,10 @@ import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.URIGenerator.URIUtils;
 import pt.isel.ls.printers.html.HtmlGenerator;
+
 import java.util.Collection;
 
-public class PrintDetailedMovie implements Printable
-{
+public class PrintDetailedMovie implements Printable {
 
     private Collection<Movie> movieCollection;
     private Command command;
@@ -63,23 +63,22 @@ public class PrintDetailedMovie implements Printable
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         HtmlGenerator htmlString = new HtmlGenerator();
         if (movieCollection.isEmpty())
             return String.format(htmlString.getTemplate(),
-                                htmlString
-                                        .addString(NoMovie)
-                                        .toString());
+                    htmlString
+                            .addString(NoMovie)
+                            .toString());
         ArrayList<String> menu = new ArrayList<>();
-        Integer  top = null;
-        if(command.getParams().getParamInt("top") == null)
+        Integer top = null;
+        if (command.getParams().getParamInt("top") == null)
             top = 5;
         menu.add(URIUtils.getURI("/", null, "Home Page"));
-        menu.add(URIUtils.getURI("/movies/", "top="+top.intValue()+"&skip=0", "All Movies"));
-        menu.add(URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/ratings", null, "Rating"));
-        menu.add(URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
-                "top="+top.intValue()+"&skip=0", "All Reviews"));
+        menu.add(URIUtils.getURI("/movies/", "top=" + top.intValue() + "&skip=0", "All Movies"));
+        menu.add(URIUtils.getURI("/movies/" + movieCollection.iterator().next().getMovieID() + "/ratings", null, "Rating"));
+        menu.add(URIUtils.getURI("/movies/" + movieCollection.iterator().next().getMovieID() + "/reviews/",
+                "top=" + top.intValue() + "&skip=0", "All Reviews"));
 
 
         htmlString
@@ -89,8 +88,8 @@ public class PrintDetailedMovie implements Printable
                 .addBrTag()
                 .addString(
                         getAllReviews(
-                                URIUtils.getURI("/movies/"+movieCollection.iterator().next().getMovieID()+"/reviews/",
-                                    "top="+top.intValue()+"&skip=0", "All Reviews")))
+                                URIUtils.getURI("/movies/" + movieCollection.iterator().next().getMovieID() + "/reviews/",
+                                        "top=" + top.intValue() + "&skip=0", "All Reviews")))
                 .addBrTag()
                 .addString(
                         getCollectionsWithMovie());
@@ -99,8 +98,7 @@ public class PrintDetailedMovie implements Printable
     }
 
 
-    private String getCollectionsWithMovie()
-    {
+    private String getCollectionsWithMovie() {
         try {
             return new GetAllCollectionsWithIDAux().execute(con, command).toStringHtml();
         } catch (SQLException e) {

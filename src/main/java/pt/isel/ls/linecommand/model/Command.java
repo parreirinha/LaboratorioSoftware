@@ -1,8 +1,7 @@
 package pt.isel.ls.linecommand.model;
 
 /**
- * Class whose instances are used to represent a generic linecommand,
- * i.e. an object with 3 fields of each type Method, Path and Parameters.
+ * Class whose instances are used to represent a generic linecommand.
  */
 public class Command {
 
@@ -36,13 +35,11 @@ public class Command {
         return params;
     }
 
-    public String getLocation()
-    {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location)
-    {
+    public void setLocation(String location) {
         this.location = location;
     }
 

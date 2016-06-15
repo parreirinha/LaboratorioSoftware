@@ -45,12 +45,11 @@ public class ExecutionServlet extends HttpServlet {
 
         PrintWriter out;
         String str = "";
-        if (req.getMethod().equals("POST")){
+        if (req.getMethod().equals("POST")) {
             Map<String, String> map = getMap(req);
-            for(int i = 0; i < post.length; ++i)
-            {
-                if(map.containsKey(post[i])) {
-                    if(!str.equals(""))
+            for (int i = 0; i < post.length; ++i) {
+                if (map.containsKey(post[i])) {
+                    if (!str.equals(""))
                         str += "&";
                     str += post[i] + "=" + map.get(post[i]);
                 }
@@ -58,7 +57,7 @@ public class ExecutionServlet extends HttpServlet {
         }
 
         Command c = new UriCommandGetter().getCommandFromUri(req.getMethod(), req.getRequestURI(),
-                                                    req.getMethod().equals("GET") ? req.getQueryString() : str);
+                req.getMethod().equals("GET") ? req.getQueryString() : str);
         CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
 
         if (ce == null) {
@@ -72,11 +71,10 @@ public class ExecutionServlet extends HttpServlet {
                 if (p instanceof PrintError) {
                     resp.sendError(400);
                 }
-                if (req.getMethod().equals("POST")){
+                if (req.getMethod().equals("POST")) {
                     resp.setStatus(303);
                     resp.setHeader("Location", c.getLocation());
-                }
-                else{
+                } else {
                     resp.setStatus(200);
                 }
                 resp.setContentType(identifyContentType(c));
@@ -116,12 +114,12 @@ public class ExecutionServlet extends HttpServlet {
     }
 
     private String[] post = {"name", "description", "mid", "title", "releaseYear", "rating", "reviewerName", "reviewSummary", "review"};
+
     private Map<String, String> getMap(HttpServletRequest req) {
         Map<String, String> map = new HashMap<>();
-        for(int i = 0; i < post.length; ++i)
-        {
+        for (int i = 0; i < post.length; ++i) {
             String value = req.getParameter(post[i]);
-            if(value != null)
+            if (value != null)
                 map.put(post[i], value);
         }
         return map;

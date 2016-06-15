@@ -51,14 +51,12 @@ public class PrintReview implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home"));
-        if (reviews.isEmpty())
-        {
-            menu.add(URIUtils.getURI("/movies/"+command.getPath().getPathInt("mid"), null, "Movie"));
+        if (reviews.isEmpty()) {
+            menu.add(URIUtils.getURI("/movies/" + command.getPath().getPathInt("mid"), null, "Movie"));
             htmlString
                     .createMenu(menu)
                     .addString(NoReview)
@@ -66,15 +64,15 @@ public class PrintReview implements Printable {
                     .postNewReview(command.getPath().getPathInt("mid"));
             return String.format(htmlString.getTemplate(), htmlString.toString());
         }
-        menu.add(URIUtils.getURI("/movies/"+reviews.iterator().next().getMovieID(), null, "Movie"));
+        menu.add(URIUtils.getURI("/movies/" + reviews.iterator().next().getMovieID(), null, "Movie"));
 
         ArrayList<String> uri = new ArrayList<>();
-        reviews.forEach(x -> uri.add("/movies/"+x.getMovieID()+"/reviews/"+x.getReviewID()));
+        reviews.forEach(x -> uri.add("/movies/" + x.getMovieID() + "/reviews/" + x.getReviewID()));
 
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(reviews, head, function, uri)
-                .createPagging(command, "/movies/"+reviews.iterator().next().getMovieID()+"/reviews/")
+                .createPagging(command, "/movies/" + reviews.iterator().next().getMovieID() + "/reviews/")
                 .addBrTag()
                 .postNewReview(reviews.iterator().next().getMovieID());
         return String.format(htmlString.getTemplate(), htmlString.toString());

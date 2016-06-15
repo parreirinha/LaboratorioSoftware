@@ -75,7 +75,7 @@ public class CommandMapper {
         int i = 0, size = s.length();
         for (; i < size; ++i) {
             char c = s.charAt(i);
-            if(c <'A' || c > 'Z')
+            if (c < 'A' || c > 'Z')
                 break;
         }
         return i == 0 ? "" : s.substring(i);

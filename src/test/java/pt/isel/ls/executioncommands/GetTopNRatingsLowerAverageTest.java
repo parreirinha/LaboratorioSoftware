@@ -57,7 +57,7 @@ public class GetTopNRatingsLowerAverageTest {
                 "\tName = The Matrix" +
                 "\n\tRelease = 1999\n" +
                 "\t* = 33   ** = 14   *** = 70   **** = 15   ***** = 1\n" +
-                "\tAverage = 2.526\n"+
+                "\tAverage = 2.526\n" +
                 "Movie ID = 5\n" +
                 "\tName = Pulp Fiction" +
                 "\n\tRelease = 1994\n" +

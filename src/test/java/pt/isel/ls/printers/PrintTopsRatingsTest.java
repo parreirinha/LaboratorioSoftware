@@ -12,7 +12,7 @@ public class PrintTopsRatingsTest {
     PrintTopsRatings printTopsRatings = new PrintTopsRatings();
 
     @Test
-    public void testPrintTopsRatingsTest(){
+    public void testPrintTopsRatingsTest() {
 
         String expected =
                 "<!DOCTYPE>\n" +

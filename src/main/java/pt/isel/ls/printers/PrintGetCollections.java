@@ -40,13 +40,11 @@ public class PrintGetCollections implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
-        if(col.isEmpty())
-        {
+        if (col.isEmpty()) {
             htmlString
                     .createMenu(menu)
                     .addString("There is no such collections")
@@ -54,7 +52,7 @@ public class PrintGetCollections implements Printable {
             return String.format(htmlString.getTemplate(), htmlString.toString());
         }
         ArrayList<String> uri = new ArrayList<>();
-        col.forEach(x-> uri.add("/collections/"+x.getCollectionID()));
+        col.forEach(x -> uri.add("/collections/" + x.getCollectionID()));
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(col, head, functions, uri)

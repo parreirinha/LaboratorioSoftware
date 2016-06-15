@@ -3,7 +3,7 @@ package pt.isel.ls.printers;
 import pt.isel.ls.printers.html.HtmlGenerator;
 
 /**
- * Created by fabio on 17-Apr-16.
+ * Class used to print a message.
  */
 public class PrintMessage implements Printable {
 

@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by Dani on 13-04-2016.
+ * Class used to represent InteractiveMode command.
  */
 public class InteractiveMode implements CommandExecution {
     private Run run;

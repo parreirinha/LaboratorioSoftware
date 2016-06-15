@@ -42,7 +42,7 @@ public class UriCommandGetter {
                 commandParts[2] = paramsString;
             }
 
-        }else{
+        } else {
             commandParts = new String[2];
         }
 

@@ -33,6 +33,7 @@ public class GetAllMoviesTest {
         dataTests.dropTables();
         connection.close();
     }
+
     @Before
     public void initConnectionandDataBase() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
@@ -44,6 +45,7 @@ public class GetAllMoviesTest {
     /**
      * GET /movies
      * "Movie ID = ##\n\tName = ##\tRelease = ##\n"
+     *
      * @throws SQLException
      */
     @Test
@@ -145,12 +147,12 @@ public class GetAllMoviesTest {
                 "\t</html>";
     }
 
-    private String getAllMoviesString(){
-        return "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n"+
-            "Movie ID = 2\n\tName = Seven\tRelease = 1995\n" +
-            "Movie ID = 3\n\tName = The Matrix\tRelease = 1999\n" +
-            "Movie ID = 4\n\tName = Inception\tRelease = 2010\n" +
-            "Movie ID = 5\n\tName = Pulp Fiction\tRelease = 1994\n";
+    private String getAllMoviesString() {
+        return "Movie ID = 1\n\tName = Fight Club\tRelease = 1999\n" +
+                "Movie ID = 2\n\tName = Seven\tRelease = 1995\n" +
+                "Movie ID = 3\n\tName = The Matrix\tRelease = 1999\n" +
+                "Movie ID = 4\n\tName = Inception\tRelease = 2010\n" +
+                "Movie ID = 5\n\tName = Pulp Fiction\tRelease = 1994\n";
     }
 
     @Test
@@ -167,8 +169,9 @@ public class GetAllMoviesTest {
         expected = getStringToSortByYearDesc();
         assertEquals(expected, result);
     }
-    private String getStringToSortByYearDesc(){
-        return  "Movie ID = 4\n" + "\tName = Inception\tRelease = 2010\n" +
+
+    private String getStringToSortByYearDesc() {
+        return "Movie ID = 4\n" + "\tName = Inception\tRelease = 2010\n" +
                 "Movie ID = 1\n" + "\tName = Fight Club\tRelease = 1999\n" +
                 "Movie ID = 3\n" + "\tName = The Matrix\tRelease = 1999\n" +
                 "Movie ID = 6\n" + "\tName = American History X\tRelease = 1998\n" +
@@ -189,7 +192,8 @@ public class GetAllMoviesTest {
         expected = getStringToSortByYear();
         assertEquals(expected, result);
     }
-    private String getStringToSortByYear(){
+
+    private String getStringToSortByYear() {
         return "Movie ID = 7\n" +
                 "\tName = The Silence of the Lambs\tRelease = 1991\n" +
                 "Movie ID = 5\n" +
@@ -217,7 +221,8 @@ public class GetAllMoviesTest {
         expected = getStringToSortByAddedDataDescDesc();
         assertEquals(expected, result);
     }
-    private String getStringToSortByAddedDataDescDesc(){
+
+    private String getStringToSortByAddedDataDescDesc() {
         return "Movie ID = 7\n" +
                 "\tName = The Silence of the Lambs\tRelease = 1991\n" +
                 "Movie ID = 6\n" +
@@ -245,17 +250,18 @@ public class GetAllMoviesTest {
         expected = getStringToSortByTitle();
         assertEquals(expected, result);
     }
-    private String getStringToSortByTitle(){
+
+    private String getStringToSortByTitle() {
         return "Movie ID = 6\n" +
-            "\tName = American History X\tRelease = 1998\n" +
-            "Movie ID = 1\n" +
-            "\tName = Fight Club\tRelease = 1999\n" +
-            "Movie ID = 4\n" +
-            "\tName = Inception\tRelease = 2010\n" +
-            "Movie ID = 5\n" +
-            "\tName = Pulp Fiction\tRelease = 1994\n" +
-            "Movie ID = 2\n" +
-            "\tName = Seven\tRelease = 1995\n";
+                "\tName = American History X\tRelease = 1998\n" +
+                "Movie ID = 1\n" +
+                "\tName = Fight Club\tRelease = 1999\n" +
+                "Movie ID = 4\n" +
+                "\tName = Inception\tRelease = 2010\n" +
+                "Movie ID = 5\n" +
+                "\tName = Pulp Fiction\tRelease = 1994\n" +
+                "Movie ID = 2\n" +
+                "\tName = Seven\tRelease = 1995\n";
     }
 
     @Test
@@ -273,7 +279,7 @@ public class GetAllMoviesTest {
         assertEquals(expected, result);
     }
 
-    private String getStringToSortByTitleDesc(){
+    private String getStringToSortByTitleDesc() {
         return "Movie ID = 7\n" +
                 "\tName = The Silence of the Lambs\tRelease = 1991\n" +
                 "Movie ID = 3\n" +
@@ -297,7 +303,7 @@ public class GetAllMoviesTest {
         assertEquals(expected, result);
     }
 
-    private String getStringToSortByRating(){
+    private String getStringToSortByRating() {
         return "Movie ID = 3\n" +
                 "\tName = The Matrix\tRelease = 1999\n" +
                 "Movie ID = 5\n" +
@@ -321,7 +327,7 @@ public class GetAllMoviesTest {
         assertEquals(expected, result);
     }
 
-    private String getStringToSortByRatingDesc(){
+    private String getStringToSortByRatingDesc() {
         return "Movie ID = 4\n" +
                 "\tName = Inception\tRelease = 2010\n" +
                 "Movie ID = 6\n" +
@@ -345,8 +351,8 @@ public class GetAllMoviesTest {
         assertEquals(expected, result);
     }
 
-    private String getStringToSimplePagingTest(){
-        return  "Movie ID = 3\n" +
+    private String getStringToSimplePagingTest() {
+        return "Movie ID = 3\n" +
                 "\tName = The Matrix\tRelease = 1999\n" +
                 "Movie ID = 4\n" +
                 "\tName = Inception\tRelease = 2010\n" +
@@ -368,7 +374,8 @@ public class GetAllMoviesTest {
         expected = getStringToSortByAddedDataDesc();
         assertEquals(expected, result);
     }
-    private String getStringToSortByAddedDataDesc(){
+
+    private String getStringToSortByAddedDataDesc() {
         return "Movie ID = 1\n" +
                 "\tName = Fight Club\tRelease = 1999\n" +
                 "Movie ID = 2\n" +
@@ -392,7 +399,7 @@ public class GetAllMoviesTest {
         assertEquals(expected, result);
     }
 
-    private String getStringToSortByTitleWithPaging(){
+    private String getStringToSortByTitleWithPaging() {
         return "Movie ID = 4\n" +
                 "\tName = Inception\tRelease = 2010\n" +
                 "Movie ID = 5\n" +
