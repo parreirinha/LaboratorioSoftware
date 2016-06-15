@@ -14,8 +14,7 @@ public class PrintExit implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         return String.format(new HtmlGenerator().getTemplate(), Exit);
     }
 }

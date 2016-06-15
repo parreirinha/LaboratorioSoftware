@@ -40,7 +40,7 @@ public class GetTopNMoviesWithHigherReviewCountTest {
     }
 
     @Test
-    public void checkResultsetGetTopNMoviesWithHigherReviewCountQuery() throws SQLException {
+    public void checkResultSetGetTopNMoviesWithHigherReviewCountQuery() throws SQLException {
         connection = new TestConnectionFactory().getNewConnection();
         input = new String[]{"GET", "/tops/2/reviews/higher/count"};
         command = new CommandGetter().getCommand(input);

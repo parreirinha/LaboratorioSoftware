@@ -10,13 +10,14 @@ import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.http.HttpServer;
 
 import static java.lang.System.getenv;
+
 /**
  * @author Tede Morgado
  *         Created at 09/06/2016
  */
-public class AppServer
-{
+public class AppServer {
     private static final Logger _logger = LoggerFactory.getLogger(AppServer.class);
+
     public static void main(String[] args) throws Exception {
 
 

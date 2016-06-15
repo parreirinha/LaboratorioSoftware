@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * Class responsable to create data for all tests
+ * Class responsible to create data for all tests
  */
 public class DataCreationTests {
 

@@ -2,7 +2,7 @@ package pt.isel.ls.model;
 
 
 /**
- * Created by fabio on 17-Apr-16.
+ * Class whose instances are used to represent a model of collections.
  */
 public class Collections {
 

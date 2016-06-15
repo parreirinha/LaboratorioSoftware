@@ -21,26 +21,25 @@ public class PrintRatingsAverage implements Printable {
     private final String link;
     private ArrayList<Function<Movie, String>> function = new ArrayList<>();
 
-    public PrintRatingsAverage(Command command, Collection<Movie> collection, String link)
-    {
+    public PrintRatingsAverage(Command command, Collection<Movie> collection, String link) {
         this.command = command;
         this.collection = collection;
         this.link = link;
-        function.add(x -> ""+x.getMovieID());
+        function.add(x -> "" + x.getMovieID());
         function.add(x -> x.getMovieName());
-        function.add(x -> ""+x.getMovieRelease());
-        function.add(x -> ""+x.getOneStar());
-        function.add(x -> ""+x.getTwoStar());
-        function.add(x -> ""+x.getThreeStar());
-        function.add(x -> ""+x.getFourStar());
-        function.add(x -> ""+x.getFiveStar());
-        function.add(x -> ""+x.getAverage());
+        function.add(x -> "" + x.getMovieRelease());
+        function.add(x -> "" + x.getOneStar());
+        function.add(x -> "" + x.getTwoStar());
+        function.add(x -> "" + x.getThreeStar());
+        function.add(x -> "" + x.getFourStar());
+        function.add(x -> "" + x.getFiveStar());
+        function.add(x -> "" + x.getAverage());
     }
 
     @Override
     public String toStringText() {
         String res = "";
-        for (Movie m:collection) {
+        for (Movie m : collection) {
             res += "Movie ID = " + m.getMovieID() +
                     "\n\tName = " + m.getMovieName() +
                     "\n\tRelease = " + m.getMovieRelease() +
@@ -55,11 +54,10 @@ public class PrintRatingsAverage implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         HtmlGenerator htmlString = new HtmlGenerator();
         ArrayList<String> uri = new ArrayList<>();
-        collection.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        collection.forEach(x -> uri.add("/movies/" + x.getMovieID()));
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home"));
         menu.add(URIUtils.getURI("/tops/ratings/", null, "Tops Ratings"));

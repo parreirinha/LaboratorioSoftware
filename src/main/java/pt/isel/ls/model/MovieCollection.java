@@ -3,7 +3,7 @@ package pt.isel.ls.model;
 import java.util.ArrayList;
 
 /**
- * Created by fabio on 17-Apr-16.
+ * Class whose instances are used to represent a model of movies collection.
  */
 public class MovieCollection {
 

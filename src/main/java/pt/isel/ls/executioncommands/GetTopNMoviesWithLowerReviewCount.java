@@ -19,7 +19,7 @@ import static pt.isel.ls.executioncommands.AccessUtils.*;
 import static pt.isel.ls.executioncommands.AccessUtils.setValuesOnPreparedStatement;
 
 /**
- * Created by fabio on 20-May-16.
+ * Class used to represent GetTopNMoviesWithLowerReviewCount command.
  */
 public class GetTopNMoviesWithLowerReviewCount implements CommandExecution {
 
@@ -52,8 +52,6 @@ public class GetTopNMoviesWithLowerReviewCount implements CommandExecution {
     private Collection<Movie> getCollection(ResultSet rs) throws SQLException {
         Collection<Movie> res = new ArrayList<Movie>();
         while (rs.next())
-
-           // if(rs.getObject(10) instanceof Integer)
             res.add(new Movie(
                     rs.getInt(1),
                     rs.getString(2),

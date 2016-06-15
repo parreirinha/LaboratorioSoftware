@@ -9,9 +9,7 @@ import java.sql.SQLException;
 
 
 /**
- * Public interface that give the definition of the method to execute in the linecommand line
- * obj[0] Path
- * obj[1] Parameter
+ * Public interface that defines the model of execution commands.
  */
 public interface CommandExecution {
 

@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.function.Function;
 
 /**
- * Created by fabio on 05-Apr-16.
+ * Class used to print a movie rating.
  */
 public class PrintMovieRating implements Printable {
 
@@ -56,14 +56,13 @@ public class PrintMovieRating implements Printable {
     }
 
     @Override
-    public String toStringHtml()
-    {
+    public String toStringHtml() {
         HtmlGenerator htmlString = new HtmlGenerator();
         if (movie.isEmpty())
             return String.format(htmlString.getTemplate(), htmlString.addString(NoMovie).toString());
 
         ArrayList<String> uri = new ArrayList<>();
-        movie.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        movie.forEach(x -> uri.add("/movies/" + x.getMovieID()));
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home"));
         htmlString

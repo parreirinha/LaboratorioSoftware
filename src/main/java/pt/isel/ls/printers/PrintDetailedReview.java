@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
-public class PrintDetailedReview implements Printable
-{
+public class PrintDetailedReview implements Printable {
 
     private final Command command;
     Collection<Review> review;
@@ -51,23 +50,22 @@ public class PrintDetailedReview implements Printable
     }
 
     @Override
-    public String toStringHtml()
-    {
-        Integer  top = null;
-        if(command.getParams().getParamInt("top") == null)
+    public String toStringHtml() {
+        Integer top = null;
+        if (command.getParams().getParamInt("top") == null)
             top = 5;
         HtmlGenerator htmlString = new HtmlGenerator();
         if (review.isEmpty())
             return String.format(htmlString.getTemplate(),
-                        htmlString
-                                .addString(NoReview)
-                                .toString());
+                    htmlString
+                            .addString(NoReview)
+                            .toString());
         ArrayList<String> uri = new ArrayList<>();
-        review.forEach(x -> uri.add("/movies/"+x.getMovieID()));
+        review.forEach(x -> uri.add("/movies/" + x.getMovieID()));
         ArrayList<String> menu = new ArrayList<>();
         menu.add(URIUtils.getURI("/", null, "Home Page"));
-        menu.add(URIUtils.getURI("/movies/"+review.iterator().next().getMovieID()+"/reviews",
-                "top="+top.intValue()+"&skip=0", "All Reviews"));
+        menu.add(URIUtils.getURI("/movies/" + review.iterator().next().getMovieID() + "/reviews",
+                "top=" + top.intValue() + "&skip=0", "All Reviews"));
         htmlString
                 .createMenu(menu)
                 .htmlGenerate(review, head, function, uri);

@@ -6,7 +6,7 @@ import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Dani on 11-04-2016.
+ * Class used to test HeadersGetter getHeaders method.
  */
 public class HeadersGetterTests {
     private final String OneArgHeaders = "accept:text/html";

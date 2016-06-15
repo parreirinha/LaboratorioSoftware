@@ -36,7 +36,6 @@ public class PostMovieReviewTest {
 
     @After
     public void undoChangesAndCloseConnection() throws SQLException {
-        //dataTests.deleteAllMovies();
         dataTests.dropTables();
         connection.close();
     }

@@ -3,7 +3,7 @@ package pt.isel.ls.linecommand.model;
 import java.util.HashMap;
 
 /**
- * Created by Dani on 11-04-2016.
+ * Class used to represent the headers component.
  */
 public class Headers {
     private HashMap<String, String> headersStrings;
