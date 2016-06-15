@@ -25,22 +25,11 @@ public class AppServer
         String portDef = System.getenv("PORT");
         int port = portDef != null ? Integer.valueOf(portDef) : 8080;
         _logger.info("------------------------PORT = '{}'-----------------------", port);
- /*       Server server = new Server(port);
+        Server server = new Server(port);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
-        handler.addServletWithMapping(new ServletHolder(ExecutionServlet.class), "/*");
+        handler.addServletWithMapping(new ServletHolder(new ExecutionServlet()), "/*");
         server.start();
-        _logger.info("------------------------      Start      -----------------------");
-        server.join();
-*/
-        Server server = new Server(port);
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
-        server.setHandler(context);
-        //context.addServlet(new ServletHolder(new TimeServlet()),"/*");
-        context.addServlet(new ServletHolder(new ExecutionServlet()),"/*");
-        server.start();
-        _logger.info("------------------------      Start      -----------------------");
         server.join();
     }
 }
