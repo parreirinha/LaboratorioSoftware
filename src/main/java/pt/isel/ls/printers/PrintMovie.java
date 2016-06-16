@@ -63,6 +63,7 @@ public class PrintMovie implements Printable {
         htmlString
                 .createMenu(menu)
                 .createOrdering(command, "/movies")
+                .addBrTag()
                 .htmlGenerate(movieCollection, head, function, uri)
                 .createPagging(command, "/movies")
                 .addBrTag()
