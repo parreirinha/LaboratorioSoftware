@@ -62,9 +62,9 @@ public class PrintMovie implements Printable {
         movieCollection.forEach(x -> uri.add("/movies/" + x.getMovieID()));
         htmlString
                 .createMenu(menu)
+                .createOrdering(command, "/movies")
                 .htmlGenerate(movieCollection, head, function, uri)
-                .createPagging(command, "/movies/")
-                .createOrdering(command, "/movies/")
+                .createPagging(command, "/movies")
                 .addBrTag()
                 .postNewMovie();
 

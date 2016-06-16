@@ -161,9 +161,23 @@ public class HtmlGenerator {
         return this;
     }
 
-    public HtmlGenerator createOrdering(Command command, String s)
+    public HtmlGenerator createOrdering(Command command, String path)
     {
-
+        html += startTab + "<table border=\"2\"  style=\"width:100%\">\n" +
+                startTab + "\t<tr>\n" +
+                startTab + "\t\t<td align=\"center\" colspan=\"8\"><h3>Order by:</h3></td>\n" +
+                startTab + "\t</tr>\n" +
+                startTab + "\t<tr>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "addedData")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "addedDataDesc")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "year")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "yearDesc")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "title")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "titleDesc")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "rating")+"</td>\n" +
+                startTab + "\t\t<td align=\"center\">"+URIUtils.getUriOrder(command, path, "ratingDesc")+"</td>\n" +
+                startTab + "\t</tr>\n" +
+                startTab + "</table>\n";
         return this;
     }
 
