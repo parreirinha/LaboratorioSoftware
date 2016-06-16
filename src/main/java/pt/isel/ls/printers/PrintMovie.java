@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
-/*
+/**
 * class used to print a Movie.
 * */
 public class PrintMovie implements Printable {
@@ -64,6 +64,7 @@ public class PrintMovie implements Printable {
                 .createMenu(menu)
                 .htmlGenerate(movieCollection, head, function, uri)
                 .createPagging(command, "/movies/")
+                .createOrdering(command, "/movies/")
                 .addBrTag()
                 .postNewMovie();
 

@@ -1,15 +1,10 @@
 package pt.isel.ls.user.io;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.isel.ls.http.ExecutionServlet;
-import pt.isel.ls.http.HttpServer;
-
-import static java.lang.System.getenv;
 
 /**
  * @author Tede Morgado

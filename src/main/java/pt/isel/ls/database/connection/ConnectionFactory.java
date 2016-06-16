@@ -24,7 +24,7 @@ public class ConnectionFactory {
 
     private void initValues() {
         conn = new SQLServerDataSource();
-        conn.setServerName(LS_DB_SERVER);
+        //conn.setServerName(LS_DB_SERVER);
         conn.setDatabaseName(LS_DB_NAME);
         conn.setUser(LS_DB_USER);
         conn.setPassword(LS_DB_PW);

@@ -2,7 +2,6 @@ package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.printers.PrintMessage;
 import pt.isel.ls.printers.Printable;
 import pt.isel.ls.user.io.ContinuousInputOutput;
 import pt.isel.ls.user.io.Run;

@@ -4,7 +4,6 @@ import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Movie;
 import pt.isel.ls.printers.PrintError;
-import pt.isel.ls.printers.PrintMovie;
 import pt.isel.ls.printers.PrintReviewsCount;
 import pt.isel.ls.printers.Printable;
 

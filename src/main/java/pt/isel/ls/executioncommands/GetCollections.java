@@ -4,7 +4,6 @@ import pt.isel.ls.exceptions.ApplicationException;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
 import pt.isel.ls.printers.PrintGetCollections;
-import pt.isel.ls.printers.PrintMessage;
 import pt.isel.ls.printers.Printable;
 
 import java.sql.Connection;

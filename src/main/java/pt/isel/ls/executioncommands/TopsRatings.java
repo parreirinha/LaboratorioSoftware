@@ -8,8 +8,6 @@ import pt.isel.ls.printers.Printable;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static pt.isel.ls.http.ExecutionServlet.getPort;
-
 /**
  * Created by fabio on 19-May-16.
  */

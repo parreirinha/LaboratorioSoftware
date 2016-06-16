@@ -161,6 +161,12 @@ public class HtmlGenerator {
         return this;
     }
 
+    public HtmlGenerator createOrdering(Command command, String s)
+    {
+
+        return this;
+    }
+
     public HtmlGenerator addBrTag() {
         html += startTab + "<br>\n";
         return this;

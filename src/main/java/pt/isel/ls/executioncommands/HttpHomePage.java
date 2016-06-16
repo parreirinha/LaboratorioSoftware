@@ -8,7 +8,6 @@ import pt.isel.ls.printers.Printable;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static pt.isel.ls.http.ExecutionServlet.getPort;
 
 /**
  * Class used as the internal command that shows the application homepage.
