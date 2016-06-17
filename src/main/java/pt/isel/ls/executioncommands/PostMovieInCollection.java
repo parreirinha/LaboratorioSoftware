@@ -26,13 +26,14 @@ public class PostMovieInCollection implements CommandExecution {
         Integer cid = command.getPath().getPathInt("cid");
         Integer mid = command.getParams().getParamInt("mid");
 
-        if (cid != null && mid != null && cid > 0 && mid > 0) {
+        if (cid != null && mid != null && cid > 0 && mid > 0 && existsMovie(connection, mid)) {
 
             int verification = existsInCollection(connection, cid, mid);
             if (verification > 0){
                 String[] cmd = {"GET", "/movies/"+verification, ""};
                 return new GetMovie().execute(connection, new CommandGetter().getCommand(cmd));
             }
+
             String query = "insert into MovieCollection (CID, MovieID) values(?, ?)";
             PreparedStatement ps = connection.prepareStatement(query);
             AccessUtils.setValuesOnPreparedStatement(ps, cid, mid);
@@ -60,5 +61,17 @@ public class PostMovieInCollection implements CommandExecution {
         if(rs.next())
             return rs.getInt(2);
         return 0;
+    }
+
+    private boolean existsMovie(Connection conn, int mid) throws SQLException {
+        String q = "select * from Movie where MovieID = ?";
+        PreparedStatement ps = conn.prepareStatement(q);
+        AccessUtils.setValuesOnPreparedStatement(ps, mid);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+            return true;
+
+        mid = 0;
+        return false;
     }
 }

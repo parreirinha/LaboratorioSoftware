@@ -22,7 +22,7 @@ public class PostMovieRating implements CommandExecution {
         Integer movieID = command.getPath().getPathInt("mid");
         Integer rating = command.getParams().getParamInt("rating");
 
-        if (movieID > 1 && rating >= 1 && rating <= 5) {
+        if (movieID >= 1 && rating >= 1 && rating <= 5) {
             String ratingColumnName = AccessUtils.getColumnName(rating);
             String query = "update Movie set "+ ratingColumnName +" = "+ ratingColumnName + " + CAST(1 AS NVARCHAR(10)) where MovieID = ?";
             PreparedStatement ps = connection.prepareStatement(query);
