@@ -25,9 +25,17 @@ public class ConnectionFactory {
     private void initValues() {
         conn = new SQLServerDataSource();
         conn.setServerName(LS_DB_SERVER);
+        _logger.info("SERVER '{}'", LS_DB_SERVER);
+
         conn.setDatabaseName(LS_DB_NAME);
+        _logger.info("BDNAME '{}'", LS_DB_NAME);
+
         conn.setUser(LS_DB_USER);
+        _logger.info("USERNAME '{}'", LS_DB_USER);
+
         conn.setPassword(LS_DB_PW);
+        _logger.info("PASSWORD '{}'", LS_DB_PW);
+
     }
 
     public Connection getNewConnection() throws SQLServerException {
