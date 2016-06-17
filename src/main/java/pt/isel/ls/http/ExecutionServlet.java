@@ -29,12 +29,6 @@ import static pt.isel.ls.user.io.Run.identifyOutputFormat;
  */
 public class ExecutionServlet extends HttpServlet {
 
-    public static int getPort() {
-        return port;
-    }
-
-    private static int port = 8000;
-
     private static final Logger _logger = LoggerFactory.getLogger(ExecutionServlet.class);
 
     @Override
@@ -48,7 +42,7 @@ public class ExecutionServlet extends HttpServlet {
     }
 
     private void doMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        port = req.getLocalPort();
+
         _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
 
         Command c = new UriCommandGetter().getCommandFromUri(req.getMethod(), req.getRequestURI(),
