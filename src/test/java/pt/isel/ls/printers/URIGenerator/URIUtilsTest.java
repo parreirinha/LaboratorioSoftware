@@ -43,7 +43,7 @@ public class URIUtilsTest {
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=10&top=5&orderby=rating"};
         Command command = new CommandGetter().getCommand(input);
         String curr = getNextSkipAndTopValuesFromCommand(command);
-        String expected = "skip=15&top=5&orderby=rating";
+        String expected = "skip=15&top=5";
         assertEquals(expected, curr);
     }
 
@@ -73,7 +73,7 @@ public class URIUtilsTest {
         String[] input = new String[]{"GET", "/tops/5/ratings/higher/average", "skip=38&top=4&orderby=releaseYear"};
         Command command = new CommandGetter().getCommand(input);
         String curr = getPreviusSkipAndTopValuesFromCommand(command);
-        String expected = "skip=34&top=4&orderby=releaseYear";
+        String expected = "skip=34&top=4";
         assertEquals(expected, curr);
     }
 

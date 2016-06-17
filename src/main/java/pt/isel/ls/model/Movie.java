@@ -1,6 +1,5 @@
 package pt.isel.ls.model;
 
-import java.sql.Date;
 
 /**
  * Class whose instances are used to represent a model of a movie.

@@ -27,4 +27,10 @@ public class Parameters {
     public void setParamInt(String name, int value) {
         paramStrings.put(name, Integer.toString(value));
     }
+
+    public void setParamStrings(String key, String value)
+    {
+        paramStrings.put(key, value);
+    }
+
 }

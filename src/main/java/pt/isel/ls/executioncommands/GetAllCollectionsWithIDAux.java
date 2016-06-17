@@ -1,10 +1,8 @@
 package pt.isel.ls.executioncommands;
 
 import pt.isel.ls.exceptions.ApplicationException;
-import pt.isel.ls.http.ExecutionServlet;
 import pt.isel.ls.linecommand.model.Command;
 import pt.isel.ls.model.Collections;
-import pt.isel.ls.model.Review;
 import pt.isel.ls.printers.PrintBody;
 import pt.isel.ls.printers.Printable;
 

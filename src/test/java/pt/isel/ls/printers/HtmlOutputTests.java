@@ -459,6 +459,22 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td align=\"center\"><h3><a href=/tops/ratings>Tops Ratings</a></h3></td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +
+                "\t\t\t<table border=\"2\"  style=\"width:100%\">\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\" colspan=\"8\"><h3>Order by:</h3></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=addedData>addedData</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=addedDataDesc>addedDataDesc</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=year>year</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=yearDesc>yearDesc</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=title>title</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=titleDesc>titleDesc</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=rating>rating</a></td>\n" +
+                "\t\t\t\t\t<td align=\"center\"><a href=/movies?skip=0&top=5&sortBy=ratingDesc>ratingDesc</a></td>\n" +
+                "\t\t\t\t</tr>\n" +
+                "\t\t\t</table>\n" +
+                "\t\t\t<br>\n" +
                 "\t\t\t<ul>\n" +
                 "\t\t\t\t<li>Movie ID: 1</li>\n" +
                 "\t\t\t\t<ul>\n" +
@@ -473,7 +489,7 @@ public class HtmlOutputTests {
                 "\t\t\t\t\t<td align=\"left\">\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t\t<td align=\"right\">\n" +
-                "\t\t\t\t\t\t<a href=/movies/?skip=0&top=5>Next</a>\n" +
+                "\t\t\t\t\t\t<a href=/movies?skip=0&top=5>Next</a>\n" +
                 "\t\t\t\t\t</td>\n" +
                 "\t\t\t\t</tr>\n" +
                 "\t\t\t</table>\n" +

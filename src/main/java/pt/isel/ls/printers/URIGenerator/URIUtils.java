@@ -1,8 +1,6 @@
 package pt.isel.ls.printers.URIGenerator;
 
 import pt.isel.ls.linecommand.model.Command;
-import pt.isel.ls.linecommand.model.Parameters;
-import pt.isel.ls.linecommand.model.Path;
 
 /**
  * Created by fabio on 18-May-16.
@@ -36,8 +34,8 @@ public class URIUtils {
     }
 
     private static String getOrderBy(Command command) {
-        if (command.getParams().getParamString("orderby") != null)
-            return "&orderby=" + command.getParams().getParamString("orderby");
+        if (command.getParams().getParamString("sortBy") != null)
+            return "&sortBy=" + command.getParams().getParamString("sortBy");
         return "";
     }
 
@@ -55,5 +53,18 @@ public class URIUtils {
         res += "skip=" + skip + "&top=" + top + getOrderBy(command);
 
         return res;
+    }
+
+    public static String getUriOrder(Command command, String path, String order) {
+        Integer top = command.getParams().getParamInt("top");
+        Integer skip = command.getParams().getParamInt("skip");
+        if (skip == null || top == null || skip < 0 || top <= 0)
+        {
+            skip = 0;
+            top = 5;
+        }
+        String skipTop = "skip="+skip+"&top="+top;
+        String orderBy = "sortBy="+order;
+        return "<a href="+path + "?" + skipTop + "&" + orderBy+">"+order+"</a>";
     }
 }
