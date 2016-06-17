@@ -47,7 +47,7 @@ public class PrintGetCollections implements Printable {
         if (col.isEmpty()) {
             htmlString
                     .createMenu(menu)
-                    .addString("There is no such collections")
+                    .addString("There are no collections")
                     .postNewCollectionForm();
             return String.format(htmlString.getTemplate(), htmlString.toString());
         }

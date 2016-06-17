@@ -19,7 +19,7 @@ public class PrintReview implements Printable {
     private final String[] head =
             {"Review ID", "Reviewer Name", "Review Rating", "Summary Review"};
     private final ArrayList<Function<Review, String>> function = new ArrayList<>();
-    private final String NoReview = "There is no such review.\n";
+    private final String NoReview = "There are no reviews.\n";
 
     public PrintReview(Collection<Review> reviews, Command command) {
         this.command = command;

@@ -19,7 +19,7 @@ public class PrintMovie implements Printable {
     private final String[] head =
             {"Movie ID", "Name", "Release"};
     private ArrayList<Function<Movie, String>> function = new ArrayList<>();
-    private final String NoMovie = "There is no such movie.\n";
+    private final String NoMovie = "There are no movies.\n";
 
 
     public PrintMovie(Collection<Movie> movies, Command command) {
