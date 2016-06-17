@@ -98,31 +98,15 @@ public class ExecutionServlet extends HttpServlet {
         }
     }
 
-    private final String[] post = {"name", "description", "mid", "title", "releaseYear", "rating", "reviewerName", "reviewSummary", "review"};
-
     private String buildPostParams(HttpServletRequest req) {
-        String str = "";
-        if (req.getMethod().equals("POST")) {
-            Map<String, String> map = getMap(req);
-            for (int i = 0; i < post.length; ++i) {
-                if (map.containsKey(post[i])) {
-                    if (!str.equals(""))
-                        str += "&";
-                    str += post[i] + "=" + map.get(post[i]);
-                }
-            }
-        }
-        return str;
-    }
+        String[] s = {""};
+        req.getParameterMap().forEach((k, v) -> {
+            if (!s[0].equals(""))
+                s[0] += "&";
+            s[0] += k + "=" + v[0];
+        });
 
-    private Map<String, String> getMap(HttpServletRequest req) {
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i < post.length; ++i) {
-            String value = req.getParameter(post[i]);
-            if (value != null)
-                map.put(post[i], value);
-        }
-        return map;
+        return s[0];
     }
 
 }
