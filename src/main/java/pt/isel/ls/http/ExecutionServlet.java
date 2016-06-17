@@ -82,9 +82,8 @@ public class ExecutionServlet extends HttpServlet {
     }
 
     private void finalize(HttpServletResponse resp, Command c, Printable p) throws IOException {
-        PrintWriter out;
         resp.setContentType(identifyContentType(c));
-        out = resp.getWriter();
+        PrintWriter out = resp.getWriter();
         out.println(identifyOutputFormat(c, p));
         out.close();
     }
