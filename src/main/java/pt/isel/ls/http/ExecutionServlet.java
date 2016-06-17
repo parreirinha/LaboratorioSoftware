@@ -24,7 +24,7 @@ import static pt.isel.ls.user.io.Run.identifyOutputFormat;
 
 
 /**
- * Class used to execute an HTTP GET request to the application and
+ * Class used to execute an HTTP GET or POST request to the application and
  * that returns the correspondent response.
  */
 public class ExecutionServlet extends HttpServlet {
@@ -37,35 +37,33 @@ public class ExecutionServlet extends HttpServlet {
 
     private static final Logger _logger = LoggerFactory.getLogger(ExecutionServlet.class);
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doMethod(req, resp);
+    }
 
-    protected void doMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doMethod(req, resp);
+    }
 
+    private void doMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         port = req.getLocalPort();
         _logger.info("{} on '{}' with accept:'{}'", req.getMethod(), req.getRequestURI(), req.getHeader("Accept"));
 
-        PrintWriter out;
-        String str = "";
-        if (req.getMethod().equals("POST")) {
-            Map<String, String> map = getMap(req);
-            for (int i = 0; i < post.length; ++i) {
-                if (map.containsKey(post[i])) {
-                    if (!str.equals(""))
-                        str += "&";
-                    str += post[i] + "=" + map.get(post[i]);
-                }
-            }
-        }
-
         Command c = new UriCommandGetter().getCommandFromUri(req.getMethod(), req.getRequestURI(),
-                req.getMethod().equals("GET") ? req.getQueryString() : str);
+                req.getMethod().equals("GET") ? req.getQueryString() : buildPostParams(req));
         CommandExecution ce = new CommandMapper().getExecutionCommandInstance(c);
 
+        servletExecute(req, resp, c, ce);
+    }
+
+    private void servletExecute(HttpServletRequest req, HttpServletResponse resp, Command c, CommandExecution ce) throws IOException {
         if (ce == null) {
             resp.sendError(400);
         } else {
-            Printable p = null;
             try {
-                p = ce.execute(
+                Printable p = ce.execute(
                         new ConnectionFactory().getNewConnection(), c);
 
                 if (p instanceof PrintError) {
@@ -77,10 +75,7 @@ public class ExecutionServlet extends HttpServlet {
                 } else {
                     resp.setStatus(200);
                 }
-                resp.setContentType(identifyContentType(c));
-                out = resp.getWriter();
-                out.println(identifyOutputFormat(c, p));
-                out.close();
+                finalize(resp, c, p);
             } catch (SQLException e) {
                 _logger.info("Error '{}'", e.toString());
                 resp.setStatus(500);
@@ -92,6 +87,14 @@ public class ExecutionServlet extends HttpServlet {
         }
     }
 
+    private void finalize(HttpServletResponse resp, Command c, Printable p) throws IOException {
+        PrintWriter out;
+        resp.setContentType(identifyContentType(c));
+        out = resp.getWriter();
+        out.println(identifyOutputFormat(c, p));
+        out.close();
+    }
+
     private String identifyContentType(Command c) {
         String s = c.getHeaders().getHeadersString("accept");
 
@@ -100,20 +103,24 @@ public class ExecutionServlet extends HttpServlet {
         } else {
             return "text/plain";
         }
-
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doMethod(req, resp);
-    }
+    private final String[] post = {"name", "description", "mid", "title", "releaseYear", "rating", "reviewerName", "reviewSummary", "review"};
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doMethod(req, resp);
+    private String buildPostParams(HttpServletRequest req) {
+        String str = "";
+        if (req.getMethod().equals("POST")) {
+            Map<String, String> map = getMap(req);
+            for (int i = 0; i < post.length; ++i) {
+                if (map.containsKey(post[i])) {
+                    if (!str.equals(""))
+                        str += "&";
+                    str += post[i] + "=" + map.get(post[i]);
+                }
+            }
+        }
+        return str;
     }
-
-    private String[] post = {"name", "description", "mid", "title", "releaseYear", "rating", "reviewerName", "reviewSummary", "review"};
 
     private Map<String, String> getMap(HttpServletRequest req) {
         Map<String, String> map = new HashMap<>();
