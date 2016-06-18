@@ -3,7 +3,7 @@ package pt.isel.ls.printers.URIGenerator;
 import pt.isel.ls.linecommand.model.Command;
 
 /**
- * Created by fabio on 18-May-16.
+ * Class with static methods used to help uri manipulation in http navigation.
  */
 public class URIUtils {
 
